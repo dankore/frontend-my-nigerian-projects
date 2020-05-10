@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./css/main.css";
 
+// CONTEXTS
+import StateContext from "./StateContext";
+import DispatchContext from "./DispatchContext";
+// CONTEXTS END
+
 // COMPONENTS
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -14,24 +19,28 @@ import HowToBid from "./components/HowToBid";
 
 function Main() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/terms">
-          <Terms />
-        </Route>
-        <Route path="/how-to-bid">
-          <HowToBid />
-        </Route>
-      </Switch>
-      <Footer />
-    </BrowserRouter>
+    <StateContext.Provider>
+      <DispatchContext.Provider>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/terms">
+              <Terms />
+            </Route>
+            <Route path="/how-to-bid">
+              <HowToBid />
+            </Route>
+          </Switch>
+          <Footer />
+        </BrowserRouter>
+      </DispatchContext.Provider>
+    </StateContext.Provider>
   );
 }
 
