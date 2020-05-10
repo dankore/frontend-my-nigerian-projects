@@ -10,12 +10,12 @@ import DispatchContext from "./DispatchContext";
 
 // COMPONENTS
 import Header from "./components/Header";
-import Home from "./pages/Home";
+import Home from "./pages/HomePage";
 import Footer from "./components/Footer";
-import About from "./pages/About";
-import Terms from "./pages/Terms";
-import HowToBid from "./pages/HowToBid";
-import LoginPage from "./pages/Login";
+import About from "./pages/AboutPage";
+import Terms from "./pages/TermsPage";
+import HowToBid from "./pages/HowToBidPage";
+import LoginPage from "./pages/LoginPage";
 // COMPONENTS END
 
 function Main() {
