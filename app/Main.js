@@ -16,6 +16,7 @@ import About from "./pages/AboutPage";
 import Terms from "./pages/TermsPage";
 import HowToBid from "./pages/HowToBidPage";
 import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
 // COMPONENTS END
 
 function Main() {
@@ -39,6 +40,9 @@ function Main() {
             </Route>
             <Route path="/login">
               <LoginPage />
+            </Route>
+            <Route path="/register">
+              <RegistrationPage />
             </Route>
           </Switch>
           <Footer />
