@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import Page from "./Page"
+import Page from "../components/Page";
 
 function HowToBid() {
   return (
