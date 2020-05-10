@@ -6,7 +6,8 @@ import "./css/main.css";
 // COMPONENTS
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
+import About from "./components/About";
 // COMPONENTS END
 
 function Main() {
@@ -16,6 +17,9 @@ function Main() {
       <Switch>
         <Route path="/" exact>
           <Home />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
       </Switch>
       <Footer />
