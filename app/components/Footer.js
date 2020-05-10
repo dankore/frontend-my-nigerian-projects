@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 
 function Footer() {
   return (
-    <>
-      <h1>Hello from footer</h1>
-    </>
+    <div>
+      &copy; {new Date().getFullYear()} Adamu M. Dankore
+    </div>
   )
 }
 

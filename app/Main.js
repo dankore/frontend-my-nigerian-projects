@@ -1,14 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./css/main.css";
+
+// COMPONENTS
 import Header from "./components/Header";
+import Home from "./components/Home";
+import Footer from './components/Footer';
+// COMPONENTS END
 
 function Main() {
   return (
-    <div>
+    <BrowserRouter>
       <Header />
-      <h1 className="text-red-500 text-2xl">Bidding App</h1>
-    </div>
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+      </Switch>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
