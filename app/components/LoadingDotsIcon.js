@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 
 function LoadingDotsIcon() {
   return (
-    <div>
-      <div>Loading...</div>
+    <div className="dots-loading">
+      <div></div>
     </div>
   );
 }
