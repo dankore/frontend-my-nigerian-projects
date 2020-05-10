@@ -9,7 +9,7 @@ function Header() {
           <span className="text-2xl">&#8962;</span>
           <span className="ml-1">Bidding App</span>
         </Link>
-        <div>How to Bid</div>
+        <Link to="/how-to-bid">How To Bid</Link>
       </div>
     </header>
   );

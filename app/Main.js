@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Terms from "./components/Terms";
+import HowToBid from "./components/HowToBid";
 // COMPONENTS END
 
 function Main() {
@@ -24,6 +25,9 @@ function Main() {
         </Route>
         <Route path="/terms">
           <Terms />
+        </Route>
+        <Route path="/how-to-bid">
+          <HowToBid />
         </Route>
       </Switch>
       <Footer />
