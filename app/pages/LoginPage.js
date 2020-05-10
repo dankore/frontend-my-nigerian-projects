@@ -6,7 +6,7 @@ function LoginPage() {
   return (
     <Page title="Login">
       <div className="px-2 mx-auto">
-        <form className="p-2 sm:p-4 border rounded">
+        <form className="p-3 sm:p-4 border rounded">
           <div className="mb-4">
             <label htmlFor="email" className="w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 ">
               Enter Your Email
