@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Terms from "./components/Terms";
 // COMPONENTS END
 
 function Main() {
@@ -20,6 +21,9 @@ function Main() {
         </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/terms">
+          <Terms />
         </Route>
       </Switch>
       <Footer />
