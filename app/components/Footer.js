@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div>
+    <div className="text-center mt-10">
       <div>
         <Link to="/">Home</Link> <Link to="about">About</Link> <Link to="/terms">Terms</Link>
       </div>
