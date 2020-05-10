@@ -9,7 +9,11 @@ function Header() {
           <span className="text-2xl">&#8962;</span>
           <span className="ml-1">Bidding App</span>
         </Link>
-        <Link to="/how-to-bid">How To Bid</Link>
+        <div className="flex justify-between w-64">
+          <Link to="/how-to-bid">How To Bid</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
       </div>
     </header>
   );

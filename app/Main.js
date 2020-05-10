@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Terms from "./components/Terms";
 import HowToBid from "./components/HowToBid";
+import LoginPage from "./components/Login";
 // COMPONENTS END
 
 function Main() {
@@ -35,6 +36,9 @@ function Main() {
             </Route>
             <Route path="/how-to-bid">
               <HowToBid />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
             </Route>
           </Switch>
           <Footer />
