@@ -6667,12 +6667,6 @@ video {
   color: rgba(112, 36, 89, var(--text-opacity));
 }
 
-.hover\:text-indigo-900:hover {
-  --text-opacity: 1;
-  color: #3c366b;
-  color: rgba(60, 54, 107, var(--text-opacity));
-}
-
 .text-opacity-0 {
   --text-opacity: 0;
 }
@@ -8317,32 +8311,4 @@ video {
 
 .delay-1000 {
   transition-delay: 1000ms;
-}
-
-@media (min-width: 640px) {
-  .sm\:rounded-lg {
-    border-radius: 0.5rem;
-  }
-
-  .sm\:-mx-6 {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-  }
-
-  .sm\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lg\:-mx-8 {
-    margin-left: -2rem;
-    margin-right: -2rem;
-  }
-
-  .lg\:px-8 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
 }
