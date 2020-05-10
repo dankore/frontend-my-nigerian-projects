@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header>
-      <div className="flex justify-between max-w-2xl bg-green-600 text-white mx-auto">
-        <Link to="/">Bidding App</Link>
-        <div>Home</div>
+    <header className="bg-blue-600">
+      <div className="flex justify-between items-center px-3 py-1 max-w-2xl text-white mx-auto">
+        <Link to="/">
+          <span className="text-2xl">&#8962;</span>
+          <span className="ml-1">Bidding App</span>
+        </Link>
+        <div>How to Bid</div>
       </div>
     </header>
   );
