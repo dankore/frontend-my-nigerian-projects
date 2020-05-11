@@ -1,8 +1,8 @@
 {
-  "name": "complex-react-app",
+  "name": "frontend-bidding-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "test.js",
+  "description": "Bidding App for My Projects",
+  "main": "Main.js",
   "scripts": {
     "dev": "npm-run-all -s generate watch:css webpackDev",
     "webpackDev": "webpack-dev-server",
