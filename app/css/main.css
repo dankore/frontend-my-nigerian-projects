@@ -1,3 +1,6 @@
+/* 
+MY NON-TAILWIND STYLES
+*/
 /* Dots Loading Animation */
 .dots-loading {
   margin: 0 auto;
@@ -70,6 +73,45 @@
   }
 }
 /* Dots Loading Animation */
+
+.liveValidateMessage {
+  top: 52px;
+  position: absolute;
+  z-index: 1;
+}
+
+.liveValidateMessage--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liveValidateMessage-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.liveValidateMessage-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.liveValidateMessage-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liveValidateMessage-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+
+/* 
+MY NON-TAILWIND STYLES ENDS
+*/
+
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
