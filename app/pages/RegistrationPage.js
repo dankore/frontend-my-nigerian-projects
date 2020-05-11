@@ -4,12 +4,11 @@ import Page from '../components/Page';
 import Axios from 'axios';
 
 function RegistrationPage() {
-
   async function handleSubmit(e) {
     e.preventDefault();
-  
+
     try {
-      await Axios.post('/register', { username: 'Dankore2', email: 'emil@test.com', password: '123456789012' });
+      await Axios.post('/register', { username: 'Dankore2', firstName: 'Adamu', lastName: 'Muhammad', email: 'emil@test.com', password: '123456789012' });
       console.log('user created!');
     } catch (error) {
       console.log('user error');
