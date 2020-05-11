@@ -2,11 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./css/main.css";
+import Axios from 'axios';
 
-// CONTEXTS
+// STATE MANAGEMENT
 import StateContext from "./StateContext";
 import DispatchContext from "./DispatchContext";
-// CONTEXTS END
+// STATE MANAGEMENT ENDS
+
+// AXIOS COMMON URL
+Axios.defaults.baseURL = 'http://localhost:8080';
 
 // COMPONENTS
 import Header from "./components/Header";
@@ -17,6 +21,7 @@ import Terms from "./pages/TermsPage";
 import HowToBid from "./pages/HowToBidPage";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
+
 // COMPONENTS END
 
 function Main() {
