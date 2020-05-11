@@ -45,6 +45,7 @@ function RegistrationPage() {
   };
 
   function Reducer(draft, action) {
+    console.log({ o: draft.username.hasErrors });
     switch (action.type) {
       // USERNAME
       case 'usernameImmediately':
@@ -54,6 +55,10 @@ function RegistrationPage() {
         if (draft.username.value.length > 30) {
           draft.username.hasErrors = true;
           draft.username.message = 'Username cannot exceed 30 characters.';
+        }
+        if (draft.username.value && !/^([a-zA-Z0-9]+)$/.test(draft.username.value)) {
+          draft.username.hasErrors = true;
+          draft.username.message = 'Username can only contain letters and numbers.';
         }
         return;
       case 'usernameAfterDelay':
@@ -116,7 +121,7 @@ function RegistrationPage() {
                 Username <span className='text-red-600'>*</span>
               </label>
               <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='username' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
-              <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage'>
+              <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={{ color: 'red', borderRadius: 0.25 + 'em', borderColor: '#fc8181', padding: 0.75 + 'em' }} className='liveValidateMessage'>
                   {state.username.message}
                 </div>
