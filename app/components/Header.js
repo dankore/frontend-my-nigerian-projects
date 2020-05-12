@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <header className='bg-blue-600'>
-      <div className='sm:flex sm:justify-between sm:items-center px-3 max-w-2xl text-center text-white sm:mx-auto'>
+      <div className='sm:flex sm:justify-between sm:items-center px-3 py-1 max-w-2xl text-center text-white sm:mx-auto'>
         <div className=''>
           <Link to='/'>
             <i className='fas fa-home'></i>

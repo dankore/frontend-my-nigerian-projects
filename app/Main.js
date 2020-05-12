@@ -22,6 +22,7 @@ import HowToBid from './pages/HowToBidPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProfilePage from './pages/ProfilePage';
 
 // COMPONENTS END
 
@@ -98,6 +99,9 @@ function Main() {
             <Route path='/' exact>
               <Home />
             </Route>
+            <Route path='/profile/:username'>
+              <ProfilePage />
+            </Route>
             <Route path='/about'>
               <About />
             </Route>
@@ -107,12 +111,8 @@ function Main() {
             <Route path='/how-to-bid'>
               <HowToBid />
             </Route>
-            <Route path='/login'>
-              {state.loggedIn ? <NotFoundPage /> : <LoginPage />}
-            </Route>
-            <Route path='/register'>
-              {state.loggedIn ? <NotFoundPage /> : <RegistrationPage />}
-            </Route>
+            <Route path='/login'>{state.loggedIn ? <NotFoundPage /> : <LoginPage />}</Route>
+            <Route path='/register'>{state.loggedIn ? <NotFoundPage /> : <RegistrationPage />}</Route>
             <Route>
               <NotFoundPage />
             </Route>
