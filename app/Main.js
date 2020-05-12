@@ -87,7 +87,7 @@ function Main() {
         return request.cancel();
       };
     }
-  });
+  },[]);
 
   return (
     <StateContext.Provider value={state}>

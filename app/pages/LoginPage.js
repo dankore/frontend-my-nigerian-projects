@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
 import Axios from 'axios';
-import StateContext from '../StateContext';
 
 function LoginPage() {
   const appDispatch = useContext(DispatchContext);
- 
+  const [wasSuccessful, setWasSuccessful] = useState(false);
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -19,14 +18,18 @@ function LoginPage() {
       console.log({ login: response.data });
       if (response.data) {
         appDispatch({ type: 'login', data: response.data });
-        appDispatch({ type: 'flashMessage', value: 'Invalid username / password' });
+        setWasSuccessful(response.data);
       } else {
-        console.log('wrong username / password.');
         appDispatch({ type: 'flashMessage', value: 'Invalid username / password.' });
       }
     } catch (error) {
       alert("Sorry, there's a problem logging you in. Please try again.");
     }
+  }
+
+  if (wasSuccessful) {
+    appDispatch({ type: 'flashMessage', value: 'Congrats, you created a new post.' });
+    return <Redirect to={`/`} />;
   }
 
   return (
@@ -37,7 +40,7 @@ function LoginPage() {
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
             </label>
-            <input onChange={e => setUsername(e.target.value)} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => setUsername(e.target.value)} id='username' type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
           </div>
           <div className='mb-4'>
             <div className='flex justify-between mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
