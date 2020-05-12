@@ -6,7 +6,7 @@ import StateContext from '../StateContext';
 
 function Header() {
   const appState = useContext(StateContext);
-console.log(appState)
+
   return (
     <header className='bg-blue-600'>
       <div className='sm:flex sm:justify-between sm:items-center px-3 max-w-2xl text-center text-white sm:mx-auto'>
