@@ -8382,7 +8382,7 @@ MY NON-TAILWIND STYLES
   }
 }
 
-/* Dots Loading Animation Ends */
+/* Dots Loading Animation */
 
 .liveValidateMessage {
   top: 52px;
@@ -8420,3 +8420,22 @@ MY NON-TAILWIND STYLES
 /* 
 MY NON-TAILWIND STYLES ENDS
 */
+
+@media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:items-center {
+    align-items: center;
+  }
+
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
