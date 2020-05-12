@@ -36,11 +36,14 @@ function Main() {
     },
   };
 
-  function reducer() {
-    switch (applicationCache.type) {
+  function reducer(draft, action) {
+    switch (action.type) {
       case 'login':
+        draft.loggedIn = true;
+        draft.user = action.data;
         return;
       case 'logout':
+        draft.loggedIn = false;
         return;
       case 'flashMessage':
         return;
