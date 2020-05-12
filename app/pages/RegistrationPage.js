@@ -45,7 +45,6 @@ function RegistrationPage() {
   };
 
   function Reducer(draft, action) {
-    console.log({ o: draft.username.hasErrors });
     switch (action.type) {
       // USERNAME
       case 'usernameImmediately':
@@ -62,8 +61,23 @@ function RegistrationPage() {
         }
         return;
       case 'usernameAfterDelay':
+        if (draft.username.value.length < 3) {
+          draft.username.hasErrors = true;
+          draft.username.message = 'Username must be at least 3 characters.';
+        }
+        if (!draft.hasErrors) {
+          draft.username.checkCount++;
+        }
         return;
       case 'usernameIsUnique':
+        console.log(action.value)
+        if (action.value) {
+          draft.username.hasErrors = true;
+          draft.username.isUnique = false;
+          draft.username.message = 'That username is already being used.';
+        } else {
+          draft.username.isUnique = true;
+        }
         return;
       // USERNAME ENDS
       // FIRST NAME
@@ -107,6 +121,34 @@ function RegistrationPage() {
   }
 
   const [state, dispatch] = useImmerReducer(Reducer, initialState);
+
+  // DELAY
+  useEffect(() => {
+    if (state.username.value) {
+      const delay = setTimeout(() => dispatch({ type: 'usernameAfterDelay' }), 800);
+
+      return () => clearTimeout(delay);
+    }
+  }, [state.username.value]);
+
+  // USERNAME
+  useEffect(() => {
+    if (state.username.checkCount) {
+      const request = Axios.CancelToken.source();
+      (async function checkForUsername() {
+        try {
+          const response = await Axios.post('/doesUsernameExist', { username: state.username.value }, { cancelToken: request.token });
+          dispatch({ type: 'usernameIsUnique', value: response.data });
+        } catch (error) {
+          alert('Having difficulty looking for your username. Please try again.');
+        }
+      })();
+      return function cleanUpRequest() {
+        return request.cancel();
+      };
+    }
+  }, [state.username.checkCount]);
+
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -120,7 +162,7 @@ function RegistrationPage() {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
                 Username <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='username' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+              <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
               <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={{ color: 'red', borderRadius: 0.25 + 'em', borderColor: '#fc8181', padding: 0.75 + 'em' }} className='liveValidateMessage'>
                   {state.username.message}
@@ -131,19 +173,19 @@ function RegistrationPage() {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='first-name'>
                 First Name <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='given-name' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+              <input onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
             </div>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='last-name'>
                 Last Name <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='family-name' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
+              <input onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='off' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
             </div>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='email'>
                 Email <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'emailImmediately', value: e.target.value })} id='email' autoComplete='email' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='email' type='text' />
+              <input onChange={e => dispatch({ type: 'emailImmediately', value: e.target.value })} id='email' autoComplete='off' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='email' type='text' />
             </div>
             <div className='relative w-full px-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='password'>
