@@ -88,7 +88,7 @@ function Main() {
         return request.cancel();
       };
     }
-  },[]);
+  }, []);
 
   return (
     <StateContext.Provider value={state}>
@@ -109,10 +109,10 @@ function Main() {
               <HowToBid />
             </Route>
             <Route path='/login'>
-              <LoginPage />
+              {state.loggedIn ? <NotFoundPage /> : <LoginPage />}
             </Route>
             <Route path='/register'>
-              <RegistrationPage />
+              {state.loggedIn ? <NotFoundPage /> : <RegistrationPage />}
             </Route>
             <Route>
               <NotFoundPage />

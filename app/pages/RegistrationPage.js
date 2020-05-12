@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useContext, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
 import { useImmerReducer } from 'use-immer';
@@ -8,6 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 
 function RegistrationPage() {
   const appDispatch = useContext(DispatchContext);
+  const [wasSuccessful, setWasSuccessful] = useState(false);
 
   const initialState = {
     username: {
@@ -211,7 +212,7 @@ function RegistrationPage() {
     }
   }, [state.username.checkCount]);
 
-  // SEND FORM
+  // SUBMIT FORM
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
@@ -228,10 +229,11 @@ function RegistrationPage() {
             },
             { cancelToken: request.token }
           );
-          // LOG USER IN
-          appDispatch({ type: 'login', data: response.data });
-          // FLASH MESSAGE
-          appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
+          if (response.data) {
+            setWasSuccessful(response.data);
+            // LOG USER IN
+            appDispatch({ type: 'login', data: response.data });
+          }
         } catch (e) {
           console.log('problem from registration');
         }
@@ -241,6 +243,12 @@ function RegistrationPage() {
       };
     }
   }, [state.submitCount]);
+
+  if (wasSuccessful) {
+    // FLASH MESSAGE
+    appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
+    return <Redirect to='/' />;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();

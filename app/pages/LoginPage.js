@@ -15,10 +15,10 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await Axios.post('/login', { username: username, password: password });
-      console.log({ login: response.data });
+
       if (response.data) {
-        appDispatch({ type: 'login', data: response.data });
         setWasSuccessful(response.data);
+        appDispatch({ type: 'login', data: response.data });
       } else {
         appDispatch({ type: 'flashMessage', value: 'Invalid username / password.' });
       }
@@ -29,7 +29,7 @@ function LoginPage() {
 
   if (wasSuccessful) {
     appDispatch({ type: 'flashMessage', value: 'Congrats, you created a new post.' });
-    return <Redirect to={`/`} />;
+    return <Redirect to='/' />;
   }
 
   return (
