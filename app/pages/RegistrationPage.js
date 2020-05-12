@@ -21,13 +21,11 @@ function RegistrationPage() {
       value: '',
       hasErrors: false,
       message: '',
-      checkCount: 0,
     },
     lastName: {
       value: '',
       hasErrors: false,
       message: '',
-      checkCount: 0,
     },
     email: {
       value: '',
@@ -65,7 +63,7 @@ function RegistrationPage() {
           draft.username.hasErrors = true;
           draft.username.message = 'Username must be at least 3 characters.';
         }
-        if (!draft.hasErrors) {
+        if (!draft.hasErrors && !action.noNeedToSendAxiosRequest) {
           draft.username.checkCount++;
         }
         return;
@@ -82,11 +80,21 @@ function RegistrationPage() {
       case 'firstnameImmediately':
         draft.firstName.hasErrors = false;
         draft.firstName.value = action.value;
+
+        if (draft.firstName.value.length == '') {
+          draft.firstName.hasErrors = true;
+          draft.firstName.message = 'First name field cannot be empty.';
+        }
         return;
       // LAST NAME
       case 'lastnameImmediately':
         draft.lastName.hasErrors = false;
         draft.lastName.value = action.value;
+
+        if (draft.lastName.value.length == '') {
+          draft.lastName.hasErrors = true;
+          draft.lastName.message = 'Last name field cannot be empty.';
+        }
         return;
       case 'lastnameAfterDelay':
         return;
@@ -100,7 +108,7 @@ function RegistrationPage() {
           draft.email.hasErrors = true;
           draft.email.message = 'Please provide a valid email.';
         }
-        if (!draft.email.hasErrors) {
+        if (!draft.email.hasErrors && !action.noNeedToSendAxiosRequest) {
           draft.email.checkCount++;
         }
         return;
@@ -124,13 +132,16 @@ function RegistrationPage() {
         }
         return;
       case 'passwordAfterDelay':
-        if (draft.password.value.length < 7) {
+        if (draft.password.value.length < 6) {
           draft.password.hasErrors = true;
-          draft.password.message = 'Password must be at least 12 characters.';
+          draft.password.message = 'Password must be at least 6 characters.';
         }
         return;
       // SUBMIT
       case 'submitForm':
+        if (!draft.username.hasErrors && draft.username.isUnique && !draft.firstName.hasErrors && !draft.lastName.hasErrors && !draft.email.hasErrors && draft.email.isUnique && !draft.password.hasErrors) {
+          draft.submitCount++;
+        }
         return;
     }
   }
@@ -200,12 +211,56 @@ function RegistrationPage() {
     }
   }, [state.username.checkCount]);
 
+  // SEND FORM
+  useEffect(() => {
+    if (state.submitCount) {
+      const request = Axios.CancelToken.source();
+      (async function submitRegistration() {
+        try {
+          const response = await Axios.post(
+            '/register',
+            {
+              username: state.username.value,
+              firstName: state.firstName.value,
+              lastName: state.lastName.value,
+              email: state.email.value,
+              password: state.password.value,
+            },
+            { cancelToken: request.token }
+          );
+          // LOG USER IN
+          appDispatch({ type: 'login', data: response.data });
+          // FLASH MESSAGE
+          appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
+        } catch (e) {
+          console.log('problem from registration');
+        }
+      })();
+      return function cleanUpRequest() {
+        return request.cancel();
+      };
+    }
+  }, [state.submitCount]);
+
   function handleSubmit(e) {
     e.preventDefault();
+    dispatch({ type: 'usernameImmediately', value: state.username.value });
+    dispatch({ type: 'usernameAfterDelay', value: state.username.value, noNeedToSendAxiosRequest: true });
+
+    dispatch({ type: 'firstnameImmediately', value: state.firstName.value });
+    dispatch({ type: 'lastnameImmediately', value: state.lastName.value });
+
+    dispatch({ type: 'emailImmediately', value: state.email.value });
+    dispatch({ type: 'emailAfterDelay', value: state.email.value, noNeedToSendAxiosRequest: true });
+
+    dispatch({ type: 'passwordImmediately', value: state.password.value });
+    dispatch({ type: 'passwordAfterDelay', value: state.password.value });
+
+    dispatch({ type: 'submitForm' });
   }
 
   // CSS
-  const CSSTransitionStyle = {color: '#e53e3e', fontSize: 0.75 + 'em'};
+  const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
 
   return (
     <Page title='Registration'>
