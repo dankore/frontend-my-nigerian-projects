@@ -14,8 +14,10 @@ function Header() {
           <span className='text-2xl'>&#8962;</span>
           <span className='ml-1'>I Want to Hire You</span>
         </Link>
-        <Link to='/how-to-bid'>How To Bid</Link>
-        {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+        <div className='flex items-center'>
+          <Link className='inline-block mr-3' to='/how-to-bid'>How To Bid</Link>
+          {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+        </div>
       </div>
     </header>
   );

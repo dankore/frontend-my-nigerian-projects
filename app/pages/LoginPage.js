@@ -40,7 +40,7 @@ function LoginPage() {
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
             </label>
-            <input onChange={e => setUsername(e.target.value)} id='username' type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => setUsername(e.target.value)} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
           </div>
           <div className='mb-4'>
             <div className='flex justify-between mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>

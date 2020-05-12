@@ -22,6 +22,7 @@ import Terms from './pages/TermsPage';
 import HowToBid from './pages/HowToBidPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // COMPONENTS END
 
@@ -112,6 +113,9 @@ function Main() {
             </Route>
             <Route path='/register'>
               <RegistrationPage />
+            </Route>
+            <Route>
+              <NotFoundPage />
             </Route>
           </Switch>
           <Footer />
