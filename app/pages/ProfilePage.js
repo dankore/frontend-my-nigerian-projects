@@ -18,7 +18,7 @@ function ProfilePage() {
         </Link>
       </h2>
 
-      <ul className='flex border-b mt-5'>
+      <ul className='flex border-b mt-5 shadow'>
         <li className='-mb-px mr-1'>
           <a className='bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' to='#'>
             Active
@@ -42,7 +42,7 @@ function ProfilePage() {
       </ul>
       <div className='flex flex-col'>
         <div className='-my-2 py-2  sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8'>
-          <div className='align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200'>
+          <div className='align-middle inline-block min-w-full border overflow-hidden sm:rounded-lg border-b border-gray-200'>
             <table className='min-w-full'>
               <thead>
                 <tr>
