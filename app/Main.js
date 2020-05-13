@@ -33,6 +33,8 @@ function Main() {
     user: {
       token: localStorage.getItem('biddingApp-token'),
       username: localStorage.getItem('biddingApp-username'),
+      firstName: localStorage.getItem('biddingApp-firstname'),
+      lastName: localStorage.getItem('biddingApp-lastname'),
       avatar: localStorage.getItem('biddingApp-avatar'),
     },
   };
@@ -52,15 +54,19 @@ function Main() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-
+console.log(state)
   useEffect(() => {
     if (state.loggedIn) {
       localStorage.setItem('biddingApp-token', state.user.token);
       localStorage.setItem('biddingApp-username', state.user.username);
+      localStorage.setItem('biddingApp-firstname', state.user.firstName),
+      localStorage.setItem('biddingApp-lastname', state.user.lastName),
       localStorage.setItem('biddingApp-avatar', state.user.avatar);
     } else {
       localStorage.removeItem('biddingApp-token');
       localStorage.removeItem('biddingApp-username');
+      localStorage.removeItem('biddingApp-firstname');
+      localStorage.removeItem('biddingApp-lastname');
       localStorage.removeItem('biddingApp-avatar');
     }
   }, [state.loggedIn]);
