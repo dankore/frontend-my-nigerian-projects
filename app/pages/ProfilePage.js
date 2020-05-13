@@ -12,7 +12,7 @@ function ProfilePage() {
         <Link to={`/profile/${appState.user.username}`}>
           <img className='h-10 w-10 rounded-full' src='https://gravatar.com/avatar/f69127052821e90dabb8c6cabd227e90?s=128' alt='' />
         </Link>
-        <Link className='mx-3 bg-red-400' to={`/profile/${appState.user.username}`}>
+        <Link className='mx-3' to={`/profile/${appState.user.username}`}>
           {appState.user.firstName} {appState.user.lastName}
         </Link>
         <button className='text-white bg-blue-600 focus:outline-none hover:bg-red-800 px-1 rounded'>

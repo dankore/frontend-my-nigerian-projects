@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     enabled: true,
-    content: ["./dist/css/main.css", "./dist/index.html", "./dist/main.438d061b4ff7b3afa119.js"],
+    content: ["./dist/css/main.css", "./dist/index.html"],
   },
   target: "relaxed",
   prefix: "",
