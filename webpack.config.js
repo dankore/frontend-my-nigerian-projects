@@ -45,6 +45,7 @@ config = {
   mode: "development",
   module: {
     rules: [
+      
       {
         test: /\.js$/,
         exclude: /(node_modules)/,

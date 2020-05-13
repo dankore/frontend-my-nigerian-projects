@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, NavLink, Switch, Route } from 'react-router-dom';
+import Axios from 'axios';
+import { useImmer } from 'use-immer';
 
 function ProfilePage() {
   const appState = useContext(StateContext);
   const { username } = useParams();
+
+  useEffect(() => {}, []);
 
   return (
     <Page title='Profile Page'>
@@ -23,21 +27,17 @@ function ProfilePage() {
 
       <div className='mt-2 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg'>
         <ul className='flex mb-3 shadow'>
-          <li className='cursor-pointer -mb-px mr-1'>
-            <a className='bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' to='#'>
-              Bids: 1
-            </a>
-          </li>
-          <li className='cursor-pointer mr-1'>
-            <a className='bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
-              Followers: 21
-            </a>
-          </li>
-          <li className='cursor-pointer mr-1'>
-            <a className='bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
-              Following: 30
-            </a>
-          </li>
+          <NavLink exact to='#' className='cursor-pointer -mb-px mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' to='#'>
+            Bids: 1
+          </NavLink>
+
+          <NavLink className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
+            Followers: 21
+          </NavLink>
+
+          <NavLink className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
+            Following: 30
+          </NavLink>
         </ul>
         <table className='min-w-full border'>
           <thead>
