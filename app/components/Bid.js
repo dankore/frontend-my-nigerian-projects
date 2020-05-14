@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Bid(props) {
+  const bid = props.bid;
+  const date = new Date(bid.createdDate);
+  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  const descriptionFormatted = bid.description.split(' ').slice(0, 5).join(" ") + '...'
+
   return (
     <tr className='border'>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
@@ -11,20 +16,20 @@ function Bid(props) {
           </div>
           <div className='ml-4'>
             <div className='text-sm leading-5 font-medium text-gray-900'>
-              {props.bid.author.firstName} {props.bid.author.lastName}
+              {bid.author.firstName} {bid.author.lastName}
             </div>
-            <div className='text-sm leading-5 text-gray-500'>Contact #</div>
+            <div className='text-sm leading-5 text-gray-500'>on {dateFormatted}</div>
           </div>
         </div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
         <div className='text-sm leading-5 text-gray-900'>Project Title</div>
-        <div className='text-sm leading-5 text-gray-500'>{props.bid.description}</div>
+        <div className='text-sm leading-5 text-gray-500'>{descriptionFormatted}</div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
         <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Active</span>
       </td>
-      <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500'>Owner</td>
+      <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500'>????</td>
       <td className='px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium'>
         <Link to='#' className='text-indigo-600 hover:text-indigo-900'>
           View
