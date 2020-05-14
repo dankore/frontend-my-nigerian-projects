@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Page from '../components/Page';
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
-function CreateBid() {
+function CreateBid(props) {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
 
@@ -10,11 +11,12 @@ function CreateBid() {
     e.preventDefault();
 
     try {
-      await Axios.post('/create-bid', {
+      const response = await Axios.post('/create-bid', {
         title,
         description,
         token: localStorage.getItem('biddingApp-token'),
       });
+      props.history.push(`/bid/${response.data}`);
       console.log('new bid created.');
     } catch (error) {
       alert('Problem creating bid');
@@ -44,4 +46,4 @@ function CreateBid() {
   );
 }
 
-export default CreateBid;
+export default withRouter(CreateBid);

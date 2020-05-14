@@ -24,6 +24,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
 import CreateBid from './pages/CreateBid';
+import ViewSingleBid from './pages/ViewSingleBid';
 
 // COMPONENTS END
 
@@ -108,6 +109,9 @@ function Main() {
             </Route>
             <Route path='/create-bid'>
               <CreateBid />
+            </Route>
+            <Route path='/bid/:id'>
+              <ViewSingleBid/>
             </Route>
             <Route path='/profile/:username'>
               <ProfilePage />
