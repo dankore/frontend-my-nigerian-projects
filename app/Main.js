@@ -25,6 +25,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
 import CreateBid from './pages/CreateBid';
 import ViewSingleBid from './pages/ViewSingleBid';
+import FlashMessages from './components/FlashMessages';
 
 // COMPONENTS END
 
@@ -51,6 +52,7 @@ function Main() {
         draft.loggedIn = false;
         return;
       case 'flashMessage':
+        draft.flashMessages.push(action.value);
         return;
     }
   }
@@ -61,9 +63,7 @@ function Main() {
     if (state.loggedIn) {
       localStorage.setItem('biddingApp-token', state.user.token);
       localStorage.setItem('biddingApp-username', state.user.username);
-      localStorage.setItem('biddingApp-firstname', state.user.firstName),
-      localStorage.setItem('biddingApp-lastname', state.user.lastName),
-      localStorage.setItem('biddingApp-avatar', state.user.avatar);
+      localStorage.setItem('biddingApp-firstname', state.user.firstName), localStorage.setItem('biddingApp-lastname', state.user.lastName), localStorage.setItem('biddingApp-avatar', state.user.avatar);
     } else {
       localStorage.removeItem('biddingApp-token');
       localStorage.removeItem('biddingApp-username');
@@ -102,6 +102,7 @@ function Main() {
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
+          <FlashMessages />
           <Header />
           <Switch>
             <Route path='/' exact>
@@ -111,7 +112,7 @@ function Main() {
               <CreateBid />
             </Route>
             <Route path='/bid/:id'>
-              <ViewSingleBid/>
+              <ViewSingleBid />
             </Route>
             <Route path='/profile/:username'>
               <ProfilePage />
