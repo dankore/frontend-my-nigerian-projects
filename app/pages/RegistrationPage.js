@@ -1,14 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
 import { useImmerReducer } from 'use-immer';
 import DispatchContext from '../DispatchContext';
 import { CSSTransition } from 'react-transition-group';
 
-function RegistrationPage() {
+function RegistrationPage(props) {
   const appDispatch = useContext(DispatchContext);
-  const [wasSuccessful, setWasSuccessful] = useState(false);
 
   const initialState = {
     username: {
@@ -183,7 +182,6 @@ function RegistrationPage() {
         try {
           const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
           dispatch({ type: 'emailIsUnique', value: response.data });
-          console.log(response.data);
         } catch (error) {
           alert('Having difficulty looking for your email. Please try again.');
         }
@@ -230,12 +228,13 @@ function RegistrationPage() {
             { cancelToken: request.token }
           );
           if (response.data) {
-            setWasSuccessful(response.data);
+            props.history.push('/');
+            appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
             // LOG USER IN
             appDispatch({ type: 'login', data: response.data });
           }
         } catch (e) {
-          console.log('problem from registration');
+          alert('Problem registering your account. Please try again.');
         }
       })();
       return function cleanUpRequest() {
@@ -244,11 +243,6 @@ function RegistrationPage() {
     }
   }, [state.submitCount]);
 
-  if (wasSuccessful) {
-    // FLASH MESSAGE
-    appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
-    return <Redirect to='/' />;
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -345,4 +339,4 @@ function RegistrationPage() {
   );
 }
 
-export default RegistrationPage;
+export default withRouter(RegistrationPage);

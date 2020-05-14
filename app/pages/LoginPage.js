@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
 import Axios from 'axios';
 
-function LoginPage() {
+function LoginPage(props) {
   const appDispatch = useContext(DispatchContext);
-  const [wasSuccessful, setWasSuccessful] = useState(false);
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -17,7 +16,8 @@ function LoginPage() {
       const response = await Axios.post('/login', { username: username, password: password });
 
       if (response.data) {
-        setWasSuccessful(response.data);
+        props.history.push('/');
+        appDispatch({ type: 'flashMessage', value: 'Congrats, you created a new post.' });
         appDispatch({ type: 'login', data: response.data });
       } else {
         appDispatch({ type: 'flashMessage', value: 'Invalid username / password.' });
@@ -25,11 +25,6 @@ function LoginPage() {
     } catch (error) {
       alert("Sorry, there's a problem logging you in. Please try again.");
     }
-  }
-
-  if (wasSuccessful) {
-    appDispatch({ type: 'flashMessage', value: 'Congrats, you created a new post.' });
-    return <Redirect to='/' />;
   }
 
   return (
@@ -60,4 +55,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
