@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkDown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 function Bid(props) {
   const bid = props.bid;
@@ -24,7 +26,9 @@ function Bid(props) {
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
         <div className='text-sm leading-5 text-gray-900'>Project Title</div>
-        <div className='text-sm leading-5 text-gray-500'>{descriptionFormatted}</div>
+        <div className='text-sm leading-5 text-gray-500'>
+          <ReactMarkdown source={descriptionFormatted} allowedTypes={['paragraph', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        </div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
         <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Active</span>
