@@ -23,7 +23,6 @@ function ProfileBids() {
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-    // TODO SAME ANYWHERE AXIOS GETS CALLED
     return () => {
       request.cancel();
     };
