@@ -17,7 +17,7 @@ function LoginPage(props) {
 
       if (response.data) {
         props.history.push('/');
-        appDispatch({ type: 'flashMessage', value: 'Congrats, you created a new post.' });
+        appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
         appDispatch({ type: 'login', data: response.data });
       } else {
         appDispatch({ type: 'flashMessage', value: 'Invalid username / password.' });
