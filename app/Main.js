@@ -23,6 +23,7 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
+import CreateBid from './pages/CreateBid';
 
 // COMPONENTS END
 
@@ -54,7 +55,7 @@ function Main() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-console.log(state)
+
   useEffect(() => {
     if (state.loggedIn) {
       localStorage.setItem('biddingApp-token', state.user.token);
@@ -104,6 +105,9 @@ console.log(state)
           <Switch>
             <Route path='/' exact>
               <Home />
+            </Route>
+            <Route path='/create-bid'>
+              <CreateBid />
             </Route>
             <Route path='/profile/:username'>
               <ProfilePage />

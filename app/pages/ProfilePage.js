@@ -21,7 +21,7 @@ function ProfilePage() {
           {appState.user.firstName} {appState.user.lastName}
         </Link>
         <button className='text-white bg-blue-600 focus:outline-none hover:bg-red-800 px-1 rounded'>
-          Follow <i class='fas fa-user-plus'></i>
+          Follow <i className='fas fa-user-plus'></i>
         </button>
       </h2>
 
