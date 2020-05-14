@@ -33,7 +33,6 @@ function ProfilePage() {
     (async function fetchDataByUsername() {
       try {
         const response = await Axios.post(`/profile/${username}`, { token: appState.user.token }, { CancelToken: request.token });
-        console.log(response.data);
         setState(draft => {
           draft.profileData = response.data;
         });

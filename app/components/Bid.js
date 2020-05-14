@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Bid(props) {
-  console.log(props);
   return (
     <tr className='border'>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
