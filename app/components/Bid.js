@@ -5,7 +5,7 @@ function Bid(props) {
   const bid = props.bid;
   const date = new Date(bid.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  const descriptionFormatted = bid.description.split(' ').slice(0, 5).join(" ") + '...'
+  const descriptionFormatted = `${bid.description.split(' ').slice(0, 5).join(" ")}...`
 
   return (
     <tr className='border'>
