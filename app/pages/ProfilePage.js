@@ -16,6 +16,8 @@ function ProfilePage() {
     stopFollowingRequestCount: 0,
     profileData: {
       profileUsername: '...',
+      profileFirstName: '',
+      profileLastName: '',
       profileAvatar: 'https://gravatar.com/avatar/palceholder?s=128',
       isFollowing: false,
       counts: {
@@ -42,14 +44,15 @@ function ProfilePage() {
     })();
   }, [username]);
 
+  console.log({ state });
   return (
     <Page title='Profile Page'>
       <h2 className='flex items-center'>
-        <Link to={`/profile/${appState.user.username}`}>
+        <Link to={`/profile/${state.profileData.profileUsername}`}>
           <img className='h-10 w-10 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
         </Link>
-        <Link className='mx-3' to={`/profile/${appState.user.username}`}>
-          {appState.user.firstName} {appState.user.lastName}
+        <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
+          {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
         <button className='text-white bg-blue-600 focus:outline-none hover:bg-red-800 px-1 rounded'>
           Follow <i className='fas fa-user-plus'></i>
