@@ -5,10 +5,12 @@ import { useParams, Link } from 'react-router-dom';
 import Axios from 'axios';
 import ReactToolTip from 'react-tooltip';
 import ReactMarkdown from 'react-markdown';
+import NotFoundPage from './NotFoundPage';
 
 function ViewSingleBid() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [notFound, setNotfound] = useState(false);
   const [bid, setBid] = useState();
 
   useEffect(() => {
@@ -18,8 +20,12 @@ function ViewSingleBid() {
         const response = await Axios.get(`/bid/${id}`, {
           cancelToken: request.token,
         });
-        setBid(response.data);
-        setIsLoading(false);
+        if (response.data) {
+          setBid(response.data);
+          setIsLoading(false);
+        } else {
+          setNotfound(true);
+        }
       } catch (error) {
         console.log('Problem with fetching bids.');
       }
@@ -29,6 +35,10 @@ function ViewSingleBid() {
       request.cancel();
     };
   }, [id]);
+
+  if(notFound){
+    return <NotFoundPage />
+  }
 
   if (isLoading) {
     return <LoadingDotsIcon />;

@@ -6,6 +6,7 @@ import Axios from 'axios';
 import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
+import NotFoundPage from './NotFoundPage';
 
 function ViewSingleBid() {
   const appState = useContext(StateContext);
@@ -68,6 +69,9 @@ function ViewSingleBid() {
           draft.description.message = 'Description cannot be empty.';
         }
         return;
+      case 'notFound':
+        draft.notFound = true;
+        return;
     }
   }
 
@@ -80,7 +84,11 @@ function ViewSingleBid() {
         const response = await Axios.get(`/bid/${state.id}`, {
           cancelToken: request.token,
         });
-        dispatch({ type: 'fetchComplete', value: response.data });
+        if (response.data) {
+          dispatch({ type: 'fetchComplete', value: response.data });
+        } else {
+          dispatch({ type: 'notFound' });
+        }
       } catch (error) {
         console.log('Problem with fetching bids.');
       }
@@ -123,7 +131,13 @@ function ViewSingleBid() {
 
   function submitEditBidForm(e) {
     e.preventDefault();
+    dispatch({ type: 'titleRules', value: state.title.value });
+    dispatch({ type: 'descriptionRules', value: state.description.value });
     dispatch({ type: 'submitRequest' });
+  }
+
+  if (state.notFound) {
+    return <NotFoundPage />;
   }
 
   if (state.isFetching) {
@@ -132,12 +146,15 @@ function ViewSingleBid() {
 
   return (
     <Page title='Edit Bid'>
+      <Link className='text-blue-600 mb-3 inline-block' to={`/bid/${state.id}`}>
+        &laquo;Back previous link
+      </Link>
       <form onSubmit={submitEditBidForm}>
         <div className='relative mb-4'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
           </label>
-          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 text-2xl text-semibold leading-tight' />
           {state.title.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
         <div className='relative'>
