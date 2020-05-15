@@ -29,6 +29,18 @@ function CreateBid(props) {
         draft.description.hasErrors = false;
         draft.description.value = action.value;
         return;
+      case 'titleRules':
+        if (!action.value.trim()) {
+          draft.title.hasErrors = true;
+          draft.title.message = 'Title cannot be empty';
+        }
+        return;
+      case 'descriptionRules':
+        if (!action.value.trim()) {
+          draft.description.hasErrors = true;
+          draft.description.message = 'Description cannot be empty';
+        }
+        return;
     }
   }
   const [state, dispatch] = useImmerReducer(reducer, initialState);
@@ -51,18 +63,20 @@ function CreateBid(props) {
   return (
     <Page title='Create New Bid'>
       <form onSubmit={handleSubmit}>
-        <div className='mb-4'>
+        <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
           </label>
-          <input onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+          {state.title.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
 
-        <div className=''>
+        <div className='relative'>
           <label htmlFor='bid-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='bid-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='bid-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
+          {state.description.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
         <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Save New Bid</button>
