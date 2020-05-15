@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import ReactToolTip from 'react-tooltip';
 import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
+import DispatchContext from '../DispatchContext';
 
-function ViewSingleBid() {
+function ViewSingleBid(props) {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotfound] = useState(false);
@@ -57,17 +59,33 @@ function ViewSingleBid() {
     return false;
   }
 
+  async function deleteBidHandler() {
+    const areYouSure = window.confirm('Delete your bid?');
+
+    if (areYouSure) {
+      try {
+        const response = await Axios.delete(`/bid/${id}`, { data: { token: appState.user.token } });
+        if (response.data == 'Success') {
+          appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
+          props.history.push(`/profile/${appState.user.username}`);
+        }
+      } catch (error) {
+        console.log('Problem deleting your bid. Please try again.');
+      }
+    }
+  }
+
   return (
     <Page title={bid.title}>
       <div className='flex justify-between'>
         <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate'>{bid.title}</h2>
         {isOwner() && (
           <span className='pt-2'>
-            <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 mr-3' data-for='edit-btn' data-tip='edit'>
+            <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
               <i className='fas fa-edit'></i>
             </Link>
             <ReactToolTip place='bottom' id='edit-btn' />
-            <button className='text-red-600' data-for='delete-btn' data-tip='Delete'>
+            <button onClick={deleteBidHandler} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
               <i className='fas fa-trash'></i>
             </button>
             <ReactToolTip place='bottom' id='delete-btn' />
@@ -92,4 +110,4 @@ function ViewSingleBid() {
   );
 }
 
-export default ViewSingleBid;
+export default withRouter(ViewSingleBid);
