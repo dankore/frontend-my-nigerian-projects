@@ -36,7 +36,7 @@ function ViewSingleBid() {
     };
   }, [id]);
 
-  if(notFound){
+  if(notFound){ // COULD USE if(!isLoading && !bid)
     return <NotFoundPage />
   }
 
