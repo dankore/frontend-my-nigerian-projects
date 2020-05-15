@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { useImmerReducer } from 'use-immer';
+import StateContext from '../StateContext';
+import DispatchContext from '../DispatchContext';
 
 function CreateBid(props) {
+  const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const initialState = {
     title: {
       value: '',
@@ -17,6 +21,7 @@ function CreateBid(props) {
       message: '',
     },
     sendCount: 0,
+    isSaving: false,
   };
 
   function reducer(draft, action) {
@@ -41,28 +46,62 @@ function CreateBid(props) {
           draft.description.message = 'Description cannot be empty';
         }
         return;
+      case 'handleSubmit':
+        if (!draft.title.hasErrors && !draft.description.hasErrors) {
+          draft.sendCount++;
+        }
+        return;
+      case 'saveRequestStarted':
+        draft.isSaving = true;
+        return;
+      case 'saveRequestFinished':
+        draft.isSaving = false;
+        return;
     }
   }
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      const response = await Axios.post('/create-bid', {
-        title: state.title.value,
-        description: state.description.value,
-        token: localStorage.getItem('biddingApp-token'),
-      });
-      props.history.push(`/bid/${response.data}`);
-    } catch (error) {
-      alert('Problem creating bid');
+  useEffect(() => {
+    if (state.sendCount) {
+      dispatch({ type: 'saveRequestStarted' });
+      const request = Axios.CancelToken.source();
+      (async function saveBid() {
+        try {
+          const response = await Axios.post(
+            '/create-bid',
+            {
+              title: state.title.value,
+              description: state.description.value,
+              token: appState.user.token,
+            },
+            {
+              cancelToken: request.token,
+            }
+          );
+          dispatch({ type: 'saveRequestFinished' });
+          props.history.push(`/bid/${response.data}`);
+          appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
+        } catch (error) {
+          alert('Problem creating bid.');
+        }
+      })();
+      // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+      return () => {
+        request.cancel();
+      };
     }
+  }, [state.sendCount]);
+
+  async function handleBidSubmit(e) {
+    e.preventDefault();
+    dispatch({ type: 'titleRules', value: state.title.value });
+    dispatch({ type: 'descriptionRules', value: state.description.value });
+    dispatch({ type: 'handleSubmit' });
   }
 
   return (
     <Page title='Create New Bid'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleBidSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -79,7 +118,9 @@ function CreateBid(props) {
           {state.description.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
-        <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Save New Bid</button>
+        <button disabled={state.isSaving} className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
+          {state.isSaving ? 'Saving..' : 'Save New Bid'}
+        </button>
       </form>
     </Page>
   );
