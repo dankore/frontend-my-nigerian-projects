@@ -104,7 +104,7 @@ function ViewSingleBid(props) {
       </p>
 
       <div className='mt-6'>
-        <ReactMarkdown source={bid.description} allowedTypes={['paragraph', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        <ReactMarkdown source={bid.description} allowedTypes={['paragraph','image','strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
       </div>
     </Page>
   );
