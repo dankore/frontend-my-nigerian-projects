@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -92,7 +92,7 @@ function CreateBid(props) {
     }
   }, [state.sendCount]);
 
-  async function handleBidSubmit(e) {
+  function handleBidSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
