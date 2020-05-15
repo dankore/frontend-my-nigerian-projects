@@ -44,7 +44,6 @@ function ProfilePage() {
     })();
   }, [username]);
 
-  console.log({ state });
   return (
     <Page title='Profile Page'>
       <h2 className='flex items-center'>
