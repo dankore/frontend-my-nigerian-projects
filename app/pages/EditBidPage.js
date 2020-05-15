@@ -1,14 +1,14 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import NotFoundPage from './NotFoundPage';
 
-function ViewSingleBid() {
+function EditBidPage(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
 
@@ -86,6 +86,11 @@ function ViewSingleBid() {
         });
         if (response.data) {
           dispatch({ type: 'fetchComplete', value: response.data });
+          // OWNERSHIP
+          if (appState.user.username != response.data.author.username) {
+            appDispatch({ type: 'flashMessage', value: 'You do not have a permission to permission that action.' });
+            props.history.push('/');
+          }
         } else {
           dispatch({ type: 'notFound' });
         }
@@ -173,4 +178,4 @@ function ViewSingleBid() {
   );
 }
 
-export default ViewSingleBid;
+export default withRouter(EditBidPage);
