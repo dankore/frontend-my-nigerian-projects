@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import { useParams, Link } from 'react-router-dom';
@@ -6,8 +6,10 @@ import Axios from 'axios';
 import ReactToolTip from 'react-tooltip';
 import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
+import StateContext from '../StateContext';
 
 function ViewSingleBid() {
+  const appState = useContext(StateContext);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotfound] = useState(false);
@@ -36,8 +38,9 @@ function ViewSingleBid() {
     };
   }, [id]);
 
-  if(notFound){ // COULD USE if(!isLoading && !bid)
-    return <NotFoundPage />
+  if (notFound) {
+    // COULD USE if(!isLoading && !bid)
+    return <NotFoundPage />;
   }
 
   if (isLoading) {
@@ -47,20 +50,29 @@ function ViewSingleBid() {
   const date = new Date(bid.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
+  function isOwner() {
+    if (appState.loggedIn) {
+      return appState.user.username == bid.author.username;
+    }
+    return false;
+  }
+
   return (
     <Page title={bid.title}>
       <div className='flex justify-between'>
         <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate'>{bid.title}</h2>
-        <span className='pt-2'>
-          <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 mr-3' data-for='edit-btn' data-tip='edit'>
-            <i className='fas fa-edit'></i>
-          </Link>
-          <ReactToolTip place='bottom' id='edit-btn' />
-          <button className='text-red-600' data-for='delete-btn' data-tip='Delete'>
-            <i className='fas fa-trash'></i>
-          </button>
-          <ReactToolTip place='bottom' id='delete-btn' />
-        </span>
+        {isOwner() && (
+          <span className='pt-2'>
+            <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 mr-3' data-for='edit-btn' data-tip='edit'>
+              <i className='fas fa-edit'></i>
+            </Link>
+            <ReactToolTip place='bottom' id='edit-btn' />
+            <button className='text-red-600' data-for='delete-btn' data-tip='Delete'>
+              <i className='fas fa-trash'></i>
+            </button>
+            <ReactToolTip place='bottom' id='delete-btn' />
+          </span>
+        )}
       </div>
 
       <p className='flex items-center'>
