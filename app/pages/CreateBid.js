@@ -17,7 +17,6 @@ function CreateBid(props) {
         token: localStorage.getItem('biddingApp-token'),
       });
       props.history.push(`/bid/${response.data}`);
-      console.log('new bid created.');
     } catch (error) {
       alert('Problem creating bid');
     }

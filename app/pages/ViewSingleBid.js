@@ -100,7 +100,7 @@ function ViewSingleBid(props) {
         <Link className='mx-1' to={`/profile/${bid.author.username}`}>
           {bid.author.firstName} {bid.author.lastName}
         </Link>{' '}
-        on 2/10/2020
+        {dateFormatted}
       </p>
 
       <div className='mt-6'>
