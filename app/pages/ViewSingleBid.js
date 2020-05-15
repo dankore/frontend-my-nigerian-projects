@@ -42,13 +42,13 @@ function ViewSingleBid() {
       <div className='flex justify-between'>
         <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate'>{bid.title}</h2>
         <span className='pt-2'>
-          <Link to='#' className='text-blue-600 mr-3' data-for='edit-btn' data-tip='edit'>
+          <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 mr-3' data-for='edit-btn' data-tip='edit'>
             <i className='fas fa-edit'></i>
           </Link>
           <ReactToolTip place='bottom' id='edit-btn' />
-          <Link to='#' className='text-red-600' data-for='delete-btn' data-tip='Delete'>
+          <button className='text-red-600' data-for='delete-btn' data-tip='Delete'>
             <i className='fas fa-trash'></i>
-          </Link>
+          </button>
           <ReactToolTip place='bottom' id='delete-btn' />
         </span>
       </div>

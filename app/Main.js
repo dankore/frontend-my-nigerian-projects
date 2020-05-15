@@ -26,6 +26,7 @@ import ProfilePage from './pages/ProfilePage';
 import CreateBid from './pages/CreateBid';
 import ViewSingleBid from './pages/ViewSingleBid';
 import FlashMessages from './components/FlashMessages';
+import EditBidPage from './pages/EditBidPage';
 
 // COMPONENTS END
 
@@ -111,7 +112,10 @@ function Main() {
             <Route path='/create-bid'>
               <CreateBid />
             </Route>
-            <Route path='/bid/:id'>
+            <Route path='/bid/:id/edit' exact>
+              <EditBidPage />
+            </Route>
+            <Route path='/bid/:id' exact>
               <ViewSingleBid />
             </Route>
             <Route path='/profile/:username'>
