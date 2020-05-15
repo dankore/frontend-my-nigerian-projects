@@ -152,7 +152,7 @@ function EditBidPage(props) {
   return (
     <Page title='Edit Bid'>
       <Link className='text-blue-600 mb-3 inline-block' to={`/bid/${state.id}`}>
-        &laquo;Back previous link
+        &laquo;Back to previous link
       </Link>
       <form onSubmit={submitEditBidForm}>
         <div className='relative mb-4'>
