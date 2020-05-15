@@ -53,7 +53,7 @@ function ProfilePage() {
         <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
           {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
-        <button className='text-white bg-blue-600 focus:outline-none hover:bg-blue-800 px-1 rounded'>
+        <button className='text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
           Follow <i className='fas fa-user-plus'></i>
         </button>
       </h2>
