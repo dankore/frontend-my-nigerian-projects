@@ -11,7 +11,7 @@ import DispatchContext from './DispatchContext';
 
 // AXIOS COMMON URL
 console.log(process.env.BACKENDURL);
-Axios.defaults.baseURL =  process.env.BACKENDURL || 'https://backend-bidding-app.herokuapp.com';
+Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-bidding-app.herokuapp.com';
 
 // COMPONENTS
 import Header from './components/Header';
@@ -110,9 +110,7 @@ function Main() {
             <Route path='/' exact>
               <Home />
             </Route>
-            <Route path='/create-bid'>
-              <CreateBid />
-            </Route>
+            <Route path='/create-bid'>{state.loggedIn ? <CreateBid /> : <NotFoundPage />}</Route>
             <Route path='/bid/:id/edit' exact>
               <EditBidPage />
             </Route>
