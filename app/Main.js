@@ -10,7 +10,8 @@ import DispatchContext from './DispatchContext';
 // STATE MANAGEMENT ENDS
 
 // AXIOS COMMON URL
-Axios.defaults.baseURL = 'http://localhost:8080';
+console.log(process.env.BACKENDURL);
+Axios.defaults.baseURL =  process.env.BACKENDURL || 'https://backend-bidding-app.herokuapp.com';
 
 // COMPONENTS
 import Header from './components/Header';
