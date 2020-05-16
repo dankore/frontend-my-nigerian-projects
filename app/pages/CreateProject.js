@@ -79,7 +79,7 @@ function CreateBid(props) {
             }
           );
           dispatch({ type: 'saveRequestFinished' });
-          props.history.push(`/bid/${response.data}`);
+          props.history.push(`/project/${response.data}`);
           appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
         } catch (error) {
           dispatch({

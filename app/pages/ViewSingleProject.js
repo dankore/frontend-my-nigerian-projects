@@ -21,7 +21,7 @@ function ViewSingleBid(props) {
     const request = Axios.CancelToken.source();
     (async function fetchBid() {
       try {
-        const response = await Axios.get(`/bid/${id}`, {
+        const response = await Axios.get(`/project/${id}`, {
           cancelToken: request.token,
         });
         if (response.data) {
@@ -67,7 +67,7 @@ function ViewSingleBid(props) {
 
     if (areYouSure) {
       try {
-        const response = await Axios.delete(`/bid/${id}`, { data: { token: appState.user.token } });
+        const response = await Axios.delete(`/project/${id}`, { data: { token: appState.user.token } });
         if (response.data == 'Success') {
           appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
           props.history.push(`/profile/${appState.user.username}`);
@@ -94,7 +94,7 @@ function ViewSingleBid(props) {
         </div>
         {isOwner() && (
           <span className='pt-2'>
-            <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+            <Link to={`/project/${bid._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
               <i className='fas fa-edit'></i>
             </Link>
             <ReactToolTip place='bottom' id='edit-btn' />

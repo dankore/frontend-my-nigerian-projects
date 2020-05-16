@@ -81,7 +81,7 @@ function EditBidPage(props) {
     const request = Axios.CancelToken.source();
     (async function fetchBid() {
       try {
-        const response = await Axios.get(`/bid/${state.id}`, {
+        const response = await Axios.get(`/project/${state.id}`, {
           cancelToken: request.token,
         });
         if (response.data) {
@@ -99,7 +99,6 @@ function EditBidPage(props) {
           type: 'flashMessageError',
           value: 'Problem with fetching bids.',
         });
-        
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -115,7 +114,7 @@ function EditBidPage(props) {
       (async function fetchBid() {
         try {
           const response = await Axios.post(
-            `/bid/${state.id}/edit`,
+            `/project/${state.id}/edit`,
             {
               title: state.title.value,
               description: state.description.value,
@@ -155,7 +154,7 @@ function EditBidPage(props) {
 
   return (
     <Page title='Edit Bid'>
-      <Link className='text-blue-600 mb-3 inline-block' to={`/bid/${state.id}`}>
+      <Link className='text-blue-600 mb-3 inline-block' to={`/project/${state.id}`}>
         &laquo;Back to previous link
       </Link>
       <form onSubmit={submitEditBidForm}>

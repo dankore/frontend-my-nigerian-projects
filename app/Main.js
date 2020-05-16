@@ -120,10 +120,10 @@ function Main() {
               <Home />
             </Route>
             <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
-            <Route path='/bid/:id/edit' exact>
+            <Route path='/project/:id/edit' exact>
               <EditProjectPage />
             </Route>
-            <Route path='/bid/:id' exact>
+            <Route path='/project/:id' exact>
               <ViewSingleProject />
             </Route>
             <Route path='/profile/:username'>
