@@ -80,11 +80,11 @@ function CreateBid(props) {
           );
           dispatch({ type: 'saveRequestFinished' });
           props.history.push(`/project/${response.data}`);
-          appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
+          appDispatch({ type: 'flashMessage', value: 'New project created successfully.' });
         } catch (error) {
           dispatch({
             type: 'flashMessageError',
-            value: 'Problem creating bid.',
+            value: 'Problem creating project.',
           });
         }
       })();
@@ -103,7 +103,7 @@ function CreateBid(props) {
   }
 
   return (
-    <Page title='Create New Bid'>
+    <Page title='Create New Project'>
       <form onSubmit={handleBidSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
@@ -114,15 +114,15 @@ function CreateBid(props) {
         </div>
 
         <div className='relative'>
-          <label htmlFor='bid-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='bid-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='project-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
           {state.description.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
         <button disabled={state.isSaving} className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
-          {state.isSaving ? 'Saving..' : 'Save New Bid'}
+          {state.isSaving ? 'Saving..' : 'Save New Project'}
         </button>
       </form>
     </Page>
