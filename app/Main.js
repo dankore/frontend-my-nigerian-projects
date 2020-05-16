@@ -80,7 +80,7 @@ function Main() {
     }
   }, [state.loggedIn]);
 
-  // CECCK TOKEN
+  // CHECK TOKEN
   useEffect(() => {
     if (state.loggedIn) {
       const request = Axios.CancelToken.source();

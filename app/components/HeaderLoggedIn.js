@@ -20,7 +20,7 @@ function HeaderLoggedIn(props) {
       </Link>
       <ReactToolTip place='bottom' id='profile' />
       <Link className='bg-green-600 hover:bg-green-700 mr-2 rounded px-2' to='/create-project'>
-        Create Bid
+        Create Project
       </Link>
       <button onClick={handleLogout} className='hover:text-gray-400'>
         Sign Out
