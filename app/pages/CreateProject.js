@@ -6,7 +6,7 @@ import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 
-function CreateBid(props) {
+function CreateProject(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
@@ -65,7 +65,7 @@ function CreateBid(props) {
     if (state.sendCount) {
       dispatch({ type: 'saveRequestStarted' });
       const request = Axios.CancelToken.source();
-      (async function saveBid() {
+      (async function saveProject() {
         try {
           const response = await Axios.post(
             '/create-project',
@@ -95,7 +95,7 @@ function CreateBid(props) {
     }
   }, [state.sendCount]);
 
-  function handleBidSubmit(e) {
+  function handleProjectSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
@@ -104,7 +104,7 @@ function CreateBid(props) {
 
   return (
     <Page title='Create New Project'>
-      <form onSubmit={handleBidSubmit}>
+      <form onSubmit={handleProjectSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -129,4 +129,4 @@ function CreateBid(props) {
   );
 }
 
-export default withRouter(CreateBid);
+export default withRouter(CreateProject);

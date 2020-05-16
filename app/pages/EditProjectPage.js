@@ -8,7 +8,7 @@ import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import NotFoundPage from './NotFoundPage';
 
-function EditBidPage(props) {
+function EditProjectPage(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
 
@@ -79,7 +79,7 @@ function EditBidPage(props) {
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    (async function fetchBid() {
+    (async function fetchProject() {
       try {
         const response = await Axios.get(`/project/${state.id}`, {
           cancelToken: request.token,
@@ -97,7 +97,7 @@ function EditBidPage(props) {
       } catch (error) {
         dispatch({
           type: 'flashMessageError',
-          value: 'Problem with fetching bids.',
+          value: 'Problem with fetching projects.',
         });
       }
     })();
@@ -111,7 +111,7 @@ function EditBidPage(props) {
     if (state.sendCount) {
       dispatch({ type: 'saveRequestStarted' });
       const request = Axios.CancelToken.source();
-      (async function fetchBid() {
+      (async function fetchProject() {
         try {
           const response = await Axios.post(
             `/project/${state.id}/edit`,
@@ -125,9 +125,9 @@ function EditBidPage(props) {
             }
           );
           dispatch({ type: 'saveRequestFinished' });
-          appDispatch({ type: 'flashMessage', value: 'Bid updated successfully.' });
+          appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
         } catch (error) {
-          console.log('Problem with fetching bids.');
+          console.log('Problem with fetching projects.');
         }
       })();
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -137,7 +137,7 @@ function EditBidPage(props) {
     }
   }, [state.sendCount]);
 
-  function submitEditBidForm(e) {
+  function submitEditProjectForm(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
@@ -153,11 +153,11 @@ function EditBidPage(props) {
   }
 
   return (
-    <Page title='Edit Bid'>
+    <Page title='Edit Project'>
       <Link className='text-blue-600 mb-3 inline-block' to={`/project/${state.id}`}>
         &laquo;Back to previous link
       </Link>
-      <form onSubmit={submitEditBidForm}>
+      <form onSubmit={submitEditProjectForm}>
         <div className='relative mb-4'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -166,10 +166,10 @@ function EditBidPage(props) {
           {state.title.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
         <div className='relative'>
-          <label htmlFor='bid-description' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+          <label htmlFor='project-description' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='bid-description' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text' />
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text' />
           {state.description.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
@@ -181,4 +181,4 @@ function EditBidPage(props) {
   );
 }
 
-export default withRouter(EditBidPage);
+export default withRouter(EditProjectPage);
