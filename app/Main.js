@@ -110,6 +110,7 @@ function Main() {
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
+        <FlashMessages messages={['jjghfffgffg']} />
         <BrowserRouter>
           <FlashMessages messages={state.flashMessages} />
           <Header />
