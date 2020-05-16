@@ -35,6 +35,7 @@ function Main() {
   const initialState = {
     loggedIn: Boolean(localStorage.getItem('biddingApp-token')),
     flashMessages: [],
+    flashMessageErrors: [],
     user: {
       token: localStorage.getItem('biddingApp-token'),
       username: localStorage.getItem('biddingApp-username'),
@@ -55,6 +56,9 @@ function Main() {
         return;
       case 'flashMessage':
         draft.flashMessages.push(action.value);
+        return;
+      case 'flashMessageError':
+        draft.flashMessageErrors.push(action.value);
         return;
     }
   }
@@ -90,7 +94,10 @@ function Main() {
             });
           }
         } catch (e) {
-          console.log('problem from Main.js');
+          dispatch({
+            type: 'flashMessageError',
+            value: 'problem from Main.js.',
+          });
         }
       })();
 
@@ -103,6 +110,7 @@ function Main() {
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
+        <FlashMessages messages={['jjghghgffg']} />
         <BrowserRouter>
           <FlashMessages messages={state.flashMessages} />
           <Header />
