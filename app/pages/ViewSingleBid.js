@@ -31,10 +31,10 @@ function ViewSingleBid(props) {
           setNotfound(true);
         }
       } catch (error) {
-         dispatch({
-           type: 'flashMessageError',
-           value: 'Problem creating bid.',
-         });
+        dispatch({
+          type: 'flashMessageError',
+          value: 'Problem creating bid.',
+        });
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -81,7 +81,17 @@ function ViewSingleBid(props) {
   return (
     <Page title={bid.title}>
       <div className='flex justify-between'>
-        <h2 className='text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate'>{bid.title}</h2>
+        <div className='flex items-center'>
+          <Link to={`/profile/${bid.author.username}`}>
+            <img className='w-12 h-12 rounded-full mr-2' src={bid.author.avatar} />
+          </Link>
+          <p className=''>
+            <Link className='text-blue-600' to={`/profile/${bid.author.username}`}>
+              {bid.author.firstName} {bid.author.lastName}
+            </Link>{' '}
+            <p className='text-gray-600'>posted this project on {dateFormatted}</p>
+          </p>
+        </div>
         {isOwner() && (
           <span className='pt-2'>
             <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
@@ -96,17 +106,8 @@ function ViewSingleBid(props) {
         )}
       </div>
 
-      <p className='flex items-center'>
-        <Link to={`/profile/${bid.author.username}`}>
-          <img className='w-10 h-10 rounded-full mr-2' src={bid.author.avatar} />
-        </Link>
-        <Link className='mx-1' to={`/profile/${bid.author.username}`}>
-          {bid.author.firstName} {bid.author.lastName}
-        </Link>{' '}
-        {dateFormatted}
-      </p>
-
-      <div className='mt-6'>
+      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{bid.title}</h2>
+      <div className='mt-2'>
         <ReactMarkdown source={bid.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
       </div>
     </Page>
