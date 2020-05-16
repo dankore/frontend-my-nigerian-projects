@@ -28,7 +28,7 @@ import CreateBid from './pages/CreateBid';
 import ViewSingleBid from './pages/ViewSingleBid';
 import FlashMessages from './components/FlashMessages';
 import EditBidPage from './pages/EditBidPage';
-import FlashMessageError from './components/FlashMessagesError';
+import FlashMessageErrors from './components/FlashMessageErrors';
 
 // COMPONENTS END
 
@@ -111,10 +111,9 @@ function Main() {
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
-        <FlashMessageError messages={['state.flashMessageErrors']} />
         <BrowserRouter>
           <FlashMessages messages={state.flashMessages} />
-          <FlashMessageError messages={state.flashMessageErrors} />
+          <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
           <Switch>
             <Route path='/' exact>
