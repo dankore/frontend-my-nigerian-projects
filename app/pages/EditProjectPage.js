@@ -125,6 +125,7 @@ function EditProjectPage(props) {
             }
           );
           dispatch({ type: 'saveRequestFinished' });
+          props.history.goBack();
           appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
         } catch (error) {
           console.log('Problem with fetching projects.');
