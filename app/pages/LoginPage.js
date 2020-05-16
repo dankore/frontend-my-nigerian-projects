@@ -20,10 +20,10 @@ function LoginPage(props) {
         appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
         appDispatch({ type: 'login', data: response.data });
       } else {
-        appDispatch({ type: 'flashMessage', value: 'Invalid username / password.' });
+        appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
       }
     } catch (error) {
-      alert("Sorry, there's a problem logging you in. Please try again.");
+      appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
     }
   }
 
