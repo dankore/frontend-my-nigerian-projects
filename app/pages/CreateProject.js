@@ -68,7 +68,7 @@ function CreateBid(props) {
       (async function saveBid() {
         try {
           const response = await Axios.post(
-            '/create-bid',
+            '/create-project',
             {
               title: state.title.value,
               description: state.description.value,
@@ -82,10 +82,10 @@ function CreateBid(props) {
           props.history.push(`/bid/${response.data}`);
           appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
         } catch (error) {
-           dispatch({
-             type: 'flashMessageError',
-             value: 'Problem creating bid.',
-           });
+          dispatch({
+            type: 'flashMessageError',
+            value: 'Problem creating bid.',
+          });
         }
       })();
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST

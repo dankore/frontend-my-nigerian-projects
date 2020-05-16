@@ -19,7 +19,7 @@ function HeaderLoggedIn(props) {
         <img className='h-10 w-10 rounded-full' src='https://gravatar.com/avatar/f69127052821e90dabb8c6cabd227e90?s=128' alt='Profile Pic' />
       </Link>
       <ReactToolTip place='bottom' id='profile' />
-      <Link className='bg-green-600 hover:bg-green-700 mr-2 rounded px-2' to='/create-bid'>
+      <Link className='bg-green-600 hover:bg-green-700 mr-2 rounded px-2' to='/create-project'>
         Create Bid
       </Link>
       <button onClick={handleLogout} className='hover:text-gray-400'>

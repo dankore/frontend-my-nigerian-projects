@@ -24,10 +24,10 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
-import CreateBid from './pages/CreateBid';
-import ViewSingleBid from './pages/ViewSingleBid';
+import CreateProject from './pages/CreateProject';
+import ViewSingleProject from './pages/ViewSingleProject';
 import FlashMessages from './components/FlashMessages';
-import EditBidPage from './pages/EditBidPage';
+import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
 
 // COMPONENTS END
@@ -80,7 +80,7 @@ function Main() {
     }
   }, [state.loggedIn]);
 
-  // check token
+  // CECCK TOKEN
   useEffect(() => {
     if (state.loggedIn) {
       const request = Axios.CancelToken.source();
@@ -119,12 +119,12 @@ function Main() {
             <Route path='/' exact>
               <Home />
             </Route>
-            <Route path='/create-bid'>{state.loggedIn ? <CreateBid /> : <NotFoundPage />}</Route>
+            <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
             <Route path='/bid/:id/edit' exact>
-              <EditBidPage />
+              <EditProjectPage />
             </Route>
             <Route path='/bid/:id' exact>
-              <ViewSingleBid />
+              <ViewSingleProject />
             </Route>
             <Route path='/profile/:username'>
               <ProfilePage />
