@@ -85,12 +85,12 @@ function ViewSingleBid(props) {
           <Link to={`/profile/${bid.author.username}`}>
             <img className='w-12 h-12 rounded-full mr-2' src={bid.author.avatar} />
           </Link>
-          <p className=''>
+          <div className=''>
             <Link className='text-blue-600' to={`/profile/${bid.author.username}`}>
               {bid.author.firstName} {bid.author.lastName}
             </Link>{' '}
             <p className='text-gray-600'>posted this project on {dateFormatted}</p>
-          </p>
+          </div>
         </div>
         {isOwner() && (
           <span className='pt-2'>
