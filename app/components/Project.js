@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import ReactMarkDown from 'react-markdown';
 import ReactMarkdown from 'react-markdown';
 
-function Bid(props) {
-  const bid = props.bid;
-  const date = new Date(bid.createdDate);
+function Project(props) {
+  const project = props.project;
+  const date = new Date(project.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  const descriptionFormatted = `${bid.description.split(' ').slice(0, 5).join(' ')}...`;
+  const descriptionFormatted = `${project.description.split(' ').slice(0, 5).join(' ')}...`;
 
   return (
     <tr className='border'>
@@ -18,14 +18,14 @@ function Bid(props) {
           </div>
           <div className='ml-4'>
             <div className='text-sm leading-5 font-medium text-gray-900'>
-              {bid.author.firstName} {bid.author.lastName}
+              {project.author.firstName} {project.author.lastName}
             </div>
             <div className='text-sm leading-5 text-gray-500'>on {dateFormatted}</div>
           </div>
         </div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-        <div className='text-sm leading-5 text-gray-900'>{bid.title}</div>
+        <div className='text-sm leading-5 text-gray-900'>{project.title}</div>
         <div className='text-sm leading-5 text-gray-500'>
           <ReactMarkdown source={descriptionFormatted} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </div>
@@ -35,7 +35,7 @@ function Bid(props) {
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500'>????</td>
       <td className='px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium'>
-        <Link to={`/bid/${bid._id}`} className='text-indigo-600 hover:text-indigo-900'>
+        <Link to={`/project/${project._id}`} className='text-indigo-600 hover:text-indigo-900'>
           View
         </Link>
       </td>
@@ -43,4 +43,4 @@ function Bid(props) {
   );
 }
 
-export default Bid;
+export default Project;

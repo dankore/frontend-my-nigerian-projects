@@ -6,7 +6,7 @@ import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 
-function CreateBid(props) {
+function CreateProject(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
@@ -65,10 +65,10 @@ function CreateBid(props) {
     if (state.sendCount) {
       dispatch({ type: 'saveRequestStarted' });
       const request = Axios.CancelToken.source();
-      (async function saveBid() {
+      (async function saveProject() {
         try {
           const response = await Axios.post(
-            '/create-bid',
+            '/create-project',
             {
               title: state.title.value,
               description: state.description.value,
@@ -79,13 +79,13 @@ function CreateBid(props) {
             }
           );
           dispatch({ type: 'saveRequestFinished' });
-          props.history.push(`/bid/${response.data}`);
-          appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
+          props.history.push(`/project/${response.data}`);
+          appDispatch({ type: 'flashMessage', value: 'New project created successfully.' });
         } catch (error) {
-           dispatch({
-             type: 'flashMessageError',
-             value: 'Problem creating bid.',
-           });
+          dispatch({
+            type: 'flashMessageError',
+            value: 'Problem creating project.',
+          });
         }
       })();
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -95,7 +95,7 @@ function CreateBid(props) {
     }
   }, [state.sendCount]);
 
-  function handleBidSubmit(e) {
+  function handleProjectSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
@@ -103,8 +103,8 @@ function CreateBid(props) {
   }
 
   return (
-    <Page title='Create New Bid'>
-      <form onSubmit={handleBidSubmit}>
+    <Page title='Create New Project'>
+      <form onSubmit={handleProjectSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -114,19 +114,19 @@ function CreateBid(props) {
         </div>
 
         <div className='relative'>
-          <label htmlFor='bid-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='bid-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='project-body' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text'></textarea>
           {state.description.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
         <button disabled={state.isSaving} className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
-          {state.isSaving ? 'Saving..' : 'Save New Bid'}
+          {state.isSaving ? 'Saving..' : 'Save New Project'}
         </button>
       </form>
     </Page>
   );
 }
 
-export default withRouter(CreateBid);
+export default withRouter(CreateProject);

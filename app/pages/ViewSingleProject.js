@@ -9,23 +9,23 @@ import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 
-function ViewSingleBid(props) {
+function ViewSingleProject(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotfound] = useState(false);
-  const [bid, setBid] = useState();
+  const [project, setProject] = useState();
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    (async function fetchBid() {
+    (async function fetchProject() {
       try {
-        const response = await Axios.get(`/bid/${id}`, {
+        const response = await Axios.get(`/project/${id}`, {
           cancelToken: request.token,
         });
         if (response.data) {
-          setBid(response.data);
+          setProject(response.data);
           setIsLoading(false);
         } else {
           setNotfound(true);
@@ -33,7 +33,7 @@ function ViewSingleBid(props) {
       } catch (error) {
         dispatch({
           type: 'flashMessageError',
-          value: 'Problem creating bid.',
+          value: 'Problem creating project.',
         });
       }
     })();
@@ -44,7 +44,7 @@ function ViewSingleBid(props) {
   }, [id]);
 
   if (notFound) {
-    // COULD USE if(!isLoading && !bid)
+    // COULD USE if(!isLoading && !project)
     return <NotFoundPage />;
   }
 
@@ -52,53 +52,53 @@ function ViewSingleBid(props) {
     return <LoadingDotsIcon />;
   }
 
-  const date = new Date(bid.createdDate);
+  const date = new Date(project.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
   function isOwner() {
     if (appState.loggedIn) {
-      return appState.user.username == bid.author.username;
+      return appState.user.username == project.author.username;
     }
     return false;
   }
 
-  async function deleteBidHandler() {
-    const areYouSure = window.confirm('Delete your bid?');
+  async function deleteProjectHandler() {
+    const areYouSure = window.confirm('Delete your project?');
 
     if (areYouSure) {
       try {
-        const response = await Axios.delete(`/bid/${id}`, { data: { token: appState.user.token } });
+        const response = await Axios.delete(`/project/${id}`, { data: { token: appState.user.token } });
         if (response.data == 'Success') {
-          appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
+          appDispatch({ type: 'flashMessage', value: 'Project deleted.' });
           props.history.push(`/profile/${appState.user.username}`);
         }
       } catch (error) {
-        console.log('Problem deleting your bid. Please try again.');
+        console.log('Problem deleting your project. Please try again.');
       }
     }
   }
 
   return (
-    <Page title={bid.title}>
+    <Page title={project.title}>
       <div className='flex justify-between'>
         <div className='flex items-center'>
-          <Link to={`/profile/${bid.author.username}`}>
-            <img className='w-12 h-12 rounded-full mr-2' src={bid.author.avatar} />
+          <Link to={`/profile/${project.author.username}`}>
+            <img className='w-12 h-12 rounded-full mr-2' src={project.author.avatar} />
           </Link>
           <div className=''>
-            <Link className='text-blue-600' to={`/profile/${bid.author.username}`}>
-              {bid.author.firstName} {bid.author.lastName}
+            <Link className='text-blue-600' to={`/profile/${project.author.username}`}>
+              {project.author.firstName} {project.author.lastName}
             </Link>{' '}
             <p className='text-gray-600'>posted this project on {dateFormatted}</p>
           </div>
         </div>
         {isOwner() && (
           <span className='pt-2'>
-            <Link to={`/bid/${bid._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+            <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
               <i className='fas fa-edit'></i>
             </Link>
             <ReactToolTip place='bottom' id='edit-btn' />
-            <button onClick={deleteBidHandler} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+            <button onClick={deleteProjectHandler} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
               <i className='fas fa-trash'></i>
             </button>
             <ReactToolTip place='bottom' id='delete-btn' />
@@ -106,12 +106,12 @@ function ViewSingleBid(props) {
         )}
       </div>
 
-      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{bid.title}</h2>
+      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{project.title}</h2>
       <div className='mt-2'>
-        <ReactMarkdown source={bid.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
       </div>
     </Page>
   );
 }
 
-export default withRouter(ViewSingleBid);
+export default withRouter(ViewSingleProject);

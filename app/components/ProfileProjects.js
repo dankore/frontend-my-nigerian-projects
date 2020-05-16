@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import LoadingDotsIcon from '../components/LoadingDotsIcon';
+import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
-import Bid from './Bid';
+import Project from './Project';
 
-function ProfileBids() {
+function ProfileProjects() {
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [bids, setBids] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    (async function fetchBids() {
+    (async function fetchProjects() {
       try {
-        const response = await Axios.get(`/profile/${username}/bids`, {
+        const response = await Axios.get(`/profile/${username}/projects`, {
           cancelToken: request.token,
         });
         setIsLoading(false);
-        setBids(response.data);
+        setProjects(response.data);
       } catch (error) {
-        alert('Problem with fetching bids.');
+        alert('Problem with fetching projects.');
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -40,11 +40,11 @@ function ProfileBids() {
 
   return (
     <>
-      {bids.map(bid => {
-        return <Bid bid={bid} key={bid._id} />;
+      {projects.map(project => {
+        return <Project project={project} key={project._id} />;
       })}
     </>
   );
 }
 
-export default ProfileBids;
+export default ProfileProjects;
