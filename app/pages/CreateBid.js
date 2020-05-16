@@ -82,7 +82,10 @@ function CreateBid(props) {
           props.history.push(`/bid/${response.data}`);
           appDispatch({ type: 'flashMessage', value: 'New bid created successfully.' });
         } catch (error) {
-          alert('Problem creating bid.');
+           dispatch({
+             type: 'flashMessageError',
+             value: 'Problem creating bid.',
+           });
         }
       })();
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST

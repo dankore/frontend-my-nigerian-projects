@@ -95,7 +95,11 @@ function EditBidPage(props) {
           dispatch({ type: 'notFound' });
         }
       } catch (error) {
-        console.log('Problem with fetching bids.');
+        dispatch({
+          type: 'flashMessageError',
+          value: 'Problem with fetching bids.',
+        });
+        
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST

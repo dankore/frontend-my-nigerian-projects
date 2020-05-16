@@ -31,7 +31,10 @@ function ViewSingleBid(props) {
           setNotfound(true);
         }
       } catch (error) {
-        console.log('Problem with fetching bids.');
+         dispatch({
+           type: 'flashMessageError',
+           value: 'Problem creating bid.',
+         });
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
