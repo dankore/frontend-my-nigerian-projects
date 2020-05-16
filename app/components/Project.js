@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import ReactMarkDown from 'react-markdown';
 import ReactMarkdown from 'react-markdown';
 
 function Project(props) {
   const project = props.project;
   const date = new Date(project.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  const descriptionFormatted = `${project.description.split(' ').slice(0, 5).join(' ')}...`;
+  const test = formatTitleAndDescription(project.description);
+  function formatTitleAndDescription(s) {
+    return `${s.split(' ').slice(0, 5).join(' ')}...`;
+  }
 
   return (
     <tr className='border'>
@@ -25,9 +27,9 @@ function Project(props) {
         </div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-        <div className='text-sm leading-5 text-gray-900'>{project.title}</div>
+        <div className='text-sm leading-5 text-gray-900 truncate'>{formatTitleAndDescription(project.title)}</div>
         <div className='text-sm leading-5 text-gray-500'>
-          <ReactMarkdown source={descriptionFormatted} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+          <ReactMarkdown source={test} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </div>
       </td>
       <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
