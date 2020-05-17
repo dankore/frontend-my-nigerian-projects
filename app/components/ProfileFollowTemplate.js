@@ -3,9 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
+import StateContext from '../StateContext';
 
 function ProfileFollow(props) {
   const appDispatch = useContext(DispatchContext);
+  const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
@@ -29,20 +31,40 @@ function ProfileFollow(props) {
     };
   }, [username, props.action]);
 
+  function noFollowBlankTemplate(s){
+    if(s == 'followers'){
+      if(appState.user.username == username){
+        return 'You do not have any followers'
+      } else {
+        return 'This user has no followers'
+      }
+    }
+
+    if (s == 'following') {
+      if ((appState.user.username == username)) {
+        return 'You are not following anyone';
+      } else {
+        return 'This user is not following anyone yet.';
+      }
+    }
+  }
+
   if (isLoading) {
     return <LoadingDotsIcon />;
   }
 
   return (
     <div className='border rounded'>
-      {projects.map((follow, index) => {
-        return (
-          <Link key={index} to={`/profile/${follow.username}`} className='hover:bg-gray-100 flex items-center p-2 border-b'>
-            <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
-            {follow.username}
-          </Link>
-        );
-      })}
+      {projects.length > 0
+        ? projects.map((follow, index) => {
+            return (
+              <Link key={index} to={`/profile/${follow.username}`} className='hover:bg-gray-100 flex items-center p-2 border-b'>
+                <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
+                {follow.username}
+              </Link>
+            );
+          })
+        : <p>{`${noFollowBlankTemplate(props.action)}`}</p>}
     </div>
   );
 }
