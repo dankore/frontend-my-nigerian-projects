@@ -33,11 +33,11 @@ function ProfileProjects() {
   }
 
   return (
-    <>
+    <div className=''>
       {projects.map(project => {
         return <Project project={project} key={project._id} />;
       })}
-    </>
+    </div>
   );
 }
 
