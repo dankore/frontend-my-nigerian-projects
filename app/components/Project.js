@@ -10,7 +10,7 @@ function Project(props) {
 
   return (
     <Link to={`/project/${project._id}`} className=''>
-      <div className='border border-gray-200 flex justify-between py-3'>
+      <div className='border border-gray-200 flex justify-between py-3 hover:bg-gray-100'>
         <div className='px-6'>
           <div className='flex items-center'>
             <div className='flex-shrink-0 h-10 w-10'>
@@ -24,7 +24,7 @@ function Project(props) {
             </div>
           </div>
         </div>
-        <div className=''>
+        <div className='bg-red-400'>
           <div className='text-sm leading-5 text-gray-900'>{formatTitleAndDescription(project.title)}</div>
           <div className='text-sm leading-5 text-gray-500'>
             <ReactMarkdown source={formatTitleAndDescription(project.description)} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />

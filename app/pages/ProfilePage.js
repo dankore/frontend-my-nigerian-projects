@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
+import DispatchContext from '../DispatchContext';
 import { Link, useParams, NavLink, Switch, Route } from 'react-router-dom';
 import Axios from 'axios';
 import { useImmer } from 'use-immer';
@@ -8,6 +9,7 @@ import ProfileProjects from '../components/ProfileProjects';
 
 function ProfilePage() {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
 
   const [state, setState] = useImmer({
@@ -39,7 +41,7 @@ function ProfilePage() {
           draft.profileData = response.data;
         });
       } catch (error) {
-        alert('Fetching username failed.');
+        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
       }
     })();
     // CANCEL REQUEST
@@ -65,7 +67,7 @@ function ProfilePage() {
             draft.followActionLoading = false;
           });
         } catch (error) {
-          alert('Fetching username failed.');
+          appDispatch({ type: 'flashMessageError', value: 'Fetching Followers failed.' });
         }
       })();
       // CANCEL REQUEST
@@ -92,7 +94,7 @@ function ProfilePage() {
             draft.followActionLoading = false;
           });
         } catch (error) {
-          alert('Fetching username failed.');
+          appDispatch({ type: 'flashMessageError', value: 'Fetching Following failed.' });
         }
       })();
       // CANCEL REQUEST
@@ -133,7 +135,7 @@ function ProfilePage() {
         <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
           {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
-        
+
         {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
           <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
             Follow <i className='fas fa-user-plus'></i>
