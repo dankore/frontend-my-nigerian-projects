@@ -34,12 +34,12 @@ function ProfileFollowers() {
   }
 
   return (
-    <div className='p-1 border border-gray-200 hover:bg-gray-100'>
+    <div className='border rounded'>
       {projects.map((follower, index) => {
         return (
-          <Link key={index} to={`/profile/${follower.username}`} className='flex items-center'>
-            <img className='h-10 w-10 rounded-full mr-2' src={follower.avatar} alt='Profile Pic' /> 
-           {follower.username}
+          <Link key={index} to={`/profile/${follower.username}`} className='hover:bg-gray-100 flex items-center p-2 border-b'>
+            <img className='h-10 w-10 rounded-full mr-2' src={follower.avatar} alt='Profile Pic' />
+            {follower.username}
           </Link>
         );
       })}
