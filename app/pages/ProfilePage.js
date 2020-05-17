@@ -102,7 +102,6 @@ function ProfilePage() {
     }
   }, [state.stopFollowingRequestCount]);
 
-
   function startFollowing() {
     setState(draft => {
       draft.startFollowingRequestCount++;
@@ -114,6 +113,16 @@ function ProfilePage() {
       draft.stopFollowingRequestCount++;
     });
   }
+
+  const activeNavCSS = {
+    borderLeftWidth: 1 + 'px',
+    borderTopWidth: 1 + 'px',
+    borderRightWidth: 1 + 'px',
+    borderTopRightRadius: 0.25 + 'rem',
+    borderBottomLeftRadius: 0.25 + 'rem',
+    marginRight: -0.25 + 'rem',
+    marginBottom: -0.25 + 'rem',
+  };
 
   return (
     <Page title='Profile Page'>
@@ -135,18 +144,18 @@ function ProfilePage() {
           </button>
         )}
       </h2>
-
+      {/* border-l border-t border-r rounded-t */}
       <div className='mt-2 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg'>
         <ul className='flex mb-3 shadow'>
-          <NavLink exact to={`/profile/${state.profileData.profileUsername}`} className='cursor-pointer -mb-px mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' to='#'>
+          <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
             Projects: {state.profileData.counts.projectCount}
           </NavLink>
 
-          <NavLink className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
+          <NavLink to={`/profile/${state.profileData.profileUsername}/followers`} activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
             Followers: {state.profileData.counts.followerCount}
           </NavLink>
 
-          <NavLink className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold' to='#'>
+          <NavLink to={`/profile/${state.profileData.profileUsername}/following`} activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
             Following: {state.profileData.counts.followingCount}
           </NavLink>
         </ul>
@@ -161,7 +170,13 @@ function ProfilePage() {
             </tr>
           </thead>
           <tbody className='bg-white'>
-            <ProfileProjects />
+            <Switch>
+              <Route exact path='/profile/:username'>
+                <ProfileProjects />
+              </Route>
+              <Route path='/profile/:followers'>"hi"</Route>
+              <Route path='/profile/:following'>'kkk'</Route>
+            </Switch>
           </tbody>
         </table>
       </div>
