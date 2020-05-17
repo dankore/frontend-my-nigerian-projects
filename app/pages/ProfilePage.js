@@ -6,8 +6,7 @@ import { Link, useParams, NavLink, Switch, Route } from 'react-router-dom';
 import Axios from 'axios';
 import { useImmer } from 'use-immer';
 import ProfileProjects from '../components/ProfileProjects';
-import ProfileFollowers from '../components/ProfileFollowers';
-import ProfileFollowing from '../components/ProfileFollowing';
+import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
 
 
 function ProfilePage() {
@@ -171,10 +170,10 @@ function ProfilePage() {
             <ProfileProjects />
           </Route>
           <Route path='/profile/:username/followers'>
-            <ProfileFollowers />
+            <ProfileFollowTemplate action='followers' />
           </Route>
           <Route path='/profile/:username/following'>
-            <ProfileFollowing />
+            <ProfileFollowTemplate action='following' />
           </Route>
         </Switch>
       </div>
