@@ -121,7 +121,7 @@ function ProfilePage() {
     borderTopRightRadius: 0.25 + 'rem',
     borderBottomLeftRadius: 0.25 + 'rem',
     marginRight: -0.25 + 'rem',
-    marginBottom: -0.25 + 'rem',
+    marginBottom: -1 + 'px',
   };
 
   return (
@@ -144,8 +144,8 @@ function ProfilePage() {
           </button>
         )}
       </h2>
-      {/* border-l border-t border-r rounded-t */}
-      <div className='mt-2 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg'>
+     
+      <div className='mt-2 align-middle inline-block min-w-full'>
         <ul className='flex mb-3 shadow'>
           <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
             Projects: {state.profileData.counts.projectCount}
