@@ -42,7 +42,78 @@ function ProfilePage() {
         alert('Fetching username failed.');
       }
     })();
+    // CANCEL REQUEST
+    return () => {
+      request.cancel();
+    };
   }, [username]);
+
+  useEffect(() => {
+    if (state.startFollowingRequestCount) {
+      setState(draft => {
+        draft.followActionLoading = true;
+      });
+      // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+      const request = Axios.CancelToken.source();
+
+      (async function fetchDataByUsername() {
+        try {
+          const response = await Axios.post(`/addFollow/${state.profileData.profileUsername}`, { token: appState.user.token }, { CancelToken: request.token });
+          setState(draft => {
+            draft.profileData.isFollowing = true;
+            draft.profileData.counts.followerCount++;
+            draft.followActionLoading = false;
+          });
+        } catch (error) {
+          alert('Fetching username failed.');
+        }
+      })();
+      // CANCEL REQUEST
+      return () => {
+        request.cancel();
+      };
+    }
+  }, [state.startFollowingRequestCount]);
+
+  useEffect(() => {
+    if (state.stopFollowingRequestCount) {
+      setState(draft => {
+        draft.followActionLoading = true;
+      });
+      // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+      const request = Axios.CancelToken.source();
+
+      (async function fetchDataByUsername() {
+        try {
+          const response = await Axios.post(`/removeFollow/${state.profileData.profileUsername}`, { token: appState.user.token }, { CancelToken: request.token });
+          setState(draft => {
+            draft.profileData.isFollowing = false;
+            draft.profileData.counts.followerCount--;
+            draft.followActionLoading = false;
+          });
+        } catch (error) {
+          alert('Fetching username failed.');
+        }
+      })();
+      // CANCEL REQUEST
+      return () => {
+        request.cancel();
+      };
+    }
+  }, [state.stopFollowingRequestCount]);
+
+
+  function startFollowing() {
+    setState(draft => {
+      draft.startFollowingRequestCount++;
+    });
+  }
+
+  function stopFollowing() {
+    setState(draft => {
+      draft.stopFollowingRequestCount++;
+    });
+  }
 
   return (
     <Page title='Profile Page'>
@@ -53,9 +124,16 @@ function ProfilePage() {
         <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
           {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
-        <button className='text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
-          Follow <i className='fas fa-user-plus'></i>
-        </button>
+        {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
+          <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
+            Follow <i className='fas fa-user-plus'></i>
+          </button>
+        )}
+        {appState.loggedIn && state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
+          <button onClick={stopFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-red-600 focus:outline-none hover:bg-red-700 px-1 rounded'>
+            Stop Following <i className='fas fa-user-times'></i>
+          </button>
+        )}
       </h2>
 
       <div className='mt-2 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg'>
