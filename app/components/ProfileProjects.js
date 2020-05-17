@@ -29,13 +29,7 @@ function ProfileProjects() {
   }, [username]);
 
   if (isLoading) {
-    return (
-      <tr>
-        <td>
-          <LoadingDotsIcon />
-        </td>
-      </tr>
-    );
+    return <LoadingDotsIcon />;
   }
 
   return (

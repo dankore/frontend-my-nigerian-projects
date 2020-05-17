@@ -133,6 +133,7 @@ function ProfilePage() {
         <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
           {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
+        
         {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
           <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
             Follow <i className='fas fa-user-plus'></i>
@@ -144,7 +145,7 @@ function ProfilePage() {
           </button>
         )}
       </h2>
-     
+
       <div className='mt-2 align-middle inline-block min-w-full'>
         <ul className='flex mb-3 shadow'>
           <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
@@ -159,26 +160,14 @@ function ProfilePage() {
             Following: {state.profileData.counts.followingCount}
           </NavLink>
         </ul>
-        <table className='min-w-full border'>
-          <thead>
-            <tr>
-              <th className='px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Name</th>
-              <th className='px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Title</th>
-              <th className='px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Status</th>
-              <th className='px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>????</th>
-              <th className='px-6 py-3 border-b border-gray-200 bg-gray-50'></th>
-            </tr>
-          </thead>
-          <tbody className='bg-white'>
-            <Switch>
-              <Route exact path='/profile/:username'>
-                <ProfileProjects />
-              </Route>
-              <Route path='/profile/:followers'>"hi"</Route>
-              <Route path='/profile/:following'>'kkk'</Route>
-            </Switch>
-          </tbody>
-        </table>
+
+        <Switch>
+          <Route exact path='/profile/:username'>
+            <ProfileProjects />
+          </Route>
+          <Route path='/profile/:followers'>"hi"</Route>
+          <Route path='/profile/:following'>'kkk'</Route>
+        </Switch>
       </div>
     </Page>
   );
