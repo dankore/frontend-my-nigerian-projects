@@ -170,10 +170,10 @@ function ProfilePage() {
             <ProfileProjects />
           </Route>
           <Route path='/profile/:username/followers'>
-            <ProfileFollowTemplate action='followers' />
+            <ProfileFollowTemplate name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} action='followers' />
           </Route>
           <Route path='/profile/:username/following'>
-            <ProfileFollowTemplate action='following' />
+            <ProfileFollowTemplate name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}  action='following' />
           </Route>
         </Switch>
       </div>

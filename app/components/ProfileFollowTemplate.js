@@ -11,6 +11,7 @@ function ProfileFollow(props) {
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -31,19 +32,26 @@ function ProfileFollow(props) {
     };
   }, [username, props.action]);
 
-  function noFollowBlankTemplate(s){
-    if(s == 'followers'){
-      if(appState.user.username == username){
-        return 'You do not have any followers'
+  function noFollowBlankTemplate(s) {
+    if (s == 'followers') {
+      if (appState.user.username == username) {
+        return 'You do not have any followers';
       } else {
-        return 'This user has no followers'
+        if (!appState.loggedIn) {
+          console.log(props.name);
+          return `This user has no followers yet. Login or Register to get the latest projects from ${props.name}.`;
+        }
+        return 'This user has no followers. Click the Follow button to get the latest from this user.';
       }
     }
 
     if (s == 'following') {
-      if ((appState.user.username == username)) {
+      if (appState.user.username == username) {
         return 'You are not following anyone';
       } else {
+        if (!appState.loggedIn) {
+          return `This user is not following anyone yet. Login or Register to get the latest projects from ${props.name}.`;
+        }
         return 'This user is not following anyone yet.';
       }
     }
@@ -55,16 +63,18 @@ function ProfileFollow(props) {
 
   return (
     <div className='border rounded'>
-      {projects.length > 0
-        ? projects.map((follow, index) => {
-            return (
-              <Link key={index} to={`/profile/${follow.username}`} className='hover:bg-gray-100 flex items-center p-2 border-b'>
-                <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
-                {follow.username}
-              </Link>
-            );
-          })
-        : <p>{`${noFollowBlankTemplate(props.action)}`}</p>}
+      {projects.length > 0 ? (
+        projects.map((follow, index) => {
+          return (
+            <Link key={index} to={`/profile/${follow.username}`} className='hover:bg-gray-100 flex items-center p-2 border-b'>
+              <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
+              {follow.username}
+            </Link>
+          );
+        })
+      ) : (
+        <p className='p-4'>{`${noFollowBlankTemplate(props.action)}`}</p>
+      )}
     </div>
   );
 }
