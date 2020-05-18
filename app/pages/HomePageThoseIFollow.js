@@ -7,20 +7,23 @@ import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
 import Project from '../components/Project';
 import { activeNavCSS } from '../helpers/activeNavCSS';
+import StateContext from '../StateContext';
 
 function HomePageThoseIFollow() {
   const appDispatch = useContext(DispatchContext);
+  const appState = useContext(StateContext)
   const [state, setState] = useImmer({
     isLoading: true,
     feed: [],
   });
 
+  
 
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
     const request = Axios.CancelToken.source();
 
-    (async function fetchDataByUsername() {
+    (async function fetchData() {
       try {
         const response = await Axios.post('/getHomeFeed', { token: appState.user.token }, { CancelToken: request.token });
         setState(draft => {
@@ -28,7 +31,7 @@ function HomePageThoseIFollow() {
           draft.feed = response.data;
         });
       } catch (error) {
-        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+        appDispatch({ type: 'flashMessageError', value: 'Fetching Projects From Those You Follow Failed. Please Try Again.' });
       }
     })();
     // CANCEL REQUEST
@@ -41,6 +44,7 @@ function HomePageThoseIFollow() {
     return <LoadingDotsIcon />;
   }
 
+  console.log(activeNavCSS)
   return (
     <Page title='Home'>
       <div className='mt-2 align-middle inline-block min-w-full'>
