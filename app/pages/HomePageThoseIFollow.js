@@ -44,23 +44,27 @@ function HomePageThoseIFollow() {
     return <LoadingDotsIcon />;
   }
 
-  console.log(activeNavCSS)
+
   return (
-    <Page title='Home'>
-      <div className='mt-2 align-middle inline-block min-w-full'>
-        <ul className='flex shadow mb-4'>
-          <NavLink to='/' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
-            All Projects: 4
-          </NavLink>
-
-          <NavLink to='/follow' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
-            Those You Follow: 6
-          </NavLink>
-        </ul>
-
-        <p>jjjjjj</p>
-      </div>
-    </Page>
+    <div title='Home'>
+            <Switch>
+          <Route path='a'>
+            {/* {state.feed.length > 0 ? (
+              <>
+                <div className=''>
+                  {state.feed.map(project => {
+                    return <Project project={project} key={project._id} />;
+                  })}
+                </div>
+              </>
+            ) : (
+              <h2 className='text-2xl text-center'>No Projects posted at this time.</h2>
+            )} */}
+            A
+          </Route>
+          <Route path='b'>B</Route>
+        </Switch>
+    </div>
   );
 }
 

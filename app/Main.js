@@ -117,8 +117,13 @@ function Main() {
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
           <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route path='/follow' component={HomePageThoseIFollow}/>
+            <Route exact path='/'>
+              <Redirect to='/home' />
+            </Route>
+            <Route path='/home'>
+              <HomePage />
+            </Route>
+            {/* <Route path='/follow' component={HomePageThoseIFollow}/> */}
             <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
             <Route path='/project/:id/edit' exact>
               <EditProjectPage />
