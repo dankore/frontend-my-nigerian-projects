@@ -128,7 +128,7 @@ function EditProjectPage(props) {
           props.history.goBack();
           appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
         } catch (error) {
-          console.log('Problem with fetching projects.');
+          appDispatch({ type: 'flashMessageError', value: 'Problem with fetching projects.' });
         }
       })();
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST

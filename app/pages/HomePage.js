@@ -63,10 +63,9 @@ function Home() {
     <LoadingDotsIcon />;
   }
 
-
   return (
     <Page title='Home'>
-      {state.feed.length > 0 && (
+      {state.feed.length > 0 ? (
         <>
           <h2 className='text-center'>Latest from those you follow</h2>
           <div>
@@ -75,8 +74,9 @@ function Home() {
             })}
           </div>
         </>
+      ) : (
+        <p>No Projects posted at this time.</p>
       )}
-      {state.feed.length == 0 && <h2>Feed is empty</h2>}
     </Page>
   );
 }

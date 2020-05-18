@@ -32,7 +32,6 @@ function ProfileProjects() {
     return <LoadingDotsIcon />;
   }
 
-  console.log({ projects });
 
   return (
     <div className=''>

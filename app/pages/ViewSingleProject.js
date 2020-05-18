@@ -73,7 +73,7 @@ function ViewSingleProject(props) {
           props.history.push(`/profile/${appState.user.username}`);
         }
       } catch (error) {
-        console.log('Problem deleting your project. Please try again.');
+        appDispatch({ type: 'flashMessageError', value: 'Problem deleting your project. Please try again.' });
       }
     }
   }

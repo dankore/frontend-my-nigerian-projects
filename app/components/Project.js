@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import StateContext from '../StateContext';
 
 function Project(props) {
-  const appState = useContext(StateContext);
   const project = props.project;
   const date = new Date(project.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -15,7 +13,6 @@ function Project(props) {
     }
     return `${inputToArray.slice(0, 5).join(' ')}...`;
   };
-
 
   return (
     <Link to={`/project/${project._id}`} className=''>
