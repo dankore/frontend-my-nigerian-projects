@@ -23,7 +23,7 @@ function Project(props) {
         <div className='mx-6'>
           <div className='flex items-center'>
             <div className=''>
-              <img className='h-10 w-10 rounded-full' src={project.author.avatar || 'https://gravatar.com/avatar/palceholder?s=128'} alt='Profile Pic' />
+              <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
             </div>
             <div className='ml-2'>
               <div className='text-sm leading-5 font-medium text-gray-900'>
