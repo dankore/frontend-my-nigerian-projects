@@ -8,20 +8,21 @@ import DispatchContext from '../DispatchContext';
 import Project from '../components/Project';
 import { activeNavCSS } from '../helpers/activeNavCSS';
 
-function HomePage(props) {
+function HomePageThoseIFollow() {
   const appDispatch = useContext(DispatchContext);
   const [state, setState] = useImmer({
     isLoading: true,
     feed: [],
   });
 
+
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
     const request = Axios.CancelToken.source();
 
-    (async function fetchData() {
+    (async function fetchDataByUsername() {
       try {
-        const response = await Axios.get('/getHomeFeedIfNotLoggedIn', { CancelToken: request.token });
+        const response = await Axios.post('/getHomeFeed', { token: appState.user.token }, { CancelToken: request.token });
         setState(draft => {
           draft.isLoading = false;
           draft.feed = response.data;
@@ -36,30 +37,9 @@ function HomePage(props) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-  //   const request = Axios.CancelToken.source();
-
-  //   (async function fetchDataByUsername() {
-  //     try {
-  //       const response = await Axios.post('/getHomeFeed', { token: appState.user.token }, { CancelToken: request.token });
-  //       setState(draft => {
-  //         draft.isLoading = false;
-  //         draft.feed = response.data;
-  //       });
-  //     } catch (error) {
-  //       appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
-  //     }
-  //   })();
-  //   // CANCEL REQUEST
-  //   return () => {
-  //     request.cancel();
-  //   };
-  // }, []);
-
-  // if (state.isLoading) {
-  //   return <LoadingDotsIcon />;
-  // }
+  if (state.isLoading) {
+    return <LoadingDotsIcon />;
+  }
 
   return (
     <Page title='Home'>
@@ -73,24 +53,11 @@ function HomePage(props) {
             Those You Follow: 6
           </NavLink>
         </ul>
-          <Switch>
-            <Route path='/'>
-              {state.feed.length > 0 ? (
-                <>
-                  <div className=''>
-                    {state.feed.map(project => {
-                      return <Project project={project} key={project._id} />;
-                    })}
-                  </div>
-                </>
-              ) : (
-                <h2 className='text-2xl text-center'>No Projects posted at this time.</h2>
-              )}
-            </Route>
-          </Switch>
+
+        <p>jjjjjj</p>
       </div>
     </Page>
   );
 }
 
-export default withRouter(HomePage);
+export default HomePageThoseIFollow
