@@ -1,16 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import { useImmer } from 'use-immer';
-import StateContext from '../StateContext';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
-import ReactMarkdown from 'react-markdown';
 import Project from '../components/Project';
 
 function Home() {
-  const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const [state, setState] = useImmer({
     isLoading: true,
@@ -60,22 +56,22 @@ function Home() {
   // }, []);
 
   if (state.isLoading) {
-    <LoadingDotsIcon />;
+    return <LoadingDotsIcon />;
   }
 
   return (
     <Page title='Home'>
       {state.feed.length > 0 ? (
         <>
-          <h2 className='text-center'>Latest from those you follow</h2>
-          <div>
+          <h2 className='text-center'>Latest Projects</h2>
+          <div className='mt-10'>
             {state.feed.map(project => {
               return <Project project={project} key={project._id} />;
             })}
           </div>
         </>
       ) : (
-        <p>No Projects posted at this time.</p>
+        <h2 className='text-2xl'>No Projects posted at this time.</h2>
       )}
     </Page>
   );

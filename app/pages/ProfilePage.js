@@ -18,7 +18,6 @@ function ProfilePage() {
     followActionLoading: false,
     startFollowingRequestCount: 0,
     stopFollowingRequestCount: 0,
-    test: 0,
     profileData: {
       profileUsername: '...',
       profileFirstName: '',
