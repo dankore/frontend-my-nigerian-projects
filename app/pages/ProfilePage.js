@@ -18,6 +18,7 @@ function ProfilePage() {
     followActionLoading: false,
     startFollowingRequestCount: 0,
     stopFollowingRequestCount: 0,
+    test: 0,
     profileData: {
       profileUsername: '...',
       profileFirstName: '',
@@ -170,10 +171,10 @@ function ProfilePage() {
             <ProfileProjects />
           </Route>
           <Route path='/profile/:username/followers'>
-            <ProfileFollowTemplate name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} action='followers' />
+            <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} action='followers' />
           </Route>
           <Route path='/profile/:username/following'>
-            <ProfileFollowTemplate name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}  action='following' />
+            <ProfileFollowTemplate name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} action='following' />
           </Route>
         </Switch>
       </div>

@@ -30,7 +30,7 @@ function ProfileFollow(props) {
     return () => {
       request.cancel();
     };
-  }, [username, props.action]);
+  }, [username, props.action, props.followerCount]);
 
   function noFollowBlankTemplate(s) {
     if (s == 'followers') {
