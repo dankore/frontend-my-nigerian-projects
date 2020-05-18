@@ -42,7 +42,7 @@ function Main() {
       username: localStorage.getItem('biddingApp-username'),
       firstName: localStorage.getItem('biddingApp-firstname'),
       lastName: localStorage.getItem('biddingApp-lastname'),
-      avatar: localStorage.getItem('biddingApp-avatar'),
+      avatar: localStorage.getItem('biddingApp-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
     },
   };
 

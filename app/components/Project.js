@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import StateContext from '../StateContext';
 
 function Project(props) {
+  const appState = useContext(StateContext);
   const project = props.project;
   const date = new Date(project.createdDate);
   const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  const formatTitleAndDescription = s =>{ 
+  const formatTitleAndDescription = s => {
     const inputToArray = s.split(' ');
-    if(inputToArray.length < 6){
+    if (inputToArray.length < 6) {
       return `${inputToArray.slice(0, 5).join(' ')}`;
     }
-    return `${inputToArray.slice(0, 5).join(' ')}...`
+    return `${inputToArray.slice(0, 5).join(' ')}...`;
   };
+
 
   return (
     <Link to={`/project/${project._id}`} className=''>
@@ -20,7 +23,7 @@ function Project(props) {
         <div className='mx-6'>
           <div className='flex items-center'>
             <div className=''>
-              <img className='h-10 w-10 rounded-full' src='https://gravatar.com/avatar/f69127052821e90dabb8c6cabd227e90?s=128' alt='' />
+              <img className='h-10 w-10 rounded-full' src={project.author.avatar || 'https://gravatar.com/avatar/palceholder?s=128'} alt='Profile Pic' />
             </div>
             <div className='ml-2'>
               <div className='text-sm leading-5 font-medium text-gray-900'>
