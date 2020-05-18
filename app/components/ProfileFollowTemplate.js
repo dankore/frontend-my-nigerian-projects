@@ -38,7 +38,6 @@ function ProfileFollow(props) {
         return 'You do not have any followers';
       } else {
         if (!appState.loggedIn) {
-          console.log(props.name);
           return `This user has no followers yet. Login or Register to get the latest projects from ${props.name}.`;
         }
         return 'This user has no followers. Click the Follow button to get the latest from this user.';
