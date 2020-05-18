@@ -1,12 +1,14 @@
 import React, { useEffect, useContext } from 'react';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import Page from '../components/Page';
 import { useImmer } from 'use-immer';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
 import Project from '../components/Project';
+import { activeNavCSS } from '../helpers/activeNavCSS';
 
-function Home() {
+function HomePage() {
   const appDispatch = useContext(DispatchContext);
   const [state, setState] = useImmer({
     isLoading: true,
@@ -55,26 +57,44 @@ function Home() {
   //   };
   // }, []);
 
-  if (state.isLoading) {
-    return <LoadingDotsIcon />;
-  }
+  // if (state.isLoading) {
+  //   return <LoadingDotsIcon />;
+  // }
 
   return (
     <Page title='Home'>
-      {state.feed.length > 0 ? (
-        <>
-          <h2 className='text-center'>Latest Projects</h2>
-          <div className='mt-10'>
-            {state.feed.map(project => {
-              return <Project project={project} key={project._id} />;
-            })}
-          </div>
-        </>
-      ) : (
-        <h2 className='text-2xl'>No Projects posted at this time.</h2>
-      )}
+      <div className='mt-2 align-middle inline-block min-w-full'>
+        <ul className='flex shadow mb-4'>
+          <NavLink to='/allprojects' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+            All Projects: 4
+          </NavLink>
+
+          <NavLink to='/thoseifollow' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+            Those You Follow: 6
+          </NavLink>
+        </ul>
+
+        <Switch>
+          <Route path='/allprojects'>
+            {state.feed.length > 0 ? (
+              <>
+                <div className=''>
+                  {state.feed.map(project => {
+                    return <Project project={project} key={project._id} />;
+                  })}
+                </div>
+              </>
+            ) : (
+              <h2 className='text-2xl text-center'>No Projects posted at this time.</h2>
+            )}
+          </Route>
+          <Route path='/thoseifollow'>
+            <h2>THose you Follow</h2>
+          </Route>
+        </Switch>
+      </div>
     </Page>
   );
 }
 
-export default Home;
+export default HomePage;

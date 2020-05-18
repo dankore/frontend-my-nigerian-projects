@@ -15,7 +15,7 @@ Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-bidding-app.
 
 // COMPONENTS
 import Header from './components/Header';
-import Home from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import About from './pages/AboutPage';
 import Terms from './pages/TermsPage';
@@ -116,9 +116,7 @@ function Main() {
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
           <Switch>
-            <Route path='/' exact>
-              <Home />
-            </Route>
+            <Route path='/' component={HomePage} />
             <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
             <Route path='/project/:id/edit' exact>
               <EditProjectPage />

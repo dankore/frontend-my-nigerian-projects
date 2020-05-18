@@ -15,7 +15,7 @@ function Project(props) {
   };
 
   return (
-    <Link to={`/project/${project._id}`} className=''>
+    <Link to={`/project/${project._id}`}>
       <div className='border border-gray-200 flex py-3 hover:bg-gray-100'>
         <div className='mx-6'>
           <div className='flex items-center'>
