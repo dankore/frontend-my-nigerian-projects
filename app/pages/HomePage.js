@@ -64,27 +64,32 @@ function HomePage() {
         request.cancel();
       };
     }
-  }, []);
+  }, [!allProjects.isLoading]);
 
-  if (allProjects.isLoading) {
+  if (allProjects.isLoading && projectsThoseIFollow.isLoading) {
     return <LoadingDotsIcon />;
   }
 
+  if (projectsThoseIFollow.isLoading && appState.loggedIn) {
+    return <LoadingDotsIcon />;
+  }
+
+
   return (
-    <Page title='Home'>
+    <Page title='Browse'>
       <div className='mt-2 align-middle inline-block min-w-full'>
         <ul className='flex shadow mb-4'>
-          <NavLink exact to='/home' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
-            All Projects: 4
+          <NavLink exact to='/browse' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+            All Projects: {allProjects.feed.length}
           </NavLink>
 
-          <NavLink to='/home/b' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
-            Those You Follow: 6
+          <NavLink to='/browse/those-i-follow' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+            Projects from Those You Follow: {appState.loggedIn ? projectsThoseIFollow.feed.length : '(Login to View)'}
           </NavLink>
         </ul>
 
         <Switch>
-          <Route exact path='/home'>
+          <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
               <>
                 <div className=''>
@@ -94,11 +99,11 @@ function HomePage() {
                 </div>
               </>
             ) : (
-              <h2 className='text-2xl text-center'>No Projects posted at this time.</h2>
+              <h2 className='border border-gray-200 p-2'>No Projects posted at this time.</h2>
             )}
           </Route>
-          <Route path='/home/b'>
-            {projectsThoseIFollow.feed.length > 0 && appState.loggedIn ? (
+          <Route path='/browse/those-i-follow'>
+            {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
               <>
                 <div className=''>
                   {projectsThoseIFollow.feed.map(project => {
@@ -106,8 +111,12 @@ function HomePage() {
                   })}
                 </div>
               </>
-            ) : (
-              <h2 className='text-2xl text-center'>No Projects posted at this time.</h2>
+            )}
+            {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && <h2 className='border border-gray-200 p-2'>No Projects Posted at This Time.</h2>}
+            {!appState.loggedIn && (
+              <>
+                <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Login to View Projects</button>
+              </>
             )}
           </Route>
         </Switch>

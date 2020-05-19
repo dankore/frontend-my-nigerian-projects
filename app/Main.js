@@ -118,9 +118,9 @@ function Main() {
           <Header />
           <Switch>
             <Route exact path='/'>
-              <Redirect to='/home' />
+              <Redirect to='/browse' />
             </Route>
-            <Route path='/home'>
+            <Route path='/browse'>
               <HomePage />
             </Route>
             {/* <Route path='/follow' component={HomePageThoseIFollow}/> */}
