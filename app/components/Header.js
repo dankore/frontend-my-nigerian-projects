@@ -46,12 +46,12 @@ function Header() {
         </div>
 
         {isOpen && (
-          <div className='w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
-            <div className='text-sm lg:flex-grow'>
-              <Link className='block mt-4 lg:mt-0 lg:inline-block lg:mt-0 text-white' to='/how-to-bid'>
+          <div className='block lg:hidden w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
+            <div className='text-sm'>
+              <Link className='block mb-1 mt-2 lg:mt-0 lg:inline-block lg:mt-0 hover:text-gray-400 text-white' to='/how-to-bid'>
                 How To Bid
               </Link>
-              <div className='block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+              <div className='lg:inline-block lg:mt-0 text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
             </div>
           </div>
         )}

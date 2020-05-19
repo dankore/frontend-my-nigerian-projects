@@ -21,7 +21,7 @@ function HeaderLoggedIn(props) {
       </Link>
       <ReactToolTip place='bottom' id='profile' />
 
-      <Link className='lg:mr-4 block my-4 lg:my-0 bg-green-600 hover:bg-green-700 rounded px-2' to='/create-project'>
+      <Link className='lg:mr-4 block my-2 lg:my-0 bg-green-600 hover:bg-green-700 rounded px-2' to='/create-project'>
         Create Project
       </Link>
 
