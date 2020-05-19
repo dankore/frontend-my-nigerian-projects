@@ -64,7 +64,6 @@ function Main() {
       case 'openNav':
         draft.isMenuOpen = !draft.isMenuOpen;
         return;
-      
     }
   }
 
@@ -123,7 +122,7 @@ function Main() {
             <Route exact path='/'>
               <Redirect to='/browse' />
             </Route>
-            <Route path='/browse'>
+            <Route strict path='/browse'>
               <HomePage />
             </Route>
             <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
