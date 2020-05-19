@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { useImmer } from 'use-immer';
 import ProfileProjects from '../components/ProfileProjects';
 import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
-
+import { activeNavCSS } from '../helpers/activeNavCSS';
 
 function ProfilePage() {
   const appState = useContext(StateContext);
@@ -118,15 +118,6 @@ function ProfilePage() {
     });
   }
 
-  const activeNavCSS = {
-    borderLeftWidth: 1 + 'px',
-    borderTopWidth: 1 + 'px',
-    borderRightWidth: 1 + 'px',
-    borderTopRightRadius: 0.25 + 'rem',
-    borderBottomLeftRadius: 0.25 + 'rem',
-    marginRight: -0.25 + 'rem',
-    marginBottom: -1 + 'px',
-  };
 
   return (
     <Page title='Profile Page'>
