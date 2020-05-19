@@ -35,7 +35,7 @@ function Header() {
           </div>
         </div>
 
-        {appState.isMenuOpen && (
+        {appState && appState.isMenuOpen && (
           <div className='w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
             <div className='text-sm lg:flex-grow'>
               <Link className='block mt-4 lg:mt-0 lg:inline-block lg:mt-0 text-white' to='/how-to-bid'>
