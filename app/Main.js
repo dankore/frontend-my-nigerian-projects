@@ -43,6 +43,7 @@ function Main() {
       lastName: localStorage.getItem('biddingApp-lastname'),
       avatar: localStorage.getItem('biddingApp-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
     },
+    isMenuOpen: false,
   };
 
   function reducer(draft, action) {
@@ -60,6 +61,10 @@ function Main() {
       case 'flashMessageError':
         draft.flashMessageErrors.push(action.value);
         return;
+      case 'openNav':
+        draft.isMenuOpen = !draft.isMenuOpen;
+        return;
+      
     }
   }
 
