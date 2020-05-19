@@ -29,8 +29,6 @@ import ViewSingleProject from './pages/ViewSingleProject';
 import FlashMessages from './components/FlashMessages';
 import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
-import HomePageThoseIFollow from './pages/HomePageThoseIFollow';
-
 // COMPONENTS END
 
 function Main() {
@@ -123,7 +121,6 @@ function Main() {
             <Route path='/browse'>
               <HomePage />
             </Route>
-            {/* <Route path='/follow' component={HomePageThoseIFollow}/> */}
             <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
             <Route path='/project/:id/edit' exact>
               <EditProjectPage />

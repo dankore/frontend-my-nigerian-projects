@@ -7,7 +7,6 @@ import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
 import Project from '../components/Project';
 import { activeNavCSS } from '../helpers/activeNavCSS';
-import HomePageThoseIFollow from './HomePageThoseIFollow';
 import StateContext from '../StateContext';
 
 function HomePage() {
