@@ -3,25 +3,48 @@ import { Link } from 'react-router-dom';
 import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
 import StateContext from '../StateContext';
+import DispatchContext from '../DispatchContext';
 
 function Header() {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
 
   return (
-    <header className='bg-blue-600'>
-      <div className='sm:flex sm:justify-between sm:items-center px-3 py-1 max-w-2xl text-center text-white sm:mx-auto'>
-        <div className=''>
-          <Link to='/'>
-            <i className='fas fa-home'></i>
-            <span className='ml-1'>I Want to Hire You</span>
-          </Link>
+    <header className='bg-blue-600 p-2'>
+      <div className='flex items-center justify-between flex-wrap'>
+        <Link to='/' className='block flex items-center flex-shrink-0 text-white mr-6'>
+          <i className='fas fa-home'></i>
+          <span className='ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
+        </Link>
+
+        <div className='block lg:hidden'>
+          <button onClick={() => appDispatch({ type: 'openNav' })} className='flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white'>
+            <svg className='fill-current h-3 w-3' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
+              <title>Menu</title>
+              <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
+            </svg>
+          </button>
         </div>
-        <div className='flex items-center justify-center'>
-          <Link className='inline-block mr-3' to='/how-to-bid'>
-            How To Bid
-          </Link>
-          {appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+
+        <div className='hidden lg:block lg:flex lg:items-center lg:justify-center'>
+          <div className='lg:flex lg:items-center'>
+            <Link className='mt-4 lg:mt-0 lg:mr-4 lg:inline-block text-white hover:text-gray-400' to='/how-to-bid'>
+              How To Bid
+            </Link>
+            <div className='mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+          </div>
         </div>
+
+        {appState.isMenuOpen && (
+          <div className='w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
+            <div className='text-sm lg:flex-grow'>
+              <Link className='block mt-4 lg:mt-0 lg:inline-block lg:mt-0 text-white' to='/how-to-bid'>
+                How To Bid
+              </Link>
+              <div className='block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
