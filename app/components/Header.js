@@ -11,7 +11,7 @@ function Header() {
 
   return (
     <header className='bg-blue-600 p-2'>
-      <div className='flex items-center justify-between flex-wrap lg:max-w-2xl lg:mx-auto'>
+      <nav className='flex items-center justify-between flex-wrap lg:max-w-2xl lg:mx-auto'>
         <Link to='/' className='block flex items-center flex-shrink-0 text-white mr-6'>
           <i className='fas fa-home'></i>
           <span className='ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
@@ -45,7 +45,7 @@ function Header() {
             </div>
           </div>
         )}
-      </div>
+      </nav>
     </header>
   );
 }
