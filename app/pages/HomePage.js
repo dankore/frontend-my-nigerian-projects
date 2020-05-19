@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
+import { NavLink, Switch, Route, Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { useImmer } from 'use-immer';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
@@ -115,7 +115,7 @@ function HomePage() {
             {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && <h2 className='border border-gray-200 p-2'>No Projects Posted at This Time.</h2>}
             {!appState.loggedIn && (
               <>
-                <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Login to View Projects</button>
+                <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Login to View Projects</Link>
               </>
             )}
           </Route>
