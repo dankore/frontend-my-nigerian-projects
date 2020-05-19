@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom';
 import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
 import StateContext from '../StateContext';
-import DispatchContext from '../DispatchContext';
 
 function Header() {
   const appState = useContext(StateContext);
-  const appDispatch = useContext(DispatchContext);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenAndCloseMenu = () => setIsOpen(!isOpen);
+  // TOGGLE MENU
+  function handleOpenAndCloseMenu() {
+    setIsOpen(prev => {
+      if (prev == false) {
+        return prev = true;
+      } else {
+        return prev = false;
+      }
+    });
+  }
 
   return (
     <header className='bg-blue-600 p-2'>
