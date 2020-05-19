@@ -15,7 +15,7 @@ function HeaderLoggedIn(props) {
   }
 
   return (
-    <div className='text-white lg:flex lg:justify-center lg:items-center'>
+    <div className='lg:flex lg:justify-center lg:items-center'>
       <Link className='mb-2 lg:mr-4 lg:mb-0 flex lg:flex-none justify-end block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
         <img className='h-10 w-10 rounded-full' src={appState.user.avatar} alt='Profile Pic' />
       </Link>
