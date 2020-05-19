@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
@@ -8,6 +8,9 @@ import DispatchContext from '../DispatchContext';
 function Header() {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenAndCloseMenu = () => setIsOpen(!isOpen);
 
   return (
     <header className='bg-blue-600 p-2'>
@@ -18,7 +21,7 @@ function Header() {
         </Link>
 
         <div className='block lg:hidden'>
-          <button onClick={() => appDispatch({ type: 'openNav' })} className='flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white'>
+          <button onClick={handleOpenAndCloseMenu} className='flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white'>
             <svg className='fill-current h-3 w-3' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
               <title>Menu</title>
               <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
@@ -35,7 +38,7 @@ function Header() {
           </div>
         </div>
 
-        {appState && appState.isMenuOpen && (
+        {isOpen && (
           <div className='w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
             <div className='text-sm lg:flex-grow'>
               <Link className='block mt-4 lg:mt-0 lg:inline-block lg:mt-0 text-white' to='/how-to-bid'>

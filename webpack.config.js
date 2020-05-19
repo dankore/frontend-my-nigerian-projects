@@ -9,7 +9,7 @@ const fse = require('fs-extra');
 /*
   Because I didn't bother making CSS part of our
   webpack workflow for this project I'm just
-  manually copying our CSS file to the DIST folder. 
+  manually copying the CSS file to the DIST folder. 
 */
 class RunAfterCompile {
   apply(compiler) {
