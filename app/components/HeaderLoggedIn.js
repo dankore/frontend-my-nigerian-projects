@@ -11,20 +11,21 @@ function HeaderLoggedIn(props) {
   function handleLogout() {
     appDispatch({ type: 'logout' });
     props.history.push('/');
-    appDispatch({type: 'flashMessage', value: 'Logged Out Successfully.'})
+    appDispatch({ type: 'flashMessage', value: 'Logged Out Successfully.' });
   }
 
   return (
-    <div className='bg-red-600'>
-      <Link className='mb-2 flex justify-end sm:mb-2 block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
+    <div className='text-white lg:flex lg:justify-center lg:items-center'>
+      <Link className='mb-2 lg:mr-4 lg:mb-0 flex lg:flex-none justify-end block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
         <img className='h-10 w-10 rounded-full' src={appState.user.avatar} alt='Profile Pic' />
       </Link>
       <ReactToolTip place='bottom' id='profile' />
-      
-      <Link className='block bg-green-600 hover:bg-green-700 mb-2 sm:mb-2 rounded px-2' to='/create-project'>
+
+      <Link className='lg:mr-4 block my-4 lg:my-0 bg-green-600 hover:bg-green-700 rounded px-2' to='/create-project'>
         Create Project
       </Link>
-      <button onClick={handleLogout} className='hover:text-gray-400 bg-red-500'>
+
+      <button onClick={handleLogout} className='hover:text-gray-400'>
         Sign Out
       </button>
     </div>

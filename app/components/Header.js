@@ -10,11 +10,11 @@ function Header() {
   const appDispatch = useContext(DispatchContext);
 
   return (
-    <header className='bg-blue-600'>
+    <header className='bg-blue-600 p-2'>
       <div className='flex items-center justify-between flex-wrap'>
         <Link to='/' className='block flex items-center flex-shrink-0 text-white mr-6'>
           <i className='fas fa-home'></i>
-          <span className='font-semibold text-xl tracking-tight'>I Want to Hire You</span>
+          <span className='ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
         </Link>
 
         <div className='block lg:hidden'>
@@ -26,20 +26,25 @@ function Header() {
           </button>
         </div>
 
+        <div className='hidden lg:block lg:flex lg:items-center lg:justify-center'>
+          <div className='lg:flex lg:items-center'>
+            <Link className='mt-4 lg:mt-0 lg:mr-4 lg:inline-block text-white hover:text-gray-400' to='/how-to-bid'>
+              How To Bid
+            </Link>
+            <div className='mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+          </div>
+        </div>
+
         {appState.isMenuOpen && (
           <div className='w-full text-right flex justify-end lg:flex lg:items-center lg:w-auto'>
             <div className='text-sm lg:flex-grow'>
-              <Link className='block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white' to='/how-to-bid'>
+              <Link className='block mt-4 lg:mt-0 lg:inline-block lg:mt-0 text-white' to='/how-to-bid'>
                 How To Bid
               </Link>
               <div className='block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
             </div>
           </div>
         )}
-
-        <div to='#' className='inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0'>
-          Settings
-        </div>
       </div>
     </header>
   );
