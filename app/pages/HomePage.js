@@ -6,7 +6,7 @@ import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
 import Project from '../components/Project';
-import { activeNavCSS } from '../helpers/activeNavCSS';
+import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import StateContext from '../StateContext';
 
 function HomePage() {
@@ -77,12 +77,12 @@ function HomePage() {
   return (
     <Page title='Browse'>
       <div className='mt-2 align-middle inline-block min-w-full'>
-        <ul className='flex shadow mb-4'>
-          <NavLink exact to='/browse' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+        <ul className='flex border-b mb-4'>
+          <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
             All Projects: {allProjects.feed.length}
           </NavLink>
 
-          <NavLink to='/browse/those-i-follow' activeStyle={activeNavCSS} className='cursor-pointer mr-1 bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold'>
+          <NavLink to='/browse/those-i-follow' activeStyle={activeNavCSS} className={navLinkCSS}>
             Projects from Those You Follow: {appState.loggedIn ? projectsThoseIFollow.feed.length : '(Login to View)'}
           </NavLink>
         </ul>
