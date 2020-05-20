@@ -12,6 +12,8 @@ function HeaderLoggedIn(props) {
     appDispatch({ type: 'logout' });
     props.history.push('/');
     appDispatch({ type: 'flashMessage', value: 'Logged Out Successfully.' });
+    // MAKE appState.isSettingsTabOpen NEGATIVE TO CLOSE THE SETTINGS TAB UPON RE-LOGIN
+    appDispatch({ type: 'toggleSettingsTab' });
   }
 
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
