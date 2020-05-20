@@ -15,8 +15,8 @@ function HeaderLoggedIn(props) {
   }
 
   return (
-    <div className=''>
-      <button onClick={handleLogout} className='hover:text-gray-400'>
+    <div className='absolute rounded-b bg-blue-600 w-32'>
+      <button onClick={handleLogout} className=' hover:text-gray-400'>
         Sign Out
       </button>
     </div>

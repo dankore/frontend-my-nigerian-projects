@@ -20,7 +20,7 @@ function Header() {
   }
 
   return (
-    <header className='bg-blue-600 p-2'>
+    <header className='bg-blue-600'>
       <nav className='flex items-center justify-between flex-wrap lg:max-w-2xl lg:mx-auto'>
         <Link to='/' className='block flex items-center flex-shrink-0 text-white mr-6'>
           <i className='fas fa-home'></i>

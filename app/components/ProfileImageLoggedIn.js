@@ -8,19 +8,20 @@ import ProfileSettingsLoggedIn from './ProfileSettingsLoggedIn';
 function HeaderLoggedIn(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
-  const [isOpen, setIsOpen] = useState(false)
-
-
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='lg:flex lg:justify-center lg:items-center'>
-      <div onClick={() => setIsOpen(!isOpen)} className='mb-2 flex hover:bg-blue-800 p-1 rounded justify-between items-end block w-32' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
-        <img className='h-10 w-10 rounded-full' src={appState.user.avatar} alt='Profile Pic' />
-        <i className='fas fa-angle-down block text-xl'></i>
+      <div className='relative rounded bg-blue-600 px-2 w-32'>
+        <div onClick={() => setIsOpen(!isOpen)} className='cursor-pointer flex hover:bg-blue-800 rounded justify-between items-end block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
+          <img className='h-10 w-10 rounded-full' src={appState.user.avatar} alt='Profile Pic' />
+          <div>
+            <i className='fas fa-angle-down'></i>
+          </div>
+        </div>
+        {/* <ReactToolTip place='left' id='profile' /> */}
+        {isOpen ? <ProfileSettingsLoggedIn /> : null}
       </div>
-      <ReactToolTip place='bottom' id='profile' />
-
-      {isOpen ? <ProfileSettingsLoggedIn /> : null}
     </div>
   );
 }
