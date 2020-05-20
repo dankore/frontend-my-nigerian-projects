@@ -14,14 +14,20 @@ function HeaderLoggedIn(props) {
     appDispatch({ type: 'flashMessage', value: 'Logged Out Successfully.' });
   }
 
-  const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800';
+  const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
   return (
-    <ul className='w-32 absolute rounded-b bg-blue-600 text-white'>
-      <Link to='/' className={linkButtonsCommonCSS + ' block py-2'}>
+    <ul className='w-32 absolute bg-blue-600 text-white'>
+      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to={`/profile/${appState.user.username}`} className={linkButtonsCommonCSS + ' block'}>
+        <i className='far fa-user mr-1'></i>
+        Profile
+      </Link>
+      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to='/' className={linkButtonsCommonCSS + ' block'}>
+        <i className='fas fa-cog mr-1'></i>
         Settings
       </Link>
-      <button onClick={handleLogout} className={linkButtonsCommonCSS + ' py-2'}>
+      <button onClick={handleLogout} className={linkButtonsCommonCSS}>
+        <i className='fas fa-sign-out-alt mr-1'></i>
         Sign Out
       </button>
     </ul>
