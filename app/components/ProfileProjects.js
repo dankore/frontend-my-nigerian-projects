@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
 import Project from './Project';
+import StateContext from '../StateContext';
 
 function ProfileProjects() {
+  const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
@@ -28,16 +30,31 @@ function ProfileProjects() {
     };
   }, [username]);
 
+  function showThisWhenNoProject() {
+    if (appState.loggedIn) {
+      if (appState.user.username == username) {
+        return 'You have not posted any project yet.';
+      } else {
+        return 'This user has not posted any project yet.';
+      }
+    } else {
+      return 'This user has not posted any project yet.';
+    }
+  }
+
   if (isLoading) {
     return <LoadingDotsIcon />;
   }
 
-
   return (
     <div className=''>
-      {projects.map(project => {
-        return <Project project={project} key={project._id} />;
-      })}
+      {projects.length > 0 ? (
+        projects.map(project => {
+          return <Project project={project} key={project._id} />;
+        })
+      ) : (
+        <p className='p-4 border rounded'>{showThisWhenNoProject()}</p>
+      )}
     </div>
   );
 }
