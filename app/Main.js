@@ -95,14 +95,14 @@ function Main() {
           if (!response.data) {
             dispatch({ type: 'logout' });
             dispatch({
-              type: 'flashMessage',
+              type: 'flashMessageError',
               value: 'Your session has expired. Please log in again.',
             });
           }
         } catch (e) {
           dispatch({
             type: 'flashMessageError',
-            value: 'problem from Main.js.',
+            value: 'Problem verifying Token to properly secure your account.',
           });
         }
       })();
