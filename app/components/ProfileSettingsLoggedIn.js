@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 import ReactToolTip from 'react-tooltip';
-import ProfileHeaderLoggedIn from './ProfileImageLoggedIn';
 
 function HeaderLoggedIn(props) {
   const appDispatch = useContext(DispatchContext);
@@ -16,8 +15,10 @@ function HeaderLoggedIn(props) {
   }
 
   return (
-    <div className='lg:flex lg:justify-center lg:items-center'>
-      <ProfileHeaderLoggedIn />
+    <div className=''>
+      <button onClick={handleLogout} className='hover:text-gray-400'>
+        Sign Out
+      </button>
     </div>
   );
 }
