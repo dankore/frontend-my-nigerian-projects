@@ -19952,11 +19952,11 @@ MY NON-TAILWIND STYLES
   display: none;
   position: absolute;
   z-index: 999;
-  top: 38px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  -webkit-animation: floatingAlert ease-in 5s forwards;
-  animation: floatingAlert ease-in 5s forwards;
+  -webkit-animation: floatingAlert ease-in 3s forwards;
+  animation: floatingAlert ease-in 3s forwards;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
