@@ -26,10 +26,12 @@ import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
 import CreateProject from './pages/CreateProject';
 import ViewSingleProject from './pages/ViewSingleProject';
-import FlashMessages from './components/FlashMessages';
+import FlashMessageSuccess from './components/FlashMessageSuccess';
 import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
 // COMPONENTS END
+
+
 
 function Main() {
   const initialState = {
@@ -115,7 +117,7 @@ function Main() {
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
-          <FlashMessages messages={state.flashMessages} />
+          <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
           <Switch>
