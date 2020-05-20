@@ -12,8 +12,8 @@ function HeaderLoggedIn(props) {
 
   return (
     <div className='lg:flex lg:justify-center lg:items-center'>
-      <div className='relative rounded bg-blue-600 px-2 w-32'>
-        <div onClick={() => setIsOpen(!isOpen)} className='cursor-pointer flex hover:bg-blue-800 rounded justify-between items-end block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
+      <div className='relative rounded bg-blue-600 w-32'>
+        <div onClick={() => setIsOpen(!isOpen)} className='px-2 py-1 cursor-pointer flex hover:bg-blue-800 rounded justify-between items-end block' data-for='profile' data-tip='Profile' to={`/profile/${appState.user.username}`} data-tip='My Profile'>
           <img className='h-10 w-10 rounded-full' src={appState.user.avatar} alt='Profile Pic' />
           <div>
             <i className='fas fa-angle-down'></i>
