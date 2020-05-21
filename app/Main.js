@@ -29,6 +29,7 @@ import ViewSingleProject from './pages/ViewSingleProject';
 import FlashMessageSuccess from './components/FlashMessageSuccess';
 import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
+import SettingsPage from './pages/SettingsPage';
 // COMPONENTS END
 
 function Main() {
@@ -147,6 +148,9 @@ function Main() {
             </Route>
             <Route path='/terms'>
               <Terms />
+            </Route>
+            <Route path='/settings'>
+              <SettingsPage />
             </Route>
             <Route path='/how-to-bid'>
               <HowToBid />
