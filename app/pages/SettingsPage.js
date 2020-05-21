@@ -5,9 +5,9 @@ import { activeNavCSS, navLinkCSSSettings, activeNavCSSSettingsPage } from '../h
 
 function SettingsPage() {
   return (
-    <Page title='Settings' wide={true}>
-      <div className='grid grid-cols-2'>
-        <div className='max-w-xs border-r'>
+    <Page title='Settings'>
+      <div className='flex'>
+        <div style={{width: 200 +'rem'}} className='max-w-xs border-r-2 pr-2'>
           <ul className='grid grid-cols-1 mb-4'>
             <NavLink exact to='/settings/edit-profile' activeStyle={activeNavCSSSettingsPage} className={navLinkCSSSettings}>
               Edit Profile Info
@@ -19,10 +19,10 @@ function SettingsPage() {
           </ul>
         </div>
 
-        <div>
+        <div className=''>
           <Switch>
             <Route path='/settings/edit-profile'>
-              <p>Edit profile page</p>
+              <p>Edit profile page Edit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile page</p>
             </Route>
             <Route path='/settings/change-password'>
               <p>Change password page</p>
