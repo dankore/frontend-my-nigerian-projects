@@ -8,15 +8,29 @@ import StateContext from '../StateContext';
 import { CSSTransition } from 'react-transition-group';
 import LoadingDotsIcon from './LoadingDotsIcon';
 
-function RegistrationPage(props) {
+function EditUserProfileInfo(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
 
   const initialState = {
     profileData: {
-      profileUsername: '...',
-      profileFirstName: '',
-      profileLastName: '',
+      profileUsername: {
+        value: '',
+        hasErrors: false,
+        message: '',
+        isUnique: false,
+        checkCount: 0,
+      },
+      profileFirstName: {
+        value: '',
+        hasErrors: false,
+        message: '',
+      },
+      profileLastName: {
+        value: '',
+        hasErrors: false,
+        message: '',
+      },
       profileAvatar: 'https://gravatar.com/avatar/palceholder?s=128',
       isFollowing: false,
       counts: {
@@ -25,23 +39,6 @@ function RegistrationPage(props) {
         followingCount: '',
       },
     },
-    username: {
-      value: '',
-      hasErrors: false,
-      message: '',
-      isUnique: false,
-      checkCount: 0,
-    },
-    firstName: {
-      value: '',
-      hasErrors: false,
-      message: '',
-    },
-    lastName: {
-      value: '',
-      hasErrors: false,
-      message: '',
-    },
     isLoading: true,
     submitCount: 0,
   };
@@ -49,58 +46,61 @@ function RegistrationPage(props) {
   function Reducer(draft, action) {
     switch (action.type) {
       case 'fetchDataComplete':
-        draft.profileData = action.value;
+        draft.profileData.profileUsername.value = action.value.profileUsername;
+        draft.profileData.profileFirstName.value = action.value.profileFirstName;
+        draft.profileData.profileLastName.value = action.value.profileLastName;
+        draft.profileData.profileAvatar = action.value.profileAvatar;
         return;
       // USERNAME
       case 'usernameImmediately':
-        draft.username.hasErrors = false;
-        draft.username.value = action.value;
+        draft.profileData.profileUsername.hasErrors = false;
+        draft.profileData.profileUsername.value = action.value;
 
-        if (draft.username.value.length > 30) {
-          draft.username.hasErrors = true;
-          draft.username.message = 'Username cannot exceed 30 characters.';
+        if (draft.profileData.profileUsername.value.length > 30) {
+          draft.profileData.profileUsername.hasErrors = true;
+          draft.profileData.profileUsername.message = 'Username cannot exceed 30 characters.';
         }
-        if (draft.username.value && !/^([a-zA-Z0-9]+)$/.test(draft.username.value)) {
-          draft.username.hasErrors = true;
-          draft.username.message = 'Username can only contain letters and numbers.';
+        if (draft.profileData.profileUsername.value && !/^([a-zA-Z0-9]+)$/.test(draft.profileData.profileUsername.value)) {
+          draft.profileData.profileUsername.hasErrors = true;
+          draft.profileData.profileUsername.message = 'Username can only contain letters and numbers.';
         }
         return;
       case 'usernameAfterDelay':
-        if (draft.username.value.length < 3) {
-          draft.username.hasErrors = true;
-          draft.username.message = 'Username must be at least 3 characters.';
+        if (draft.profileData.profileUsername.value.length < 3) {
+          draft.profileData.profileUsername.hasErrors = true;
+          draft.profileData.profileUsername.message = 'Username must be at least 3 characters.';
         }
         if (!draft.hasErrors && !action.noNeedToSendAxiosRequest) {
-          draft.username.checkCount++;
+          draft.profileData.profileUsername.checkCount++;
         }
         return;
       case 'usernameIsUnique':
         if (action.value) {
-          draft.username.hasErrors = true;
-          draft.username.isUnique = false;
-          draft.username.message = 'That username is already being used.';
+          draft.profileData.profileUsername.hasErrors = true;
+          draft.profileData.profileUsername.isUnique = false;
+          draft.profileData.profileUsername.message = 'That username is already being used.';
         } else {
-          draft.username.isUnique = true;
+          draft.profileData.profileUsername.isUnique = true;
         }
         return;
       // FIRST NAME
       case 'firstnameImmediately':
-        draft.firstName.hasErrors = false;
-        draft.firstName.value = action.value;
+        draft.profileData.profileFirstName.hasErrors = false;
+        draft.profileData.profileFirstName = action.value;
 
-        if (draft.firstName.value.length == '') {
-          draft.firstName.hasErrors = true;
-          draft.firstName.message = 'First name field cannot be empty.';
+        if (draft.profileData.profileFirstName.length == '') {
+          draft.profileData.profileFirstName.hasErrors = true;
+          draft.profileData.profileFirstName.message = 'First name field cannot be empty.';
         }
         return;
       // LAST NAME
       case 'lastnameImmediately':
-        draft.lastName.hasErrors = false;
-        draft.lastName.value = action.value;
+        draft.profileData.profileLastName.hasErrors = false;
+        draft.profileData.profileLastName = action.value;
 
-        if (draft.lastName.value.length == '') {
-          draft.lastName.hasErrors = true;
-          draft.lastName.message = 'Last name field cannot be empty.';
+        if (draft.profileData.profileLastName.length == '') {
+          draft.profileData.profileLastName.hasErrors = true;
+          draft.profileData.profileLastName.message = 'Last name field cannot be empty.';
         }
         return;
       case 'isLoadingFinished':
@@ -108,7 +108,7 @@ function RegistrationPage(props) {
         return;
       // SUBMIT
       case 'submitForm':
-        if (!draft.username.hasErrors && draft.username.isUnique && !draft.firstName.hasErrors && !draft.lastName.hasErrors && !draft.email.hasErrors && draft.email.isUnique && !draft.password.hasErrors) {
+        if (!draft.profileData.profileUsername.hasErrors && draft.username.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors && !draft.email.hasErrors && draft.email.isUnique && !draft.password.hasErrors) {
           draft.submitCount++;
         }
         return;
@@ -119,20 +119,20 @@ function RegistrationPage(props) {
 
   // DELAY: USERNAME
   useEffect(() => {
-    if (state.username.value) {
+    if (state.profileData.profileUsername.value) {
       const delay = setTimeout(() => dispatch({ type: 'usernameAfterDelay' }), 800);
 
       return () => clearTimeout(delay);
     }
-  }, [state.username.value]);
+  }, [state.profileData.profileUsername.value]);
 
   // USERNAME IS UNIQUE
   useEffect(() => {
-    if (state.username.checkCount) {
+    if (state.profileData.profileUsername.checkCount) {
       const request = Axios.CancelToken.source();
       (async function checkForUsername() {
         try {
-          const response = await Axios.post('/doesUsernameExist', { username: state.username.value }, { cancelToken: request.token });
+          const response = await Axios.post('/doesUsernameExist', { username: state.profileData.profileUsername.value }, { cancelToken: request.token });
           dispatch({ type: 'usernameIsUnique', value: response.data });
         } catch (error) {
           alert('Having difficulty looking up your username. Please try again.');
@@ -142,7 +142,7 @@ function RegistrationPage(props) {
         return request.cancel();
       };
     }
-  }, [state.username.checkCount]);
+  }, [state.profileData.profileUsername.checkCount]);
 
   // FETCH USER INFO
   useEffect(() => {
@@ -153,6 +153,7 @@ function RegistrationPage(props) {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
         dispatch({ type: 'fetchDataComplete', value: response.data });
+        // console.log(response.data.profileUsername)
         dispatch({ type: 'isLoadingFinished' });
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
@@ -173,9 +174,9 @@ function RegistrationPage(props) {
           const response = await Axios.post(
             '/register',
             {
-              username: state.username.value,
-              firstName: state.firstName.value,
-              lastName: state.lastName.value,
+              username: state.profileData.profileUsername.value,
+              firstName: state.profileData.profileFirstName.value,
+              lastName: state.profileData.profileLastName.value,
               email: state.email.value,
               password: state.password.value,
             },
@@ -199,11 +200,11 @@ function RegistrationPage(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch({ type: 'usernameImmediately', value: state.username.value });
-    dispatch({ type: 'usernameAfterDelay', value: state.username.value, noNeedToSendAxiosRequest: true });
+    dispatch({ type: 'usernameImmediately', value: state.profileData.profileUsername.value });
+    dispatch({ type: 'usernameAfterDelay', value: state.profileData.profileUsername.value, noNeedToSendAxiosRequest: true });
 
-    dispatch({ type: 'firstnameImmediately', value: state.firstName.value });
-    dispatch({ type: 'lastnameImmediately', value: state.lastName.value });
+    dispatch({ type: 'firstnameImmediately', value: state.profileData.profileFirstName.value });
+    dispatch({ type: 'lastnameImmediately', value: state.profileData.profileLastName.value });
 
     dispatch({ type: 'submitForm' });
   }
@@ -215,6 +216,8 @@ function RegistrationPage(props) {
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
 
+  // console.log(state)
+
   return (
     <Page title='Edit Profile Info'>
       <div className='flex justify-center -mt-10 max-w-sm mx-auto'>
@@ -224,10 +227,10 @@ function RegistrationPage(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
                 Username <span className='text-red-600'>*</span>
               </label>
-              <input value={state.profileData.profileUsername} onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
-              <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+              <input value={state.profileData.profileUsername.value} onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
+              <CSSTransition in={state.profileData.profileUsername.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.username.message}
+                  {state.profileData.profileUsername.message}
                 </div>
               </CSSTransition>
             </div>
@@ -236,10 +239,10 @@ function RegistrationPage(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='first-name'>
                 First Name <span className='text-red-600'>*</span>
               </label>
-              <input value={state.profileData.profileFirstName} onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
-              <CSSTransition in={state.firstName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+              <input value={state.profileData.profileFirstName.value} onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+              <CSSTransition in={state.profileData.profileFirstName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.firstName.message}
+                  {state.profileData.profileFirstName.message}
                 </div>
               </CSSTransition>
             </div>
@@ -248,10 +251,10 @@ function RegistrationPage(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='last-name'>
                 Last Name <span className='text-red-600'>*</span>
               </label>
-              <input value={state.profileData.profileLastName} onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='off' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
-              <CSSTransition in={state.lastName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+              <input value={state.profileData.profileLastName.value} onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='off' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
+              <CSSTransition in={state.profileData.profileLastName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.lastName.message}
+                  {state.profileData.profileLastName.message}
                 </div>
               </CSSTransition>
             </div>
@@ -264,4 +267,4 @@ function RegistrationPage(props) {
   );
 }
 
-export default withRouter(RegistrationPage);
+export default withRouter(EditUserProfileInfo);
