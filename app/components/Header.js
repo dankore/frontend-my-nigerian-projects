@@ -11,7 +11,7 @@ function Header() {
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
   return (
-    <header className='bg-blue-600 px-2'>
+    <header className='bg-blue-600 px-2' style={{ zIndex: 100 }}>
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
         <div className='flex items-center'>
           <div>
@@ -21,16 +21,16 @@ function Header() {
 
             {/* SIDE MENU */}
             {appState && appState.isSideMenuOpen ? (
-              <div className='absolute bg-blue-600 text-white'>
+              <div style={{zIndex: 1}} className='absolute bg-blue-600 text-white'>
                 {appState && appState.loggedIn ? (
-                  <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mt-4 block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
+                  <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mt-2 block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
                     <i className='fas fa-plus mr-1'></i>
                     Create Project
                   </Link>
                 ) : (
                   ''
                 )}
-                <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-4'} block`} to='/how-to-bid'>
+                <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-2'} block`} to='/how-to-bid'>
                   <i className='fas fa-file-contract mr-1'></i>
                   How To Bid
                 </Link>
