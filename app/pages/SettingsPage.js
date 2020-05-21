@@ -9,7 +9,7 @@ function SettingsPage() {
       <div className='flex'>
         <div style={{width: 200 +'rem'}} className='max-w-xs border-r-2 pr-2'>
           <ul className='grid grid-cols-1 mb-4'>
-            <NavLink exact to='/settings/edit-profile' activeStyle={activeNavCSSSettingsPage} className={navLinkCSSSettings}>
+            <NavLink exact to='/settings' activeStyle={activeNavCSSSettingsPage} className={navLinkCSSSettings}>
               Edit Profile Info
             </NavLink>
 
@@ -21,7 +21,7 @@ function SettingsPage() {
 
         <div className=''>
           <Switch>
-            <Route path='/settings/edit-profile'>
+            <Route exact path='/settings'>
               <p>Edit profile page Edit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile pageEdit profile page</p>
             </Route>
             <Route path='/settings/change-password'>
