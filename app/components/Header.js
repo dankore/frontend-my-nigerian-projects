@@ -22,7 +22,7 @@ function Header() {
             ) : null}
 
             {appState && appState.isSideMenuOpen ? (
-              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-3xl text-white relative hover:text-gray-400'>
+              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative hover:text-gray-400'>
                 <i className='fas fa-times'></i>
               </button>
             ) : null}

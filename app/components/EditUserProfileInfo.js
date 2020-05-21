@@ -78,7 +78,11 @@ function EditUserProfileInfo(props) {
         if (action.value) {
           draft.profileData.profileUsername.hasErrors = true;
           draft.profileData.profileUsername.isUnique = false;
-          draft.profileData.profileUsername.message = 'That username is already being used.';
+          if (draft.profileData.profileUsername.value == appState.user.username) {
+            draft.profileData.profileUsername.message = 'No change.';
+          } else {
+            draft.profileData.profileUsername.message = 'That username is already being used.';
+          }
         } else {
           draft.profileData.profileUsername.isUnique = true;
         }
@@ -86,7 +90,7 @@ function EditUserProfileInfo(props) {
       // FIRST NAME
       case 'firstnameImmediately':
         draft.profileData.profileFirstName.hasErrors = false;
-        draft.profileData.profileFirstName = action.value;
+        draft.profileData.profileFirstName.value = action.value;
 
         if (draft.profileData.profileFirstName.length == '') {
           draft.profileData.profileFirstName.hasErrors = true;
@@ -96,7 +100,7 @@ function EditUserProfileInfo(props) {
       // LAST NAME
       case 'lastnameImmediately':
         draft.profileData.profileLastName.hasErrors = false;
-        draft.profileData.profileLastName = action.value;
+        draft.profileData.profileLastName.value = action.value;
 
         if (draft.profileData.profileLastName.length == '') {
           draft.profileData.profileLastName.hasErrors = true;
@@ -153,7 +157,6 @@ function EditUserProfileInfo(props) {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
         dispatch({ type: 'fetchDataComplete', value: response.data });
-        // console.log(response.data.profileUsername)
         dispatch({ type: 'isLoadingFinished' });
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
