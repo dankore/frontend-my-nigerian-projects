@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { useEffect, useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
 import { useImmerReducer } from 'use-immer';
@@ -114,7 +114,7 @@ function RegistrationPage(props) {
           const response = await Axios.post('/doesUsernameExist', { username: state.username.value }, { cancelToken: request.token });
           dispatch({ type: 'usernameIsUnique', value: response.data });
         } catch (error) {
-          alert('Having difficulty looking for your username. Please try again.');
+          alert('Having difficulty looking up your username. Please try again.');
         }
       })();
       return function cleanUpRequest() {
