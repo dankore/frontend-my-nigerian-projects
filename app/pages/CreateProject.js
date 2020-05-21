@@ -110,7 +110,7 @@ function CreateProject(props) {
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
           </label>
-          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS} />
+          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + ' text-3xl'} />
           {state.title.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
 
