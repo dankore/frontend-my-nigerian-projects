@@ -7,6 +7,7 @@ import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import NotFoundPage from './NotFoundPage';
+import { inputTextAreaCSS } from '../helpers/CSSHelpers';
 
 function EditProjectPage(props) {
   const appState = useContext(StateContext);
@@ -163,14 +164,14 @@ function EditProjectPage(props) {
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
           </label>
-          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 text-2xl text-semibold leading-tight' />
+          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS} />
           {state.title.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
         <div className='relative'>
           <label htmlFor='project-description' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' type='text' />
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className={inputTextAreaCSS} type='text' />
           {state.description.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
