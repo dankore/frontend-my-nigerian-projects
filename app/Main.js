@@ -31,8 +31,6 @@ import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
 // COMPONENTS END
 
-
-
 function Main() {
   const initialState = {
     loggedIn: Boolean(localStorage.getItem('biddingApp-token')),
@@ -46,6 +44,7 @@ function Main() {
       avatar: localStorage.getItem('biddingApp-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
     },
     isMenuOpen: false,
+    isSettingsTabOpen: false,
   };
 
   function reducer(draft, action) {
@@ -65,6 +64,9 @@ function Main() {
         return;
       case 'openNav':
         draft.isMenuOpen = !draft.isMenuOpen;
+        return;
+      case 'toggleSettingsTab':
+        draft.isSettingsTabOpen = !draft.isSettingsTabOpen;
         return;
     }
   }
