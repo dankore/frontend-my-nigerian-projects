@@ -22,16 +22,16 @@ function Header() {
   return (
     <header className='bg-blue-600'>
       <nav className='flex items-center justify-between flex-wrap lg:max-w-2xl lg:mx-auto'>
-        <Link to='/' className='block flex items-center flex-shrink-0 text-white mr-6'>
+        <Link to='/' className='mx-auto lg:mx-0 block flex items-center text-white'>
           <i className='fas fa-home'></i>
           <span className='ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
         </Link>
 
-        <div className='w-full flex items-center justify-between mx-auto'>
-          <Link className='mt-4 mr-4 inline-block text-white hover:text-gray-400' to='/how-to-bid'>
+        <div className='flex items-center justify-between mx-auto'>
+          <Link className='mr-4 inline-block text-white hover:text-gray-400' to='/how-to-bid'>
             How To Bid
           </Link>
-          <div className='mt-4  inline-block text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+          <div className='inline-block text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
         </div>
       </nav>
     </header>
