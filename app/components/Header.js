@@ -15,7 +15,7 @@ function Header() {
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
         <div className='flex items-center'>
           <div>
-            <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-xl text-white relative'>
+            <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative'>
               <i className='fas fa-bars'></i>
             </button>
 
