@@ -20,7 +20,7 @@ function Header() {
             </button>
 
             {/* SIDE MENU */}
-            {appState.isSideMenuOpen ? (
+            {appState && appState.isSideMenuOpen ? (
               <div className='absolute bg-blue-600 text-white'>
                 {appState && appState.loggedIn ? (
                   <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mt-4 block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
