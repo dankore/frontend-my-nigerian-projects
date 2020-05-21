@@ -4,7 +4,7 @@ import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 import ReactToolTip from 'react-tooltip';
 
-function HeaderLoggedIn(props) {
+function ProfileSettingsLoggedIn(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
 
@@ -36,4 +36,4 @@ function HeaderLoggedIn(props) {
   );
 }
 
-export default withRouter(HeaderLoggedIn);
+export default withRouter(ProfileSettingsLoggedIn);
