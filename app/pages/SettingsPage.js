@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, NavLink, Route } from 'react-router-dom';
 import Page from '../components/Page';
-import { activeNavCSS, navLinkCSSSettings, activeNavCSSSettingsPage } from '../helpers/CSSHelpers';
+import { navLinkCSSSettings, activeNavCSSSettingsPage } from '../helpers/CSSHelpers';
 import EditUserProfileInfo from '../components/EditUserProfileInfo';
 
 function SettingsPage() {

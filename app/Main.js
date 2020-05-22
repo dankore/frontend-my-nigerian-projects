@@ -38,6 +38,7 @@ function Main() {
     flashMessages: [],
     flashMessageErrors: [],
     user: {
+      userId: localStorage.getItem('biddingApp-id'),
       token: localStorage.getItem('biddingApp-token'),
       username: localStorage.getItem('biddingApp-username'),
       firstName: localStorage.getItem('biddingApp-firstname'),
@@ -46,6 +47,7 @@ function Main() {
     },
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
+    changesFromEditProfile: false,
   };
 
   function reducer(draft, action) {
@@ -72,6 +74,9 @@ function Main() {
       case 'toggleSideMenu':
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
         return;
+      case 'changesEditProfileInfo':
+        draft.changesFromEditProfile = true;
+        return;
     }
   }
 
@@ -79,10 +84,14 @@ function Main() {
 
   useEffect(() => {
     if (state.loggedIn) {
+      localStorage.setItem('biddingApp-id', state.user.userId);
       localStorage.setItem('biddingApp-token', state.user.token);
       localStorage.setItem('biddingApp-username', state.user.username);
-      localStorage.setItem('biddingApp-firstname', state.user.firstName), localStorage.setItem('biddingApp-lastname', state.user.lastName), localStorage.setItem('biddingApp-avatar', state.user.avatar);
+      localStorage.setItem('biddingApp-firstname', state.user.firstName);
+      localStorage.setItem('biddingApp-lastname', state.user.lastName);
+      localStorage.setItem('biddingApp-avatar', state.user.avatar);
     } else {
+      localStorage.removeItem('biddingApp-id');
       localStorage.removeItem('biddingApp-token');
       localStorage.removeItem('biddingApp-username');
       localStorage.removeItem('biddingApp-firstname');
@@ -90,6 +99,8 @@ function Main() {
       localStorage.removeItem('biddingApp-avatar');
     }
   }, [state.loggedIn]);
+
+  
 
   // CHECK TOKEN
   useEffect(() => {

@@ -20,7 +20,7 @@ function ProfileSettingsLoggedIn(props) {
 
   return (
     <ul style={{ width: 141 + 'px', zIndex: 1 }} className='absolute bg-blue-600 text-white'>
-      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to={`/profile/${appState.user.username}`} className={linkButtonsCommonCSS + ' block'}>
+      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to={`/profile/${localStorage.getItem('biddingApp-username')}`} className={linkButtonsCommonCSS + ' block'}>
         <i className='far fa-user mr-1'></i>
         Profile
       </Link>

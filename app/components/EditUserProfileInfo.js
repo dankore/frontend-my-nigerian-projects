@@ -41,6 +41,7 @@ function EditUserProfileInfo(props) {
     },
     isLoading: true,
     submitCount: 0,
+    successEditProfile: false,
   };
 
   function Reducer(draft, action) {
@@ -109,6 +110,9 @@ function EditUserProfileInfo(props) {
       case 'isLoadingFinished':
         draft.isLoading = false;
         return;
+      case 'successEditProfileInfo':
+        draft.successEditProfile = true;
+        return;
       // SUBMIT
       case 'submitForm':
         if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
@@ -120,6 +124,7 @@ function EditUserProfileInfo(props) {
   }
 
   const [state, dispatch] = useImmerReducer(Reducer, initialState);
+
 
   // DELAY: USERNAME
   useEffect(() => {
@@ -155,7 +160,7 @@ function EditUserProfileInfo(props) {
 
     (async function fetchData() {
       try {
-        const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
+        const response = await Axios.post(`/profile/${localStorage.getItem('biddingApp-username')}`, { token: appState.user.token }, { CancelToken: request.token });
         dispatch({ type: 'fetchDataComplete', value: response.data });
         dispatch({ type: 'isLoadingFinished' });
       } catch (error) {
@@ -166,17 +171,12 @@ function EditUserProfileInfo(props) {
     return () => {
       request.cancel();
     };
-  }, []);
+  }, [state.successEditProfile]);
+
+  console.log(state.successEditProfile);
 
   // SUBMIT FORM
   useEffect(() => {
-    console.log({
-      lo: {
-        username: state.profileData.profileUsername.value,
-        firstName: state.profileData.profileFirstName.value,
-        lastName: state.profileData.profileLastName.value,
-      },
-    });
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
       (async function submitUpdate() {
@@ -184,6 +184,7 @@ function EditUserProfileInfo(props) {
           const response = await Axios.post(
             '/updateProfileInfo',
             {
+              userId: appState.user.userId,
               username: state.profileData.profileUsername.value,
               firstName: state.profileData.profileFirstName.value,
               lastName: state.profileData.profileLastName.value,
@@ -191,9 +192,11 @@ function EditUserProfileInfo(props) {
             { cancelToken: request.token }
           );
           if (response.data) {
-            console.log(response.data);
+            console.log({ res: response.data });
+            localStorage.setItem('biddingApp-username', response.data);
             // props.history.push('/');
             // appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
+            dispatch({ type: 'successEditProfileInfo' });
           }
         } catch (e) {
           alert('Profile update failed. Please try again.');

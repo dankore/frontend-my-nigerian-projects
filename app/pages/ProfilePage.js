@@ -13,6 +13,7 @@ function ProfilePage() {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
+  
 
   const [state, setState] = useImmer({
     followActionLoading: false,
@@ -117,7 +118,6 @@ function ProfilePage() {
       draft.stopFollowingRequestCount++;
     });
   }
-
 
   return (
     <Page title='Profile Page'>
