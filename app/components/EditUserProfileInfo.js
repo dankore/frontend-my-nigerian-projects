@@ -15,19 +15,19 @@ function EditUserProfileInfo(props) {
   const initialState = {
     profileData: {
       profileUsername: {
-        value: '',
+        value: '...',
         hasErrors: false,
         message: '',
         isUnique: false,
         checkCount: 0,
       },
       profileFirstName: {
-        value: '',
+        value: '...',
         hasErrors: false,
         message: '',
       },
       profileLastName: {
-        value: '',
+        value: '...',
         hasErrors: false,
         message: '',
       },
@@ -55,7 +55,6 @@ function EditUserProfileInfo(props) {
       case 'usernameImmediately':
         draft.profileData.profileUsername.hasErrors = false;
         draft.profileData.profileUsername.value = action.value;
-
         if (draft.profileData.profileUsername.value.length > 30) {
           draft.profileData.profileUsername.hasErrors = true;
           draft.profileData.profileUsername.message = 'Username cannot exceed 30 characters.';
@@ -76,11 +75,11 @@ function EditUserProfileInfo(props) {
         return;
       case 'usernameIsUnique':
         if (action.value) {
-          draft.profileData.profileUsername.hasErrors = true;
-          draft.profileData.profileUsername.isUnique = false;
           if (draft.profileData.profileUsername.value == appState.user.username) {
-            draft.profileData.profileUsername.message = 'No change.';
+            draft.profileData.profileUsername.isUnique = true;
           } else {
+            draft.profileData.profileUsername.hasErrors = true;
+            draft.profileData.profileUsername.isUnique = false;
             draft.profileData.profileUsername.message = 'That username is already being used.';
           }
         } else {
@@ -112,8 +111,9 @@ function EditUserProfileInfo(props) {
         return;
       // SUBMIT
       case 'submitForm':
-        if (!draft.profileData.profileUsername.hasErrors && draft.username.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors && !draft.email.hasErrors && draft.email.isUnique && !draft.password.hasErrors) {
+        if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
           draft.submitCount++;
+          console.log('hi from count');
         }
         return;
     }
@@ -172,27 +172,24 @@ function EditUserProfileInfo(props) {
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
-      (async function submitRegistration() {
+      (async function submitUpdate() {
         try {
           const response = await Axios.post(
-            '/register',
+            '/updateProfileInfo',
             {
               username: state.profileData.profileUsername.value,
               firstName: state.profileData.profileFirstName.value,
               lastName: state.profileData.profileLastName.value,
-              email: state.email.value,
-              password: state.password.value,
             },
             { cancelToken: request.token }
           );
           if (response.data) {
-            props.history.push('/');
-            appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
-            // LOG USER IN
-            appDispatch({ type: 'login', data: response.data });
+            console.log(response.data);
+            // props.history.push('/');
+            // appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
           }
         } catch (e) {
-          alert('Problem registering your account. Please try again.');
+          alert('Profile update failed. Please try again.');
         }
       })();
       return function cleanUpRequest() {
@@ -218,8 +215,6 @@ function EditUserProfileInfo(props) {
 
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
-
-  // console.log(state)
 
   return (
     <Page title='Edit Profile Info'>
