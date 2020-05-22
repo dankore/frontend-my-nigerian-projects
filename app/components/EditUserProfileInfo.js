@@ -170,6 +170,13 @@ function EditUserProfileInfo(props) {
 
   // SUBMIT FORM
   useEffect(() => {
+    console.log({
+      lo: {
+        username: state.profileData.profileUsername.value,
+        firstName: state.profileData.profileFirstName.value,
+        lastName: state.profileData.profileLastName.value,
+      },
+    });
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
       (async function submitUpdate() {
