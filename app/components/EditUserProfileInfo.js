@@ -194,8 +194,8 @@ function EditUserProfileInfo(props) {
           if (response.data) {
             console.log({ res: response.data });
             localStorage.setItem('biddingApp-username', response.data);
-            // props.history.push('/');
-            // appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
+            
+            appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
             dispatch({ type: 'successEditProfileInfo' });
           }
         } catch (e) {
