@@ -38,7 +38,7 @@ function Main() {
     flashMessages: [],
     flashMessageErrors: [],
     user: {
-      userId: localStorage.getItem('biddingApp-id'),
+      _id: localStorage.getItem('biddingApp-id'),
       token: localStorage.getItem('biddingApp-token'),
       username: localStorage.getItem('biddingApp-username'),
       firstName: localStorage.getItem('biddingApp-firstname'),
@@ -51,6 +51,7 @@ function Main() {
   };
 
   function reducer(draft, action) {
+    console.log({ main: action.data });
     switch (action.type) {
       case 'login':
         draft.loggedIn = true;
@@ -77,14 +78,20 @@ function Main() {
       case 'changesEditProfileInfo':
         draft.changesFromEditProfile = true;
         return;
+      case 'updateUserInfo':
+        localStorage.setItem('biddingApp-username', action.data.username);
+        localStorage.setItem('biddingApp-firstname', action.data.firstName);
+        localStorage.setItem('biddingApp-lastname', action.data.lastName);
+        return;
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
+  console.log({ mainState: state });
   useEffect(() => {
     if (state.loggedIn) {
-      localStorage.setItem('biddingApp-id', state.user.userId);
+      localStorage.setItem('biddingApp-id', state.user._id);
       localStorage.setItem('biddingApp-token', state.user.token);
       localStorage.setItem('biddingApp-username', state.user.username);
       localStorage.setItem('biddingApp-firstname', state.user.firstName);
@@ -99,8 +106,6 @@ function Main() {
       localStorage.removeItem('biddingApp-avatar');
     }
   }, [state.loggedIn]);
-
-  
 
   // CHECK TOKEN
   useEffect(() => {

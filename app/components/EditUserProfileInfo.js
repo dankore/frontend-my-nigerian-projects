@@ -125,7 +125,6 @@ function EditUserProfileInfo(props) {
 
   const [state, dispatch] = useImmerReducer(Reducer, initialState);
 
-
   // DELAY: USERNAME
   useEffect(() => {
     if (state.profileData.profileUsername.value) {
@@ -153,6 +152,9 @@ function EditUserProfileInfo(props) {
     }
   }, [state.profileData.profileUsername.checkCount]);
 
+  // console.log({ username_edit: state.profileData.profileUsername.value });
+  console.log({ username_edit: appState.user.username });
+
   // FETCH USER INFO
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -160,7 +162,8 @@ function EditUserProfileInfo(props) {
 
     (async function fetchData() {
       try {
-        const response = await Axios.post(`/profile/${localStorage.getItem('biddingApp-username')}`, { token: appState.user.token }, { CancelToken: request.token });
+        const response = await Axios.post(`/profile/${appState.user.username})}`, { token: appState.user.token }, { CancelToken: request.token });
+        console.log({insideUse: response.data})
         dispatch({ type: 'fetchDataComplete', value: response.data });
         dispatch({ type: 'isLoadingFinished' });
       } catch (error) {
@@ -171,9 +174,9 @@ function EditUserProfileInfo(props) {
     return () => {
       request.cancel();
     };
-  }, [state.successEditProfile]);
+  }, []);
 
-  console.log(state.successEditProfile);
+  
 
   // SUBMIT FORM
   useEffect(() => {
@@ -184,7 +187,7 @@ function EditUserProfileInfo(props) {
           const response = await Axios.post(
             '/updateProfileInfo',
             {
-              userId: appState.user.userId,
+              _id: appState.user._id,
               username: state.profileData.profileUsername.value,
               firstName: state.profileData.profileFirstName.value,
               lastName: state.profileData.profileLastName.value,
@@ -192,11 +195,8 @@ function EditUserProfileInfo(props) {
             { cancelToken: request.token }
           );
           if (response.data) {
-            console.log({ res: response.data });
-            localStorage.setItem('biddingApp-username', response.data);
-            
+            appDispatch({ type: 'updateUserInfo', data: response.data });
             appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
-            dispatch({ type: 'successEditProfileInfo' });
           }
         } catch (e) {
           alert('Profile update failed. Please try again.');
@@ -225,7 +225,7 @@ function EditUserProfileInfo(props) {
 
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
-
+  
   return (
     <Page title='Edit Profile Info'>
       <div className='flex justify-center -mt-10 max-w-sm mx-auto'>
