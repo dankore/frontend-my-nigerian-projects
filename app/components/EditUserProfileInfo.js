@@ -113,7 +113,6 @@ function EditUserProfileInfo(props) {
       case 'submitForm':
         if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
           draft.submitCount++;
-          console.log('hi from count');
         }
         return;
     }
