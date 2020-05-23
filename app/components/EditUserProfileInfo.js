@@ -40,6 +40,7 @@ function EditUserProfileInfo(props) {
       },
     },
     isLoading: true,
+    isSaving: false,
     submitCount: 0,
   };
 
@@ -109,6 +110,12 @@ function EditUserProfileInfo(props) {
       case 'isLoadingFinished':
         draft.isLoading = false;
         return;
+      case 'isSavingUpdateStart':
+        draft.isSaving = true;
+        return;
+      case 'isSavingUpdateFinished':
+        draft.isSaving = false;
+        return;
       // SUBMIT
       case 'submitForm':
         if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
@@ -171,8 +178,9 @@ function EditUserProfileInfo(props) {
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
-      (async function submitUpdate() {
+      (async function submitProfileUpdate() {
         try {
+          dispatch({ type: 'isSavingUpdateStart' });
           const response = await Axios.post(
             '/updateProfileInfo',
             {
@@ -186,6 +194,7 @@ function EditUserProfileInfo(props) {
           if (response.data) {
             appDispatch({ type: 'updateUserInfo', data: response.data });
             appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
+            dispatch({ type: 'isSavingUpdateFinished' });
           }
         } catch (e) {
           alert('Profile update failed. Please try again.');
@@ -256,7 +265,9 @@ function EditUserProfileInfo(props) {
               </CSSTransition>
             </div>
 
-            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>Save Changes</button>
+            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>
+              {state.isSaving ? 'Saving...' : 'Save Changes'}
+            </button>
           </div>
         </form>
       </div>
