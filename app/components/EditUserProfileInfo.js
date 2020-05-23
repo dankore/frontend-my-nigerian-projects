@@ -162,10 +162,11 @@ function EditUserProfileInfo(props) {
 
     (async function fetchData() {
       try {
-        const response = await Axios.post(`/profile/${appState.user.username})}`, { token: appState.user.token }, { CancelToken: request.token });
-        console.log({insideUse: response.data})
+        const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
+
         dispatch({ type: 'fetchDataComplete', value: response.data });
         dispatch({ type: 'isLoadingFinished' });
+        console.log({ insideUse: response.data });
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
       }
@@ -175,8 +176,6 @@ function EditUserProfileInfo(props) {
       request.cancel();
     };
   }, []);
-
-  
 
   // SUBMIT FORM
   useEffect(() => {
@@ -225,7 +224,7 @@ function EditUserProfileInfo(props) {
 
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
-  
+
   return (
     <Page title='Edit Profile Info'>
       <div className='flex justify-center -mt-10 max-w-sm mx-auto'>
