@@ -76,9 +76,12 @@ function EditUserProfileInfo(props) {
             },
             { cancelToken: request.token }
           );
-
-          console.log(response.data);
-          // appDispatch({ type: 'flashMessage', value: 'Password updated.' });
+          // CONDITION
+          if (response.data == 'Success') {
+            appDispatch({ type: 'flashMessage', value: 'Password updated.' });
+          } else {
+            appDispatch({ type: 'flashMessageError', value: response.data });
+          }
           // dispatch({ type: 'isSavingUpdateFinished' });
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
@@ -119,7 +122,6 @@ function EditUserProfileInfo(props) {
   if (state.isLoading) {
     return <LoadingDotsIcon />;
   }
-
 
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
