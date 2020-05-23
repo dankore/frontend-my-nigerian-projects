@@ -15,6 +15,7 @@ function EditUserProfileInfo(props) {
   const [state, setState] = useImmer({
     currentPassword: '',
     newPassword: '',
+    reEnteredNewPassword: '',
     isLoading: false,
     isSaving: false,
     submitCount: 0,
@@ -64,21 +65,21 @@ function EditUserProfileInfo(props) {
       const request = Axios.CancelToken.source();
       (async function submitProfileUpdate() {
         try {
-          dispatch({ type: 'isSavingUpdateStart' });
+          // dispatch({ type: 'isSavingUpdateStart' });
           const response = await Axios.post(
             '/changePassword',
             {
               _id: appState.user._id,
-              currentPassword: state.profileData.profileUsername.value,
-              newPassword: state.profileData.profileFirstName.value,
+              currentPassword: state.currentPassword,
+              newPassword: state.newPassword,
+              reEnteredNewPassword: state.reEnteredNewPassword,
             },
             { cancelToken: request.token }
           );
-          if (response.data) {
-            appDispatch({ type: 'updateUserInfo', data: response.data });
-            appDispatch({ type: 'flashMessage', value: 'Password updated.' });
-            dispatch({ type: 'isSavingUpdateFinished' });
-          }
+
+          console.log(response.data);
+          // appDispatch({ type: 'flashMessage', value: 'Password updated.' });
+          // dispatch({ type: 'isSavingUpdateFinished' });
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
         }
@@ -90,26 +91,36 @@ function EditUserProfileInfo(props) {
   }, [state.submitCount]);
 
   function handleSubmitChangePassword(e) {
+    console.log({ submitCount: state });
     e.preventDefault();
+    setState(draft => {
+      draft.submitCount++;
+    });
+  }
+
+  function handleUpdateCurrentPassword(inputValue) {
+    setState(draft => {
+      draft.currentPassword = inputValue;
+    });
+  }
+
+  function handleUpdateNewPassword(inputValue) {
+    setState(draft => {
+      draft.newPassword = inputValue;
+    });
+  }
+
+  function handleUpdateReEnterNewPassword(inputValue) {
+    setState(draft => {
+      draft.reEnteredNewPassword = inputValue;
+    });
   }
 
   if (state.isLoading) {
     return <LoadingDotsIcon />;
   }
 
-  function handleUpdateCurrentPassword(inputValue){
-    setState(draft=>{
-      draft.currentPassword = inputValue;
-    })
-  }
 
-  function handleUpdateNewPassword(inputValue){
-    setState(draft=> {
-      draft.newPassword = inputValue
-    })
-  }
-
-  console.log(state)
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
 
@@ -130,6 +141,13 @@ function EditUserProfileInfo(props) {
                 New Password <span className='text-red-600'>*</span>
               </label>
               <input value={state.newPassword} onChange={e => handleUpdateNewPassword(e.target.value)} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+            </div>
+
+            <div className='relative w-full px-3 mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='re-enter-new-password'>
+                Re-Enter New Password <span className='text-red-600'>*</span>
+              </label>
+              <input value={state.reEnterNewPassword} onChange={e => handleUpdateReEnterNewPassword(e.target.value)} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
             </div>
 
             <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>{state.isSaving ? 'Saving...' : 'Change Password'}</button>
