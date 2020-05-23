@@ -79,7 +79,7 @@ function ViewSingleProject(props) {
   }
 
   return (
-    <Page title={project.title}>
+    <Page margin='mx-2' title={project.title}>
       <div className='flex justify-between'>
         <div className='flex items-center'>
           <Link to={`/profile/${project.author.username}`}>
