@@ -6,7 +6,7 @@ import EditUserProfileInfo from '../components/EditUserProfileInfo';
 
 function SettingsPage() {
   return (
-    <Page title='Settings'>
+    <Page margin='mx-2' title='Settings'>
       <ul className='flex border-b'>
         <NavLink exact to='/settings' activeStyle={activeNavCSS} className={navLinkCSS}>
           Edit Profile Info
