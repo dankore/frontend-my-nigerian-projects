@@ -50,7 +50,6 @@ function Main() {
   };
 
   function reducer(draft, action) {
-    console.log({ main: action.data });
     switch (action.type) {
       case 'login':
         draft.loggedIn = true;
@@ -80,14 +79,13 @@ function Main() {
         localStorage.setItem('biddingApp-lastname', action.data.lastName);
         draft.user.username = action.data.username;
         draft.user.firstName = action.data.firstName;
-        draft.user.lastName = action.data.lastName
+        draft.user.lastName = action.data.lastName;
         return;
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  console.log({ mainState: state });
   useEffect(() => {
     if (state.loggedIn) {
       localStorage.setItem('biddingApp-id', state.user._id);
