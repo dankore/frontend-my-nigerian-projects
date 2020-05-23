@@ -120,7 +120,7 @@ function ProfilePage() {
   }
 
   return (
-    <Page title='Profile Page'>
+    <Page margin='mx-2' title='Profile Page'>
       <h2 className='flex items-center'>
         <Link to={`/profile/${state.profileData.profileUsername}`}>
           <img className='h-10 w-10 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />

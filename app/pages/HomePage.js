@@ -75,7 +75,7 @@ function HomePage() {
 
 
   return (
-    <Page title='Browse'>
+    <Page margin='mx-2' title='Browse'>
       <div className='mt-2 align-middle inline-block min-w-full'>
         <ul className='flex border-b mb-4'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
@@ -114,7 +114,9 @@ function HomePage() {
             {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && <h2 className='border border-gray-200 p-2'>No Projects Posted at This Time.</h2>}
             {!appState.loggedIn && (
               <>
-                <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Login to View Projects</Link>
+                <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
+                  Login to View Projects
+                </Link>
               </>
             )}
           </Route>
