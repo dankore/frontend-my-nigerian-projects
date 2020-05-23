@@ -197,7 +197,7 @@ function EditUserProfileInfo(props) {
             dispatch({ type: 'isSavingUpdateFinished' });
           }
         } catch (e) {
-          alert('Profile update failed. Please try again.');
+          appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
         }
       })();
       return function cleanUpRequest() {
@@ -265,9 +265,7 @@ function EditUserProfileInfo(props) {
               </CSSTransition>
             </div>
 
-            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>
-              {state.isSaving ? 'Saving...' : 'Save Changes'}
-            </button>
+            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>{state.isSaving ? 'Saving...' : 'Save Changes'}</button>
           </div>
         </form>
       </div>

@@ -74,9 +74,11 @@ function Main() {
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
         return;
       case 'updateUserInfo':
+        localStorage.setItem('biddingApp-id', action.data._id);
         localStorage.setItem('biddingApp-username', action.data.username);
         localStorage.setItem('biddingApp-firstname', action.data.firstName);
         localStorage.setItem('biddingApp-lastname', action.data.lastName);
+        localStorage.setItem('biddingApp-token', action.data.token);
         draft.user.username = action.data.username;
         draft.user.firstName = action.data.firstName;
         draft.user.lastName = action.data.lastName;
