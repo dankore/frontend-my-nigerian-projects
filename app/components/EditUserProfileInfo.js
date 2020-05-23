@@ -41,7 +41,6 @@ function EditUserProfileInfo(props) {
     },
     isLoading: true,
     submitCount: 0,
-    successEditProfile: false,
   };
 
   function Reducer(draft, action) {
@@ -110,9 +109,6 @@ function EditUserProfileInfo(props) {
       case 'isLoadingFinished':
         draft.isLoading = false;
         return;
-      case 'successEditProfileInfo':
-        draft.successEditProfile = true;
-        return;
       // SUBMIT
       case 'submitForm':
         if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
@@ -160,10 +156,8 @@ function EditUserProfileInfo(props) {
     (async function fetchData() {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-
         dispatch({ type: 'fetchDataComplete', value: response.data });
         dispatch({ type: 'isLoadingFinished' });
-        console.log({ insideUse: response.data });
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
       }
