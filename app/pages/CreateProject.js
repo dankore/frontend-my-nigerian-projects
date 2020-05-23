@@ -104,7 +104,7 @@ function CreateProject(props) {
   }
 
   return (
-    <Page title='Create New Project'>
+    <Page margin='mx-2' title='Create New Project'>
       <form className='' onSubmit={handleProjectSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
