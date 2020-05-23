@@ -47,7 +47,6 @@ function Main() {
     },
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
-    changesFromEditProfile: false,
   };
 
   function reducer(draft, action) {
@@ -74,9 +73,6 @@ function Main() {
         return;
       case 'toggleSideMenu':
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
-        return;
-      case 'changesEditProfileInfo':
-        draft.changesFromEditProfile = true;
         return;
       case 'updateUserInfo':
         localStorage.setItem('biddingApp-username', action.data.username);

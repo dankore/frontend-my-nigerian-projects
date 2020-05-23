@@ -152,9 +152,6 @@ function EditUserProfileInfo(props) {
     }
   }, [state.profileData.profileUsername.checkCount]);
 
-  // console.log({ username_edit: state.profileData.profileUsername.value });
-  console.log({ username_edit: appState.user.username });
-
   // FETCH USER INFO
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
