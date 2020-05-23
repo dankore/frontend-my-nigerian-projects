@@ -3,6 +3,7 @@ import { Switch, NavLink, Route } from 'react-router-dom';
 import Page from '../components/Page';
 import { navLinkCSS, activeNavCSS, navLinkCSSSettings, activeNavCSSSettingsPage } from '../helpers/CSSHelpers';
 import EditUserProfileInfo from '../components/EditUserProfileInfo';
+import ChangePassword from '../components/ChangePassword';
 
 function SettingsPage() {
   return (
@@ -23,7 +24,7 @@ function SettingsPage() {
             <EditUserProfileInfo />
           </Route>
           <Route path='/settings/change-password'>
-            <p>Change password page</p>
+            <ChangePassword/>
           </Route>
         </Switch>
       </div>

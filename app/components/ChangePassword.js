@@ -13,52 +13,50 @@ function EditUserProfileInfo(props) {
   const appState = useContext(StateContext);
 
   const [state, setState] = useImmer({
-    isLoading: true,
+    currentPassword: '',
+    newPassword: '',
+    isLoading: false,
     isSaving: false,
     submitCount: 0,
   });
 
-  const [state, dispatch] = useImmerReducer(Reducer, initialState);
-
-
-
   // USERNAME IS UNIQUE
-  useEffect(() => {
-    if (state.profileData.profileUsername.checkCount) {
-      const request = Axios.CancelToken.source();
-      (async function checkForUsername() {
-        try {
-          const response = await Axios.post('/doesUsernameExist', { username: state.profileData.profileUsername.value }, { cancelToken: request.token });
-          dispatch({ type: 'usernameIsUnique', value: response.data });
-        } catch (error) {
-          alert('Having difficulty looking up your username. Please try again.');
-        }
-      })();
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
-    }
-  }, [state.profileData.profileUsername.checkCount]);
+  // useEffect(() => {
+  //   if (state) {
+  //     const request = Axios.CancelToken.source();
+  //     (async function checkForUsername() {
+  //       try {
+  //         const response = await Axios.post('/doesUsernameExist', { username: state.profileData.profileUsername.value }, { cancelToken: request.token });
+  //         dispatch({ type: 'usernameIsUnique', value: response.data });
+  //       } catch (error) {
+  //         alert('Having difficulty looking up your username. Please try again.');
+  //       }
+  //     })();
+  //     return function cleanUpRequest() {
+  //       return request.cancel();
+  //     };
+  //   }
+  // }, [state]);
 
-  // FETCH USER INFO
-  useEffect(() => {
-    // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-    const request = Axios.CancelToken.source();
+  // // FETCH USER INFO
+  // useEffect(() => {
+  //   // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+  //   const request = Axios.CancelToken.source();
 
-    (async function fetchData() {
-      try {
-        const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-        dispatch({ type: 'fetchDataComplete', value: response.data });
-        dispatch({ type: 'isLoadingFinished' });
-      } catch (error) {
-        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
-      }
-    })();
-    // CANCEL REQUEST
-    return () => {
-      request.cancel();
-    };
-  }, []);
+  //   (async function fetchData() {
+  //     try {
+  //       const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
+  //       dispatch({ type: 'fetchDataComplete', value: response.data });
+  //       dispatch({ type: 'isLoadingFinished' });
+  //     } catch (error) {
+  //       appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+  //     }
+  //   })();
+  //   // CANCEL REQUEST
+  //   return () => {
+  //     request.cancel();
+  //   };
+  // }, []);
 
   // SUBMIT FORM
   useEffect(() => {
@@ -93,19 +91,25 @@ function EditUserProfileInfo(props) {
 
   function handleSubmitChangePassword(e) {
     e.preventDefault();
-    dispatch({ type: 'usernameImmediately', value: state.profileData.profileUsername.value });
-    dispatch({ type: 'usernameAfterDelay', value: state.profileData.profileUsername.value, noNeedToSendAxiosRequest: true });
-
-    dispatch({ type: 'firstnameImmediately', value: state.profileData.profileFirstName.value });
-    dispatch({ type: 'lastnameImmediately', value: state.profileData.profileLastName.value });
-
-    dispatch({ type: 'submitForm' });
   }
 
   if (state.isLoading) {
     return <LoadingDotsIcon />;
   }
 
+  function handleUpdateCurrentPassword(inputValue){
+    setState(draft=>{
+      draft.currentPassword = inputValue;
+    })
+  }
+
+  function handleUpdateNewPassword(inputValue){
+    setState(draft=> {
+      draft.newPassword = inputValue
+    })
+  }
+
+  console.log(state)
   // CSS
   const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
 
@@ -116,26 +120,16 @@ function EditUserProfileInfo(props) {
           <div className='flex flex-wrap'>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>
-                Old Password <span className='text-red-600'>*</span>
+                Current Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.profileData.profileUsername.value} onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
-              <CSSTransition in={state.profileData.profileUsername.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-                <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.profileData.profileUsername.message}
-                </div>
-              </CSSTransition>
+              <input value={state.currentPassword} onChange={e => handleUpdateCurrentPassword(e.target.value)} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='new-password'>
                 New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.profileData.profileFirstName.value} onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
-              <CSSTransition in={state.profileData.profileFirstName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-                <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.profileData.profileFirstName.message}
-                </div>
-              </CSSTransition>
+              <input value={state.newPassword} onChange={e => handleUpdateNewPassword(e.target.value)} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
             </div>
 
             <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>{state.isSaving ? 'Saving...' : 'Change Password'}</button>
