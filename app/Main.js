@@ -29,6 +29,7 @@ import ViewSingleProject from './pages/ViewSingleProject';
 import FlashMessageSuccess from './components/FlashMessageSuccess';
 import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
+import SettingsPage from './pages/SettingsPage';
 // COMPONENTS END
 
 function Main() {
@@ -37,6 +38,7 @@ function Main() {
     flashMessages: [],
     flashMessageErrors: [],
     user: {
+      _id: localStorage.getItem('biddingApp-id'),
       token: localStorage.getItem('biddingApp-token'),
       username: localStorage.getItem('biddingApp-username'),
       firstName: localStorage.getItem('biddingApp-firstname'),
@@ -71,6 +73,14 @@ function Main() {
       case 'toggleSideMenu':
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
         return;
+      case 'updateUserInfo':
+        localStorage.setItem('biddingApp-username', action.data.username);
+        localStorage.setItem('biddingApp-firstname', action.data.firstName);
+        localStorage.setItem('biddingApp-lastname', action.data.lastName);
+        draft.user.username = action.data.username;
+        draft.user.firstName = action.data.firstName;
+        draft.user.lastName = action.data.lastName;
+        return;
     }
   }
 
@@ -78,10 +88,14 @@ function Main() {
 
   useEffect(() => {
     if (state.loggedIn) {
+      localStorage.setItem('biddingApp-id', state.user._id);
       localStorage.setItem('biddingApp-token', state.user.token);
       localStorage.setItem('biddingApp-username', state.user.username);
-      localStorage.setItem('biddingApp-firstname', state.user.firstName), localStorage.setItem('biddingApp-lastname', state.user.lastName), localStorage.setItem('biddingApp-avatar', state.user.avatar);
+      localStorage.setItem('biddingApp-firstname', state.user.firstName);
+      localStorage.setItem('biddingApp-lastname', state.user.lastName);
+      localStorage.setItem('biddingApp-avatar', state.user.avatar);
     } else {
+      localStorage.removeItem('biddingApp-id');
       localStorage.removeItem('biddingApp-token');
       localStorage.removeItem('biddingApp-username');
       localStorage.removeItem('biddingApp-firstname');
@@ -147,6 +161,9 @@ function Main() {
             </Route>
             <Route path='/terms'>
               <Terms />
+            </Route>
+            <Route path='/settings'>
+              <SettingsPage />
             </Route>
             <Route path='/how-to-bid'>
               <HowToBid />

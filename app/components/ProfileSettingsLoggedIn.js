@@ -24,7 +24,7 @@ function ProfileSettingsLoggedIn(props) {
         <i className='far fa-user mr-1'></i>
         Profile
       </Link>
-      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to='/' className={linkButtonsCommonCSS + ' block'}>
+      <Link onClick={() => appDispatch({ type: 'toggleSettingsTab' })} to='/settings' className={linkButtonsCommonCSS + ' block'}>
         <i className='fas fa-cog mr-1'></i>
         Settings
       </Link>

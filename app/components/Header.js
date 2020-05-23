@@ -15,13 +15,21 @@ function Header() {
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
         <div className='flex items-center'>
           <div>
-            <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative'>
-              <i className='fas fa-bars'></i>
-            </button>
+            {!(appState && appState.isSideMenuOpen) ? (
+              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative hover:text-gray-400'>
+                <i className='fas fa-bars'></i>
+              </button>
+            ) : null}
+
+            {appState && appState.isSideMenuOpen ? (
+              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative hover:text-gray-400'>
+                <i className='fas fa-times'></i>
+              </button>
+            ) : null}
 
             {/* SIDE MENU */}
             {appState && appState.isSideMenuOpen ? (
-              <div style={{zIndex: 1}} className='absolute bg-blue-600 text-white'>
+              <div style={{ zIndex: 1 }} className='absolute bg-blue-600 text-white'>
                 {appState && appState.loggedIn ? (
                   <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mt-2 block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
                     <i className='fas fa-plus mr-1'></i>
@@ -39,8 +47,8 @@ function Header() {
           </div>
 
           <Link to='/' className='mx-auto lg:mx-0 block flex items-center text-white'>
-            <i className='fas fa-home text-xl'></i>
-            <span className='hidden lg:block ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
+            <i className='fas fa-home text-xl hover:text-gray-400'></i>
+            <span className='hidden lg:block ml-2 font-semibold text-xl tracking-tight hover:text-gray-400'>Bid for my Projects</span>
           </Link>
         </div>
 
