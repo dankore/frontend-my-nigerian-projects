@@ -134,6 +134,8 @@ function ChangePassword(props) {
 
   function handleSubmitChangePassword(e) {
     e.preventDefault();
+    dispatch({ type: 'newPasswordAfterDelay' });
+    dispatch({ type: 'reEnteredPasswordAfterDelay' });
     dispatch({ type: 'submitForm' });
   }
 
