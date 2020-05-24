@@ -16,48 +16,14 @@ function EditUserProfileInfo(props) {
     currentPassword: '',
     newPassword: '',
     reEnteredNewPassword: '',
+    errorMessage: {
+      hasErrors: false,
+      message: '',
+    },
     isLoading: false,
     isSaving: false,
     submitCount: 0,
   });
-
-  // USERNAME IS UNIQUE
-  // useEffect(() => {
-  //   if (state) {
-  //     const request = Axios.CancelToken.source();
-  //     (async function checkForUsername() {
-  //       try {
-  //         const response = await Axios.post('/doesUsernameExist', { username: state.profileData.profileUsername.value }, { cancelToken: request.token });
-  //         dispatch({ type: 'usernameIsUnique', value: response.data });
-  //       } catch (error) {
-  //         alert('Having difficulty looking up your username. Please try again.');
-  //       }
-  //     })();
-  //     return function cleanUpRequest() {
-  //       return request.cancel();
-  //     };
-  //   }
-  // }, [state]);
-
-  // // FETCH USER INFO
-  // useEffect(() => {
-  //   // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-  //   const request = Axios.CancelToken.source();
-
-  //   (async function fetchData() {
-  //     try {
-  //       const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-  //       dispatch({ type: 'fetchDataComplete', value: response.data });
-  //       dispatch({ type: 'isLoadingFinished' });
-  //     } catch (error) {
-  //       appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
-  //     }
-  //   })();
-  //   // CANCEL REQUEST
-  //   return () => {
-  //     request.cancel();
-  //   };
-  // }, []);
 
   // SUBMIT FORM
   useEffect(() => {
@@ -93,14 +59,6 @@ function EditUserProfileInfo(props) {
     }
   }, [state.submitCount]);
 
-  function handleSubmitChangePassword(e) {
-    console.log({ submitCount: state });
-    e.preventDefault();
-    setState(draft => {
-      draft.submitCount++;
-    });
-  }
-
   function handleUpdateCurrentPassword(inputValue) {
     setState(draft => {
       draft.currentPassword = inputValue;
@@ -111,12 +69,42 @@ function EditUserProfileInfo(props) {
     setState(draft => {
       draft.newPassword = inputValue;
     });
+    // ERROR
+    if (inputValue != state.reEnteredNewPassword && state.reEnteredNewPassword != '') {
+      setState(draft => {
+        draft.errorMessage.hasErrors = true;
+        draft.errorMessage.message = 'Passwords do not match.';
+      });
+    } else {
+      setState(draft => {
+        draft.errorMessage.hasErrors = false;
+      });
+    }
   }
 
   function handleUpdateReEnterNewPassword(inputValue) {
     setState(draft => {
       draft.reEnteredNewPassword = inputValue;
     });
+    // ERROR
+    if (inputValue != state.newPassword) {
+      setState(draft => {
+        draft.errorMessage.hasErrors = true;
+        draft.errorMessage.message = 'Passwords do not match.';
+      });
+    } else {
+      setState(draft => {
+        draft.errorMessage.hasErrors = false;
+      });
+    }
+  }
+
+  function handleSubmitChangePassword(e) {
+    e.preventDefault();
+    if (!state.errorMessage.hasErrors && state.currentPassword != '' && state.newPassword != '' && state.reEnteredNewPassword != '')
+      setState(draft => {
+        draft.submitCount++;
+      });
   }
 
   if (state.isLoading) {
@@ -150,6 +138,11 @@ function EditUserProfileInfo(props) {
                 Re-Enter New Password <span className='text-red-600'>*</span>
               </label>
               <input value={state.reEnterNewPassword} onChange={e => handleUpdateReEnterNewPassword(e.target.value)} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+              <CSSTransition in={state.errorMessage.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.errorMessage.message}
+                </div>
+              </CSSTransition>
             </div>
 
             <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>{state.isSaving ? 'Saving...' : 'Change Password'}</button>
