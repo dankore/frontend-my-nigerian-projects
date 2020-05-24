@@ -148,9 +148,8 @@ function EditUserProfileInfo(props) {
           console.log('Having difficulty looking up your username. Please try again.');
         }
       })();
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
+      // CANCEL REQUEST
+      return () => request.cancel();
     }
   }, [state.profileData.profileUsername.checkCount]);
 
@@ -169,9 +168,7 @@ function EditUserProfileInfo(props) {
       }
     })();
     // CANCEL REQUEST
-    return () => {
-      request.cancel();
-    };
+    return () => request.cancel();
   }, []);
 
   // SUBMIT FORM
