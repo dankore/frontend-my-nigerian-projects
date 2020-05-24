@@ -66,6 +66,12 @@ function ChangePassword(props) {
           draft.reEnteredNewPassword.message = 'Passwords do not match.';
         }
         return;
+      case 'isSavingUpdateStart':
+        draft.isSaving = true;
+        return;
+      case 'isSavingUpdateFinished':
+        draft.isSaving = false;
+        return;
       case 'submitForm':
         if (!draft.newPassword.hasErrors && !draft.reEnteredNewPassword.hasErrors && draft.currentPassword.value != '' && draft.newPassword.value != '' && draft.reEnteredNewPassword.value != '') {
           draft.submitCount++;
@@ -96,16 +102,16 @@ function ChangePassword(props) {
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
+      dispatch({ type: 'isSavingUpdateStart' });
       (async function submitProfileUpdate() {
         try {
-          // dispatch({ type: 'isSavingUpdateStart' });
           const response = await Axios.post(
             '/changePassword',
             {
               _id: appState.user._id,
               currentPassword: state.currentPassword,
-              newPassword: state.newPassword,
-              reEnteredNewPassword: state.reEnteredNewPassword,
+              newPassword: state.newPassword.value,
+              reEnteredNewPassword: state.reEnteredNewPassword.value,
             },
             { cancelToken: request.token }
           );
@@ -115,7 +121,7 @@ function ChangePassword(props) {
           } else {
             appDispatch({ type: 'flashMessageError', value: response.data });
           }
-          // dispatch({ type: 'isSavingUpdateFinished' });
+          dispatch({ type: 'isSavingUpdateFinished' });
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
         }
