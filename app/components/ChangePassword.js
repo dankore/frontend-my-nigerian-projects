@@ -29,7 +29,7 @@ function ChangePassword(props) {
     submitCount: 0,
   };
 
-  const reducer = (draft, action) => {
+  function reducer(draft, action) {
     switch (action.type) {
       case 'currentPasswordImmediately':
         draft.currentPassword = action.value;
@@ -42,6 +42,10 @@ function ChangePassword(props) {
         if (draft.newPassword.value.length < 6) {
           draft.newPassword.hasErrors = true;
           draft.newPassword.message = 'Passwords must be at least 6 characters.';
+        }
+        if (draft.newPassword.value.length > 50) {
+          draft.newPassword.hasErrors = true;
+          draft.newPassword.message = 'Passwords cannot be more than 50 characters.';
         }
         return;
       case 'reEnteredPasswordImmediately':
@@ -57,6 +61,10 @@ function ChangePassword(props) {
           draft.reEnteredNewPassword.hasErrors = true;
           draft.reEnteredNewPassword.message = 'Passwords cannot be more than 50 characters.';
         }
+        if (draft.newPassword.value != draft.reEnteredNewPassword.value) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords do not match.';
+        }
         return;
       case 'submitForm':
         if (!draft.newPassword.hasErrors && !draft.reEnteredNewPassword.hasErrors && draft.currentPassword.value != '' && draft.newPassword.value != '' && draft.reEnteredNewPassword.value != '') {
@@ -64,7 +72,7 @@ function ChangePassword(props) {
         }
         return;
     }
-  };
+  }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
@@ -77,12 +85,12 @@ function ChangePassword(props) {
   }, [state.newPassword.value]);
 
   // DELAY FOR RE-ENTER PASSWORD
-  // useEffect(() => {
-  //   if (state.reEnteredNewPassword.value) {
-  //     const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
-  //     return () => clearTimeout(delay);
-  //   }
-  // }, [state.reEnteredNewPassword.value]);
+  useEffect(() => {
+    if (state.reEnteredNewPassword.value) {
+      const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
+      return () => clearTimeout(delay);
+    }
+  }, [state.reEnteredNewPassword.value]);
 
   // SUBMIT FORM
   useEffect(() => {
