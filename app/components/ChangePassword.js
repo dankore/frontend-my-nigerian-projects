@@ -31,14 +31,24 @@ function ChangePassword(props) {
         draft.currentPassword = action.value;
         return;
       case 'newPasswordImmediately':
+        draft.errorMessage.hasErrors = false;
         draft.newPassword = action.value;
         return;
       case 'newPasswordAfterDelay':
+        if (draft.newPassword.length < 6) {
+          draft.errorMessage.hasErrors = true;
+          draft.errorMessage.message = 'Passwords must be at least 6 characters.';
+        }
         return;
       case 'reEnteredPasswordImmediately':
+        draft.errorMessage.hasErrors = false;
         draft.reEnterNewPassword = action.value;
         return;
       case 'reEnteredPasswordAfterDelay':
+        if (draft.reEnterNewPassword.length < 6) {
+          draft.errorMessage.hasErrors = true;
+          draft.errorMessage.message = 'Passwords must be at least 6 characters.';
+        }
         return;
       case 'submitForm':
         if (!draft.errorMessage.hasErrors && draft.currentPassword != '' && draft.newPassword != '' && draft.reEnteredNewPassword != '') {
@@ -49,6 +59,22 @@ function ChangePassword(props) {
   };
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  // DELAY FOR NEW PASSWORD
+  // useEffect(() => {
+  //   if (state.newPassword) {
+  //     const delay = setTimeout(() => dispatch({ type: 'newPasswordAfterDelay' }), 800);
+  //     return () => clearTimeout(delay);
+  //   }
+  // }, [state.newPassword]);
+
+  // DELAY FOR RE-ENTER PASSWORD
+  useEffect(() => {
+    if (state.reEnterNewPassword) {
+      const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
+      return () => clearTimeout(delay);
+    }
+  }, [state.reEnterNewPassword]);
 
   // SUBMIT FORM
   useEffect(() => {
