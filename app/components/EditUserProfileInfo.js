@@ -145,7 +145,7 @@ function EditUserProfileInfo(props) {
           const response = await Axios.post('/doesUsernameExist', { username: state.profileData.profileUsername.value }, { cancelToken: request.token });
           dispatch({ type: 'usernameIsUnique', value: response.data });
         } catch (error) {
-          alert('Having difficulty looking up your username. Please try again.');
+          console.log('Having difficulty looking up your username. Please try again.');
         }
       })();
       return function cleanUpRequest() {

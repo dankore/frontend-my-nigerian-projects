@@ -2,17 +2,17 @@ import React, { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
-import { useImmer } from 'use-immer';
+import { useImmer, useImmerReducer } from 'use-immer';
 import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 import { CSSTransition } from 'react-transition-group';
 import LoadingDotsIcon from './LoadingDotsIcon';
 
-function EditUserProfileInfo(props) {
+function ChangePassword(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
 
-  const [state, setState] = useImmer({
+  const initialState = {
     currentPassword: '',
     newPassword: '',
     reEnteredNewPassword: '',
@@ -23,7 +23,32 @@ function EditUserProfileInfo(props) {
     isLoading: false,
     isSaving: false,
     submitCount: 0,
-  });
+  };
+
+  const reducer = (draft, action) => {
+    switch (action.type) {
+      case 'currentPasswordImmediately':
+        draft.currentPassword = action.value;
+        return;
+      case 'newPasswordImmediately':
+        draft.newPassword = action.value;
+        return;
+      case 'newPasswordAfterDelay':
+        return;
+      case 'reEnteredPasswordImmediately':
+        draft.reEnterNewPassword = action.value;
+        return;
+      case 'reEnteredPasswordAfterDelay':
+        return;
+      case 'submitForm':
+        if (!draft.errorMessage.hasErrors && draft.currentPassword != '' && draft.newPassword != '' && draft.reEnteredNewPassword != '') {
+          draft.submitCount++;
+        }
+        return;
+    }
+  };
+
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   // SUBMIT FORM
   useEffect(() => {
@@ -59,52 +84,9 @@ function EditUserProfileInfo(props) {
     }
   }, [state.submitCount]);
 
-  function handleUpdateCurrentPassword(inputValue) {
-    setState(draft => {
-      draft.currentPassword = inputValue;
-    });
-  }
-
-  function handleUpdateNewPassword(inputValue) {
-    setState(draft => {
-      draft.newPassword = inputValue;
-    });
-    // ERROR
-    if (inputValue != state.reEnteredNewPassword && state.reEnteredNewPassword != '') {
-      setState(draft => {
-        draft.errorMessage.hasErrors = true;
-        draft.errorMessage.message = 'Passwords do not match.';
-      });
-    } else {
-      setState(draft => {
-        draft.errorMessage.hasErrors = false;
-      });
-    }
-  }
-
-  function handleUpdateReEnterNewPassword(inputValue) {
-    setState(draft => {
-      draft.reEnteredNewPassword = inputValue;
-    });
-    // ERROR
-    if (inputValue != state.newPassword) {
-      setState(draft => {
-        draft.errorMessage.hasErrors = true;
-        draft.errorMessage.message = 'Passwords do not match.';
-      });
-    } else {
-      setState(draft => {
-        draft.errorMessage.hasErrors = false;
-      });
-    }
-  }
-
   function handleSubmitChangePassword(e) {
     e.preventDefault();
-    if (!state.errorMessage.hasErrors && state.currentPassword != '' && state.newPassword != '' && state.reEnteredNewPassword != '')
-      setState(draft => {
-        draft.submitCount++;
-      });
+    dispatch({ type: 'submitForm' });
   }
 
   if (state.isLoading) {
@@ -123,21 +105,21 @@ function EditUserProfileInfo(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>
                 Current Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.currentPassword} onChange={e => handleUpdateCurrentPassword(e.target.value)} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='password' />
+              <input value={state.currentPassword} onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='new-password'>
                 New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.newPassword} onChange={e => handleUpdateNewPassword(e.target.value)} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='password' />
+              <input value={state.newPassword} onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='re-enter-new-password'>
                 Re-Enter New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.reEnterNewPassword} onChange={e => handleUpdateReEnterNewPassword(e.target.value)} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='password' />
+              <input value={state.reEnterNewPassword} onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
               <CSSTransition in={state.errorMessage.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.errorMessage.message}
@@ -153,4 +135,4 @@ function EditUserProfileInfo(props) {
   );
 }
 
-export default withRouter(EditUserProfileInfo);
+export default withRouter(ChangePassword);
