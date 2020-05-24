@@ -2,43 +2,116 @@ import React, { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
-import { useImmer } from 'use-immer';
+import { useImmer, useImmerReducer } from 'use-immer';
 import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 import { CSSTransition } from 'react-transition-group';
 import LoadingDotsIcon from './LoadingDotsIcon';
 
-function EditUserProfileInfo(props) {
+function ChangePassword(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
 
-  const [state, setState] = useImmer({
+  const initialState = {
     currentPassword: '',
-    newPassword: '',
-    reEnteredNewPassword: '',
-    errorMessage: {
+    newPassword: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    reEnteredNewPassword: {
+      value: '',
       hasErrors: false,
       message: '',
     },
     isLoading: false,
     isSaving: false,
     submitCount: 0,
-  });
+  };
+
+  function reducer(draft, action) {
+    switch (action.type) {
+      case 'currentPasswordImmediately':
+        draft.currentPassword = action.value;
+        return;
+      case 'newPasswordImmediately':
+        draft.newPassword.hasErrors = false;
+        draft.newPassword.value = action.value;
+        return;
+      case 'newPasswordAfterDelay':
+        if (draft.newPassword.value.length < 6) {
+          draft.newPassword.hasErrors = true;
+          draft.newPassword.message = 'Passwords must be at least 6 characters.';
+        }
+        if (draft.newPassword.value.length > 50) {
+          draft.newPassword.hasErrors = true;
+          draft.newPassword.message = 'Passwords cannot be more than 50 characters.';
+        }
+        return;
+      case 'reEnteredPasswordImmediately':
+        draft.reEnteredNewPassword.hasErrors = false;
+        draft.reEnteredNewPassword.value = action.value;
+        return;
+      case 'reEnteredPasswordAfterDelay':
+        if (draft.reEnteredNewPassword.value.length < 6) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords must be at least 6 characters.';
+        }
+        if (draft.reEnteredNewPassword.value.length > 50) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords cannot be more than 50 characters.';
+        }
+        if (draft.newPassword.value != draft.reEnteredNewPassword.value) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords do not match.';
+        }
+        return;
+      case 'isSavingUpdateStart':
+        draft.isSaving = true;
+        return;
+      case 'isSavingUpdateFinished':
+        draft.isSaving = false;
+        return;
+      case 'submitForm':
+        if (!draft.newPassword.hasErrors && !draft.reEnteredNewPassword.hasErrors && draft.currentPassword.value != '' && draft.newPassword.value != '' && draft.reEnteredNewPassword.value != '') {
+          draft.submitCount++;
+        }
+        return;
+    }
+  }
+
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  // DELAY FOR NEW PASSWORD
+  useEffect(() => {
+    if (state.newPassword.value) {
+      const delay = setTimeout(() => dispatch({ type: 'newPasswordAfterDelay' }), 800);
+      return () => clearTimeout(delay);
+    }
+  }, [state.newPassword.value]);
+
+  // DELAY FOR RE-ENTER PASSWORD
+  useEffect(() => {
+    if (state.reEnteredNewPassword.value) {
+      const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
+      return () => clearTimeout(delay);
+    }
+  }, [state.reEnteredNewPassword.value]);
 
   // SUBMIT FORM
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
+      dispatch({ type: 'isSavingUpdateStart' });
       (async function submitProfileUpdate() {
         try {
-          // dispatch({ type: 'isSavingUpdateStart' });
           const response = await Axios.post(
             '/changePassword',
             {
               _id: appState.user._id,
               currentPassword: state.currentPassword,
-              newPassword: state.newPassword,
-              reEnteredNewPassword: state.reEnteredNewPassword,
+              newPassword: state.newPassword.value,
+              reEnteredNewPassword: state.reEnteredNewPassword.value,
             },
             { cancelToken: request.token }
           );
@@ -48,7 +121,7 @@ function EditUserProfileInfo(props) {
           } else {
             appDispatch({ type: 'flashMessageError', value: response.data });
           }
-          // dispatch({ type: 'isSavingUpdateFinished' });
+          dispatch({ type: 'isSavingUpdateFinished' });
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
         }
@@ -59,52 +132,9 @@ function EditUserProfileInfo(props) {
     }
   }, [state.submitCount]);
 
-  function handleUpdateCurrentPassword(inputValue) {
-    setState(draft => {
-      draft.currentPassword = inputValue;
-    });
-  }
-
-  function handleUpdateNewPassword(inputValue) {
-    setState(draft => {
-      draft.newPassword = inputValue;
-    });
-    // ERROR
-    if (inputValue != state.reEnteredNewPassword && state.reEnteredNewPassword != '') {
-      setState(draft => {
-        draft.errorMessage.hasErrors = true;
-        draft.errorMessage.message = 'Passwords do not match.';
-      });
-    } else {
-      setState(draft => {
-        draft.errorMessage.hasErrors = false;
-      });
-    }
-  }
-
-  function handleUpdateReEnterNewPassword(inputValue) {
-    setState(draft => {
-      draft.reEnteredNewPassword = inputValue;
-    });
-    // ERROR
-    if (inputValue != state.newPassword) {
-      setState(draft => {
-        draft.errorMessage.hasErrors = true;
-        draft.errorMessage.message = 'Passwords do not match.';
-      });
-    } else {
-      setState(draft => {
-        draft.errorMessage.hasErrors = false;
-      });
-    }
-  }
-
   function handleSubmitChangePassword(e) {
     e.preventDefault();
-    if (!state.errorMessage.hasErrors && state.currentPassword != '' && state.newPassword != '' && state.reEnteredNewPassword != '')
-      setState(draft => {
-        draft.submitCount++;
-      });
+    dispatch({ type: 'submitForm' });
   }
 
   if (state.isLoading) {
@@ -123,24 +153,29 @@ function EditUserProfileInfo(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>
                 Current Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.currentPassword} onChange={e => handleUpdateCurrentPassword(e.target.value)} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='password' />
+              <input onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='new-password'>
                 New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.newPassword} onChange={e => handleUpdateNewPassword(e.target.value)} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='password' />
+              <input onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <CSSTransition in={state.newPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.newPassword.message}
+                </div>
+              </CSSTransition>
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='re-enter-new-password'>
                 Re-Enter New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.reEnterNewPassword} onChange={e => handleUpdateReEnterNewPassword(e.target.value)} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='password' />
-              <CSSTransition in={state.errorMessage.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+              <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <CSSTransition in={state.reEnteredNewPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.errorMessage.message}
+                  {state.reEnteredNewPassword.message}
                 </div>
               </CSSTransition>
             </div>
@@ -153,4 +188,4 @@ function EditUserProfileInfo(props) {
   );
 }
 
-export default withRouter(EditUserProfileInfo);
+export default withRouter(ChangePassword);
