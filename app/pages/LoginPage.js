@@ -3,28 +3,74 @@ import Page from '../components/Page';
 import { Link, withRouter } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
 import Axios from 'axios';
+import { useImmerReducer } from 'use-immer';
 
 function LoginPage(props) {
   const appDispatch = useContext(DispatchContext);
+  const initialState = {
+    username: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    password: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    isLoggingIn: false,
+    submitCount: 0,
+  };
 
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const response = await Axios.post('/login', { username: username, password: password });
-
-      if (response.data) {
-        props.history.push('/');
-        appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
-        appDispatch({ type: 'login', data: response.data });
-      } else {
-        appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
-      }
-    } catch (error) {
-      appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
+  function reducer(draft, action) {
+    switch (action.type) {
+      case 'usernameImmediately':
+        draft.username.value = action.value;
+        return;
+      case 'passwordImmediately':
+        draft.password.value = action.value;
+        return;
+      case 'isLoggingInStart':
+        draft.isLoggingIn = true;
+        return;
+      case 'isLoggingInFinished':
+        draft.isLoggingIn = false;
+        return;
+      case 'submitForm':
+        draft.submitCount++;
+        return;
     }
+  }
+
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (state.submitCount) {
+      const request = Axios.CancelToken.source();
+      dispatch({ type: 'isLoggingInStart' });
+      (async function submitLogin() {
+        try {
+          const response = await Axios.post('/login', { username: state.username.value, password: state.password.value });
+          if (response.data) {
+            props.history.push('/');
+            appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
+            appDispatch({ type: 'login', data: response.data });
+          } else {
+            appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
+          }
+        } catch (error) {
+          appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
+        }
+        dispatch({ type: 'isLoggingInFinished' });
+      })();
+
+      return () => request.cancel();
+    }
+  }, [state.submitCount]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch({ type: 'submitForm' });
   }
 
   return (
@@ -35,7 +81,7 @@ function LoginPage(props) {
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
             </label>
-            <input onChange={e => setUsername(e.target.value)} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
           </div>
           <div className='mb-4'>
             <div className='flex justify-between mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
@@ -43,9 +89,9 @@ function LoginPage(props) {
                 Enter Your Password{' '}
               </label>
             </div>
-            <input onChange={e => setPassword(e.target.value)} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
           </div>
-          <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>Login</button>
+          <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>{state.isLoggingIn ? 'Logging in...' : 'Login'}</button>
         </form>
         <Link to='/register' className='block mt-3 px-4'>
           Don't have an account? <span className='text-blue-600'>Create yours for free</span>
