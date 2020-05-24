@@ -14,9 +14,13 @@ function ChangePassword(props) {
 
   const initialState = {
     currentPassword: '',
-    newPassword: '',
-    reEnteredNewPassword: '',
-    errorMessage: {
+    newPassword: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    reEnteredNewPassword: {
+      value: '',
       hasErrors: false,
       message: '',
     },
@@ -31,27 +35,31 @@ function ChangePassword(props) {
         draft.currentPassword = action.value;
         return;
       case 'newPasswordImmediately':
-        draft.errorMessage.hasErrors = false;
-        draft.newPassword = action.value;
+        draft.newPassword.hasErrors = false;
+        draft.newPassword.value = action.value;
         return;
       case 'newPasswordAfterDelay':
-        if (draft.newPassword.length < 6) {
-          draft.errorMessage.hasErrors = true;
-          draft.errorMessage.message = 'Passwords must be at least 6 characters.';
+        if (draft.newPassword.value.length < 6) {
+          draft.newPassword.hasErrors = true;
+          draft.newPassword.message = 'Passwords must be at least 6 characters.';
         }
         return;
       case 'reEnteredPasswordImmediately':
-        draft.errorMessage.hasErrors = false;
-        draft.reEnterNewPassword = action.value;
+        draft.reEnteredNewPassword.hasErrors = false;
+        draft.reEnteredNewPassword.value = action.value;
         return;
       case 'reEnteredPasswordAfterDelay':
-        if (draft.reEnterNewPassword.length < 6) {
-          draft.errorMessage.hasErrors = true;
-          draft.errorMessage.message = 'Passwords must be at least 6 characters.';
+        if (draft.reEnteredNewPassword.value.length < 6) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords must be at least 6 characters.';
+        }
+        if (draft.reEnteredNewPassword.value.length > 50) {
+          draft.reEnteredNewPassword.hasErrors = true;
+          draft.reEnteredNewPassword.message = 'Passwords cannot be more than 50 characters.';
         }
         return;
       case 'submitForm':
-        if (!draft.errorMessage.hasErrors && draft.currentPassword != '' && draft.newPassword != '' && draft.reEnteredNewPassword != '') {
+        if (!draft.newPassword.hasErrors && !draft.reEnteredNewPassword.hasErrors && draft.currentPassword.value != '' && draft.newPassword.value != '' && draft.reEnteredNewPassword.value != '') {
           draft.submitCount++;
         }
         return;
@@ -61,20 +69,20 @@ function ChangePassword(props) {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   // DELAY FOR NEW PASSWORD
-  // useEffect(() => {
-  //   if (state.newPassword) {
-  //     const delay = setTimeout(() => dispatch({ type: 'newPasswordAfterDelay' }), 800);
-  //     return () => clearTimeout(delay);
-  //   }
-  // }, [state.newPassword]);
-
-  // DELAY FOR RE-ENTER PASSWORD
   useEffect(() => {
-    if (state.reEnterNewPassword) {
-      const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
+    if (state.newPassword.value) {
+      const delay = setTimeout(() => dispatch({ type: 'newPasswordAfterDelay' }), 800);
       return () => clearTimeout(delay);
     }
-  }, [state.reEnterNewPassword]);
+  }, [state.newPassword.value]);
+
+  // DELAY FOR RE-ENTER PASSWORD
+  // useEffect(() => {
+  //   if (state.reEnteredNewPassword.value) {
+  //     const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
+  //     return () => clearTimeout(delay);
+  //   }
+  // }, [state.reEnteredNewPassword.value]);
 
   // SUBMIT FORM
   useEffect(() => {
@@ -131,24 +139,29 @@ function ChangePassword(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>
                 Current Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.currentPassword} onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <input onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='new-password'>
                 New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.newPassword} onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <input onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <CSSTransition in={state.newPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.newPassword.message}
+                </div>
+              </CSSTransition>
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='re-enter-new-password'>
                 Re-Enter New Password <span className='text-red-600'>*</span>
               </label>
-              <input value={state.reEnterNewPassword} onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
-              <CSSTransition in={state.errorMessage.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+              <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <CSSTransition in={state.reEnteredNewPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.errorMessage.message}
+                  {state.reEnteredNewPassword.message}
                 </div>
               </CSSTransition>
             </div>
