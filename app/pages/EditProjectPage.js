@@ -89,7 +89,7 @@ function EditProjectPage(props) {
           dispatch({ type: 'fetchComplete', value: response.data });
           // OWNERSHIP
           if (appState.user.username != response.data.author.username) {
-            appDispatch({ type: 'flashMessage', value: 'You do not have a permission to permission that action.' });
+            appDispatch({ type: 'flashMessageError', value: 'You do not have a permission to permission that action.' });
             props.history.push('/');
           }
         } else {
