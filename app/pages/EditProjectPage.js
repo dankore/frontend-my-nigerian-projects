@@ -164,14 +164,14 @@ function EditProjectPage(props) {
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
           </label>
-          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + ' text-3xl'} />
+          <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full text-3xl'} />
           {state.title.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
         </div>
         <div className='relative'>
           <label htmlFor='project-description' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description
           </label>
-          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className={inputTextAreaCSS} type='text' />
+          <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className={inputTextAreaCSS + 'w-full'} type='text' />
           {state.description.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
         </div>
 
