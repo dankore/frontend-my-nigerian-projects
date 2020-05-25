@@ -2,11 +2,12 @@ import React, { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import Axios from 'axios';
-import { useImmer, useImmerReducer } from 'use-immer';
+import { useImmerReducer } from 'use-immer';
 import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 import { CSSTransition } from 'react-transition-group';
 import LoadingDotsIcon from './LoadingDotsIcon';
+import { CSSTransitionStyle } from '../helpers/CSSHelpers';
 
 function ChangePassword(props) {
   const appDispatch = useContext(DispatchContext);
@@ -142,9 +143,6 @@ function ChangePassword(props) {
   if (state.isLoading) {
     return <LoadingDotsIcon />;
   }
-
-  // CSS
-  const CSSTransitionStyle = { color: '#e53e3e', fontSize: 0.75 + 'em' };
 
   return (
     <Page title='Change Password'>
