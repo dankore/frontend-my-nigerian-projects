@@ -123,10 +123,7 @@ function Main() {
             });
           }
         } catch (e) {
-          dispatch({
-            type: 'flashMessageError',
-            value: 'Problem verifying Token to properly secure your account.',
-          });
+          console.log('Problem verifying Token to properly secure your account.');
         }
       })();
 
