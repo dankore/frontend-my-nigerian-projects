@@ -6,12 +6,24 @@ import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import { inputTextAreaCSS } from '../helpers/CSSHelpers';
+import { CSSTransition } from 'react-transition-group';
+import { CSSTransitionStyle } from '../helpers/CSSHelpers';
 
 function CreateProject(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
     title: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    location: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    dateNeededBy: {
       value: '',
       hasErrors: false,
       message: '',
@@ -111,22 +123,27 @@ function CreateProject(props) {
             Title
           </label>
           <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full text-3xl'} />
-          {state.title.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
+          <CSSTransition in={state.title.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+            <div style={CSSTransitionStyle} className='liveValidateMessage'>
+              {state.title.message}
+            </div>
+          </CSSTransition>
         </div>
+
         <div className='lg:w-auto lg:flex justify-between'>
           <div className='mb-4 relative'>
             <label htmlFor='location' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Location
             </label>
             <input onBlur={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
-            {state.title.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
+            {state.location.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
           </div>
           <div className='mb-4 relative'>
             <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Need Project Completed By
             </label>
             <input onBlur={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' autoFocus type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
-            {state.title.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
+            {state.dateNeededBy.hasErrors && <div className='w-full text-right px-2 text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
           </div>
         </div>
 
