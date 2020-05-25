@@ -70,9 +70,9 @@ function LoginPage(props) {
         try {
           const response = await Axios.post('/login', { username: state.username.value, password: state.password.value }, { cancelToken: request.token });
           if (response.data) {
+            appDispatch({ type: 'login', data: response.data });
             props.history.push('/');
             appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
-            appDispatch({ type: 'login', data: response.data });
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
           }
