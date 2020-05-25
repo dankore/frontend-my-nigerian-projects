@@ -43,16 +43,37 @@ function CreateProject(props) {
         draft.title.hasErrors = false;
         draft.title.value = action.value;
         return;
-      case 'descriptionUpdate':
-        draft.description.hasErrors = false;
-        draft.description.value = action.value;
-        return;
       case 'titleRules':
         if (!action.value.trim()) {
           draft.title.hasErrors = true;
           draft.title.message = 'Title cannot be empty';
         }
         return;
+      case 'locationUpdate':
+        draft.location.hasErrors = false;
+        draft.location.value = action.value;
+        return;
+      case 'locationRules':
+        if (!action.value.trim()) {
+          draft.location.hasErrors = true;
+          draft.location.message = 'Location cannot be empty.';
+        }
+        return;
+      case 'dateNeedByUpdate':
+        draft.dateNeededBy.hasErrors = false;
+        draft.dateNeededBy.value = action.value;
+        return;
+      case 'dateNeedByRules':
+        if (!action.value.trim()) {
+          draft.dateNeededBy.hasErrors = true;
+          draft.dateNeededBy.message = 'Date cannot be empty.';
+        }
+        return;
+      case 'descriptionUpdate':
+        draft.description.hasErrors = false;
+        draft.description.value = action.value;
+        return;
+
       case 'descriptionRules':
         if (!action.value.trim()) {
           draft.description.hasErrors = true;
@@ -60,7 +81,7 @@ function CreateProject(props) {
         }
         return;
       case 'handleSubmit':
-        if (!draft.title.hasErrors && !draft.description.hasErrors) {
+        if (!draft.title.hasErrors && !draft.description.hasErrors && !draft.location.hasErrors && !draft.dateNeededBy.hasErrors) {
           draft.sendCount++;
         }
         return;
@@ -84,6 +105,8 @@ function CreateProject(props) {
             '/create-project',
             {
               title: state.title.value,
+              location: state.location.value,
+              dateNeededBy: state.dateNeededBy.value,
               description: state.description.value,
               token: appState.user.token,
             },
@@ -111,10 +134,12 @@ function CreateProject(props) {
   function handleProjectSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
+    dispatch({ type: 'locationRules', value: state.location.value });
+    dispatch({ type: 'dateNeedByRules', value: state.dateNeededBy.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
     dispatch({ type: 'handleSubmit' });
   }
-console.log(state.title.hasErrors);
+
   return (
     <Page margin='mx-2' title='Create New Project'>
       <form className='' onSubmit={handleProjectSubmit}>
