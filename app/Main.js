@@ -31,6 +31,7 @@ import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
 import SettingsPage from './pages/SettingsPage';
 import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
+import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
 // COMPONENTS END
 
 function Main() {
@@ -169,8 +170,8 @@ function Main() {
             <Route path='/how-to-bid'>
               <HowToBid />
             </Route>
-            <Route path='/login'>{state.loggedIn ? <YouMustBeLoggedInToViewThisPage /> : <LoginPage />}</Route>
-            <Route path='/register'>{state.loggedIn ? <YouMustBeLoggedInToViewThisPage /> : <RegistrationPage />}</Route>
+            <Route path='/login'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <LoginPage />}</Route>
+            <Route path='/register'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <RegistrationPage />}</Route>
             <Route>
               <NotFoundPage />
             </Route>
