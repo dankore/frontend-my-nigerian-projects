@@ -30,6 +30,7 @@ import FlashMessageSuccess from './components/FlashMessageSuccess';
 import EditProjectPage from './pages/EditProjectPage';
 import FlashMessageErrors from './components/FlashMessageErrors';
 import SettingsPage from './pages/SettingsPage';
+import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
 // COMPONENTS END
 
 function Main() {
@@ -148,7 +149,7 @@ function Main() {
             <Route strict path='/browse'>
               <HomePage />
             </Route>
-            <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <NotFoundPage />}</Route>
+            <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <YouMustBeLoggedInToViewThisPage />}</Route>
             <Route path='/project/:id/edit' exact>
               <EditProjectPage />
             </Route>
@@ -164,14 +165,12 @@ function Main() {
             <Route path='/terms'>
               <Terms />
             </Route>
-            <Route path='/settings'>
-              <SettingsPage />
-            </Route>
+            <Route path='/settings'>{state.loggedIn ? <SettingsPage /> : <YouMustBeLoggedInToViewThisPage />}</Route>
             <Route path='/how-to-bid'>
               <HowToBid />
             </Route>
-            <Route path='/login'>{state.loggedIn ? <NotFoundPage /> : <LoginPage />}</Route>
-            <Route path='/register'>{state.loggedIn ? <NotFoundPage /> : <RegistrationPage />}</Route>
+            <Route path='/login'>{state.loggedIn ? <YouMustBeLoggedInToViewThisPage /> : <LoginPage />}</Route>
+            <Route path='/register'>{state.loggedIn ? <YouMustBeLoggedInToViewThisPage /> : <RegistrationPage />}</Route>
             <Route>
               <NotFoundPage />
             </Route>
