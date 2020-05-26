@@ -84,12 +84,23 @@ function CreateProject(props) {
         draft.description.value = action.value;
         return;
       case 'emailUpdate':
+        draft.email.hasErrors = false;
         draft.email.value = action.value;
         return;
       case 'emailRules':
         if (!action.value.trim()) {
           draft.email.hasErrors = true;
           draft.email.message = 'Email cannot be empty';
+        }
+        return;
+      case 'phoneUpdate':
+        draft.phone.hasErrors = false;
+        draft.phone.value = action.value;
+        return;
+      case 'phoneRules':
+        if (!action.value.trim()) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone cannot be empty';
         }
         return;
       case 'descriptionRules':
@@ -99,7 +110,15 @@ function CreateProject(props) {
         }
         return;
       case 'handleSubmit':
-        if (!draft.title.hasErrors && !draft.description.hasErrors && !draft.location.hasErrors && !draft.dateNeededBy.hasErrors) {
+        if (
+          // CONDITIONS BEFORE SUBMIT
+          !draft.title.hasErrors &&
+          !draft.location.hasErrors &&
+          !draft.dateNeededBy.hasErrors &&
+          !draft.description.hasErrors &&
+          !draft.email.hasErrors &&
+          !draft.phone.hasErrors
+        ) {
           draft.sendCount++;
         }
         return;
@@ -171,6 +190,7 @@ function CreateProject(props) {
     dispatch({ type: 'dateNeedByRules', value: state.dateNeededBy.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
     dispatch({ type: 'emailRules', value: state.email.value });
+    dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'handleSubmit' });
   }
 
