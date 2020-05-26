@@ -33,6 +33,16 @@ function CreateProject(props) {
       hasErrors: false,
       message: '',
     },
+    email: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    phone: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     sendCount: 0,
     isSaving: false,
   };
@@ -73,7 +83,9 @@ function CreateProject(props) {
         draft.description.hasErrors = false;
         draft.description.value = action.value;
         return;
-
+      case 'emailUpdate':
+        draft.email.value = action.value;
+        return;
       case 'descriptionRules':
         if (!action.value.trim()) {
           draft.description.hasErrors = true;
@@ -96,6 +108,20 @@ function CreateProject(props) {
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   useEffect(() => {
+    const request = Axios.CancelToken.source();
+    (async function fetchData() {
+      try {
+        const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
+        dispatch({ type: 'emailUpdate', value: response.data.email });
+        console.log(response.data.email)
+      } catch (error) {
+        console.log({ CreateProject: error });
+      }
+    })();
+    return () => request.cancel();
+  }, []);
+
+  useEffect(() => {
     if (state.sendCount) {
       dispatch({ type: 'saveRequestStarted' });
       const request = Axios.CancelToken.source();
@@ -108,6 +134,8 @@ function CreateProject(props) {
               location: state.location.value,
               dateNeededBy: state.dateNeededBy.value,
               description: state.description.value,
+              email: state.email.value,
+              phone: state.phone.value,
               token: appState.user.token,
             },
             {
@@ -145,7 +173,7 @@ function CreateProject(props) {
       <form className='' onSubmit={handleProjectSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-            Title
+            Title <span className='text-red-600'>*</span>
           </label>
           <input onKeyUp={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleUpdate', value: e.target.value })} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full text-3xl'} />
           <CSSTransition in={state.title.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
@@ -158,7 +186,7 @@ function CreateProject(props) {
         <div className='lg:w-auto lg:flex justify-between'>
           <div className='mb-4 relative'>
             <label htmlFor='location' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Location
+              Location <span className='text-red-600'>*</span>
             </label>
             <input onKeyUp={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.location.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
@@ -169,7 +197,7 @@ function CreateProject(props) {
           </div>
           <div className='mb-4 relative'>
             <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Need Project Completed By
+              Need Project Completed By <span className='text-red-600'>*</span>
             </label>
             <input onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' autoFocus type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.dateNeededBy.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
@@ -180,9 +208,9 @@ function CreateProject(props) {
           </div>
         </div>
 
-        <div className='relative'>
+        <div className='mb-4 relative'>
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-            Description
+            Description <span className='text-red-600'>*</span>
           </label>
           <textarea onKeyUp={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionUpdate', value: e.target.value })} name='body' id='project-body' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           <CSSTransition in={state.description.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
@@ -191,6 +219,34 @@ function CreateProject(props) {
             </div>
           </CSSTransition>{' '}
         </div>
+
+        <fieldset className='border rounded p-2 mb-4'>
+          <legend className=''>Contact:</legend>
+          <div className='lg:w-auto lg:flex justify-between'>
+            <div className='mb-4 lg:mb-0 relative'>
+              <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                Email <span className='text-red-600'>*</span>
+              </label>
+              <input value={state.email.value} onKeyUp={e => dispatch({ type: 'emailRules', value: e.target.value })} onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} id='email' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+              <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.email.message}
+                </div>
+              </CSSTransition>{' '}
+            </div>
+            <div className='relative'>
+              <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                Phone Number <span className='text-red-600'>*</span>
+              </label>
+              <input onKeyUp={e => dispatch({ type: 'phoneRules', value: e.target.value })} onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' autoFocus type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+              <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.phone.message}
+                </div>
+              </CSSTransition>{' '}
+            </div>
+          </div>
+        </fieldset>
 
         <button disabled={state.isSaving} className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
           {state.isSaving ? 'Saving..' : 'Save New Project'}

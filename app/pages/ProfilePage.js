@@ -13,7 +13,6 @@ function ProfilePage() {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
-  
 
   const [state, setState] = useImmer({
     followActionLoading: false,
@@ -48,9 +47,7 @@ function ProfilePage() {
       }
     })();
     // CANCEL REQUEST
-    return () => {
-      request.cancel();
-    };
+    return () => request.cancel();
   }, [username]);
 
   useEffect(() => {
