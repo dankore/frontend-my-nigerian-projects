@@ -139,7 +139,7 @@ function CreateProject(props) {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
         dispatch({ type: 'emailUpdate', value: response.data.email });
       } catch (error) {
-        console.log({ CreateProject: error });
+        console.log({ CreateProject: error.message });
       }
     })();
     return () => request.cancel();
