@@ -86,6 +86,12 @@ function CreateProject(props) {
       case 'emailUpdate':
         draft.email.value = action.value;
         return;
+      case 'emailRules':
+        if (!action.value.trim()) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Email cannot be empty';
+        }
+        return;
       case 'descriptionRules':
         if (!action.value.trim()) {
           draft.description.hasErrors = true;
@@ -113,7 +119,6 @@ function CreateProject(props) {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
         dispatch({ type: 'emailUpdate', value: response.data.email });
-        console.log(response.data.email)
       } catch (error) {
         console.log({ CreateProject: error });
       }
@@ -165,6 +170,7 @@ function CreateProject(props) {
     dispatch({ type: 'locationRules', value: state.location.value });
     dispatch({ type: 'dateNeedByRules', value: state.dateNeededBy.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
+    dispatch({ type: 'emailRules', value: state.email.value });
     dispatch({ type: 'handleSubmit' });
   }
 
