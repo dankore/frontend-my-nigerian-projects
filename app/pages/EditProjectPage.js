@@ -59,22 +59,70 @@ function EditProjectPage(props) {
       case 'fetchComplete':
         draft.title.value = action.value.title;
         draft.location.value = action.value.location;
-        draft.dateNeededBy.value = action .value.dateNeededBy;
+        draft.dateNeededBy.value = action.value.dateNeededBy;
         draft.description.value = action.value.description;
         draft.email.value = action.value.email;
         draft.phone.value = action.value.phone;
         draft.isFetching = false;
         return;
       case 'titleChange':
-        draft.title.value = action.value;
         draft.title.hasErrors = false;
+        draft.title.value = action.value;
+        return;
+      case 'locationUpdate':
+        draft.location.hasErrors = false;
+        draft.location.value = action.value;
+        return;
+      case 'locationRules':
+        if (!action.value.trim()) {
+          draft.location.hasErrors = true;
+          draft.location.message = 'Location cannot be empty.';
+        }
+        return;
+      case 'dateNeedByUpdate':
+        draft.dateNeededBy.hasErrors = false;
+        draft.dateNeededBy.value = action.value;
+        return;
+      case 'dateNeedByRules':
+        if (!action.value.trim()) {
+          draft.dateNeededBy.hasErrors = true;
+          draft.dateNeededBy.message = 'Date cannot be empty.';
+        }
         return;
       case 'descriptionChange':
         draft.description.value = action.value;
         draft.description.hasErrors = false;
         return;
+      case 'emailUpdate':
+        draft.email.hasErrors = false;
+        draft.email.value = action.value;
+        return;
+      case 'emailRules':
+        if (!action.value.trim()) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Email cannot be empty';
+        }
+        return;
+      case 'phoneUpdate':
+        draft.phone.hasErrors = false;
+        draft.phone.value = action.value;
+        return;
+      case 'phoneRules':
+        if (!action.value.trim()) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone cannot be empty';
+        }
+        return;
       case 'submitRequest':
-        if (!draft.title.hasErrors && !draft.description.hasErrors) {
+        if (
+          // CONDITIONS
+          !draft.title.hasErrors &&
+          !draft.location.hasErrors &&
+          !draft.dateNeededBy.hasErrors &&
+          !draft.description.hasErrors &&
+          !draft.email.hasErrors &&
+          !draft.phone.hasErrors
+        ) {
           draft.sendCount++;
         }
         return;
@@ -113,7 +161,6 @@ function EditProjectPage(props) {
         });
         if (response.data) {
           dispatch({ type: 'fetchComplete', value: response.data });
-          console.log(response.data)
           // OWNERSHIP
           if (appState.user.username != response.data.author.username) {
             appDispatch({ type: 'flashMessageError', value: 'You do not have a permission to permission that action.' });
@@ -145,7 +192,11 @@ function EditProjectPage(props) {
             `/project/${state.id}/edit`,
             {
               title: state.title.value,
+              location: state.location.value,
+              dateNeededBy: state.dateNeededBy.value,
               description: state.description.value,
+              email: state.email.value,
+              phone: state.phone.value,
               token: appState.user.token,
             },
             {
@@ -200,7 +251,7 @@ function EditProjectPage(props) {
             <label htmlFor='location' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Location <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <input value={state.location.value} onKeyUp={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.location.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.location.message}
@@ -211,7 +262,7 @@ function EditProjectPage(props) {
             <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Need Project Completed By <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' autoFocus type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <input value={state.dateNeededBy.value} onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' autoFocus type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.dateNeededBy.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.dateNeededBy.message}
@@ -246,7 +297,7 @@ function EditProjectPage(props) {
               <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Phone Number <span className='text-red-600'>*</span>
               </label>
-              <input onKeyUp={e => dispatch({ type: 'phoneRules', value: e.target.value })} onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' autoFocus type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+              <input value={state.phone.value} onKeyUp={e => dispatch({ type: 'phoneRules', value: e.target.value })} onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' autoFocus type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
               <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.phone.message}
