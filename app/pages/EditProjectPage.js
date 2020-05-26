@@ -113,19 +113,7 @@ function EditProjectPage(props) {
           draft.phone.message = 'Phone cannot be empty';
         }
         return;
-      case 'submitRequest':
-        if (
-          // CONDITIONS
-          !draft.title.hasErrors &&
-          !draft.location.hasErrors &&
-          !draft.dateNeededBy.hasErrors &&
-          !draft.description.hasErrors &&
-          !draft.email.hasErrors &&
-          !draft.phone.hasErrors
-        ) {
-          draft.sendCount++;
-        }
-        return;
+
       case 'saveRequestStarted':
         draft.isSaving = true;
         return;
@@ -146,6 +134,19 @@ function EditProjectPage(props) {
         return;
       case 'notFound':
         draft.notFound = true;
+        return;
+      case 'submitRequest':
+        if (
+          // CONDITIONS
+          !draft.title.hasErrors &&
+          !draft.location.hasErrors &&
+          !draft.dateNeededBy.hasErrors &&
+          !draft.description.hasErrors &&
+          !draft.email.hasErrors &&
+          !draft.phone.hasErrors
+        ) {
+          draft.sendCount++;
+        }
         return;
     }
   }
@@ -220,7 +221,11 @@ function EditProjectPage(props) {
   function submitEditProjectForm(e) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
+    dispatch({ type: 'locationRules', value: state.location.value });
+    dispatch({ type: 'dateNeededByRules', value: state.dateNeededBy.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
+    dispatch({ type: 'emailRules', value: state.email.value });
+    dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'submitRequest' });
   }
 
@@ -243,7 +248,11 @@ function EditProjectPage(props) {
             Title
           </label>
           <input onBlur={e => dispatch({ type: 'titleRules', value: e.target.value })} onChange={e => dispatch({ type: 'titleChange', value: e.target.value })} value={state.title.value} id='title' autoFocus type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full text-3xl'} />
-          {state.title.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.title.message}</div>}
+          <CSSTransition in={state.title.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+            <div style={CSSTransitionStyle} className='liveValidateMessage'>
+              {state.title.message}
+            </div>
+          </CSSTransition>{' '}
         </div>
 
         <div className='lg:w-auto lg:flex justify-between'>
@@ -276,7 +285,11 @@ function EditProjectPage(props) {
             Description
           </label>
           <textarea onBlur={e => dispatch({ type: 'descriptionRules', value: e.target.value })} onChange={e => dispatch({ type: 'descriptionChange', value: e.target.value })} value={state.description.value} rows='6' name='body' id='project-description' className={inputTextAreaCSS + 'w-full'} type='text' />
-          {state.description.hasErrors && <div className='text-xs text-red-600 liveValidateMessage'>{state.description.message}</div>}
+          <CSSTransition in={state.description.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+            <div style={CSSTransitionStyle} className='liveValidateMessage'>
+              {state.description.message}
+            </div>
+          </CSSTransition>{' '}
         </div>
 
         <fieldset className='border rounded p-2 mb-4'>
