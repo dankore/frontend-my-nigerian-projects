@@ -1,5 +1,5 @@
 module.exports = {
-  purge: {},
+  purge: ['./dist/index.html'],
   target: 'relaxed',
   prefix: '',
   important: false,
