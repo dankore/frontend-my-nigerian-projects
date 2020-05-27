@@ -15,33 +15,25 @@ function Header() {
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
         <div className='flex items-center'>
           <div>
-            {!(appState && appState.isSideMenuOpen) ? (
-              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative hover:text-gray-400'>
-                <i className='fas fa-bars'></i>
-              </button>
-            ) : null}
-
-            {appState && appState.isSideMenuOpen ? (
-              <button onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-2xl text-white relative hover:text-gray-400'>
-                <i className='fas fa-times'></i>
-              </button>
-            ) : null}
+            <button style={{padding: 6 + 'px'}} onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-white relative flex hover:bg-blue-800 justify-between items-end block'>
+              <span className='inline-block text-lg mr-2'>Menu</span> <i className='fas fa-angle-down'></i>
+            </button>
 
             {/* SIDE MENU */}
             {appState && appState.isSideMenuOpen ? (
               <div style={{ zIndex: 1 }} className='absolute bg-blue-600 text-white'>
+                <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-2'} block`} to='/how-to-bid'>
+                  <i className='fas fa-file-contract mr-1'></i>
+                  How To Bid
+                </Link>
                 {appState && appState.loggedIn ? (
-                  <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mt-2 block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
+                  <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
                     <i className='fas fa-plus mr-1'></i>
                     Create Project
                   </Link>
                 ) : (
                   ''
                 )}
-                <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-2'} block`} to='/how-to-bid'>
-                  <i className='fas fa-file-contract mr-1'></i>
-                  How To Bid
-                </Link>
               </div>
             ) : null}
           </div>
