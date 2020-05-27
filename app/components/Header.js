@@ -15,7 +15,7 @@ function Header() {
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
         <div className='flex items-center'>
           <div>
-            <button style={{padding: 6 + 'px'}} onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-5 focus:outline-none cursor-pointer text-white relative flex hover:bg-blue-800 justify-between items-end block'>
+            <button style={{ padding: 6 + 'px' }} onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-3 focus:outline-none cursor-pointer text-white relative flex hover:bg-blue-800 justify-between items-end block'>
               <span className='inline-block text-lg mr-2'>Menu</span> <i className='fas fa-angle-down'></i>
             </button>
 
@@ -38,9 +38,12 @@ function Header() {
             ) : null}
           </div>
 
-          <Link to='/' className='mx-auto lg:mx-0 block flex items-center text-white'>
-            <i className='fas fa-home text-xl hover:text-gray-400'></i>
-            <span className='hidden lg:block ml-2 font-semibold text-xl tracking-tight hover:text-gray-400'>Bid for my Projects</span>
+          <Link
+            to='/'
+            className='mx-auto lg:mx-0 block flex items-center text-white hover:text-gray-200 hover:text-gray-400'
+          >
+            <i className='fas fa-home text-xl'></i>
+            <span className='hidden lg:block ml-2 font-semibold text-xl tracking-tight'>Bid for my Projects</span>
           </Link>
         </div>
 
