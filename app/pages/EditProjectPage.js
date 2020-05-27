@@ -238,7 +238,7 @@ function EditProjectPage(props) {
   }
 
   return (
-    <Page title='Edit Project'>
+    <Page margin='mx-2' title='Edit Project'>
       <Link className='text-blue-600 mb-3 inline-block' to={`/project/${state.id}`}>
         &laquo;Back to previous link
       </Link>
