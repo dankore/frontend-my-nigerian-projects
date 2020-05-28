@@ -12,11 +12,11 @@ function Header() {
 
   return (
     <header className='bg-blue-600 px-2' style={{ zIndex: 100 }}>
-      <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : 'py-1'}`}>
+      <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : ''}`}>
         <div className='flex items-center'>
           <div>
             <div style={{ padding: 6 + 'px' }} onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='mr-3 preventAutoZoom focus:outline-none cursor-pointer text-white relative flex hover:bg-blue-800 justify-between items-end block'>
-              <span className='inline-block text-lg mr-2'>Menu</span> <i className='fas fa-angle-down'></i>
+              <span className='inline-block text-lg py-1 mr-2'>Menu</span> <i className='fas fa-angle-down'></i>
             </div>
 
             {/* SIDE MENU */}
