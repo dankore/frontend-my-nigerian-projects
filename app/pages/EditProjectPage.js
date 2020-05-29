@@ -79,11 +79,11 @@ function EditProjectPage(props) {
           draft.location.message = 'Location cannot be empty.';
         }
         return;
-      case 'dateNeedByUpdate':
+      case 'bidSubmissionDeadline':
         draft.bidSubmissionDeadline.hasErrors = false;
         draft.bidSubmissionDeadline.value = action.value;
         return;
-      case 'dateNeedByRules':
+      case 'bidSubmissionDeadlineRules':
         if (!action.value.trim()) {
           draft.bidSubmissionDeadline.hasErrors = true;
           draft.bidSubmissionDeadline.message = 'Date cannot be empty.';
@@ -271,7 +271,7 @@ function EditProjectPage(props) {
             <label htmlFor='bid-submission-deadline' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Bid Submission Deadline <span className='text-red-600'>*</span>
             </label>
-            <input value={state.bidSubmissionDeadline.value} onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='bid-submission-deadline' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <input value={state.bidSubmissionDeadline.value} onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'bidSubmissionDeadline', value: e.target.value })} id='bid-submission-deadline' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.bidSubmissionDeadline.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.bidSubmissionDeadline.message}

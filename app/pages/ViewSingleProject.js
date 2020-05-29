@@ -82,9 +82,25 @@ function ViewSingleProject(props) {
   const CSSTitle = 'text-gray-600';
 
   function formatDate() {
+    var month = new Array();
+    month[1] = 'January';
+    month[2] = 'February';
+    month[3] = 'March';
+    month[4] = 'April';
+    month[5] = 'May';
+    month[6] = 'June';
+    month[7] = 'July';
+    month[8] = 'August';
+    month[9] = 'September';
+    month[10] = 'October';
+    month[11] = 'November';
+    month[12] = 'December';
+
+    
+
     if (project.bidSubmissionDeadline) {
       const datePartsArray = project.bidSubmissionDeadline.split('-');
-      return `${datePartsArray[1]}/${datePartsArray[2]}/${datePartsArray[0]}`;
+      return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
     }
   }
 
