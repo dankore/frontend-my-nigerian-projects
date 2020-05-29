@@ -78,11 +78,11 @@ function ViewSingleProject(props) {
     }
   }
 
-  const CSSContainer = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
-  const CSSTitle = 'text-gray-600';
+  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
+  const titleCSS = 'text-gray-700';
 
   function formatDate() {
-    var month = new Array();
+    let month = new Array();
     month[1] = 'January';
     month[2] = 'February';
     month[3] = 'March';
@@ -96,10 +96,13 @@ function ViewSingleProject(props) {
     month[11] = 'November';
     month[12] = 'December';
 
-    
+    /**
+     * @param project.bidSubmissionDeadline comes in as e.g 12/30/2020
+     */
 
     if (project.bidSubmissionDeadline) {
       const datePartsArray = project.bidSubmissionDeadline.split('-');
+      // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
       return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
     }
   }
@@ -140,22 +143,22 @@ function ViewSingleProject(props) {
         <fieldset className='border rounded p-2 my-4 bg-gray-100'>
           <legend className=''>Location & Date:</legend>
           <div className='flex flex-wrap justify-between'>
-            <p className={CSSContainer}>
-              <span className={CSSTitle}>Project Location:</span> {project.location}
+            <p className={containerCSS}>
+              <span className={titleCSS}>Project Location:</span> {project.location}
             </p>
-            <p className={CSSContainer}>
-              <span className={CSSTitle}>Bid Submission Deadline:</span> {formatDate()}
+            <p className={containerCSS}>
+              <span className={titleCSS}>Bid Submission Deadline:</span> {formatDate()}
             </p>
           </div>
         </fieldset>
         <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
           <legend className=''>Contact:</legend>
           <div className='flex flex-wrap justify-between'>
-            <p className={CSSContainer}>
-              <span className={CSSTitle}>Email:</span> {project.email}
+            <p className={containerCSS}>
+              <span className={titleCSS}>Email:</span> {project.email}
             </p>
-            <p className={CSSContainer}>
-              <span className={CSSTitle}>Phone Number:</span> {project.phone}
+            <p className={containerCSS}>
+              <span className={titleCSS}>Phone Number:</span> {project.phone}
             </p>
           </div>
         </fieldset>
