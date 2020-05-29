@@ -141,7 +141,7 @@ function ViewSingleProject(props) {
           <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </div>
         <fieldset className='border rounded p-2 my-4 bg-gray-100'>
-          <legend className=''>Location & Date:</legend>
+          <legend className=''>Location & Deadline:</legend>
           <div className='flex flex-wrap justify-between'>
             <p className={containerCSS}>
               <span className={titleCSS}>Project Location:</span> {project.location}

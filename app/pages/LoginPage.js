@@ -70,16 +70,18 @@ function LoginPage(props) {
         try {
           const response = await Axios.post('/login', { username: state.username.value, password: state.password.value }, { cancelToken: request.token });
           if (response.data) {
+            dispatch({ type: 'isLoggingInFinished' });
             appDispatch({ type: 'login', data: response.data });
-            props.history.push('/');
+            props.history.push('/browse');
             appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
           } else {
+            dispatch({ type: 'isLoggingInFinished' });
             appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
           }
         } catch (error) {
+          dispatch({ type: 'isLoggingInFinished' });
           appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
         }
-        dispatch({ type: 'isLoggingInFinished' });
       })();
 
       return () => request.cancel();
