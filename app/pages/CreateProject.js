@@ -194,6 +194,14 @@ function CreateProject(props) {
     dispatch({ type: 'handleSubmit' });
   }
 
+  function defaultDateFormatted() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return month < 10 ? `${year}-${'0' + month}-${day}` : `${year}-${1 + month}-${day}`;
+  }
+
   return (
     <Page margin='mx-2' title='Create New Project'>
       <form className='' onSubmit={handleProjectSubmit}>
@@ -225,7 +233,7 @@ function CreateProject(props) {
             <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Need Project Completed By <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <input onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} style={{minHeight: 2.5 +'rem'}}/>
             <CSSTransition in={state.dateNeededBy.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.dateNeededBy.message}
