@@ -26,7 +26,7 @@ function EditProjectPage(props) {
       hasErrors: false,
       message: '',
     },
-    dateNeededBy: {
+    bidSubmissionDeadline: {
       value: '',
       hasErrors: false,
       message: '',
@@ -59,7 +59,7 @@ function EditProjectPage(props) {
       case 'fetchComplete':
         draft.title.value = action.value.title;
         draft.location.value = action.value.location;
-        draft.dateNeededBy.value = action.value.dateNeededBy;
+        draft.bidSubmissionDeadline.value = action.value.bidSubmissionDeadline;
         draft.description.value = action.value.description;
         draft.email.value = action.value.email;
         draft.phone.value = action.value.phone;
@@ -80,13 +80,13 @@ function EditProjectPage(props) {
         }
         return;
       case 'dateNeedByUpdate':
-        draft.dateNeededBy.hasErrors = false;
-        draft.dateNeededBy.value = action.value;
+        draft.bidSubmissionDeadline.hasErrors = false;
+        draft.bidSubmissionDeadline.value = action.value;
         return;
       case 'dateNeedByRules':
         if (!action.value.trim()) {
-          draft.dateNeededBy.hasErrors = true;
-          draft.dateNeededBy.message = 'Date cannot be empty.';
+          draft.bidSubmissionDeadline.hasErrors = true;
+          draft.bidSubmissionDeadline.message = 'Date cannot be empty.';
         }
         return;
       case 'descriptionChange':
@@ -140,7 +140,7 @@ function EditProjectPage(props) {
           // CONDITIONS
           !draft.title.hasErrors &&
           !draft.location.hasErrors &&
-          !draft.dateNeededBy.hasErrors &&
+          !draft.bidSubmissionDeadline.hasErrors &&
           !draft.description.hasErrors &&
           !draft.email.hasErrors &&
           !draft.phone.hasErrors
@@ -194,7 +194,7 @@ function EditProjectPage(props) {
             {
               title: state.title.value,
               location: state.location.value,
-              dateNeededBy: state.dateNeededBy.value,
+              bidSubmissionDeadline: state.bidSubmissionDeadline.value,
               description: state.description.value,
               email: state.email.value,
               phone: state.phone.value,
@@ -222,7 +222,7 @@ function EditProjectPage(props) {
     e.preventDefault();
     dispatch({ type: 'titleRules', value: state.title.value });
     dispatch({ type: 'locationRules', value: state.location.value });
-    dispatch({ type: 'dateNeededByRules', value: state.dateNeededBy.value });
+    dispatch({ type: 'bidSubmissionDeadlineRules', value: state.bidSubmissionDeadline.value });
     dispatch({ type: 'descriptionRules', value: state.description.value });
     dispatch({ type: 'emailRules', value: state.email.value });
     dispatch({ type: 'phoneRules', value: state.phone.value });
@@ -268,13 +268,13 @@ function EditProjectPage(props) {
             </CSSTransition>{' '}
           </div>
           <div className='mb-4 relative'>
-            <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Need Project Completed By <span className='text-red-600'>*</span>
+            <label htmlFor='bid-submission-deadline' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              Bid Submission Deadline <span className='text-red-600'>*</span>
             </label>
-            <input value={state.dateNeededBy.value} onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
-            <CSSTransition in={state.dateNeededBy.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+            <input value={state.bidSubmissionDeadline.value} onKeyUp={e => dispatch({ type: 'dateNeedByRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='bid-submission-deadline' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <CSSTransition in={state.bidSubmissionDeadline.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.dateNeededBy.message}
+                {state.bidSubmissionDeadline.message}
               </div>
             </CSSTransition>{' '}
           </div>
