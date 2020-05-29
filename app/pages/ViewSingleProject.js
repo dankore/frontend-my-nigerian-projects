@@ -78,8 +78,8 @@ function ViewSingleProject(props) {
     }
   }
 
-  const css = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold';
-  const cc2 = 'text-gray-600';
+  const CSSContainer = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
+  const CSSTitle = 'text-gray-600';
 
   return (
     <Page margin='mx-2' title={project.title}>
@@ -117,22 +117,22 @@ function ViewSingleProject(props) {
         <fieldset className='border rounded p-2 my-4 bg-gray-100'>
           <legend className=''>Location & Date:</legend>
           <div className='flex flex-wrap justify-between'>
-            <p className={css}>
-              <span className={cc2}>Project Location:</span> {project.location}
+            <p className={CSSContainer}>
+              <span className={CSSTitle}>Project Location:</span> {project.location}
             </p>
-            <p className={css}>
-              <span className={cc2}>I Need Project By:</span> {project.dateNeededBy}
+            <p className={CSSContainer}>
+              <span className={CSSTitle}>I Need Project By:</span> {project.dateNeededBy}
             </p>
           </div>
         </fieldset>
         <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
           <legend className=''>Contact:</legend>
           <div className='flex flex-wrap justify-between'>
-            <p className={css}>
-              <span className={cc2}>Email:</span> {project.email}
+            <p className={CSSContainer}>
+              <span className={CSSTitle}>Email:</span> {project.email}
             </p>
-            <p className={css}>
-              <span className={cc2}>Phone Number:</span> {project.phone}
+            <p className={CSSContainer}>
+              <span className={CSSTitle}>Phone Number:</span> {project.phone}
             </p>
           </div>
         </fieldset>
