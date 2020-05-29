@@ -230,10 +230,10 @@ function CreateProject(props) {
             </CSSTransition>{' '}
           </div>
           <div className='mb-4 relative'>
-            <label htmlFor='date-need-by' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-             Bid Submission Deadline <span className='text-red-600'>*</span>
+            <label htmlFor='bid-submission-deadline' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              Bid Submission Deadline <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='date-need-by' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} style={{ minHeight: 2.5 + 'rem' }} />
+            <input onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='bid-submission-deadline' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} style={{ minHeight: 2.5 + 'rem' }} />
             <CSSTransition in={state.bidSubmissionDeadline.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.bidSubmissionDeadline.message}
