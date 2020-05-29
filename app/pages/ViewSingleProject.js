@@ -81,6 +81,11 @@ function ViewSingleProject(props) {
   const CSSContainer = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
   const CSSTitle = 'text-gray-600';
 
+  function formatDate(){
+    const datePartsArray = project.dateNeededBy.split('-');
+    return `${datePartsArray[1]}/${datePartsArray[2]}/${datePartsArray[0]}`;
+  }
+
   return (
     <Page margin='mx-2' title={project.title}>
       <div className='flex justify-between'>
@@ -121,7 +126,7 @@ function ViewSingleProject(props) {
               <span className={CSSTitle}>Project Location:</span> {project.location}
             </p>
             <p className={CSSContainer}>
-              <span className={CSSTitle}>I Need Project By:</span> {project.dateNeededBy}
+              <span className={CSSTitle}>I Need Project By:</span> {formatDate()}
             </p>
           </div>
         </fieldset>
