@@ -98,7 +98,7 @@ function ViewSingleProject(props) {
 
     /**
      * @param project.bidSubmissionDeadline comes in this format e.g mm-dd-yyyy
-     * @output format May 29, 2020
+     * @returns format May 29, 2020
      */
 
     if (project.bidSubmissionDeadline) {
