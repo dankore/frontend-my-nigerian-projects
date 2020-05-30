@@ -14,6 +14,14 @@ function Project(props) {
     return `${inputToArray.slice(0, 5).join(' ')}...`;
   };
 
+ // TIME DIFF IN DAYS
+ function timeRemainingInDays(){
+    const bidSubmissionDeadline = new Date(project.bidSubmissionDeadline);
+    const todaysDate = new Date();
+    const timeDifferenceInSecs = Math.abs(todaysDate - bidSubmissionDeadline);
+    return Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
+ }
+
   return (
     <Link to={`/project/${project._id}`}>
       <div className='border border-gray-200 flex py-3 hover:bg-gray-100'>
@@ -37,7 +45,7 @@ function Project(props) {
           </div>
         </div>
         <div className='ml-6'>
-          <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>Active</span>
+          <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>{timeRemainingInDays()} days left to bid</span>
         </div>
       </div>
     </Link>
