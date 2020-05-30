@@ -14,13 +14,13 @@ function Project(props) {
     return `${inputToArray.slice(0, 5).join(' ')}...`;
   };
 
- // TIME DIFF IN DAYS
- function timeRemainingInDays(){
+  // TIME DIFF IN DAYS
+  function timeRemainingInDays() {
     const bidSubmissionDeadline = new Date(project.bidSubmissionDeadline);
     const todaysDate = new Date();
     const timeDifferenceInSecs = Math.abs(todaysDate - bidSubmissionDeadline);
-    return Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
- }
+    return /** TIME DIFFERENCE IN DAYS */ Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
+  }
 
   return (
     <Link to={`/project/${project._id}`}>
