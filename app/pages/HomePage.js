@@ -20,6 +20,9 @@ function HomePage() {
     isLoading: true,
     feed: [],
   });
+  const [followingCount, setFollowingCount] = useImmer({
+    followingCount: 0,
+  });
 
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -65,6 +68,28 @@ function HomePage() {
     }
   }, [!allProjects.isLoading]);
 
+  useEffect(() => {
+    // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+    const request = Axios.CancelToken.source();
+
+    (async function fetchDataByUsername() {
+      try {
+        const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
+        setFollowingCount(draft => {
+          draft.followingCount = response.data.counts.followingCount;
+        });
+      } catch (error) {
+        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+      }
+    })();
+    // CANCEL REQUEST
+    return () => request.cancel();
+  }, []);
+
+  function noProjectsThoseIFollow() {
+    return followingCount.followingCount > 0 ? <h2 className='border border-gray-200 p-2'>No projects posted by those you follow at this time.</h2> : <h2 className='border border-gray-200 p-2'>You don't follow anyone yet. Follow others to get their projects here. </h2>;
+  }
+
   if (allProjects.isLoading && projectsThoseIFollow.isLoading) {
     return <LoadingDotsIcon />;
   }
@@ -73,6 +98,7 @@ function HomePage() {
     return <LoadingDotsIcon />;
   }
 
+  
 
   return (
     <Page margin='mx-2' title='Browse'>
@@ -86,7 +112,6 @@ function HomePage() {
             Projects from Those You Follow: {appState.loggedIn ? projectsThoseIFollow.feed.length : '(Login to View)'}
           </NavLink>
         </ul>
-
         <Switch>
           <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
@@ -103,21 +128,17 @@ function HomePage() {
           </Route>
           <Route path='/browse/those-i-follow'>
             {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
-              <>
-                <div className=''>
-                  {projectsThoseIFollow.feed.map(project => {
-                    return <Project project={project} key={project._id} />;
-                  })}
-                </div>
-              </>
+              <div className=''>
+                {projectsThoseIFollow.feed.map(project => {
+                  return <Project project={project} key={project._id} />;
+                })}
+              </div>
             )}
-            {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && <h2 className='border border-gray-200 p-2'>No Projects Posted at This Time.</h2>}
+            {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && noProjectsThoseIFollow()}
             {!appState.loggedIn && (
-              <>
-                <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
-                  Login to View Projects
-                </Link>
-              </>
+              <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
+                Login to View Projects
+              </Link>
             )}
           </Route>
         </Switch>
