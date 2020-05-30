@@ -116,25 +116,25 @@ function HomePage() {
           <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
               <>
-                <div className=''>
-                  {allProjects.feed.map(project => {
-                    return <Project project={project} key={project._id} />;
-                  })}
-                </div>
+                {allProjects.feed.map(project => {
+                  return <Project project={project} key={project._id} />;
+                })}
               </>
             ) : (
-              <h2 className='border border-gray-200 p-2'>No Projects posted at this time.</h2>
+              <h2 className='border border-gray-200 p-2'>No projects posted at this time.</h2>
             )}
           </Route>
           <Route path='/browse/those-i-follow'>
             {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
-              <div className=''>
+              <>
                 {projectsThoseIFollow.feed.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
-              </div>
+              </>
             )}
+            {/* NO PROJECTS */}
             {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && noProjectsThoseIFollow()}
+            {/* NOT LOGGED IN */}
             {!appState.loggedIn && (
               <Link to='/login' className='inline-block text-center w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
                 Login to View Projects
