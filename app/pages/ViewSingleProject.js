@@ -97,7 +97,8 @@ function ViewSingleProject(props) {
     month[12] = 'December';
 
     /**
-     * @param project.bidSubmissionDeadline comes in as e.g 12/30/2020
+     * @param project.bidSubmissionDeadline comes in this format e.g mm-dd-yyyy
+     * @output format May 29, 2020
      */
 
     if (project.bidSubmissionDeadline) {
@@ -135,7 +136,7 @@ function ViewSingleProject(props) {
         )}
       </div>
 
-      <div className=''>
+      <>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{project.title}</h2>
         <div className='mt-2'>
           <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
@@ -162,7 +163,7 @@ function ViewSingleProject(props) {
             </p>
           </div>
         </fieldset>
-      </div>
+      </>
     </Page>
   );
 }
