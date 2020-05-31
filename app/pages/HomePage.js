@@ -84,7 +84,7 @@ function HomePage() {
     })();
     // CANCEL REQUEST
     return () => request.cancel();
-  }, []);
+  }, [appState.loggedIn]);
 
   function noProjectsThoseIFollow() {
     return followingCount.followingCount > 0 ? <h2 className='border border-gray-200 p-2'>No projects posted by those you follow at this time.</h2> : <h2 className='border border-gray-200 p-2'>You don't follow anyone yet. Follow others to get their projects here. </h2>;
@@ -97,8 +97,6 @@ function HomePage() {
   if (projectsThoseIFollow.isLoading && appState.loggedIn) {
     return <LoadingDotsIcon />;
   }
-
-  
 
   return (
     <Page margin='mx-2' title='Browse'>
