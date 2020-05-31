@@ -3,6 +3,7 @@ import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
+import NotFoundPage from './NotFoundPage';
 
 function CreateBid() {
   const initialState = {
@@ -23,7 +24,7 @@ function CreateBid() {
         draft.project.title.value = action.value.title;
         return;
       case 'notFound':
-        draft.notFound = false;
+        draft.notFound = true;
         return;
     }
   }
@@ -33,11 +34,10 @@ function CreateBid() {
   useEffect(() => {
     const request = Axios.CancelToken.source();
     const id = state.id;
-   
+
     (async function fetchProjectForCreateBid() {
       try {
         const response = await Axios.get(`/project/${id}`, { cancelToken: request.token });
-        console.log(response.data);
         if (response.data) {
           dispatch({ type: 'fetchingProjectComplete', value: response.data });
         } else {
@@ -51,10 +51,14 @@ function CreateBid() {
     return () => request.cancel();
   }, []);
 
+  if(state.notFound){
+    return <NotFoundPage />
+  }
+
   return (
     <Page title='Create Bid'>
       <form>
-  <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{state.project.title.value}</h2>
+        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{state.project.title.value}</h2>
         <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Add Bid</button>
       </form>
     </Page>
