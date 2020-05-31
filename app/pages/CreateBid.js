@@ -83,8 +83,15 @@ function CreateBid() {
             </label>
             <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='price' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
           </div>
-          <p>450</p>
-          <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Add Item</button>
+
+          <div className='mb-4 relative lg:mx-2'>
+            <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              Quantity <span className='text-red-600'>*</span>
+            </label>
+            <span>450</span>
+          </div>
+
+          <div className='w-full text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 px-6 py-2'>Add Item</div>
         </div>
         <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Submit Bid</button>
       </form>
