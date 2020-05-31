@@ -18,6 +18,7 @@ module.exports = {
     borderStyle: 'solid',
   },
   CSSTransitionStyle: { color: '#e53e3e', fontSize: 0.75 + 'em' },
+  inputTextAreaCSSCreateBid: 'p-2 bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
   inputTextAreaCSS: 'py-2 px-4  bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
   navLinkCSS: 'cursor-pointer mr-px bg-white inline-block py-2 px-4 text-blue-500 hover:border hover:rounded-t font-semibold',
   navLinkCSSSettings: 'cursor-pointer mr-px bg-white inline-block py-2 px-4 text-blue-500 hover:border hover:rounded font-semibold',
