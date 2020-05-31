@@ -155,7 +155,7 @@ function Main() {
             <Route path='/project/:id' exact>
               <ViewSingleProject />
             </Route>
-            <Route path='/create-bid'>{state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}</Route>
+            <Route path='/create-bid/:id' exact>{state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}</Route>
             <Route path='/profile/:username'>
               <ProfilePage />
             </Route>

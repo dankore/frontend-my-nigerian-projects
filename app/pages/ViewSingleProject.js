@@ -38,9 +38,8 @@ function ViewSingleProject(props) {
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-    return () => {
-      request.cancel();
-    };
+    return () => request.cancel();
+  
   }, [id]);
 
   if (notFound) {
@@ -167,7 +166,7 @@ function ViewSingleProject(props) {
         </>
       </div>
       <div className='flex justify-end'>
-        <Link to='/create-bid' className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
+        <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
           Add a Bid
         </Link>
       </div>
