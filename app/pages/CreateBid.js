@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import { useParams } from 'react-router-dom';
@@ -15,8 +15,10 @@ function CreateBid() {
         message: '',
       },
     },
-    item: { name: '', quantity: 0, price_per_item: 0, total: 0 },
     items: [],
+    itemName: '',
+    itemQuantity: 0,
+    itemPricePerItem: 0,
     itemTotal: 0,
     notFound: false,
     id: useParams().id,
@@ -34,22 +36,22 @@ function CreateBid() {
         draft.notFound = true;
         return;
       case 'itemNameUpdate':
-        draft.item.name = action.value;
+        draft.itemName = action.value;
         return;
       case 'quantityUpdate':
-        draft.item.quantity = action.value;
+        draft.itemQuantity = action.value;
         return;
       case 'pricePerItemUpdate':
-        draft.item.price_per_item = action.value;
+        draft.itemPricePerItem = action.value;
         return;
       case 'totalUpdate':
-        console.log({ totalUpdate: action.value });
-        draft.item.total = action.value;
+        draft.itemTotal = action.value;
         return;
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+  const [total, setTotal] = useState();
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -72,7 +74,21 @@ function CreateBid() {
   }, []);
 
   function handleAddItem() {
-    dispatch({ type: 'addItem', value: state.item });
+    // dispatch({ type: 'totalUpdate', value: document.getElementById('total').innerText });
+    setTotal(prev => {
+      prev = document.getElementById('total').innerText;
+    });
+
+    const item = {
+      name: state.itemName,
+      quantity: state.itemQuantity,
+      price_per_item: state.itemPricePerItem,
+      total: total,
+    };
+
+    console.log(item)
+
+    //  dispatch({ type: 'addItem', value: item });
   }
 
   if (state.notFound) {
@@ -91,9 +107,11 @@ function CreateBid() {
     );
   };
 
-  function  handleTest(e){
-    dispatch({ type: 'pricePerItemUpdate', value: e.target.value })
-    dispatch({type: 'totalUpdate', value: document.getElementById('total').value })
+  console.log(state.itemName, state.itemQuantity, state.itemPricePerItem, state.itemTotal);
+
+  function handleTest(e) {
+    // dispatch({ type: 'pricePerItemUpdate', value: e.target.value })
+    // dispatch({type: 'totalUpdate', value: document.getElementById('total').value })
   }
 
   return (
@@ -108,7 +126,7 @@ function CreateBid() {
             Description <span className='text-red-600'>*</span>
           </label>
           <div className={inputTextAreaCSS + 'w-full'} style={{ minHeight: 6 + 'rem' }}>
-            {state.items.map(htmlTemplate)}
+            {/* {state.items.map(htmlTemplate)} */}
           </div>
         </div>
 
@@ -132,7 +150,7 @@ function CreateBid() {
             <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Price per Item <span className='text-red-600'>*</span>
             </label>
-            <input onChange={handleTest} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+            <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
           </div>
 
           <div className='mb-4 relative flex justify-center'>
@@ -140,8 +158,8 @@ function CreateBid() {
               <label htmlFor='total' className='w-full text-center lg:text-left text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Total
               </label>
-              <div>{state.item.quantity * state.item.price_per_item}</div>
-              <input id='total' type='hidden' value={state.item.quantity * state.item.price_per_item} className='bg-red-500' />
+              <div id='total'>{state.itemQuantity * state.itemPricePerItem}</div>
+              {/* <input id='total' type='hidden' value={state.item.quantity * state.item.price_per_item} className='bg-red-500' /> */}
             </div>
           </div>
 
