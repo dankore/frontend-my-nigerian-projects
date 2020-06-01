@@ -15,7 +15,9 @@ function CreateBid() {
         message: '',
       },
     },
-    items: ['adamu', 'muhammad'],
+    item: { name: '', quantity: 0, price_per_item: 0, total: 0 },
+    items: [],
+    itemTotal: 0,
     notFound: false,
     id: useParams().id,
   };
@@ -25,8 +27,24 @@ function CreateBid() {
       case 'fetchingProjectComplete':
         draft.project.title.value = action.value.title;
         return;
+      case 'addItem':
+        draft.items.push(action.value);
+        return;
       case 'notFound':
         draft.notFound = true;
+        return;
+      case 'itemNameUpdate':
+        draft.item.name = action.value;
+        return;
+      case 'quantityUpdate':
+        draft.item.quantity = action.value;
+        return;
+      case 'pricePerItemUpdate':
+        draft.item.price_per_item = action.value;
+        return;
+      case 'totalUpdate':
+        console.log({ totalUpdate: action.value });
+        draft.item.total = action.value;
         return;
     }
   }
@@ -53,8 +71,29 @@ function CreateBid() {
     return () => request.cancel();
   }, []);
 
+  function handleAddItem() {
+    dispatch({ type: 'addItem', value: state.item });
+  }
+
   if (state.notFound) {
     return <NotFoundPage />;
+  }
+
+  const htmlTemplate = function (item, index) {
+    console.log({ item });
+    return (
+      <div key={index} className='flex'>
+        <p className='mr-2'>{item.name}</p>
+        <p className='mr-2'>{item.quantity}</p>
+        <p className='mr-2'>{item.price_per_item}</p>
+        <p className='mr-2'>{item.total}</p>
+      </div>
+    );
+  };
+
+  function  handleTest(e){
+    dispatch({ type: 'pricePerItemUpdate', value: e.target.value })
+    dispatch({type: 'totalUpdate', value: document.getElementById('total').value })
   }
 
   return (
@@ -68,8 +107,8 @@ function CreateBid() {
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description <span className='text-red-600'>*</span>
           </label>
-          <div className={inputTextAreaCSS + 'w-full'} style={{minHeight: 6+'rem'}}>
-            {state.items.map(item => <div>{item}</div>)}
+          <div className={inputTextAreaCSS + 'w-full'} style={{ minHeight: 6 + 'rem' }}>
+            {state.items.map(htmlTemplate)}
           </div>
         </div>
 
@@ -86,27 +125,30 @@ function CreateBid() {
             <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Quantity <span className='text-red-600'>*</span>
             </label>
-            <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+            <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
           </div>
 
           <div className='mb-4 relative lg:mx-2'>
             <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Price per Item <span className='text-red-600'>*</span>
             </label>
-            <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='price' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+            <input onChange={handleTest} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
           </div>
 
-          <div className='mb-4 relative lg:mx-2 flex justify-center'>
+          <div className='mb-4 relative flex justify-center'>
             <div>
-              <label htmlFor='quantity' className='w-full text-center lg:text-left text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              <label htmlFor='total' className='w-full text-center lg:text-left text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Total
               </label>
-              <span className='border border-gray-200 px-2'>4599</span>
+              <div>{state.item.quantity * state.item.price_per_item}</div>
+              <input id='total' type='hidden' value={state.item.quantity * state.item.price_per_item} className='bg-red-500' />
             </div>
           </div>
 
           <div className='flex justify-end w-full'>
-            <div className='text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 px-6 py-2'>Add Item</div>
+            <div onClick={handleAddItem} className='text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 px-6 py-2'>
+              Add Item
+            </div>
           </div>
         </div>
         <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Submit Bid</button>
