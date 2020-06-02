@@ -96,7 +96,7 @@ function CreateBid() {
 
   const itemHtmlTemplate = function (item, index) {
     return (
-      <div key={index} className='flex p-2 border border-red-200 justify-between'>
+      <div key={index} className='flex p-2 border border-gray-200 justify-between'>
         <p className='mr-2'>{item.name}</p>
         <p className='mr-2'>{item.quantity}</p>
         <p className='mr-2'>{item.price_per_item}</p>
@@ -111,7 +111,9 @@ function CreateBid() {
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form className=''>
-        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{state.project.title.value}</h2>
+        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+          Bidding for <span className='underline'>{state.project.title.value}</span>
+        </h2>
 
         {/* BODY */}
 
@@ -119,13 +121,13 @@ function CreateBid() {
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Itemize Lists <span className='text-red-600'>*</span>
           </label>
-          <div className='bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight w-full' style={{ minHeight: 6 + 'rem' }}>
-            <div className='flex p-2 bg-gray-700 text-white justify-between'>
-              <p className='mr-2'>Name</p>
-              <p className='mr-2'>Quantity</p>
-              <p className='mr-2'>Price Per Item</p>
-              <p className='mr-2'>Total</p>
-              <p className='text-red-400'>Delete</p>
+          <div className='lg:px-6 lg:py-3 rounded-lg border border-gray-200' style={{ minHeight: 6 + 'rem' }}>
+            <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
+              <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Name</p>
+              <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
+              <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
+              <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
+              <p className='text-red-400 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Delete</p>
             </div>
             {state.items.map(itemHtmlTemplate)}
           </div>
