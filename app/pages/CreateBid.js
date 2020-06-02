@@ -15,10 +15,8 @@ function CreateBid() {
         message: '',
       },
     },
+    item: { name: '', quantity: 0, price_per_item: 0 },
     items: [],
-    itemName: '',
-    itemQuantity: 0,
-    itemPricePerItem: 0,
     itemTotal: 0,
     notFound: false,
     id: useParams().id,
@@ -31,18 +29,19 @@ function CreateBid() {
         return;
       case 'addItem':
         draft.items.push(action.value);
+        draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
         return;
       case 'notFound':
         draft.notFound = true;
         return;
       case 'itemNameUpdate':
-        draft.itemName = action.value;
+        draft.item.name = action.value;
         return;
       case 'quantityUpdate':
-        draft.itemQuantity = action.value;
+        draft.item.quantity = action.value;
         return;
       case 'pricePerItemUpdate':
-        draft.itemPricePerItem = action.value;
+        draft.item.price_per_item = action.value;
         return;
       case 'totalUpdate':
         draft.itemTotal = action.value;
@@ -51,7 +50,6 @@ function CreateBid() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  const [total, setTotal] = useState();
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -74,21 +72,7 @@ function CreateBid() {
   }, []);
 
   function handleAddItem() {
-    // dispatch({ type: 'totalUpdate', value: document.getElementById('total').innerText });
-    setTotal(prev => {
-      prev = document.getElementById('total').innerText;
-    });
-
-    const item = {
-      name: state.itemName,
-      quantity: state.itemQuantity,
-      price_per_item: state.itemPricePerItem,
-      total: total,
-    };
-
-    console.log(item)
-
-    //  dispatch({ type: 'addItem', value: item });
+    dispatch({ type: 'addItem', value: state.item });
   }
 
   if (state.notFound) {
@@ -96,23 +80,16 @@ function CreateBid() {
   }
 
   const htmlTemplate = function (item, index) {
-    console.log({ item });
     return (
-      <div key={index} className='flex'>
+      <div key={index} className='flex p-2 border border-red-200 justify-between'>
         <p className='mr-2'>{item.name}</p>
         <p className='mr-2'>{item.quantity}</p>
         <p className='mr-2'>{item.price_per_item}</p>
-        <p className='mr-2'>{item.total}</p>
+        <p className='mr-2'>{+(item.quantity * item.price_per_item)}</p>
+        <button className='text-red-600'>X</button>
       </div>
     );
   };
-
-  console.log(state.itemName, state.itemQuantity, state.itemPricePerItem, state.itemTotal);
-
-  function handleTest(e) {
-    // dispatch({ type: 'pricePerItemUpdate', value: e.target.value })
-    // dispatch({type: 'totalUpdate', value: document.getElementById('total').value })
-  }
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
@@ -126,8 +103,16 @@ function CreateBid() {
             Description <span className='text-red-600'>*</span>
           </label>
           <div className={inputTextAreaCSS + 'w-full'} style={{ minHeight: 6 + 'rem' }}>
-            {/* {state.items.map(htmlTemplate)} */}
+            <div className='flex p-2 bg-gray-700 text-white justify-between'>
+              <p className='mr-2'>Name</p>
+              <p className='mr-2'>Quantity</p>
+              <p className='mr-2'>Price Per Item</p>
+              <p className='mr-2'>Total</p>
+              <p className='text-red-600'>Delete</p>
+            </div>
+            {state.items.map(htmlTemplate)}
           </div>
+          <div className='flex bg-red-500 justify-end pr-3'>Total: {state.itemTotal}</div>
         </div>
 
         {/* ADD ITEM */}
@@ -151,16 +136,6 @@ function CreateBid() {
               Price per Item <span className='text-red-600'>*</span>
             </label>
             <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
-          </div>
-
-          <div className='mb-4 relative flex justify-center'>
-            <div>
-              <label htmlFor='total' className='w-full text-center lg:text-left text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                Total
-              </label>
-              <div id='total'>{state.itemQuantity * state.itemPricePerItem}</div>
-              {/* <input id='total' type='hidden' value={state.item.quantity * state.item.price_per_item} className='bg-red-500' /> */}
-            </div>
           </div>
 
           <div className='flex justify-end w-full'>
