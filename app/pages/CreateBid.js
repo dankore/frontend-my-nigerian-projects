@@ -102,17 +102,17 @@ function CreateBid() {
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Description <span className='text-red-600'>*</span>
           </label>
-          <div className={inputTextAreaCSS + 'w-full'} style={{ minHeight: 6 + 'rem' }}>
+          <div className='bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight w-full' style={{ minHeight: 6 + 'rem' }}>
             <div className='flex p-2 bg-gray-700 text-white justify-between'>
               <p className='mr-2'>Name</p>
               <p className='mr-2'>Quantity</p>
               <p className='mr-2'>Price Per Item</p>
               <p className='mr-2'>Total</p>
-              <p className='text-red-600'>Delete</p>
+              <p className='text-red-400'>Delete</p>
             </div>
             {state.items.map(htmlTemplate)}
           </div>
-          <div className='flex bg-red-500 justify-end pr-3'>Total: {state.itemTotal}</div>
+          <div className='flex justify-end pr-1'>Grand Total: {state.itemTotal}</div>
         </div>
 
         {/* ADD ITEM */}
