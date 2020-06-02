@@ -45,6 +45,11 @@ function CreateBid() {
         return;
       case 'totalUpdate':
         draft.itemTotal = action.value;
+        draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
+        return;
+      case 'deleteItem':
+        draft.items.splice(action.value.index, 1);
+        draft.itemTotal -= +action.value.quantity * +action.value.price_per_item;
         return;
     }
   }
@@ -79,14 +84,26 @@ function CreateBid() {
     return <NotFoundPage />;
   }
 
-  const htmlTemplate = function (item, index) {
+  function handleDeleteItem(e) {
+    const itemToDelete = {
+      index: e.target.id,
+      quantity: e.target.getAttribute('data-quantity'),
+      price_per_item: e.target.getAttribute('data-price_per_item'),
+    };
+
+    dispatch({ type: 'deleteItem', value: itemToDelete });
+  }
+
+  const itemHtmlTemplate = function (item, index) {
     return (
       <div key={index} className='flex p-2 border border-red-200 justify-between'>
         <p className='mr-2'>{item.name}</p>
         <p className='mr-2'>{item.quantity}</p>
         <p className='mr-2'>{item.price_per_item}</p>
         <p className='mr-2'>{+(item.quantity * item.price_per_item)}</p>
-        <button className='text-red-600'>X</button>
+        <div data-quantity={`${item.quantity}`} data-price_per_item={`${item.price_per_item}`} id={`${index}`} onClick={handleDeleteItem} className='text-red-600 cursor-pointer'>
+          X
+        </div>
       </div>
     );
   };
@@ -110,7 +127,7 @@ function CreateBid() {
               <p className='mr-2'>Total</p>
               <p className='text-red-400'>Delete</p>
             </div>
-            {state.items.map(htmlTemplate)}
+            {state.items.map(itemHtmlTemplate)}
           </div>
           <div className='flex justify-end pr-1'>Grand Total: {state.itemTotal}</div>
         </div>
