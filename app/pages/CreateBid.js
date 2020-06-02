@@ -100,7 +100,7 @@ function CreateBid() {
 
         <div className='mb-4 relative'>
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-            Description <span className='text-red-600'>*</span>
+            Itemize Lists <span className='text-red-600'>*</span>
           </label>
           <div className='bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight w-full' style={{ minHeight: 6 + 'rem' }}>
             <div className='flex p-2 bg-gray-700 text-white justify-between'>
