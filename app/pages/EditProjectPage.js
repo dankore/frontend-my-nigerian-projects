@@ -229,6 +229,22 @@ function EditProjectPage(props) {
     dispatch({ type: 'submitRequest' });
   }
 
+  function formatMinDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    return `${year}-${month}-${day}`;
+  }
+
   if (state.notFound) {
     return <NotFoundPage />;
   }
@@ -271,7 +287,7 @@ function EditProjectPage(props) {
             <label htmlFor='bid-submission-deadline' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Bid Submission Deadline <span className='text-red-600'>*</span>
             </label>
-            <input value={state.bidSubmissionDeadline.value} onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'bidSubmissionDeadline', value: e.target.value })} id='bid-submission-deadline' type='date' min={new Date()} autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+            <input value={state.bidSubmissionDeadline.value} onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'bidSubmissionDeadline', value: e.target.value })} id='bid-submission-deadline' type='date' min={`${formatMinDate()}`} autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
             <CSSTransition in={state.bidSubmissionDeadline.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.bidSubmissionDeadline.message}
