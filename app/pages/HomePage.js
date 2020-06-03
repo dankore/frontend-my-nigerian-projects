@@ -69,7 +69,8 @@ function HomePage() {
   }, [!allProjects.isLoading]);
 
   useEffect(() => {
-    // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
+    if(appState.loggedIn){
+       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
     const request = Axios.CancelToken.source();
 
     (async function fetchDataByUsername() {
@@ -83,7 +84,8 @@ function HomePage() {
       }
     })();
     // CANCEL REQUEST
-    return () => request.cancel();
+    return () => request.cancel();       
+       }
   }, [appState.loggedIn]);
 
   function noProjectsThoseIFollow() {
