@@ -20,6 +20,7 @@ function CreateBid() {
     itemTotal: 0,
     notFound: false,
     id: useParams().id,
+    isOpen: false,
   };
 
   function reducer(draft, action) {
@@ -50,6 +51,9 @@ function CreateBid() {
       case 'deleteItem':
         draft.items.splice(action.value.index, 1);
         draft.itemTotal -= +action.value.quantity * +action.value.price_per_item;
+        return;
+      case 'toggleOptions':
+        draft.isOpen = !draft.isOpen;
         return;
     }
   }
@@ -112,8 +116,11 @@ function CreateBid() {
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form className=''>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          Bidding for <span className='underline'>{state.project.title.value}</span>
+          Creating a bid for <span className='underline'>{state.project.title.value}</span>
         </h2>
+
+        {/* WHAT BEST DESCRIBES YOU */}
+       
 
         {/* BODY */}
 
@@ -121,7 +128,7 @@ function CreateBid() {
           <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Itemize Lists <span className='text-red-600'>*</span>
           </label>
-          <div className='lg:px-6 lg:py-3 rounded-lg border border-gray-200' style={{ minHeight: 6 + 'rem' }}>
+          <div className='rounded-lg border border-gray-200' style={{ minHeight: 6 + 'rem' }}>
             <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Name</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
