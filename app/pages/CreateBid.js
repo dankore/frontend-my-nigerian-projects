@@ -16,6 +16,7 @@ function CreateBid() {
       },
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
+    whatBestDescribesYou: '',
     items: [],
     itemTotal: 0,
     notFound: false,
@@ -36,6 +37,9 @@ function CreateBid() {
         return;
       case 'notFound':
         draft.notFound = true;
+        return;
+      case 'whatBestDescribesYou':
+        draft.whatBestDescribesYou = action.value;
         return;
       case 'itemNameUpdate':
         draft.item.name = action.value;
@@ -100,6 +104,11 @@ function CreateBid() {
     dispatch({ type: 'deleteItem', value: itemToDelete });
   }
 
+  function handleSubmitBid(e) {
+    e.preventDefault();
+    console.log('submit');
+  }
+
   const itemHtmlTemplate = function (item, index) {
     return (
       <div key={index} className='flex p-2 border border-gray-200 justify-between'>
@@ -120,7 +129,7 @@ function CreateBid() {
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
-      <form className=''>
+      <form onSubmit={handleSubmitBid} className=''>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
           Creating a bid for <span className='underline'>{state.project.title.value}</span>
         </h2>
@@ -130,12 +139,17 @@ function CreateBid() {
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
               What best describes you? <span className='text-red-600'>*</span>
             </label>
-            <select className={inputTextAreaCSSCreateBid + ' cursor-pointer'} id='as-what'>
-              <option></option>
+            <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' cursor-pointer'} id='as-what'>
               <option>I will get someone else to do the work</option>
               <option>I will do the work myself</option>
               <option>Both</option>
             </select>
+          </div>
+          <div className='mb-4 relative lg:mr-2'>
+            <label htmlFor='how-long' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              How long have you been in this field? <span className='text-red-600'>*</span>
+            </label>
+            <input onChange={e => dispatch({ type: 'howLongUpdate', value: e.target.value })} id='how-long' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
           </div>
 
           {/* BODY */}
@@ -146,7 +160,7 @@ function CreateBid() {
             </label>
             <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
               <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Name</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
@@ -179,12 +193,17 @@ function CreateBid() {
               </label>
               <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
             </div>
-
-            <div className=''>
-              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
-                Add Item
-              </div>
+            <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
+              Add Item
             </div>
+          </div>
+
+          {/* OTHER DETAILS */}
+          <div className='my-4 relative'>
+            <label htmlFor='other-details' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+              Other Details <span className='text-red-600'>*</span>
+            </label>
+            <textarea onChange={e => dispatch({ type: 'othersUpdate', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
           <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Submit Bid</button>
         </div>
