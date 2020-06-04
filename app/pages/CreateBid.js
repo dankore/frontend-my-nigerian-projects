@@ -29,8 +29,10 @@ function CreateBid() {
         draft.project.title.value = action.value.title;
         return;
       case 'addItem':
-        draft.items.push(action.value);
-        draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
+        if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
+          draft.items.push(action.value);
+          draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
+        }
         return;
       case 'notFound':
         draft.notFound = true;
@@ -101,7 +103,9 @@ function CreateBid() {
   const itemHtmlTemplate = function (item, index) {
     return (
       <div key={index} className='flex p-2 border border-gray-200 justify-between'>
-        <p className='mr-2'>{item.name}</p>
+        <p style={{ maxWidth: 300 + 'px' }} className='mr-2'>
+          {item.name}
+        </p>
         <p className='mr-2'>{item.quantity}</p>
         <p className='mr-2'>{item.price_per_item}</p>
         <p className='mr-2'>{+(item.quantity * item.price_per_item)}</p>
@@ -175,7 +179,7 @@ function CreateBid() {
             </div>
 
             <div className=''>
-              <div style={{padding: 7 +'px'}} onClick={handleAddItem} className='text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 mt-1'>
+              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className='text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 mt-1'>
                 Add Item
               </div>
             </div>
