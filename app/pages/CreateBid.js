@@ -116,6 +116,8 @@ function CreateBid() {
     );
   };
 
+  const addItemButtonBool = state.item.name == '' && state.item.quantity == 0 && state.item.price_per_item == 0;
+
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form className=''>
@@ -179,7 +181,7 @@ function CreateBid() {
             </div>
 
             <div className=''>
-              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className='text-center cursor-pointer text-white rounded border border-white bg-green-600 hover:bg-green-800 mt-1'>
+              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
                 Add Item
               </div>
             </div>
