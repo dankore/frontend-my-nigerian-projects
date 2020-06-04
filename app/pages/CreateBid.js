@@ -120,15 +120,25 @@ function CreateBid() {
         </h2>
 
         {/* WHAT BEST DESCRIBES YOU */}
-       
+        <div className='mt-10 mb-4'>
+          <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
+            What best describes you? <span className='text-red-600'>*</span>
+          </label>
+          <select className={inputTextAreaCSSCreateBid + ' cursor-pointer'} id='as-what'>
+            <option></option>
+            <option>I will get someone else to do the work</option>
+            <option>I will do the work myself</option>
+            <option>Both</option>
+          </select>
+        </div>
 
         {/* BODY */}
 
         <div className='mb-4 relative'>
-          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
             Itemize Lists <span className='text-red-600'>*</span>
           </label>
-          <div className='rounded-lg border border-gray-200' style={{ minHeight: 6 + 'rem' }}>
+          <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
             <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Name</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
