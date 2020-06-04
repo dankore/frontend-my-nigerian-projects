@@ -118,9 +118,9 @@ function CreateBid() {
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
           Creating a bid for <span className='underline'>{state.project.title.value}</span>
         </h2>
-        <div className='border border-gray-200 px-2 rounded'>
+        <div className='border border-gray-200 p-2 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
-          <div className='mt-10 mb-4'>
+          <div className='mb-4'>
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
               What best describes you? <span className='text-red-600'>*</span>
             </label>
