@@ -16,8 +16,21 @@ function CreateBid() {
       },
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
-    whatBestDescribesYou: '',
-    yearsOfExperience: 0,
+    whatBestDescribesYou: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    yearsOfExperience: {
+      value: 0,
+      hasErrors: false,
+      message: '',
+    },
+    otherDetails: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     items: [],
     itemTotal: 0,
     notFound: false,
@@ -40,10 +53,10 @@ function CreateBid() {
         draft.notFound = true;
         return;
       case 'whatBestDescribesYou':
-        draft.whatBestDescribesYou = action.value;
+        draft.whatBestDescribesYou.value = action.value;
         return;
       case 'yearsExperienceUpdate':
-        draft.yearsOfExperience = action.value;
+        draft.yearsOfExperience.value = action.value;
         return;
       case 'itemNameUpdate':
         draft.item.name = action.value;
@@ -58,6 +71,9 @@ function CreateBid() {
         draft.itemTotal = action.value;
         draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
         return;
+      case 'othersUpdate':
+        draft.otherDetails.value = action.value;
+        return;
       case 'deleteItem':
         draft.items.splice(action.value.index, 1);
         draft.itemTotal -= +action.value.quantity * +action.value.price_per_item;
@@ -69,6 +85,8 @@ function CreateBid() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  console.log(state)
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
