@@ -86,7 +86,6 @@ function CreateBid() {
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  console.log(state)
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -162,6 +161,7 @@ function CreateBid() {
               What best describes you? <span className='text-red-600'>*</span>
             </label>
             <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+              <option></option>
               <option>I will get someone else to do the work</option>
               <option>I will do the work myself</option>
               <option>Both</option>
