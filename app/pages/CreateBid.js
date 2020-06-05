@@ -37,6 +37,7 @@ function CreateBid() {
     notFound: false,
     id: useParams().id,
     isOpen: false,
+    sendCount: 0,
   };
 
   function reducer(draft, action) {
@@ -96,6 +97,11 @@ function CreateBid() {
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
         return;
+      case 'submitForm':
+        if (!draft.whatBestDescribesYou.hasErrors && !draft.yearsOfExperience.hasErrors) {
+          draft.sendCount++;
+        }
+        return;
     }
   }
 
@@ -142,6 +148,8 @@ function CreateBid() {
   function handleSubmitBid(e) {
     e.preventDefault();
     dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
+    dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
+    // dispatch({ type: 'submitForm' });
     console.log('submit');
   }
 
@@ -186,15 +194,22 @@ function CreateBid() {
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.whatBestDescribesYou.message}
                 </div>
-              </CSSTransition>{' '}
+              </CSSTransition>
             </span>
           </div>
 
-          <div className='mb-4 relative lg:flex lg:items-center'>
+          <div className='mb-4 lg:flex lg:items-center'>
             <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
               Years of experience in this field <span className='text-red-600'>*</span>
             </label>
-            <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
+            <span className='relative inline-block'>
+              <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
+              <CSSTransition in={state.yearsOfExperience.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.yearsOfExperience.message}
+                </div>
+              </CSSTransition>
+            </span>
           </div>
 
           {/* ITEMIZE LIST */}
@@ -246,7 +261,7 @@ function CreateBid() {
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
             <label htmlFor='other-details' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Other Details <span className='text-red-600'>*</span>
+              Other Details
             </label>
             <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
