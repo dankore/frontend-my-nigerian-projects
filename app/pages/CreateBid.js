@@ -17,6 +17,7 @@ function CreateBid() {
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
     whatBestDescribesYou: '',
+    yearsOfExperience: 0,
     items: [],
     itemTotal: 0,
     notFound: false,
@@ -40,6 +41,9 @@ function CreateBid() {
         return;
       case 'whatBestDescribesYou':
         draft.whatBestDescribesYou = action.value;
+        return;
+      case 'yearsExperienceUpdate':
+        draft.yearsOfExperience = action.value;
         return;
       case 'itemNameUpdate':
         draft.item.name = action.value;
@@ -139,20 +143,20 @@ function CreateBid() {
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
               What best describes you? <span className='text-red-600'>*</span>
             </label>
-            <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' cursor-pointer'} id='as-what'>
+            <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
               <option>I will get someone else to do the work</option>
               <option>I will do the work myself</option>
               <option>Both</option>
             </select>
           </div>
-          <div className='mb-4 relative lg:mr-2'>
-            <label htmlFor='how-long' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              How long have you been in this field? <span className='text-red-600'>*</span>
+          <div className='mb-4 relative lg:flex lg:items-center'>
+            <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
+              Years of experience in this field <span className='text-red-600'>*</span>
             </label>
-            <input onChange={e => dispatch({ type: 'howLongUpdate', value: e.target.value })} id='how-long' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+            <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
           </div>
 
-          {/* BODY */}
+          {/* ITEMIZE LIST */}
 
           <div className='mb-4 relative'>
             <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
