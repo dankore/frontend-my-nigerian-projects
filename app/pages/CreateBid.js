@@ -4,6 +4,7 @@ import { useImmerReducer } from 'use-immer';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import NotFoundPage from './NotFoundPage';
+import { CSSTransition } from 'react-transition-group';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 
 function CreateBid() {
@@ -53,10 +54,24 @@ function CreateBid() {
         draft.notFound = true;
         return;
       case 'whatBestDescribesYou':
+        draft.whatBestDescribesYou.hasErrors = false;
         draft.whatBestDescribesYou.value = action.value;
         return;
+      case 'whatBestDescribesYouRules':
+        if (draft.whatBestDescribesYou.value == '') {
+          draft.whatBestDescribesYou.hasErrors = true;
+          draft.whatBestDescribesYou.message = 'Please choose from the options.';
+        }
+        return;
       case 'yearsExperienceUpdate':
+        draft.yearsOfExperience.hasErrors = false;
         draft.yearsOfExperience.value = action.value;
+        return;
+      case 'yearsExperienceUpdateRules':
+        if (draft.yearsOfExperience.value == 0) {
+          draft.yearsOfExperience.hasErrors = true;
+          draft.yearsOfExperience.message = 'Years of experience required.';
+        }
         return;
       case 'itemNameUpdate':
         draft.item.name = action.value;
@@ -71,7 +86,7 @@ function CreateBid() {
         draft.itemTotal = action.value;
         draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
         return;
-      case 'othersUpdate':
+      case 'otherDetails':
         draft.otherDetails.value = action.value;
         return;
       case 'deleteItem':
@@ -85,7 +100,6 @@ function CreateBid() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -127,6 +141,7 @@ function CreateBid() {
 
   function handleSubmitBid(e) {
     e.preventDefault();
+    dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
     console.log('submit');
   }
 
@@ -150,7 +165,7 @@ function CreateBid() {
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
-      <form onSubmit={handleSubmitBid} className=''>
+      <form onSubmit={handleSubmitBid}>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
           Creating a bid for <span className='underline'>{state.project.title.value}</span>
         </h2>
@@ -160,13 +175,21 @@ function CreateBid() {
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
               What best describes you? <span className='text-red-600'>*</span>
             </label>
-            <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
-              <option></option>
-              <option>I will get someone else to do the work</option>
-              <option>I will do the work myself</option>
-              <option>Both</option>
-            </select>
+            <span className='relative inline-block'>
+              <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+                <option></option>
+                <option>I will get someone else to do the work</option>
+                <option>I will do the work myself</option>
+                <option>Both</option>
+              </select>
+              <CSSTransition in={state.whatBestDescribesYou.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.whatBestDescribesYou.message}
+                </div>
+              </CSSTransition>{' '}
+            </span>
           </div>
+
           <div className='mb-4 relative lg:flex lg:items-center'>
             <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
               Years of experience in this field <span className='text-red-600'>*</span>
@@ -225,7 +248,7 @@ function CreateBid() {
             <label htmlFor='other-details' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Other Details <span className='text-red-600'>*</span>
             </label>
-            <textarea onChange={e => dispatch({ type: 'othersUpdate', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
+            <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
           <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Submit Bid</button>
         </div>
