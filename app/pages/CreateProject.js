@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import { inputTextAreaCSS } from '../helpers/CSSHelpers';
+import { inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import { CSSTransition } from 'react-transition-group';
-import { CSSTransitionStyle } from '../helpers/CSSHelpers';
+
 
 function CreateProject(props) {
   const appState = useContext(StateContext);
@@ -204,7 +204,7 @@ function CreateProject(props) {
 
   return (
     <Page margin='mx-2' title='Create New Project'>
-      <form className='' onSubmit={handleProjectSubmit}>
+      <form onSubmit={handleProjectSubmit}>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title <span className='text-red-600'>*</span>

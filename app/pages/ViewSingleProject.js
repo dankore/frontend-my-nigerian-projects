@@ -38,9 +38,8 @@ function ViewSingleProject(props) {
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-    return () => {
-      request.cancel();
-    };
+    return () => request.cancel();
+  
   }, [id]);
 
   if (notFound) {
@@ -110,60 +109,67 @@ function ViewSingleProject(props) {
 
   return (
     <Page margin='mx-2' title={project.title}>
-      <div className='flex justify-between'>
-        <div className='flex items-center'>
-          <Link to={`/profile/${project.author.username}`}>
-            <img className='w-12 h-12 rounded-full mr-2' src={project.author.avatar} />
-          </Link>
-          <div className=''>
-            <Link className='text-blue-600' to={`/profile/${project.author.username}`}>
-              {project.author.firstName} {project.author.lastName}
-            </Link>{' '}
-            <p className='text-gray-600'>posted this project on {dateFormatted}</p>
-          </div>
-        </div>
-        {isOwner() && (
-          <span className='pt-2'>
-            <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
-              <i className='fas fa-edit'></i>
+      <div>
+        <div className='flex justify-between'>
+          <div className='flex items-center'>
+            <Link to={`/profile/${project.author.username}`}>
+              <img className='w-12 h-12 rounded-full mr-2' src={project.author.avatar} />
             </Link>
-            <ReactToolTip place='bottom' id='edit-btn' />
-            <button onClick={deleteProjectHandler} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
-              <i className='fas fa-trash'></i>
-            </button>
-            <ReactToolTip place='bottom' id='delete-btn' />
-          </span>
-        )}
-      </div>
-
-      <>
-        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{project.title}</h2>
-        <div className='mt-2'>
-          <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+            <div>
+              <Link className='text-blue-600' to={`/profile/${project.author.username}`}>
+                {project.author.firstName} {project.author.lastName}
+              </Link>{' '}
+              <p className='text-gray-600'>posted this project on {dateFormatted}</p>
+            </div>
+          </div>
+          {isOwner() && (
+            <span className='pt-2'>
+              <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+                <i className='fas fa-edit'></i>
+              </Link>
+              <ReactToolTip place='bottom' id='edit-btn' />
+              <button onClick={deleteProjectHandler} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+                <i className='fas fa-trash'></i>
+              </button>
+              <ReactToolTip place='bottom' id='delete-btn' />
+            </span>
+          )}
         </div>
-        <fieldset className='border rounded p-2 my-4 bg-gray-100'>
-          <legend>Location & Deadline:</legend>
-          <div className='flex flex-wrap justify-between'>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Project Location:</span> {project.location}
-            </p>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Bid Submission Deadline:</span> {formatDate()}
-            </p>
+
+        <>
+          <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{project.title}</h2>
+          <div className='mt-2'>
+            <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
-        </fieldset>
-        <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
-          <legend className=''>Contact:</legend>
-          <div className='flex flex-wrap justify-between'>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Email:</span> {project.email}
-            </p>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Phone Number:</span> {project.phone}
-            </p>
-          </div>
-        </fieldset>
-      </>
+          <fieldset className='border rounded p-2 my-4 bg-gray-100'>
+            <legend>Location & Deadline:</legend>
+            <div className='flex flex-wrap justify-between'>
+              <p className={containerCSS}>
+                <span className={titleCSS}>Project Location:</span> {project.location}
+              </p>
+              <p className={containerCSS}>
+                <span className={titleCSS}>Bid Submission Deadline:</span> {formatDate()}
+              </p>
+            </div>
+          </fieldset>
+          <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
+            <legend className=''>Contact:</legend>
+            <div className='flex flex-wrap justify-between'>
+              <p className={containerCSS}>
+                <span className={titleCSS}>Email:</span> {project.email}
+              </p>
+              <p className={containerCSS}>
+                <span className={titleCSS}>Phone Number:</span> {project.phone}
+              </p>
+            </div>
+          </fieldset>
+        </>
+      </div>
+      <div className='flex justify-end'>
+        <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
+          Add a Bid
+        </Link>
+      </div>
     </Page>
   );
 }

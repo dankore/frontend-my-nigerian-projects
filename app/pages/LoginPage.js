@@ -31,7 +31,7 @@ function LoginPage(props) {
         draft.username.value = action.value;
         return;
       case 'usernameCatchError':
-        if (draft.username.value == '') {
+        if (draft.username.value.trim() == '') {
           draft.username.hasErrors = true;
           draft.username.message = 'Username field is empty.';
         }
@@ -41,7 +41,7 @@ function LoginPage(props) {
         draft.password.value = action.value;
         return;
       case 'passwordCatchError':
-        if (draft.password.value == '') {
+        if (draft.password.value.trim() == '') {
           draft.password.hasErrors = true;
           draft.password.message = 'Password field is empty.';
         }
