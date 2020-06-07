@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import NotFoundPage from './NotFoundPage';
 import { CSSTransition } from 'react-transition-group';
+import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 
 function CreateBid() {
+  const appState = useContext(StateContext);
   const initialState = {
     project: {
       title: {
@@ -35,7 +37,7 @@ function CreateBid() {
     items: [],
     itemTotal: 0,
     notFound: false,
-    id: useParams().id,
+    projectId: useParams().id,
     isOpen: false,
     sendCount: 0,
   };
@@ -98,7 +100,7 @@ function CreateBid() {
         draft.isOpen = !draft.isOpen;
         return;
       case 'submitForm':
-        if (!draft.whatBestDescribesYou.hasErrors && !draft.yearsOfExperience.hasErrors) {
+        if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '') {
           draft.sendCount++;
         }
         return;
@@ -109,11 +111,11 @@ function CreateBid() {
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    const id = state.id;
+    const projectId = state.projectId;
 
     (async function fetchProjectForCreateBid() {
       try {
-        const response = await Axios.get(`/project/${id}`, { cancelToken: request.token });
+        const response = await Axios.get(`/project/${projectId}`, { cancelToken: request.token });
         if (response.data) {
           dispatch({ type: 'fetchingProjectComplete', value: response.data });
         } else {
@@ -126,6 +128,32 @@ function CreateBid() {
 
     return () => request.cancel();
   }, []);
+
+  useEffect(() => {
+    const request = Axios.CancelToken.source();
+    if (state.sendCount) {
+      (async function saveBid() {
+        try {
+          const response = await Axios.post(
+            '/create-bid',
+            {
+              projectId: state.projectId,
+              whatBestDescribesYou: state.whatBestDescribesYou.value,
+              yearsOfExperience: state.yearsOfExperience.value,
+              items: state.items,
+              otherDetails: state.otherDetails.value,
+              token: appState.user.token,
+            },
+            { cancelToken: request.token }
+          );
+          console.log(response);
+        } catch (error) {
+          console.log({ errorCreatingBid: error });
+        }
+      })();
+    }
+    return () => request.cancel();
+  }, [state.sendCount]);
 
   function handleAddItem() {
     dispatch({ type: 'addItem', value: state.item });
@@ -149,14 +177,14 @@ function CreateBid() {
     e.preventDefault();
     dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
     dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
-    // dispatch({ type: 'submitForm' });
+    dispatch({ type: 'submitForm' });
     console.log('submit');
   }
 
   const itemHtmlTemplate = function (item, index) {
     return (
       <div key={index} className='flex p-2 border border-gray-200 justify-between'>
-        <p style={{ maxWidth: 300 + 'px' }} className='mr-2'>
+        <p style={{ maxWidth: 200 + 'px', overflowWrap: 'break-word', minWidth: 0 + 'px' }} className='mr-2'>
           {item.name}
         </p>
         <p className='mr-2'>{item.quantity}</p>
