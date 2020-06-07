@@ -184,7 +184,7 @@ function CreateBid() {
               What best describes you? <span className='text-red-600'>*</span>
             </label>
             <span className='relative inline-block'>
-              <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+              <select autoFocus onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
                 <option></option>
                 <option>I will get someone else to do the work</option>
                 <option>I will do the work myself</option>
@@ -203,7 +203,7 @@ function CreateBid() {
               Years of experience in this field <span className='text-red-600'>*</span>
             </label>
             <span className='relative inline-block'>
-              <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
+              <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
               <CSSTransition in={state.yearsOfExperience.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.yearsOfExperience.message}
@@ -244,14 +244,14 @@ function CreateBid() {
               <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Quantity <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+              <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
             </div>
 
             <div className='mb-4 relative lg:mx-2'>
               <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Price per Item <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+              <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
             </div>
             <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
               Add Item
