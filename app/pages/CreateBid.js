@@ -146,7 +146,7 @@ function CreateBid() {
             },
             { cancelToken: request.token }
           );
-          console.log(response);
+          console.log(response.data);
         } catch (error) {
           console.log({ errorCreatingBid: error });
         }
