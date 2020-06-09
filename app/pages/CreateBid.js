@@ -150,7 +150,7 @@ function CreateBid(props) {
           );
 
           if (response.data == 'Success') {
-            props.history.push('/');
+            props.history.goBack();
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
           }
