@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import NotFoundPage from './NotFoundPage';
 import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
+import DispatchContext from '../DispatchContext';
 
-function CreateBid() {
+function CreateBid(props) {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const initialState = {
     project: {
       title: {
@@ -146,7 +148,12 @@ function CreateBid() {
             },
             { cancelToken: request.token }
           );
-          console.log(response.data);
+
+          if (response.data == 'Success') {
+            props.history.push('/');
+          } else {
+            appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
+          }
         } catch (error) {
           console.log({ errorCreatingBid: error });
         }
@@ -300,4 +307,4 @@ function CreateBid() {
   );
 }
 
-export default CreateBid;
+export default withRouter(CreateBid);
