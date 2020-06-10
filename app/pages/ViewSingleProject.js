@@ -8,7 +8,6 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import ViewSingleBid from './viewSingleBid';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -172,9 +171,9 @@ function ViewSingleProject(props) {
           </Link>
         </div>
         {project.bids?.length > 0 ? (
-          project.bids.map((bid, index)=> {
+          project.bids.map((bid, index) => {
             return (
-              <Link key={index} to={`/bid/${bid.id}`} className='block bg-gray-700 text-white my-2'>
+              <Link key={index} to={`/${id}/bid/${bid.id}`} className='block bg-gray-700 text-white my-2'>
                 hi
               </Link>
             );
