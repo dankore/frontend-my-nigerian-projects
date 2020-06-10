@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
+import ViewSingleBid from './viewSingleBid';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -39,7 +40,6 @@ function ViewSingleProject(props) {
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
     return () => request.cancel();
-  
   }, [id]);
 
   if (notFound) {
@@ -165,10 +165,23 @@ function ViewSingleProject(props) {
           </fieldset>
         </>
       </div>
-      <div className='flex justify-end'>
-        <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
-          Add a Bid
-        </Link>
+      <div>
+        <div className='flex justify-end'>
+          <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
+            Add a Bid
+          </Link>
+        </div>
+        {project.bids?.length > 0 ? (
+          project.bids.map((bid, index)=> {
+            return (
+              <Link key={index} to={`/bid/${bid.id}`} className='block bg-gray-700 text-white my-2'>
+                hi
+              </Link>
+            );
+          })
+        ) : (
+          <div>No Bids</div>
+        )}
       </div>
     </Page>
   );

@@ -33,6 +33,7 @@ import SettingsPage from './pages/SettingsPage';
 import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
 import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
 import CreateBid from './pages/CreateBid';
+import ViewSingleBid from './pages/viewSingleBid';
 // COMPONENTS END
 
 function Main() {
@@ -154,6 +155,9 @@ function Main() {
             </Route>
             <Route path='/project/:id' exact>
               <ViewSingleProject />
+            </Route>
+            <Route path='/bid/:id'>
+              <ViewSingleBid />
             </Route>
             <Route path='/create-bid/:id' exact>{state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}</Route>
             <Route path='/profile/:username'>
