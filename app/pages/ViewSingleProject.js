@@ -179,10 +179,9 @@ function ViewSingleProject(props) {
         </div>
         {project.bids?.length > 0 ? (
           project.bids.map((bid, index) => {
-            console.log(bid.items);
             return (
               <Link key={index} to={`/${id}/bid/${bid.id}`} className='block border border-gray-200 my-2 p-2'>
-                <span>Bid by Adamu</span> <span>Cost: {bidItemsTotal(bid.items)}</span>
+                <span>Bid by {`${bid.bidAuthor.firstName} ${bid.bidAuthor.lastName}`}</span> <span>Cost: {bidItemsTotal(bid.items)}</span>
               </Link>
             );
           })

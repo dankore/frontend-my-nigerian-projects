@@ -50,7 +50,11 @@ function ViewSingleBid(props) {
     return <LoadingDotsIcon />;
   }
 
-  return <Page title='View Single Bid'>hi</Page>;
+  return (
+  <Page title='View Single Bid'>
+    <h2>{state.bid.whatBestDescribesYou}</h2>
+  </Page>
+  );
 }
 
 export default ViewSingleBid;

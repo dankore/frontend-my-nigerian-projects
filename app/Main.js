@@ -129,11 +129,9 @@ function Main() {
         }
       })();
 
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
+      return () => request.cancel();
     }
-  }, [state.loggedIn]);
+  }, []);
 
   return (
     <StateContext.Provider value={state}>
@@ -159,7 +157,9 @@ function Main() {
             <Route path='/:projectId/bid/:bidId'>
               <ViewSingleBid />
             </Route>
-            <Route path='/create-bid/:id' exact>{state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}</Route>
+            <Route path='/create-bid/:id' exact>
+              {state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}
+            </Route>
             <Route path='/profile/:username'>
               <ProfilePage />
             </Route>
