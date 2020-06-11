@@ -133,7 +133,7 @@ function Main() {
         return request.cancel();
       };
     }
-  }, []);
+  }, [state.loggedIn]);
 
   return (
     <StateContext.Provider value={state}>

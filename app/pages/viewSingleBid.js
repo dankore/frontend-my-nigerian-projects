@@ -4,9 +4,9 @@ import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import Axios from 'axios';
 import StateContext from '../StateContext';
+import LoadingDotsIcon from '../components/LoadingDotsIcon';
 
 function ViewSingleBid(props) {
-  const { projectId, bidId } = useParams();
   const appState = useContext(StateContext);
   const initialState = {
     bid: {
@@ -15,6 +15,8 @@ function ViewSingleBid(props) {
       items: [],
       otherDetails: '',
     },
+    params: useParams(),
+    isFetching: true,
   };
 
   function reducer(draft, action) {
@@ -22,23 +24,31 @@ function ViewSingleBid(props) {
       case 'fetchComplete':
         draft.bid = action.value;
         return;
+      case 'fetchingComplete':
+        draft.isFetching = false;
+        return;
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  console.log({ state });
-
   useEffect(() => {
     const request = Axios.CancelToken.source();
     (async function fetchDataViewSingleBid() {
       try {
-        const { data } = await Axios.post('/view-single-bid', { projectId, bidId, token: appState.user.token });
+        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token });
         dispatch({ type: 'fetchComplete', value: data });
-      } catch (error) {}
+        dispatch({ type: 'fetchingComplete' });
+      } catch (error) {
+        console.log({ ViewSingleBid: error });
+      }
     })();
     return () => request.cancel();
   }, []);
+
+  if (state.isFetching) {
+    return <LoadingDotsIcon />;
+  }
 
   return <Page title='View Single Bid'>hi</Page>;
 }

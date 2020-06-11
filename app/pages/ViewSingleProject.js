@@ -76,9 +76,6 @@ function ViewSingleProject(props) {
     }
   }
 
-  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
-  const titleCSS = 'text-gray-700';
-
   function formatDate() {
     let month = new Array();
     month[1] = 'January';
@@ -105,6 +102,16 @@ function ViewSingleProject(props) {
       return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
     }
   }
+
+  function bidItemsTotal(array) {
+    return array.reduce((total, currentElem) => {
+      const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
+      return total + currentTotal;
+    }, 0);
+  }
+
+  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
+  const titleCSS = 'text-gray-700';
 
   return (
     <Page margin='mx-2' title={project.title}>
@@ -172,9 +179,10 @@ function ViewSingleProject(props) {
         </div>
         {project.bids?.length > 0 ? (
           project.bids.map((bid, index) => {
+            console.log(bid.items);
             return (
-              <Link key={index} to={`/${id}/bid/${bid.id}`} className='block bg-gray-700 text-white my-2'>
-                hi
+              <Link key={index} to={`/${id}/bid/${bid.id}`} className='block border border-gray-200 my-2 p-2'>
+                <span>Bid by Adamu</span> <span>Cost: {bidItemsTotal(bid.items)}</span>
               </Link>
             );
           })
