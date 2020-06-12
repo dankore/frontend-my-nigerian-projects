@@ -15,6 +15,23 @@ function ViewSingleBid(props) {
       items: [],
       otherDetails: '',
     },
+    profileInfo: {
+      followActionLoading: false,
+      startFollowingRequestCount: 0,
+      stopFollowingRequestCount: 0,
+      profileData: {
+        profileUsername: '...',
+        profileFirstName: '',
+        profileLastName: '',
+        profileAvatar: 'https://gravatar.com/avatar/palceholder?s=128',
+        isFollowing: false,
+        counts: {
+          projectCount: '',
+          followerCount: '',
+          followingCount: '',
+        },
+      },
+    },
     params: useParams(),
     isFetching: true,
   };
@@ -27,6 +44,9 @@ function ViewSingleBid(props) {
       case 'fetchingComplete':
         draft.isFetching = false;
         return;
+      case 'profileInfoFetchComplete':
+        draft.profileInfo = action.value;
+        return;
     }
   }
 
@@ -36,8 +56,10 @@ function ViewSingleBid(props) {
     const request = Axios.CancelToken.source();
     (async function fetchDataViewSingleBid() {
       try {
-        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token });
+        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token }, { cancelToken: request.token });
         dispatch({ type: 'fetchComplete', value: data });
+        const profileInfo = await Axios.post(`/profile/${data.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
+        dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
         dispatch({ type: 'fetchingComplete' });
       } catch (error) {
         console.log({ ViewSingleBid: error });
@@ -49,11 +71,12 @@ function ViewSingleBid(props) {
   if (state.isFetching) {
     return <LoadingDotsIcon />;
   }
-
+console.log(state.profileInfo.profileFirstName);
   return (
-  <Page title='View Single Bid'>
-    <h2>{state.bid.whatBestDescribesYou}</h2>
-  </Page>
+    <Page title='View Single Bid'>
+      <h2>{state.bid.whatBestDescribesYou}</h2>
+      <p>By {`${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}</p>
+    </Page>
   );
 }
 
