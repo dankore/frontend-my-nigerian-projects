@@ -6,6 +6,8 @@ import Axios from 'axios';
 import StateContext from '../StateContext';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import NotFoundPage from './NotFoundPage';
+import ReactToolTip from 'react-tooltip';
+
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -83,6 +85,17 @@ function ViewSingleBid(props) {
     return () => request.cancel();
   }, []);
 
+   function isOwner() {
+     if (appState.loggedIn) {
+       return appState.user.username == state.profileInfo.profileUsername;
+     }
+     return false;
+   }
+
+   function handleDeleteBid(){
+     console.log("hi")
+   }
+
   if (state.isFetching) {
     return <LoadingDotsIcon />;
   }
@@ -92,16 +105,30 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title='View Single Bid'>
-      <div className='flex items-center'>
-        <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-          <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-        </Link>
-        <Link className='mx-3 text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
-          {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-        </Link>
+      {/* PROFILE */}
+      <div className='flex justify-between'>
+        <div className='flex items-center'>
+          <Link to={`/profile/${state.profileInfo.profileUsername}`}>
+            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+          </Link>
+          <Link className='mx-3 text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
+            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+          </Link>
+        </div>
+        {isOwner() && (
+          <span className='pt-2'>
+            <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+              <i className='fas fa-edit'></i>
+            </Link>
+            <ReactToolTip place='bottom' id='edit-btn' />
+            <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+              <i className='fas fa-trash'></i>
+            </button>
+            <ReactToolTip place='bottom' id='delete-btn' />
+          </span>
+        )}
       </div>
       <h2>{state.bid.whatBestDescribesYou}</h2>
-    
     </Page>
   );
 }
