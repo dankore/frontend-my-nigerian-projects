@@ -91,7 +91,7 @@ function ViewSingleBid(props) {
   }
 
   return (
-    <Page title='View Single Bid'>
+    <Page margin='mx-2' title='View Single Bid'>
       <div className='flex items-center'>
         <Link to={`/profile/${state.profileInfo.profileUsername}`}>
           <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />

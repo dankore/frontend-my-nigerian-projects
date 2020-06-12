@@ -41,7 +41,6 @@ function ViewSingleProject(props) {
     return () => request.cancel();
   }, [id]);
 
-
   if (notFound) {
     // COULD USE if(!isLoading && !project)
     return <NotFoundPage />;
@@ -177,17 +176,23 @@ function ViewSingleProject(props) {
             Add a Bid
           </Link>
         </div>
-        {project.bids?.length > 0 ? (
-          project.bids.map((bid, index) => {
-            return (
-              <Link key={index} to={`/${id}/bid/${bid.id}`} className='block border border-gray-200 my-2 p-2'>
-                <span>Cost: {bidItemsTotal(bid.items)}</span>
-              </Link>
-            );
-          })
-        ) : (
-          <div>No Bids</div>
-        )}
+        <div className=''>
+          <fieldset className='border rounded p-2 my-4 bg-gray-100'>
+            <legend>Bids</legend>
+            {project.bids?.length > 0 ? (
+              project.bids.map((bid, index) => {
+                console.log({ bid });
+                return (
+                  <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-gray-200 bg-white my-2 p-2'>
+                    <span>Bid number# {index + 1}</span> <span>Cost: {bidItemsTotal(bid.items)}</span>
+                  </Link>
+                );
+              })
+            ) : (
+              <div>No Bids</div>
+            )}
+          </fieldset>
+        </div>
       </div>
     </Page>
   );
