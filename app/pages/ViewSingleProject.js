@@ -31,7 +31,7 @@ function ViewSingleProject(props) {
           setNotfound(true);
         }
       } catch (error) {
-        dispatch({
+        appDispatch({
           type: 'flashMessageError',
           value: 'Problem creating project.',
         });
@@ -41,6 +41,7 @@ function ViewSingleProject(props) {
     return () => request.cancel();
   }, [id]);
 
+
   if (notFound) {
     // COULD USE if(!isLoading && !project)
     return <NotFoundPage />;
@@ -49,9 +50,6 @@ function ViewSingleProject(props) {
   if (isLoading) {
     return <LoadingDotsIcon />;
   }
-
-  const date = new Date(project.createdDate);
-  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
   function isOwner() {
     if (appState.loggedIn) {
@@ -110,6 +108,8 @@ function ViewSingleProject(props) {
     }, 0);
   }
 
+  const date = new Date(project.createdDate);
+  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
   const titleCSS = 'text-gray-700';
 
