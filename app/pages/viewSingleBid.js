@@ -5,6 +5,7 @@ import { useImmerReducer } from 'use-immer';
 import Axios from 'axios';
 import StateContext from '../StateContext';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
+import NotFoundPage from './NotFoundPage';
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -34,6 +35,7 @@ function ViewSingleBid(props) {
     },
     params: useParams(),
     isFetching: true,
+    isNotFound: false,
   };
 
   function reducer(draft, action) {
@@ -47,6 +49,9 @@ function ViewSingleBid(props) {
       case 'profileInfoFetchComplete':
         draft.profileInfo = action.value;
         return;
+      case 'notFound':
+        draft.isNotFound = true;
+        return;
     }
   }
 
@@ -57,9 +62,19 @@ function ViewSingleBid(props) {
     (async function fetchDataViewSingleBid() {
       try {
         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token }, { cancelToken: request.token });
-        dispatch({ type: 'fetchComplete', value: data });
-        const profileInfo = await Axios.post(`/profile/${data.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
-        dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
+        if (data) {
+          dispatch({ type: 'fetchComplete', value: data });
+          // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
+          if (data.bidAuthor) {
+            const profileInfo = await Axios.post(`/profile/${data.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
+            dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
+          } else {
+            dispatch({ type: 'notFound' });
+          }
+        } else {
+          dispatch({ type: 'notFound' });
+        }
+        // COMPLETE
         dispatch({ type: 'fetchingComplete' });
       } catch (error) {
         console.log({ ViewSingleBid: error });
@@ -71,7 +86,10 @@ function ViewSingleBid(props) {
   if (state.isFetching) {
     return <LoadingDotsIcon />;
   }
-console.log(state.profileInfo.profileFirstName);
+  if (state.isNotFound) {
+    return <NotFoundPage />;
+  }
+
   return (
     <Page title='View Single Bid'>
       <h2>{state.bid.whatBestDescribesYou}</h2>
