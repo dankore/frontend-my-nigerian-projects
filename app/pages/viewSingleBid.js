@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import Axios from 'axios';
@@ -92,8 +92,16 @@ function ViewSingleBid(props) {
 
   return (
     <Page title='View Single Bid'>
+      <div className='flex items-center'>
+        <Link to={`/profile/${state.profileInfo.profileUsername}`}>
+          <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+        </Link>
+        <Link className='mx-3 text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
+          {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+        </Link>
+      </div>
       <h2>{state.bid.whatBestDescribesYou}</h2>
-      <p>By {`${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}</p>
+    
     </Page>
   );
 }

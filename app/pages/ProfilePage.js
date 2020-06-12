@@ -122,7 +122,7 @@ function ProfilePage() {
         <Link to={`/profile/${state.profileData.profileUsername}`}>
           <img className='h-10 w-10 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
         </Link>
-        <Link className='mx-3' to={`/profile/${state.profileData.profileUsername}`}>
+        <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
           {state.profileData.profileFirstName} {state.profileData.profileLastName}
         </Link>
 
