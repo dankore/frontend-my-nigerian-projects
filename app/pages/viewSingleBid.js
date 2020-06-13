@@ -104,7 +104,7 @@ function ViewSingleBid(props) {
           props.history.goBack();
         }
       } catch (error) {
-        console.log('Delete bid failed.');
+        console.log({ errorDeleteBid: error });
       }
     }
   }
