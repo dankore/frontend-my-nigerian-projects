@@ -196,7 +196,7 @@ function CreateBid(props) {
         </p>
         <p className='mr-2'>{item.quantity}</p>
         <p className='mr-2'>{item.price_per_item}</p>
-        <p className='mr-2'>{+(item.quantity * item.price_per_item)}</p>
+        <p className='mr-2'>{new Intl.NumberFormat().format(+(item.quantity * item.price_per_item))}</p>
         <div data-quantity={`${item.quantity}`} data-price_per_item={`${item.price_per_item}`} id={`${index}`} onClick={handleDeleteItem} className='text-red-600 cursor-pointer'>
           X
         </div>
@@ -262,7 +262,7 @@ function CreateBid(props) {
               </div>
               {state.items.map(itemHtmlTemplate)}
             </div>
-            <div className='flex justify-end pr-1'>Grand Total: {state.itemTotal}</div>
+            <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
           </div>
 
           {/* ADD ITEM */}

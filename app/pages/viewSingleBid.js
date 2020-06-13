@@ -138,7 +138,6 @@ function ViewSingleBid(props) {
   if (state.isNotFound) {
     return <NotFoundPage />;
   }
-  console.log(state.projectAndBid.bid.items)
 
   return (
     <Page margin='mx-2' title='View Single Bid'>

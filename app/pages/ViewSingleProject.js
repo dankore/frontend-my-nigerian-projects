@@ -183,7 +183,7 @@ function ViewSingleProject(props) {
               project.bids.map((bid, index) => {
                 return (
                   <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
-                    <span>Bid number# {index + 1}</span> <span>Cost: {bidItemsTotal(bid.items)}</span>
+                    <span>Bid number# {index + 1}</span> <span>Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
                   </Link>
                 );
               })
