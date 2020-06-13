@@ -219,7 +219,7 @@ function CreateBid(props) {
               What best describes you? <span className='text-red-600'>*</span>
             </label>
             <span className='relative inline-block'>
-              <select autoFocus onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+              <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
                 <option></option>
                 <option>I will get someone else to do the work</option>
                 <option>I will do the work myself</option>
