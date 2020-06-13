@@ -140,7 +140,7 @@ function ViewSingleBid(props) {
   }
 
   return (
-    <Page margin='mx-2' title='View Single Bid'>
+    <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
       <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
         Viewing a bid for{' '}
         <Link to={`/project/${state.params.projectId}`}>
