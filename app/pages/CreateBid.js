@@ -185,7 +185,6 @@ function CreateBid(props) {
     dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
     dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
     dispatch({ type: 'submitForm' });
-    console.log('submit');
   }
 
   const itemHtmlTemplate = function (item, index) {
