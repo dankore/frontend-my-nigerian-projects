@@ -34,6 +34,7 @@ import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoVie
 import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
 import CreateBid from './pages/CreateBid';
 import ViewSingleBid from './pages/viewSingleBid';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 // COMPONENTS END
 
 function Main() {
@@ -168,6 +169,9 @@ function Main() {
             </Route>
             <Route path='/terms'>
               <Terms />
+            </Route>
+            <Route path='/privacy'>
+              <PrivacyPolicyPage />
             </Route>
             <Route path='/settings'>{state.loggedIn ? <SettingsPage /> : <YouMustBeLoggedInToViewThisPage />}</Route>
             <Route path='/how-to-bid'>

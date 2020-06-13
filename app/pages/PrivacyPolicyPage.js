@@ -6,7 +6,7 @@ function PrivacyPolicyPage() {
   return (
     <Page margin='mx-2' title='Terms'>
       <h1 className='text-center text-2xl text-semibold font-mono'>Privacy Policy</h1>
-      <div className='relative z-10 leading-normal w-full max-w-md bg-white p-4 md:p-8 mx-auto shadow-md'>
+      <div className='relative z-10 leading-normal'>
         <p>
           The Bidding App("us", "we", or "our") operates the
           <Link className='text-blue-dark' to=' https://bidding.netlify.app '>
