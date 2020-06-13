@@ -185,6 +185,7 @@ function EditUserProfileInfo(props) {
               username: state.profileData.profileUsername.value,
               firstName: state.profileData.profileFirstName.value,
               lastName: state.profileData.profileLastName.value,
+              token: appState.user.token,
             },
             { cancelToken: request.token }
           );
