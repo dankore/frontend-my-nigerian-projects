@@ -13,11 +13,14 @@ function ViewSingleBid(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
-    bid: {
-      whatBestDescribesYou: '',
-      yearsOfExperience: '',
-      items: [],
-      otherDetails: '',
+    projectAndBid: {
+      projectTitle: '',
+      bid: {
+        whatBestDescribesYou: '',
+        yearsOfExperience: '',
+        items: [],
+        otherDetails: '',
+      },
     },
     profileInfo: {
       followActionLoading: false,
@@ -44,7 +47,7 @@ function ViewSingleBid(props) {
   function reducer(draft, action) {
     switch (action.type) {
       case 'fetchComplete':
-        draft.bid = action.value;
+        draft.projectAndBid = action.value;
         return;
       case 'fetchingComplete':
         draft.isFetching = false;
@@ -68,8 +71,8 @@ function ViewSingleBid(props) {
         if (data) {
           dispatch({ type: 'fetchComplete', value: data });
           // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
-          if (data.bidAuthor) {
-            const profileInfo = await Axios.post(`/profile/${data.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
+          if (data.bid.bidAuthor) {
+            const profileInfo = await Axios.post(`/profile/${data.bid.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
             dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
           } else {
             dispatch({ type: 'notFound' });
@@ -118,6 +121,9 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title='View Single Bid'>
+      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+        Viewing a bid for <span className='underline'>{state.projectAndBid.projectTitle}</span>
+      </h2>
       {/* PROFILE */}
       <div className='flex justify-between'>
         <div className='flex items-center'>
@@ -141,7 +147,7 @@ function ViewSingleBid(props) {
           </span>
         )}
       </div>
-      <h2>{state.bid.whatBestDescribesYou}</h2>
+      <h2>{state.projectAndBid.bid.whatBestDescribesYou}</h2>
     </Page>
   );
 }
