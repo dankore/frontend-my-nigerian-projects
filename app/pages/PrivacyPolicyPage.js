@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 function PrivacyPolicyPage() {
   return (
-    <Page margin='mx-2' title='Terms'>
+    <Page margin='mx-2' title='Privacy'>
       <h1 className='text-center text-2xl text-semibold font-mono'>Privacy Policy</h1>
       <div className='relative z-10 leading-normal'>
         <p>
-          The Bidding App("us", "we", or "our") operates the
+          The Bidding App ("us", "we", "I", or "our") operates the
           <Link className='text-blue-dark' to=' https://bidding.netlify.app '>
             {' '}
-            https://bidding.netlify.app
+            https://bidding.netlify.app {" "}
           </Link>
           website and the COMING SOON mobile application (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.
         </p>
