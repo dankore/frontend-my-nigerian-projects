@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, withRouter } from 'react-router-dom';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
 import Axios from 'axios';
@@ -7,10 +7,11 @@ import StateContext from '../StateContext';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
-
+import DispatchContext from '../DispatchContext';
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const initialState = {
     bid: {
       whatBestDescribesYou: '',
@@ -85,16 +86,28 @@ function ViewSingleBid(props) {
     return () => request.cancel();
   }, []);
 
-   function isOwner() {
-     if (appState.loggedIn) {
-       return appState.user.username == state.profileInfo.profileUsername;
-     }
-     return false;
-   }
+  function isOwner() {
+    if (appState.loggedIn) {
+      return appState.user.username == state.profileInfo.profileUsername;
+    }
+    return false;
+  }
 
-   function handleDeleteBid(){
-     console.log("hi")
-   }
+  async function handleDeleteBid() {
+    const areYouSure = confirm('Are you sure?');
+    if (areYouSure) {
+      try {
+        const response = await Axios.delete('/delete-bid', { data: { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token } });
+        console.log(response.data);
+        if (response.data == 'Success') {
+          appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
+          props.history.goBack();
+        }
+      } catch (error) {
+        console.log('Delete bid failed.');
+      }
+    }
+  }
 
   if (state.isFetching) {
     return <LoadingDotsIcon />;
@@ -133,4 +146,4 @@ function ViewSingleBid(props) {
   );
 }
 
-export default ViewSingleBid;
+export default withRouter(ViewSingleBid);
