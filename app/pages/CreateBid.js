@@ -248,7 +248,6 @@ function CreateBid(props) {
           </div>
 
           {/* ITEMIZE LIST */}
-
           <div className='mb-4 relative'>
             <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
               Itemize Lists <span className='text-red-600'>*</span>
