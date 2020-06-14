@@ -147,17 +147,21 @@ function ViewSingleBid(props) {
           <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
         </Link>
       </h2>
-      {/* PROFILE */}
+
       <div className='border border-gray-200 p-2 rounded'>
         <div className='flex justify-between'>
+          {/* PROFILE */}
           <div className='flex items-center'>
             <h3 className='mr-3 text-lg font-semibold'>Bid Owner:</h3>
             <Link to={`/profile/${state.profileInfo.profileUsername}`}>
               <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
             </Link>
-            <Link className='mx-3 text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
-              {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-            </Link>
+            <div className='ml-3'>
+              <Link className='text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
+                {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+              </Link>
+              <p>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+            </div>
           </div>
           {isOwner() && (
             <span className='pt-2'>
@@ -188,7 +192,6 @@ function ViewSingleBid(props) {
           </div>
           <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
         </div>
-        <h2>{state.projectAndBid.bid.whatBestDescribesYou}</h2>
       </div>
     </Page>
   );
