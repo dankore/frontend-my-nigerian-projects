@@ -115,6 +115,10 @@ function CreateBid(props) {
           draft.phone.message = 'Phone cannot be empty';
         }
         return;
+      case 'emailUpdate':
+        draft.email.hasErrors = false;
+        draft.email.value = action.value;
+        return;
       case 'emailRules':
         if (!action.value.trim()) {
           draft.email.hasErrors = true;
@@ -168,7 +172,7 @@ function CreateBid(props) {
               items: state.items,
               otherDetails: state.otherDetails.value,
               phone: state.phone.value,
-              email: state.project.email,
+              email: state.email.value,
               token: appState.user.token,
             },
             { cancelToken: request.token }
@@ -231,7 +235,6 @@ function CreateBid(props) {
   };
 
   const addItemButtonBool = state.item.name == '' && state.item.quantity == 0 && state.item.price_per_item == 0;
-  console.log(state.project.email);
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
@@ -335,7 +338,7 @@ function CreateBid(props) {
                 <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                   Email <span className='text-red-600'>*</span>
                 </label>
-                <input defaultValue={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                <input onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} value={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
                 <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                   <div style={CSSTransitionStyle} className='liveValidateMessage'>
                     {state.email.message}

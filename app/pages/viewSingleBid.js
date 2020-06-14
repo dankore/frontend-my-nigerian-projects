@@ -21,6 +21,7 @@ function ViewSingleBid(props) {
         items: [],
         otherDetails: '',
         phone: '',
+        email: '',
       },
     },
     profileInfo: {
@@ -70,7 +71,6 @@ function ViewSingleBid(props) {
       try {
         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token }, { cancelToken: request.token });
         if (data) {
-          console.log({ data });
           dispatch({ type: 'fetchComplete', value: data });
           // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
           if (data.bid.bidAuthor) {
@@ -103,7 +103,6 @@ function ViewSingleBid(props) {
     if (areYouSure) {
       try {
         const response = await Axios.delete('/delete-bid', { data: { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token } });
-        console.log(response.data);
         if (response.data == 'Success') {
           appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
           props.history.goBack();
@@ -204,7 +203,7 @@ function ViewSingleBid(props) {
           <legend className=''>Contact:</legend>
           <div className='flex flex-wrap justify-between'>
             <p className={containerCSS}>
-              <span className={titleCSS}>Email:</span> {`email goes here`}
+              <span className={titleCSS}>Email:</span> {state.projectAndBid.bid.email}
             </p>
             <p className={containerCSS}>
               <span className={titleCSS}>Phone Number:</span> {state.projectAndBid.bid.phone}
