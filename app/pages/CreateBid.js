@@ -54,7 +54,7 @@ function CreateBid(props) {
     switch (action.type) {
       case 'fetchingProjectComplete':
         draft.project.title = action.value.title;
-        // draft.email.value = action.value.email;
+        draft.email.value = action.value.email;
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
