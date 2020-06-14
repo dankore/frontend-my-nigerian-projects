@@ -8,6 +8,8 @@ import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
+import { contactContainerCSS } from '../helpers/CSSHelpers';
+
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -127,10 +129,7 @@ function ViewSingleBid(props) {
   };
 
   function bidItemsTotal(array) {
-    return array.reduce((total, currentElem) => {
-      const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
-      return total + currentTotal;
-    }, 0);
+    return array.reduce((total, currentElem) => total + +currentElem.quantity * +currentElem.price_per_item, 0);
   }
 
   if (state.isFetching) {
@@ -139,9 +138,6 @@ function ViewSingleBid(props) {
   if (state.isNotFound) {
     return <NotFoundPage />;
   }
-
-  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
-  const titleCSS = 'text-gray-700';
 
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
@@ -202,11 +198,11 @@ function ViewSingleBid(props) {
         <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
           <legend className=''>Contact:</legend>
           <div className='flex flex-wrap justify-between'>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Email:</span> {state.projectAndBid.bid.email}
+            <p className={contactContainerCSS}>
+              <span className='text-gray-700'>Email:</span> {state.projectAndBid.bid.email}
             </p>
-            <p className={containerCSS}>
-              <span className={titleCSS}>Phone Number:</span> {state.projectAndBid.bid.phone}
+            <p className={contactContainerCSS}>
+              <span className='text-gray-700'>Phone Number:</span> {state.projectAndBid.bid.phone}
             </p>
           </div>
         </fieldset>
