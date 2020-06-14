@@ -14,11 +14,7 @@ function CreateBid(props) {
   const appDispatch = useContext(DispatchContext);
   const initialState = {
     project: {
-      title: {
-        value: '',
-        hasErrors: '',
-        message: '',
-      },
+      title: '',
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
     whatBestDescribesYou: {
@@ -36,6 +32,16 @@ function CreateBid(props) {
       hasErrors: false,
       message: '',
     },
+    phone: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
+    email: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     items: [],
     itemTotal: 0,
     notFound: false,
@@ -47,7 +53,8 @@ function CreateBid(props) {
   function reducer(draft, action) {
     switch (action.type) {
       case 'fetchingProjectComplete':
-        draft.project.title.value = action.value.title;
+        draft.project.title = action.value.title;
+        draft.email.value = action.value.email;
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -98,11 +105,27 @@ function CreateBid(props) {
         draft.items.splice(action.value.index, 1);
         draft.itemTotal -= +action.value.quantity * +action.value.price_per_item;
         return;
+      case 'phoneUpdate':
+        draft.phone.hasErrors = false;
+        draft.phone.value = action.value;
+        return;
+      case 'phoneRules':
+        if (!action.value.trim()) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone cannot be empty';
+        }
+        return;
+      case 'emailRules':
+        if (!action.value.trim()) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Email cannot be empty';
+        }
+        return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
         return;
       case 'submitForm':
-        if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '') {
+        if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '' && !draft.phone.hasErrors && draft.phone.value != '' && !draft.email.hasErrors && draft.email.value != '') {
           draft.sendCount++;
         }
         return;
@@ -144,6 +167,8 @@ function CreateBid(props) {
               yearsOfExperience: state.yearsOfExperience.value,
               items: state.items,
               otherDetails: state.otherDetails.value,
+              phone: state.phone.value,
+              email: state.project.email,
               token: appState.user.token,
             },
             { cancelToken: request.token }
@@ -184,6 +209,8 @@ function CreateBid(props) {
     e.preventDefault();
     dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
     dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
+    dispatch({ type: 'phoneRules', value: state.phone.value });
+    dispatch({ type: 'emailRules', value: state.email.value });
     dispatch({ type: 'submitForm' });
   }
 
@@ -204,12 +231,13 @@ function CreateBid(props) {
   };
 
   const addItemButtonBool = state.item.name == '' && state.item.quantity == 0 && state.item.price_per_item == 0;
+  console.log(state.project.email);
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          Creating a bid for <span className='underline'>{state.project.title.value}</span>
+          Creating a bid for <span className='underline'>{state.project.title}</span>
         </h2>
         <div className='border border-gray-200 p-2 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
@@ -297,6 +325,37 @@ function CreateBid(props) {
             </label>
             <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
+
+          {/* CONTACT */}
+
+          <fieldset className='border rounded p-2 mb-4'>
+            <legend className=''>Contact:</legend>
+            <div className='lg:w-auto lg:flex justify-between'>
+              <div className='mb-4 lg:mb-0 relative'>
+                <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                  Email <span className='text-red-600'>*</span>
+                </label>
+                <input defaultValue={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                    {state.email.message}
+                  </div>
+                </CSSTransition>{' '}
+              </div>
+              <div className='relative'>
+                <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                  Phone Number <span className='text-red-600'>*</span>
+                </label>
+                <input onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                    {state.phone.message}
+                  </div>
+                </CSSTransition>{' '}
+              </div>
+            </div>
+          </fieldset>
+
           <button className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>Submit Bid</button>
         </div>
       </form>

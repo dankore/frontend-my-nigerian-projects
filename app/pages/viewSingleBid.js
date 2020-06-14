@@ -20,6 +20,7 @@ function ViewSingleBid(props) {
         yearsOfExperience: '',
         items: [],
         otherDetails: '',
+        phone: '',
       },
     },
     profileInfo: {
@@ -69,6 +70,7 @@ function ViewSingleBid(props) {
       try {
         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token }, { cancelToken: request.token });
         if (data) {
+          console.log({ data });
           dispatch({ type: 'fetchComplete', value: data });
           // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
           if (data.bid.bidAuthor) {
@@ -139,6 +141,9 @@ function ViewSingleBid(props) {
     return <NotFoundPage />;
   }
 
+  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
+  const titleCSS = 'text-gray-700';
+
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
       <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
@@ -194,6 +199,18 @@ function ViewSingleBid(props) {
           </div>
           <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
         </div>
+        {/* CONTACT */}
+        <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
+          <legend className=''>Contact:</legend>
+          <div className='flex flex-wrap justify-between'>
+            <p className={containerCSS}>
+              <span className={titleCSS}>Email:</span> {`email goes here`}
+            </p>
+            <p className={containerCSS}>
+              <span className={titleCSS}>Phone Number:</span> {state.projectAndBid.bid.phone}
+            </p>
+          </div>
+        </fieldset>
       </div>
     </Page>
   );
