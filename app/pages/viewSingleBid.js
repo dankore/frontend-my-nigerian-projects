@@ -75,7 +75,7 @@ function ViewSingleBid(props) {
         if (data) {
           dispatch({ type: 'fetchComplete', value: data });
           // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
-          if (data.bid.bidAuthor) {
+          if (data.bid?.bidAuthor) {
             const profileInfo = await Axios.post(`/profile/${data.bid.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
             dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
           } else {
