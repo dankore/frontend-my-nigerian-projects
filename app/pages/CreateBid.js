@@ -220,9 +220,8 @@ function CreateBid(props) {
             <span className='relative inline-block'>
               <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
                 <option></option>
-                <option>I will get someone else to do the work</option>
+                <option>I will get someone else to do the work(contractor)</option>
                 <option>I will do the work myself</option>
-                <option>Both</option>
               </select>
               <CSSTransition in={state.whatBestDescribesYou.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>

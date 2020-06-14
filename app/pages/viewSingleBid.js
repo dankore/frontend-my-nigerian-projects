@@ -151,16 +151,18 @@ function ViewSingleBid(props) {
       <div className='border border-gray-200 p-2 rounded'>
         <div className='flex justify-between'>
           {/* PROFILE */}
-          <div className='flex items-center'>
-            <h3 className='mr-3 text-lg font-semibold'>Bid Owner:</h3>
-            <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-              <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-            </Link>
-            <div className='ml-3'>
-              <Link className='text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
-                {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+          <div className='lg:flex lg:items-center'>
+            <h3 className='lg:mr-2 text-lg font-semibold'>Bid Owner:</h3>
+            <div className='flex items-center lg:flex-none'>
+              <Link to={`/profile/${state.profileInfo.profileUsername}`}>
+                <img className='h-16 lg:h-10 w-16 lg:w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
               </Link>
-              <p>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+              <div className='pl-2'>
+                <Link className='text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
+                  {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+                </Link>
+                <p>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+              </div>
             </div>
           </div>
           {isOwner() && (
