@@ -11,7 +11,6 @@ import DispatchContext from '../DispatchContext';
 import { contactContainerCSS } from '../helpers/CSSHelpers';
 import ReactMarkdown from 'react-markdown';
 
-
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
@@ -142,42 +141,48 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
-      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-        Viewing a bid for{' '}
-        <Link to={`/project/${state.params.projectId}`}>
-          <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
-        </Link>
-      </h2>
+      <div className='flex justify-between items-center'>
+        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+          Viewing a bid for{' '}
+          <Link to={`/project/${state.params.projectId}`}>
+            <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
+          </Link>
+        </h2>
+        {isOwner() && (
+          <span className='pt-2'>
+            <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+              <i className='fas fa-edit'></i>
+            </Link>
+            <ReactToolTip place='bottom' id='edit-btn' />
+            <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+              <i className='fas fa-trash'></i>
+            </button>
+            <ReactToolTip place='bottom' id='delete-btn' />
+          </span>
+        )}
+      </div>
+      {/* PROFILE */}
+      <div className='border border-gray-200 rounded'>
+        <div className='bg-gray-700 p-2 rounded-t text-white'>
+          <Link className='flex justify-center' to={`/profile/${state.profileInfo.profileUsername}`}>
+            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+          </Link>
+          <Link className='flex justify-center text-lg' to={`/profile/${state.profileInfo.profileUsername}`}>
+            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+          </Link>
+          <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
 
-      <div className='border border-gray-200 p-2 rounded'>
-        <div className='flex justify-between'>
-          {/* PROFILE */}
-          <div className='lg:flex lg:items-center'>
-            <h3 className='lg:mr-2 text-lg font-semibold'>Bid Owner:</h3>
-            <div className='flex items-center lg:flex-none'>
-              <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-                <img className='h-16 lg:h-10 w-16 lg:w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-              </Link>
-              <div className='pl-2'>
-                <Link className='text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
-                  {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-                </Link>
-                <p>{state.projectAndBid.bid.whatBestDescribesYou}</p>
-              </div>
+          <hr />
+          <div className='flex justify-between text-xs px-2'>
+            <div class='flex items-center'>
+              <i class='fas fa-envelope'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
+            </div>
+            <div class='flex items-center'>
+              <i class='fas fa-phone'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
           </div>
-          {isOwner() && (
-            <span className='pt-2'>
-              <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
-                <i className='fas fa-edit'></i>
-              </Link>
-              <ReactToolTip place='bottom' id='edit-btn' />
-              <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
-                <i className='fas fa-trash'></i>
-              </button>
-              <ReactToolTip place='bottom' id='delete-btn' />
-            </span>
-          )}
         </div>
         {/* ITEMIZE LIST */}
         <div className='my-4 relative'>
@@ -199,18 +204,6 @@ function ViewSingleBid(props) {
         <fieldset className='border rounded p-2 bg-gray-100'>
           <legend>Other Details</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-        </fieldset>
-        {/* CONTACT */}
-        <fieldset className='border rounded p-2 my-4 bg-gray-100'>
-          <legend className=''>Contact:</legend>
-          <div className='flex flex-wrap justify-between'>
-            <p className={contactContainerCSS}>
-              <span className='text-gray-700'>Email:</span> {state.projectAndBid.bid.email}
-            </p>
-            <p className={contactContainerCSS}>
-              <span className='text-gray-700'>Phone Number:</span> {state.projectAndBid.bid.phone}
-            </p>
-          </div>
         </fieldset>
       </div>
     </Page>
