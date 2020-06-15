@@ -163,34 +163,13 @@ function ViewSingleBid(props) {
       </div>
       {/* PROFILE */}
       <div className='border border-gray-200 rounded'>
-        <div className='bg-gray-700 p-2 rounded-t text-white'>
-          <Link className='flex justify-center' to={`/profile/${state.profileInfo.profileUsername}`}>
-            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-          </Link>
-          <Link className='flex justify-center text-lg' to={`/profile/${state.profileInfo.profileUsername}`}>
-            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-          </Link>
-          <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
-
-          <hr />
-          <div className='flex justify-between text-xs px-2'>
-            <div class='flex items-center'>
-              <i class='fas fa-envelope'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
-            </div>
-            <div class='flex items-center'>
-              <i class='fas fa-phone'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
-            </div>
-          </div>
-        </div>
         {/* ITEMIZE LIST */}
-        <div className='my-4 relative'>
-          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
+        <div className='mt-2 relative'>
+          <label htmlFor='project-body' className='w-full px-2 text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
             Itemize Lists <span className='text-red-600'>*</span>
           </label>
-          <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
-            <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
+          <div className='' style={{ minHeight: 4 + 'rem' }}>
+            <div className='flex p-2 bg-gray-700 text-white justify-between'>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
@@ -201,10 +180,40 @@ function ViewSingleBid(props) {
           <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
         </div>
         {/* OTHER DETAILS */}
-        <fieldset className='border rounded p-2 bg-gray-100'>
+        <fieldset className='border-t border-b p-2 bg-gray-100'>
           <legend>Other Details</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
+        <p className='px-2 mt-4 text'>Bid Posted By:</p>
+        <div className='bg-gray-700 py-2 rounded-b text-white'>
+          <Link className='flex justify-center' to={`/profile/${state.profileInfo.profileUsername}`}>
+            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+          </Link>
+          <Link className='flex justify-center text-lg' to={`/profile/${state.profileInfo.profileUsername}`}>
+            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+          </Link>
+          <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
+
+          <hr />
+          <div className='flex justify-center flex-wrap text-xs px-2'>
+            <div className='flex items-center mr-2'>
+              <i className='fas fa-envelope'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
+            </div>
+            <div className='flex items-center mr-2'>
+              <i className='fas fa-phone'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
+            </div>
+            <div className='flex items-center mr-2'>
+              <i class='fas fa-id-badge'></i>
+              <p className='ml-1'>Years of experience: {state.projectAndBid.bid.yearsOfExperience}</p>
+            </div>
+            <div className='flex items-center'>
+              <i class='fas fa-id-badge'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </Page>
   );
