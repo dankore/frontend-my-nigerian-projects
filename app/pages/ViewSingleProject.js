@@ -64,8 +64,9 @@ function ViewSingleProject(props) {
       try {
         const response = await Axios.delete(`/project/${id}`, { data: { token: appState.user.token } });
         if (response.data == 'Success') {
+          // props.history.push(`/profile/${appState.user.username}`);
+          props.history.goBack();
           appDispatch({ type: 'flashMessage', value: 'Project deleted.' });
-          props.history.push(`/profile/${appState.user.username}`);
         }
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Problem deleting your project. Please try again.' });

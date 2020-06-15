@@ -205,11 +205,11 @@ function ViewSingleBid(props) {
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
             <div className='flex items-center mr-2'>
-              <i class='fas fa-id-badge'></i>
+              <i className='fas fa-id-badge'></i>
               <p className='ml-1'>Years of experience: {state.projectAndBid.bid.yearsOfExperience}</p>
             </div>
             <div className='flex items-center'>
-              <i class='fas fa-id-badge'></i>
+              <i className='fas fa-id-badge'></i>
               <p className='ml-1'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
             </div>
           </div>
