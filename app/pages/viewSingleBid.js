@@ -184,14 +184,18 @@ function ViewSingleBid(props) {
           <legend>Other Details</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
-        <p className='px-2 mt-4 text'>Bid Posted By:</p>
+        <p className='px-2 mt-4 mb-2 text'>Bid Posted By:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
-          <Link className='flex justify-center' to={`/profile/${state.profileInfo.profileUsername}`}>
-            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-          </Link>
-          <Link className='flex justify-center text-lg' to={`/profile/${state.profileInfo.profileUsername}`}>
-            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-          </Link>
+          <div className='flex justify-center'>
+            <Link to={`/profile/${state.profileInfo.profileUsername}`}>
+              <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+            </Link>
+          </div>
+          <div className='flex justify-center text-lg'>
+            <Link to={`/profile/${state.profileInfo.profileUsername}`}>
+              {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+            </Link>
+          </div>
           <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
 
           <hr />
@@ -205,8 +209,8 @@ function ViewSingleBid(props) {
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
             <div className='flex items-center mr-2'>
-              <i className='fas fa-id-badge'></i>
-              <p className='ml-1'>Years of experience: {state.projectAndBid.bid.yearsOfExperience}</p>
+              <i class='fas fa-user-cog'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.yearsOfExperience} Years of experience </p>
             </div>
             <div className='flex items-center'>
               <i className='fas fa-id-badge'></i>
