@@ -134,8 +134,7 @@ function ViewSingleBid(props) {
   }
 
   function formatDate() {
-    if (state.projectAndBid.bid.userCreationDate) {
-      const dateString = state.projectAndBid.bid.userCreationDate;
+    if (state.projectAndBid.bid.userCreationDate && typeof state.projectAndBid.bid.userCreationDate == 'string') {
       let month = new Array();
       month[1] = 'January';
       month[2] = 'February';
@@ -151,11 +150,11 @@ function ViewSingleBid(props) {
       month[12] = 'December';
 
       /**
-       * @param dateString in this format e.g yyyy-mm-dd
+       * @param state.projectAndBid.bid.userCreationDate is in this format e.g yyyy-mm-dd
        * @returns format May 29, 2020
        */
 
-      const datePartsArray = dateString.split('-');
+      const datePartsArray = state.projectAndBid.bid.userCreationDate.split('-');
       // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
       return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
     }
