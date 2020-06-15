@@ -24,6 +24,7 @@ function ViewSingleBid(props) {
         otherDetails: '',
         phone: '',
         email: '',
+        userCreationDate: '',
       },
     },
     profileInfo: {
@@ -132,6 +133,33 @@ function ViewSingleBid(props) {
     return array.reduce((total, currentElem) => total + +currentElem.quantity * +currentElem.price_per_item, 0);
   }
 
+  function formatDate(dateString) {
+    let month = new Array();
+    month[1] = 'January';
+    month[2] = 'February';
+    month[3] = 'March';
+    month[4] = 'April';
+    month[5] = 'May';
+    month[6] = 'June';
+    month[7] = 'July';
+    month[8] = 'August';
+    month[9] = 'September';
+    month[10] = 'October';
+    month[11] = 'November';
+    month[12] = 'December';
+
+    /**
+     * @param dateString in this format e.g yyyy-mm-dd
+     * @returns format May 29, 2020
+     */
+
+    if (dateString) {
+      const datePartsArray = dateString.split('-');
+      // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
+      return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
+    }
+  }
+
   if (state.isFetching) {
     return <LoadingDotsIcon />;
   }
@@ -196,7 +224,7 @@ function ViewSingleBid(props) {
               {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
             </Link>
           </div>
-          <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {formatDate(state.projectAndBid.bid.userCreationDate)}</p>
 
           <hr />
           <div className='flex justify-center flex-wrap text-xs px-2'>
@@ -209,7 +237,7 @@ function ViewSingleBid(props) {
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
             <div className='flex items-center mr-3'>
-              <i class='fas fa-user-cog'></i>
+              <i className='fas fa-user-cog'></i>
               <p className='ml-1'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
             </div>
             <div className='flex items-center'>

@@ -173,6 +173,7 @@ function CreateBid(props) {
               otherDetails: state.otherDetails.value,
               phone: state.phone.value,
               email: state.email.value,
+              userCreationDate: appState.user.userCreationDate,
               token: appState.user.token,
             },
             { cancelToken: request.token }

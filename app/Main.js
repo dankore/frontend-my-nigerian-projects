@@ -49,6 +49,7 @@ function Main() {
       firstName: localStorage.getItem('biddingApp-firstname'),
       lastName: localStorage.getItem('biddingApp-lastname'),
       avatar: localStorage.getItem('biddingApp-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
+      userCreationDate: localStorage.getItem('biddingApp-userCreationDate'),
     },
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
@@ -101,6 +102,7 @@ function Main() {
       localStorage.setItem('biddingApp-firstname', state.user.firstName);
       localStorage.setItem('biddingApp-lastname', state.user.lastName);
       localStorage.setItem('biddingApp-avatar', state.user.avatar);
+      localStorage.setItem('biddingApp-userCreationDate', state.user.userCreationDate);
     } else {
       localStorage.removeItem('biddingApp-id');
       localStorage.removeItem('biddingApp-token');
@@ -108,6 +110,7 @@ function Main() {
       localStorage.removeItem('biddingApp-firstname');
       localStorage.removeItem('biddingApp-lastname');
       localStorage.removeItem('biddingApp-avatar');
+      localStorage.removeItem('biddingApp-userCreationDate');
     }
   }, [state.loggedIn]);
 

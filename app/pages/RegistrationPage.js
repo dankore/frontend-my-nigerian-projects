@@ -243,7 +243,6 @@ function RegistrationPage(props) {
     }
   }, [state.submitCount]);
 
-
   function handleSubmit(e) {
     e.preventDefault();
     dispatch({ type: 'usernameImmediately', value: state.username.value });
