@@ -189,7 +189,7 @@ function ViewSingleBid(props) {
           </span>
         )}
       </div>
-      {/* PROFILE */}
+
       <div className='border border-gray-200 rounded'>
         {/* ITEMIZE LIST */}
         <div className='mt-2 relative'>
@@ -212,6 +212,7 @@ function ViewSingleBid(props) {
           <legend>Other Details</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
+        {/* PROFILE */}
         <p className='px-2 mt-4 mb-2 text'>Bid Posted By:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
