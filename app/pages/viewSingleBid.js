@@ -200,17 +200,17 @@ function ViewSingleBid(props) {
 
           <hr />
           <div className='flex justify-center flex-wrap text-xs px-2'>
-            <div className='flex items-center mr-2'>
+            <div className='flex items-center mr-3'>
               <i className='fas fa-envelope'></i>
               <p className='ml-1'>{state.projectAndBid.bid.email}</p>
             </div>
-            <div className='flex items-center mr-2'>
+            <div className='flex items-center mr-3'>
               <i className='fas fa-phone'></i>
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
-            <div className='flex items-center mr-2'>
+            <div className='flex items-center mr-3'>
               <i class='fas fa-user-cog'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.yearsOfExperience} Years of experience </p>
+              <p className='ml-1'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
             </div>
             <div className='flex items-center'>
               <i className='fas fa-id-badge'></i>
