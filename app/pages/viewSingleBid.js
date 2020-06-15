@@ -11,7 +11,6 @@ import DispatchContext from '../DispatchContext';
 import { contactContainerCSS } from '../helpers/CSSHelpers';
 import ReactMarkdown from 'react-markdown';
 
-
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
@@ -142,50 +141,35 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
-      <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-        Viewing a bid for{' '}
-        <Link to={`/project/${state.params.projectId}`}>
-          <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
-        </Link>
-      </h2>
-
-      <div className='border border-gray-200 p-2 rounded'>
-        <div className='flex justify-between'>
-          {/* PROFILE */}
-          <div className='lg:flex lg:items-center'>
-            <h3 className='lg:mr-2 text-lg font-semibold'>Bid Owner:</h3>
-            <div className='flex items-center lg:flex-none'>
-              <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-                <img className='h-16 lg:h-10 w-16 lg:w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
-              </Link>
-              <div className='pl-2'>
-                <Link className='text-blue-600' to={`/profile/${state.profileInfo.profileUsername}`}>
-                  {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
-                </Link>
-                <p>{state.projectAndBid.bid.whatBestDescribesYou}</p>
-              </div>
-            </div>
-          </div>
-          {isOwner() && (
-            <span className='pt-2'>
-              <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
-                <i className='fas fa-edit'></i>
-              </Link>
-              <ReactToolTip place='bottom' id='edit-btn' />
-              <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
-                <i className='fas fa-trash'></i>
-              </button>
-              <ReactToolTip place='bottom' id='delete-btn' />
-            </span>
-          )}
-        </div>
+      <div className='flex justify-between items-center'>
+        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+          Viewing a bid for{' '}
+          <Link to={`/project/${state.params.projectId}`}>
+            <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
+          </Link>
+        </h2>
+        {isOwner() && (
+          <span className='pt-2'>
+            <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+              <i className='fas fa-edit'></i>
+            </Link>
+            <ReactToolTip place='bottom' id='edit-btn' />
+            <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+              <i className='fas fa-trash'></i>
+            </button>
+            <ReactToolTip place='bottom' id='delete-btn' />
+          </span>
+        )}
+      </div>
+      {/* PROFILE */}
+      <div className='border border-gray-200 rounded'>
         {/* ITEMIZE LIST */}
-        <div className='my-4 relative'>
-          <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
+        <div className='mt-2 relative'>
+          <label htmlFor='project-body' className='w-full px-2 text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
             Itemize Lists <span className='text-red-600'>*</span>
           </label>
-          <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
-            <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
+          <div className='' style={{ minHeight: 4 + 'rem' }}>
+            <div className='flex p-2 bg-gray-700 text-white justify-between'>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
               <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
@@ -196,22 +180,40 @@ function ViewSingleBid(props) {
           <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
         </div>
         {/* OTHER DETAILS */}
-        <fieldset className='border rounded p-2 bg-gray-100'>
+        <fieldset className='border-t border-b p-2 bg-gray-100'>
           <legend>Other Details</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
-        {/* CONTACT */}
-        <fieldset className='border rounded p-2 my-4 bg-gray-100'>
-          <legend className=''>Contact:</legend>
-          <div className='flex flex-wrap justify-between'>
-            <p className={contactContainerCSS}>
-              <span className='text-gray-700'>Email:</span> {state.projectAndBid.bid.email}
-            </p>
-            <p className={contactContainerCSS}>
-              <span className='text-gray-700'>Phone Number:</span> {state.projectAndBid.bid.phone}
-            </p>
+        <p className='px-2 mt-4 text'>Bid Posted By:</p>
+        <div className='bg-gray-700 py-2 rounded-b text-white'>
+          <Link className='flex justify-center' to={`/profile/${state.profileInfo.profileUsername}`}>
+            <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+          </Link>
+          <Link className='flex justify-center text-lg' to={`/profile/${state.profileInfo.profileUsername}`}>
+            {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+          </Link>
+          <p className='flex justify-center mb-2 text-xs'>{`Member Since June 15, 2020 `}</p>
+
+          <hr />
+          <div className='flex justify-center flex-wrap text-xs px-2'>
+            <div className='flex items-center mr-2'>
+              <i className='fas fa-envelope'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
+            </div>
+            <div className='flex items-center mr-2'>
+              <i className='fas fa-phone'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
+            </div>
+            <div className='flex items-center mr-2'>
+              <i class='fas fa-id-badge'></i>
+              <p className='ml-1'>Years of experience: {state.projectAndBid.bid.yearsOfExperience}</p>
+            </div>
+            <div className='flex items-center'>
+              <i class='fas fa-id-badge'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+            </div>
           </div>
-        </fieldset>
+        </div>
       </div>
     </Page>
   );
