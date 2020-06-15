@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import { useImmerReducer } from 'use-immer';
-import { useParams, withRouter } from 'react-router-dom';
+import { useParams, withRouter, Link } from 'react-router-dom';
 import Axios from 'axios';
 import NotFoundPage from './NotFoundPage';
 import { CSSTransition } from 'react-transition-group';
@@ -240,7 +240,10 @@ function CreateBid(props) {
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          Creating a bid for <span className='underline'>{state.project.title}</span>
+          Creating a bid for{' '}
+          <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
+            {state.project.title}
+          </Link>
         </h2>
         <div className='border border-gray-200 p-2 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
