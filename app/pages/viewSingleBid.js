@@ -9,6 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
 import { contactContainerCSS } from '../helpers/CSSHelpers';
+import ReactMarkdown from 'react-markdown';
 
 
 function ViewSingleBid(props) {
@@ -194,8 +195,13 @@ function ViewSingleBid(props) {
           </div>
           <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
         </div>
+        {/* OTHER DETAILS */}
+        <fieldset className='border rounded p-2 bg-gray-100'>
+          <legend>Other Details</legend>
+          <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        </fieldset>
         {/* CONTACT */}
-        <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
+        <fieldset className='border rounded p-2 my-4 bg-gray-100'>
           <legend className=''>Contact:</legend>
           <div className='flex flex-wrap justify-between'>
             <p className={contactContainerCSS}>
