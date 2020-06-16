@@ -118,9 +118,9 @@ function ViewSingleProject(props) {
     <Page margin='mx-2' title={project.title}>
       <div>
         <div className='flex justify-between items-center'>
-        <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          {appState.loggedIn ? project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s" : project.author.firstName + "'s"  } project: {project.title}
-        </h2>
+          <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+            {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
+          </h2>
           {isOwner() && (
             <span className='flex block pt-2'>
               <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
@@ -134,14 +134,14 @@ function ViewSingleProject(props) {
             </span>
           )}
         </div>
-        <p>Description:</p>
+        <p className='pl-2 font-mono'>Description:</p>
         <div className='border border-gray-200 rounded'>
           <div className='border-b p-2 mb-4 bg-gray-100'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-         </div>
-         
+          </div>
+
           <fieldset className='border-t border-b p-2 my-4'>
-            <legend>Location & Deadline:</legend>
+            <legend className='font-mono'>Location & Deadline:</legend>
             <div className='flex flex-wrap justify-between'>
               <p className={containerCSS}>
                 <span className={titleCSS}>Project Location:</span> {project.location}
@@ -151,33 +151,33 @@ function ViewSingleProject(props) {
               </p>
             </div>
           </fieldset>
-        
-        {/* PROFILE */}
-        <p className='px-2 mt-4 mb-2'>Project posted on {dateFormatted} by:</p>
-        <div className='bg-gray-700 py-2 rounded-b text-white'>
-          <div className='flex justify-center'>
-            <Link to={`/profile/${project.author.username}`}>
-              <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
-            </Link>
-          </div>
-          <div className='flex justify-center text-lg'>
-            <Link to={`/profile/${project.author.username}`}>
-              {project.author.firstName} {project.author.lastName}
-            </Link>
-          </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormattedUserCreationDate(project.author.userCreationDate)}</p>
 
-          <hr />
-          <div className='flex justify-center flex-wrap text-xs px-2'>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-envelope'></i>
-              <p className='ml-1'>{project.email}</p>
+          {/* PROFILE */}
+          <p className='px-2 mt-4 mb-2 font-mono'>Project posted on {dateFormatted} by:</p>
+          <div className='bg-gray-700 py-2 rounded-b text-white'>
+            <div className='flex justify-center'>
+              <Link to={`/profile/${project.author.username}`}>
+                <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
+              </Link>
             </div>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-phone'></i>
-              <p className='ml-1'>{project.phone}</p>
+            <div className='flex justify-center text-lg'>
+              <Link to={`/profile/${project.author.username}`}>
+                {project.author.firstName} {project.author.lastName}
+              </Link>
             </div>
-          </div>
+            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormattedUserCreationDate(project.author.userCreationDate)}</p>
+
+            <hr />
+            <div className='flex justify-center flex-wrap text-xs px-2'>
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-envelope'></i>
+                <p className='ml-1'>{project.email}</p>
+              </div>
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-phone'></i>
+                <p className='ml-1'>{project.phone}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

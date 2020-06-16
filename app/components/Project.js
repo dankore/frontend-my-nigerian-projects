@@ -36,27 +36,15 @@ function Project(props) {
 
   return (
     <Link to={`/project/${project._id}`}>
-      <div className='border border-gray-200 flex py-3 hover:bg-gray-100'>
-        <div className='mx-6'>
-          <div className='flex items-center'>
-            <div className=''>
-              <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
-            </div>
-            <div className='ml-2'>
-              <div className='text-sm leading-5 font-medium text-gray-900'>
-                {project.author.firstName} {project.author.lastName}
-              </div>
-              <div className='text-sm leading-5 text-gray-500'>on {dateFormatted}</div>
-            </div>
+      <div className='flex items-center justify-between border border-gray-200 flex p-3 hover:bg-gray-100'>
+        <div className='flex items-center'>
+          <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
+          <div className='ml-1 text-sm leading-5 font-medium'>
+            {project.author.firstName} {project.author.lastName}
           </div>
         </div>
-        <div className='w-32'>
-          <div className='text-sm leading-5 text-gray-900'>{formatTitleAndDescription(project.title)}</div>
-          <div className='text-sm leading-5 text-gray-500'>
-            <ReactMarkdown source={formatTitleAndDescription(project.description)} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-          </div>
-        </div>
-        <div className='ml-6 px-2 text-xs leading-5 font-semibold rounded-full'>{timeRemainingInDays()}</div>
+        <div className='ml-1 text-sm leading-5'>{formatTitleAndDescription(project.title)}</div>
+        <div className='ml-1 text-xs leading-5 font-semibold rounded-full'>{timeRemainingInDays()}</div>
       </div>
     </Link>
   );
