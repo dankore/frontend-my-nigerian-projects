@@ -183,11 +183,11 @@ function ViewSingleBid(props) {
       </div>
 
       {/* ITEMIZE LIST */}
-      <label htmlFor='project-body' className='font-mono w-full px-2 text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
+      <label htmlFor='project-body' className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
         Itemize Lists:
       </label>
       <div className='border border-gray-200 rounded'>
-        <div className='' style={{ minHeight: 4 + 'rem' }}>
+        <div style={{ minHeight: 4 + 'rem' }}>
           <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
             <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
             <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
@@ -200,11 +200,11 @@ function ViewSingleBid(props) {
 
         {/* OTHER DETAILS */}
         <fieldset className='border-t border-b p-2 bg-gray-100'>
-          <legend className='font-mono'>Other Details</legend>
+          <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
         {/* PROFILE */}
-        <p className='font-mono px-2 mt-4 mb-2 text'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
+        <p className='text-lg leading-7 font-medium tracking-tight text-gray-900 px-2 mt-4 mb-2'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
             <Link to={`/profile/${state.profileInfo.username}`}>

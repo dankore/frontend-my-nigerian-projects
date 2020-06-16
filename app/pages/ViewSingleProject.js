@@ -134,14 +134,14 @@ function ViewSingleProject(props) {
             </span>
           )}
         </div>
-        <p className='pl-2 font-mono'>Description:</p>
+        <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
         <div className='border border-gray-200 rounded'>
           <div className='border-b p-2 mb-4 bg-gray-100'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
 
           <fieldset className='border-t border-b p-2 my-4'>
-            <legend className='font-mono'>Location & Deadline:</legend>
+            <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Location & Deadline:</legend>
             <div className='flex flex-wrap justify-between'>
               <p className={containerCSS}>
                 <span className={titleCSS}>Project Location:</span> {project.location}
@@ -153,7 +153,7 @@ function ViewSingleProject(props) {
           </fieldset>
 
           {/* PROFILE */}
-          <p className='px-2 mt-4 mb-2 font-mono'>Project posted on {dateFormatted} by:</p>
+          <p className='px-2 mt-4 mb-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Project posted on {dateFormatted} by:</p>
           <div className='bg-gray-700 py-2 rounded-b text-white'>
             <div className='flex justify-center'>
               <Link to={`/profile/${project.author.username}`}>
