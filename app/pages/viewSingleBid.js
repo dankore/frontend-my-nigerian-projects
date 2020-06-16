@@ -62,10 +62,10 @@ function ViewSingleBid(props) {
     const request = Axios.CancelToken.source();
     (async function fetchDataViewSingleBid() {
       try {
-        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token }, { cancelToken: request.token });
+        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId }, { cancelToken: request.token });
         if (data) {
           dispatch({ type: 'fetchComplete', value: data });
-          // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
+          // WRAP BELOW IN IF STATEMENT OTHERWISE DATA.BIDAUTHOR.USERNAME IS UNDEFINED
           if (data.bid?.bidAuthor) {
             const profileInfo = await Axios.post(`/getProfileById`,  { authorId: data.bid.bidAuthor.authorId }, { cancelToken: request.token });
             dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
@@ -161,7 +161,7 @@ function ViewSingleBid(props) {
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center'>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          Viewing a bid for{' '}
+          Viewing {appState.loggedIn ? state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s" : state.profileInfo.firstName + "'s"  } bid for{' '}
           <Link to={`/project/${state.params.projectId}`}>
             <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
           </Link>
