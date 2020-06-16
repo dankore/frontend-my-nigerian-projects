@@ -28,21 +28,12 @@ function ViewSingleBid(props) {
       },
     },
     profileInfo: {
-      followActionLoading: false,
-      startFollowingRequestCount: 0,
-      stopFollowingRequestCount: 0,
-      profileData: {
-        profileUsername: '...',
-        profileFirstName: '',
-        profileLastName: '',
-        profileAvatar: 'https://gravatar.com/avatar/palceholder?s=128',
-        isFollowing: false,
-        counts: {
-          projectCount: '',
-          followerCount: '',
-          followingCount: '',
-        },
-      },
+        _id: "",
+        avatar: "https://gravatar.com/avatar/palceholder?s=128",
+        email: "",
+        firstName: "",
+        lastName: "",
+        username: "",
     },
     params: useParams(),
     isFetching: true,
@@ -67,6 +58,7 @@ function ViewSingleBid(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+  console.log({state})
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -77,7 +69,7 @@ function ViewSingleBid(props) {
           dispatch({ type: 'fetchComplete', value: data });
           // WRAP BELOW IN IF STATEMENT OTHER DATA.BIDAUTHOR.USERNAME IS UNDEFINED
           if (data.bid?.bidAuthor) {
-            const profileInfo = await Axios.post(`/profile/${data.bid.bidAuthor.username}`, { token: appState.user.token }, { cancelToken: request.token });
+            const profileInfo = await Axios.post(`/getProfileById`,  { authorId: data.bid.bidAuthor.authorId }, { cancelToken: request.token });
             dispatch({ type: 'profileInfoFetchComplete', value: profileInfo.data });
           } else {
             dispatch({ type: 'notFound' });
@@ -96,7 +88,7 @@ function ViewSingleBid(props) {
 
   function isOwner() {
     if (appState.loggedIn) {
-      return appState.user.username == state.profileInfo.profileUsername;
+      return appState.user.username == state.profileInfo.username;
     }
     return false;
   }
@@ -168,7 +160,7 @@ function ViewSingleBid(props) {
   }
 
   return (
-    <Page margin='mx-2' title={`Bid by ${state.profileInfo.profileFirstName} ${state.profileInfo.profileLastName}`}>
+    <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center'>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
           Viewing a bid for{' '}
@@ -216,13 +208,13 @@ function ViewSingleBid(props) {
         <p className='px-2 mt-4 mb-2 text'>Bid Posted By:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
-            <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-              <img className='h-10 w-10 rounded-full' src={state.profileInfo.profileAvatar} alt='Profile Pic' />
+            <Link to={`/profile/${state.profileInfo.username}`}>
+              <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='Profile Pic' />
             </Link>
           </div>
           <div className='flex justify-center text-lg'>
-            <Link to={`/profile/${state.profileInfo.profileUsername}`}>
-              {state.profileInfo.profileFirstName} {state.profileInfo.profileLastName}
+            <Link to={`/profile/${state.profileInfo.username}`}>
+              {state.profileInfo.firstName} {state.profileInfo.lastName}
             </Link>
           </div>
           <p className='flex justify-center mb-2 text-xs'>Member since: {formatDate()}</p>
