@@ -160,14 +160,14 @@ function ViewSingleBid(props) {
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center'>
-        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+        <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
           {appState.loggedIn ? state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s" : state.profileInfo.firstName + "'s"  } bid for{' '}
           <Link to={`/project/${state.params.projectId}`}>
             <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
           </Link>
         </h2>
         {isOwner() && (
-          <span className='pt-2'>
+          <span className='flex block pt-2'>
             <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
               <i className='fas fa-edit'></i>
             </Link>
@@ -203,7 +203,7 @@ function ViewSingleBid(props) {
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
         {/* PROFILE */}
-        <p className='px-2 mt-4 mb-2 text'>Bid Posted By:</p>
+        <p className='px-2 mt-4 mb-2 text'>Bid posted by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
             <Link to={`/profile/${state.profileInfo.username}`}>

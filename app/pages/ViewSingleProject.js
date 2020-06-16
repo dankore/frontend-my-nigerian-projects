@@ -113,23 +113,16 @@ function ViewSingleProject(props) {
   const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
   const titleCSS = 'text-gray-700';
 
+
   return (
     <Page margin='mx-2' title={project.title}>
       <div>
-        <div className='flex justify-between'>
-          <div className='flex items-center'>
-            <Link to={`/profile/${project.author.username}`}>
-              <img className='w-12 h-12 rounded-full mr-2' src={project.author.avatar} />
-            </Link>
-            <div>
-              <Link className='text-blue-600' to={`/profile/${project.author.username}`}>
-                {project.author.firstName} {project.author.lastName}
-              </Link>{' '}
-              <p className='text-gray-600'>posted this project on {dateFormatted}</p>
-            </div>
-          </div>
+        <div className='flex justify-between items-center'>
+        <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+          {appState.loggedIn ? project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s" : project.author.firstName + "'s"  } project: {project.title}
+        </h2>
           {isOwner() && (
-            <span className='pt-2'>
+            <span className='flex block pt-2'>
               <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
                 <i className='fas fa-edit'></i>
               </Link>
@@ -141,13 +134,13 @@ function ViewSingleProject(props) {
             </span>
           )}
         </div>
-
-        <>
-          <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>{project.title}</h2>
-          <div className='mt-2'>
+        <p>Description:</p>
+        <div className='border border-gray-200 rounded'>
+          <div className='border-b p-2 mb-4 bg-gray-100'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-          </div>
-          <fieldset className='border rounded p-2 my-4 bg-gray-100'>
+         </div>
+         
+          <fieldset className='border-t border-b p-2 my-4 bg-gray-100'>
             <legend>Location & Deadline:</legend>
             <div className='flex flex-wrap justify-between'>
               <p className={containerCSS}>
@@ -158,19 +151,37 @@ function ViewSingleProject(props) {
               </p>
             </div>
           </fieldset>
-          <fieldset className='border rounded p-2 mb-4 bg-gray-100'>
-            <legend className=''>Contact:</legend>
-            <div className='flex flex-wrap justify-between'>
-              <p className={containerCSS}>
-                <span className={titleCSS}>Email:</span> {project.email}
-              </p>
-              <p className={containerCSS}>
-                <span className={titleCSS}>Phone Number:</span> {project.phone}
-              </p>
+        
+        {/* PROFILE */}
+        <p className='px-2 mt-4 mb-2 text-sm'>Project posted on {dateFormatted} by:</p>
+        <div className='bg-gray-700 py-2 rounded-b text-white'>
+          <div className='flex justify-center'>
+            <Link to={`/profile/${project.author.username}`}>
+              <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
+            </Link>
+          </div>
+          <div className='flex justify-center text-lg'>
+            <Link to={`/profile/${project.author.username}`}>
+              {project.author.firstName} {project.author.lastName}
+            </Link>
+          </div>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {'March 23, 2020'}</p>
+
+          <hr />
+          <div className='flex justify-center flex-wrap text-xs px-2'>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-envelope'></i>
+              <p className='ml-1'>{project.email}</p>
             </div>
-          </fieldset>
-        </>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-phone'></i>
+              <p className='ml-1'>{project.phone}</p>
+            </div>
+          </div>
+          </div>
+        </div>
       </div>
+      {/* BIDS */}
       <div>
         <div className='flex justify-end'>
           <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
