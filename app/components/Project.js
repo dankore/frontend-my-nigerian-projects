@@ -31,7 +31,7 @@ function Project(props) {
       return <span className='bg-red-300 p-1 rounded'>Bid submission is closed.</span>;
     }
 
-    return <span className='bg-green-300 p-1 rounded'>{`${days} days left to bid`}</span>;
+    return <span className='bg-green-300 p-1 rounded'>{`Bidding closing in ${days} days`}</span>;
   }
 
   return (
@@ -39,7 +39,7 @@ function Project(props) {
       <div className='flex items-center justify-between border border-gray-200 flex p-3 hover:bg-gray-100'>
         <div className='flex items-center'>
           <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
-          <div className='ml-1 text-sm leading-5 font-medium'>
+          <div className='ml-2 text-sm leading-5 font-medium'>
             {project.author.firstName} {project.author.lastName}
           </div>
         </div>
