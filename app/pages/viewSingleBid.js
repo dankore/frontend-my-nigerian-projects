@@ -9,6 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
 import ReactMarkdown from 'react-markdown';
+import { dateFormatted } from '../helpers/JSHelpers'
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -24,6 +25,7 @@ function ViewSingleBid(props) {
         phone: '',
         email: '',
         userCreationDate: '',
+        bidCreationDate: '',
       },
     },
     profileInfo: {
@@ -184,7 +186,7 @@ function ViewSingleBid(props) {
         {/* ITEMIZE LIST */}
         <div className='mt-2 relative'>
           <label htmlFor='project-body' className='w-full px-2 text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
-            Itemize Lists <span className='text-red-600'>*</span>
+            Itemize Lists:
           </label>
           <div className='' style={{ minHeight: 4 + 'rem' }}>
             <div className='flex p-2 bg-gray-700 text-white justify-between'>
@@ -203,7 +205,7 @@ function ViewSingleBid(props) {
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
         {/* PROFILE */}
-        <p className='px-2 mt-4 mb-2 text'>Bid posted by:</p>
+        <p className='px-2 mt-4 mb-2 text'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
             <Link to={`/profile/${state.profileInfo.username}`}>
