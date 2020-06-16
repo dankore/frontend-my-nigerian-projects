@@ -58,7 +58,6 @@ function ViewSingleBid(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  console.log({state})
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
