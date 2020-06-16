@@ -161,7 +161,7 @@ function ViewSingleBid(props) {
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center'>
         <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
-          Viewing {appState.loggedIn ? state.profileInfo.firstName == appState.user.firstName ? 'your' : state.profileInfo.firstName + "'s" : state.profileInfo.firstName + "'s"  } bid for{' '}
+          {appState.loggedIn ? state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s" : state.profileInfo.firstName + "'s"  } bid for{' '}
           <Link to={`/project/${state.params.projectId}`}>
             <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
           </Link>
