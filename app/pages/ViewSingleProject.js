@@ -118,7 +118,7 @@ function ViewSingleProject(props) {
     <Page margin='mx-2' title={project.title}>
       <div>
         <div className='flex justify-between items-center'>
-          <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+          <h2 className='my-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
             {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
           </h2>
           {isOwner() && (

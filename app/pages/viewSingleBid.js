@@ -162,7 +162,7 @@ function ViewSingleBid(props) {
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center'>
-        <h2 className='my-4 mr-3 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+        <h2 className='my-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           {appState.loggedIn ? (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") : state.profileInfo.firstName + "'s"} bid for:{' '}
           <Link to={`/project/${state.params.projectId}`}>
             <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
@@ -196,7 +196,7 @@ function ViewSingleBid(props) {
           </div>
           {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
         </div>
-        <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+        <div className='flex justify-end pr-1 font font-semibold leading-wide'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
 
         {/* OTHER DETAILS */}
         <fieldset className='border-t border-b p-2 bg-gray-100'>
