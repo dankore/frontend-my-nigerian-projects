@@ -9,7 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
 import ReactMarkdown from 'react-markdown';
-import { dateFormatted } from '../helpers/JSHelpers'
+import { dateFormatted, dateFormattedUserCreationDate } from '../helpers/JSHelpers'
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);

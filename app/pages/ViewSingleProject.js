@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
+import { dateFormattedUserCreationDate } from '../helpers/JSHelpers'
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -165,7 +166,7 @@ function ViewSingleProject(props) {
               {project.author.firstName} {project.author.lastName}
             </Link>
           </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {'March 23, 2020'}</p>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormattedUserCreationDate(project.author.userCreationDate)}</p>
 
           <hr />
           <div className='flex justify-center flex-wrap text-xs px-2'>
