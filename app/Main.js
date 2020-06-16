@@ -12,6 +12,7 @@ import DispatchContext from './DispatchContext';
 // AXIOS COMMON URL
 console.log(process.env.BACKENDURL);
 Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-bidding-app.herokuapp.com';
+//  Axios.defaults.baseURL = process.env.BACKENDURL || 'https://8080-aacc35dc-d399-48c1-9a09-2337c06e4638.ws-us02.gitpod.io';
 
 // COMPONENTS
 import Header from './components/Header';
