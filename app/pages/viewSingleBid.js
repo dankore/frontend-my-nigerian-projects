@@ -8,7 +8,6 @@ import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
-import { contactContainerCSS } from '../helpers/CSSHelpers';
 import ReactMarkdown from 'react-markdown';
 
 function ViewSingleBid(props) {
