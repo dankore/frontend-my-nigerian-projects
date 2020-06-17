@@ -851,6 +851,18 @@ video {
   margin-left: calc(1px * calc(1 - var(--space-x-reverse)));
 }
 
+.space-y-1\.5 > :not(template) ~ :not(template) {
+  --space-y-reverse: 0;
+  margin-top: calc(0.13rem * calc(1 - var(--space-y-reverse)));
+  margin-bottom: calc(0.13rem * var(--space-y-reverse));
+}
+
+.space-x-1\.5 > :not(template) ~ :not(template) {
+  --space-x-reverse: 0;
+  margin-right: calc(0.13rem * var(--space-x-reverse));
+  margin-left: calc(0.13rem * calc(1 - var(--space-x-reverse)));
+}
+
 .-space-y-1 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(-0.25rem * calc(1 - var(--space-y-reverse)));
@@ -1067,6 +1079,18 @@ video {
   margin-left: calc(-1px * calc(1 - var(--space-x-reverse)));
 }
 
+.-space-y-1\.5 > :not(template) ~ :not(template) {
+  --space-y-reverse: 0;
+  margin-top: calc(-0.13rem * calc(1 - var(--space-y-reverse)));
+  margin-bottom: calc(-0.13rem * var(--space-y-reverse));
+}
+
+.-space-x-1\.5 > :not(template) ~ :not(template) {
+  --space-x-reverse: 0;
+  margin-right: calc(-0.13rem * var(--space-x-reverse));
+  margin-left: calc(-0.13rem * calc(1 - var(--space-x-reverse)));
+}
+
 .space-y-reverse > :not(template) ~ :not(template) {
   --space-y-reverse: 1;
 }
@@ -1161,6 +1185,12 @@ video {
   --divide-opacity: 1;
   border-color: #fff;
   border-color: rgba(255, 255, 255, var(--divide-opacity));
+}
+
+.divide-gray-50 > :not(template) ~ :not(template) {
+  --divide-opacity: 1;
+  border-color: #f9fafb;
+  border-color: rgba(249, 250, 251, var(--divide-opacity));
 }
 
 .divide-gray-100 > :not(template) ~ :not(template) {
@@ -1807,6 +1837,12 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
 }
 
+.bg-gray-50 {
+  --bg-opacity: 1;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, var(--bg-opacity));
+}
+
 .bg-gray-100 {
   --bg-opacity: 1;
   background-color: #f7fafc;
@@ -2365,6 +2401,12 @@ video {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.hover\:bg-gray-50:hover {
+  --bg-opacity: 1;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, var(--bg-opacity));
 }
 
 .hover\:bg-gray-100:hover {
@@ -2927,6 +2969,12 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
 }
 
+.focus\:bg-gray-50:focus {
+  --bg-opacity: 1;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, var(--bg-opacity));
+}
+
 .focus\:bg-gray-100:focus {
   --bg-opacity: 1;
   background-color: #f7fafc;
@@ -3485,6 +3533,12 @@ video {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.active\:bg-gray-50:active {
+  --bg-opacity: 1;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, var(--bg-opacity));
 }
 
 .active\:bg-gray-100:active {
@@ -4187,6 +4241,12 @@ video {
   border-color: rgba(255, 255, 255, var(--border-opacity));
 }
 
+.border-gray-50 {
+  --border-opacity: 1;
+  border-color: #f9fafb;
+  border-color: rgba(249, 250, 251, var(--border-opacity));
+}
+
 .border-gray-100 {
   --border-opacity: 1;
   border-color: #f7fafc;
@@ -4747,6 +4807,12 @@ video {
   border-color: rgba(255, 255, 255, var(--border-opacity));
 }
 
+.hover\:border-gray-50:hover {
+  --border-opacity: 1;
+  border-color: #f9fafb;
+  border-color: rgba(249, 250, 251, var(--border-opacity));
+}
+
 .hover\:border-gray-100:hover {
   --border-opacity: 1;
   border-color: #f7fafc;
@@ -5305,6 +5371,12 @@ video {
   --border-opacity: 1;
   border-color: #fff;
   border-color: rgba(255, 255, 255, var(--border-opacity));
+}
+
+.focus\:border-gray-50:focus {
+  --border-opacity: 1;
+  border-color: #f9fafb;
+  border-color: rgba(249, 250, 251, var(--border-opacity));
 }
 
 .focus\:border-gray-100:focus {
@@ -7153,6 +7225,10 @@ video {
   height: 1px;
 }
 
+.h-1\.5 {
+  height: 0.13rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -7357,6 +7433,10 @@ video {
   margin: 1px;
 }
 
+.m-1\.5 {
+  margin: 0.13rem;
+}
+
 .-m-1 {
   margin: -0.25rem;
 }
@@ -7427,6 +7507,10 @@ video {
 
 .-m-px {
   margin: -1px;
+}
+
+.-m-1\.5 {
+  margin: -0.13rem;
 }
 
 .my-0 {
@@ -7629,6 +7713,16 @@ video {
   margin-right: 1px;
 }
 
+.my-1\.5 {
+  margin-top: 0.13rem;
+  margin-bottom: 0.13rem;
+}
+
+.mx-1\.5 {
+  margin-left: 0.13rem;
+  margin-right: 0.13rem;
+}
+
 .-my-1 {
   margin-top: -0.25rem;
   margin-bottom: -0.25rem;
@@ -7807,6 +7901,16 @@ video {
 .-mx-px {
   margin-left: -1px;
   margin-right: -1px;
+}
+
+.-my-1\.5 {
+  margin-top: -0.13rem;
+  margin-bottom: -0.13rem;
+}
+
+.-mx-1\.5 {
+  margin-left: -0.13rem;
+  margin-right: -0.13rem;
 }
 
 .mt-0 {
@@ -8129,6 +8233,22 @@ video {
   margin-left: 1px;
 }
 
+.mt-1\.5 {
+  margin-top: 0.13rem;
+}
+
+.mr-1\.5 {
+  margin-right: 0.13rem;
+}
+
+.mb-1\.5 {
+  margin-bottom: 0.13rem;
+}
+
+.ml-1\.5 {
+  margin-left: 0.13rem;
+}
+
 .-mt-1 {
   margin-top: -0.25rem;
 }
@@ -8415,6 +8535,22 @@ video {
 
 .-ml-px {
   margin-left: -1px;
+}
+
+.-mt-1\.5 {
+  margin-top: -0.13rem;
+}
+
+.-mr-1\.5 {
+  margin-right: -0.13rem;
+}
+
+.-mb-1\.5 {
+  margin-bottom: -0.13rem;
+}
+
+.-ml-1\.5 {
+  margin-left: -0.13rem;
 }
 
 .max-h-full {
@@ -8779,6 +8915,10 @@ video {
   padding: 1px;
 }
 
+.p-1\.5 {
+  padding: 0.13rem;
+}
+
 .py-0 {
   padding-top: 0;
   padding-bottom: 0;
@@ -8967,6 +9107,16 @@ video {
 .px-px {
   padding-left: 1px;
   padding-right: 1px;
+}
+
+.py-1\.5 {
+  padding-top: 0.13rem;
+  padding-bottom: 0.13rem;
+}
+
+.px-1\.5 {
+  padding-left: 0.13rem;
+  padding-right: 0.13rem;
 }
 
 .pt-0 {
@@ -9273,6 +9423,22 @@ video {
   padding-left: 1px;
 }
 
+.pt-1\.5 {
+  padding-top: 0.13rem;
+}
+
+.pr-1\.5 {
+  padding-right: 0.13rem;
+}
+
+.pb-1\.5 {
+  padding-bottom: 0.13rem;
+}
+
+.pl-1\.5 {
+  padding-left: 0.13rem;
+}
+
 .placeholder-transparent::-webkit-input-placeholder {
   color: transparent;
 }
@@ -9371,6 +9537,36 @@ video {
   --placeholder-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--placeholder-opacity));
+}
+
+.placeholder-gray-50::-webkit-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.placeholder-gray-50::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.placeholder-gray-50:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.placeholder-gray-50::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.placeholder-gray-50::placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
 }
 
 .placeholder-gray-100::-webkit-input-placeholder {
@@ -12171,6 +12367,36 @@ video {
   --placeholder-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-gray-50:focus::-webkit-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-gray-50:focus::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-gray-50:focus:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-gray-50:focus::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-gray-50:focus::placeholder {
+  --placeholder-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--placeholder-opacity));
 }
 
 .focus\:placeholder-gray-100:focus::-webkit-input-placeholder {
@@ -15368,6 +15594,12 @@ video {
   color: rgba(255, 255, 255, var(--text-opacity));
 }
 
+.text-gray-50 {
+  --text-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--text-opacity));
+}
+
 .text-gray-100 {
   --text-opacity: 1;
   color: #f7fafc;
@@ -15928,6 +16160,12 @@ video {
   color: rgba(255, 255, 255, var(--text-opacity));
 }
 
+.hover\:text-gray-50:hover {
+  --text-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--text-opacity));
+}
+
 .hover\:text-gray-100:hover {
   --text-opacity: 1;
   color: #f7fafc;
@@ -16486,6 +16724,12 @@ video {
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+.focus\:text-gray-50:focus {
+  --text-opacity: 1;
+  color: #f9fafb;
+  color: rgba(249, 250, 251, var(--text-opacity));
 }
 
 .focus\:text-gray-100:focus {
@@ -17361,6 +17605,10 @@ video {
   width: 1px;
 }
 
+.w-1\.5 {
+  width: 0.13rem;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -17596,6 +17844,11 @@ video {
   gap: 1px;
 }
 
+.gap-1\.5 {
+  grid-gap: 0.13rem;
+  gap: 0.13rem;
+}
+
 .col-gap-0 {
   grid-column-gap: 0;
   -moz-column-gap: 0;
@@ -17710,6 +17963,12 @@ video {
        column-gap: 1px;
 }
 
+.col-gap-1\.5 {
+  grid-column-gap: 0.13rem;
+  -moz-column-gap: 0.13rem;
+       column-gap: 0.13rem;
+}
+
 .row-gap-0 {
   grid-row-gap: 0;
   row-gap: 0;
@@ -17803,6 +18062,11 @@ video {
 .row-gap-px {
   grid-row-gap: 1px;
   row-gap: 1px;
+}
+
+.row-gap-1\.5 {
+  grid-row-gap: 0.13rem;
+  row-gap: 0.13rem;
 }
 
 .grid-flow-row {
@@ -18758,6 +19022,10 @@ video {
   --transform-translate-x: 1px;
 }
 
+.translate-x-1\.5 {
+  --transform-translate-x: 0.13rem;
+}
+
 .-translate-x-1 {
   --transform-translate-x: -0.25rem;
 }
@@ -18828,6 +19096,10 @@ video {
 
 .-translate-x-px {
   --transform-translate-x: -1px;
+}
+
+.-translate-x-1\.5 {
+  --transform-translate-x: -0.13rem;
 }
 
 .-translate-x-full {
@@ -18922,6 +19194,10 @@ video {
   --transform-translate-y: 1px;
 }
 
+.translate-y-1\.5 {
+  --transform-translate-y: 0.13rem;
+}
+
 .-translate-y-1 {
   --transform-translate-y: -0.25rem;
 }
@@ -18992,6 +19268,10 @@ video {
 
 .-translate-y-px {
   --transform-translate-y: -1px;
+}
+
+.-translate-y-1\.5 {
+  --transform-translate-y: -0.13rem;
 }
 
 .-translate-y-full {
@@ -19086,6 +19366,10 @@ video {
   --transform-translate-x: 1px;
 }
 
+.hover\:translate-x-1\.5:hover {
+  --transform-translate-x: 0.13rem;
+}
+
 .hover\:-translate-x-1:hover {
   --transform-translate-x: -0.25rem;
 }
@@ -19156,6 +19440,10 @@ video {
 
 .hover\:-translate-x-px:hover {
   --transform-translate-x: -1px;
+}
+
+.hover\:-translate-x-1\.5:hover {
+  --transform-translate-x: -0.13rem;
 }
 
 .hover\:-translate-x-full:hover {
@@ -19250,6 +19538,10 @@ video {
   --transform-translate-y: 1px;
 }
 
+.hover\:translate-y-1\.5:hover {
+  --transform-translate-y: 0.13rem;
+}
+
 .hover\:-translate-y-1:hover {
   --transform-translate-y: -0.25rem;
 }
@@ -19320,6 +19612,10 @@ video {
 
 .hover\:-translate-y-px:hover {
   --transform-translate-y: -1px;
+}
+
+.hover\:-translate-y-1\.5:hover {
+  --transform-translate-y: -0.13rem;
 }
 
 .hover\:-translate-y-full:hover {
@@ -19414,6 +19710,10 @@ video {
   --transform-translate-x: 1px;
 }
 
+.focus\:translate-x-1\.5:focus {
+  --transform-translate-x: 0.13rem;
+}
+
 .focus\:-translate-x-1:focus {
   --transform-translate-x: -0.25rem;
 }
@@ -19484,6 +19784,10 @@ video {
 
 .focus\:-translate-x-px:focus {
   --transform-translate-x: -1px;
+}
+
+.focus\:-translate-x-1\.5:focus {
+  --transform-translate-x: -0.13rem;
 }
 
 .focus\:-translate-x-full:focus {
@@ -19578,6 +19882,10 @@ video {
   --transform-translate-y: 1px;
 }
 
+.focus\:translate-y-1\.5:focus {
+  --transform-translate-y: 0.13rem;
+}
+
 .focus\:-translate-y-1:focus {
   --transform-translate-y: -0.25rem;
 }
@@ -19648,6 +19956,10 @@ video {
 
 .focus\:-translate-y-px:focus {
   --transform-translate-y: -1px;
+}
+
+.focus\:-translate-y-1\.5:focus {
+  --transform-translate-y: -0.13rem;
 }
 
 .focus\:-translate-y-full:focus {
@@ -20350,6 +20662,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .sm\:space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(0.13rem * var(--space-y-reverse));
+  }
+
+  .sm\:space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.13rem * var(--space-x-reverse));
+    margin-left: calc(0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .sm\:-space-y-1 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
     margin-top: calc(-0.25rem * calc(1 - var(--space-y-reverse)));
@@ -20566,6 +20890,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(-1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .sm\:-space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(-0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(-0.13rem * var(--space-y-reverse));
+  }
+
+  .sm\:-space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(-0.13rem * var(--space-x-reverse));
+    margin-left: calc(-0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .sm\:space-y-reverse > :not(template) ~ :not(template) {
     --space-y-reverse: 1;
   }
@@ -20660,6 +20996,12 @@ MY NON-TAILWIND STYLES ENDS
     --divide-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--divide-opacity));
+  }
+
+  .sm\:divide-gray-50 > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--divide-opacity));
   }
 
   .sm\:divide-gray-100 > :not(template) ~ :not(template) {
@@ -21306,6 +21648,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .sm\:bg-gray-50 {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .sm\:bg-gray-100 {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -21864,6 +22212,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .sm\:hover\:bg-gray-50:hover {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .sm\:hover\:bg-gray-100:hover {
@@ -22426,6 +22780,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .sm\:focus\:bg-gray-50:focus {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .sm\:focus\:bg-gray-100:focus {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -22984,6 +23344,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .sm\:active\:bg-gray-50:active {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .sm\:active\:bg-gray-100:active {
@@ -23686,6 +24052,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .sm\:border-gray-50 {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .sm\:border-gray-100 {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -24246,6 +24618,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .sm\:hover\:border-gray-50:hover {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .sm\:hover\:border-gray-100:hover {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -24804,6 +25182,12 @@ MY NON-TAILWIND STYLES ENDS
     --border-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--border-opacity));
+  }
+
+  .sm\:focus\:border-gray-50:focus {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
   }
 
   .sm\:focus\:border-gray-100:focus {
@@ -26652,6 +27036,10 @@ MY NON-TAILWIND STYLES ENDS
     height: 1px;
   }
 
+  .sm\:h-1\.5 {
+    height: 0.13rem;
+  }
+
   .sm\:h-full {
     height: 100%;
   }
@@ -26856,6 +27244,10 @@ MY NON-TAILWIND STYLES ENDS
     margin: 1px;
   }
 
+  .sm\:m-1\.5 {
+    margin: 0.13rem;
+  }
+
   .sm\:-m-1 {
     margin: -0.25rem;
   }
@@ -26926,6 +27318,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:-m-px {
     margin: -1px;
+  }
+
+  .sm\:-m-1\.5 {
+    margin: -0.13rem;
   }
 
   .sm\:my-0 {
@@ -27128,6 +27524,16 @@ MY NON-TAILWIND STYLES ENDS
     margin-right: 1px;
   }
 
+  .sm\:my-1\.5 {
+    margin-top: 0.13rem;
+    margin-bottom: 0.13rem;
+  }
+
+  .sm\:mx-1\.5 {
+    margin-left: 0.13rem;
+    margin-right: 0.13rem;
+  }
+
   .sm\:-my-1 {
     margin-top: -0.25rem;
     margin-bottom: -0.25rem;
@@ -27306,6 +27712,16 @@ MY NON-TAILWIND STYLES ENDS
   .sm\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .sm\:-my-1\.5 {
+    margin-top: -0.13rem;
+    margin-bottom: -0.13rem;
+  }
+
+  .sm\:-mx-1\.5 {
+    margin-left: -0.13rem;
+    margin-right: -0.13rem;
   }
 
   .sm\:mt-0 {
@@ -27628,6 +28044,22 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: 1px;
   }
 
+  .sm\:mt-1\.5 {
+    margin-top: 0.13rem;
+  }
+
+  .sm\:mr-1\.5 {
+    margin-right: 0.13rem;
+  }
+
+  .sm\:mb-1\.5 {
+    margin-bottom: 0.13rem;
+  }
+
+  .sm\:ml-1\.5 {
+    margin-left: 0.13rem;
+  }
+
   .sm\:-mt-1 {
     margin-top: -0.25rem;
   }
@@ -27914,6 +28346,22 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:-ml-px {
     margin-left: -1px;
+  }
+
+  .sm\:-mt-1\.5 {
+    margin-top: -0.13rem;
+  }
+
+  .sm\:-mr-1\.5 {
+    margin-right: -0.13rem;
+  }
+
+  .sm\:-mb-1\.5 {
+    margin-bottom: -0.13rem;
+  }
+
+  .sm\:-ml-1\.5 {
+    margin-left: -0.13rem;
   }
 
   .sm\:max-h-full {
@@ -28278,6 +28726,10 @@ MY NON-TAILWIND STYLES ENDS
     padding: 1px;
   }
 
+  .sm\:p-1\.5 {
+    padding: 0.13rem;
+  }
+
   .sm\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -28466,6 +28918,16 @@ MY NON-TAILWIND STYLES ENDS
   .sm\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .sm\:py-1\.5 {
+    padding-top: 0.13rem;
+    padding-bottom: 0.13rem;
+  }
+
+  .sm\:px-1\.5 {
+    padding-left: 0.13rem;
+    padding-right: 0.13rem;
   }
 
   .sm\:pt-0 {
@@ -28772,6 +29234,22 @@ MY NON-TAILWIND STYLES ENDS
     padding-left: 1px;
   }
 
+  .sm\:pt-1\.5 {
+    padding-top: 0.13rem;
+  }
+
+  .sm\:pr-1\.5 {
+    padding-right: 0.13rem;
+  }
+
+  .sm\:pb-1\.5 {
+    padding-bottom: 0.13rem;
+  }
+
+  .sm\:pl-1\.5 {
+    padding-left: 0.13rem;
+  }
+
   .sm\:placeholder-transparent::-webkit-input-placeholder {
     color: transparent;
   }
@@ -28870,6 +29348,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-gray-50::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-gray-50::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-gray-50:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-gray-50::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-gray-50::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .sm\:placeholder-gray-100::-webkit-input-placeholder {
@@ -31670,6 +32178,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-gray-50:focus::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-gray-50:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-gray-50:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-gray-50:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-gray-50:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .sm\:focus\:placeholder-gray-100:focus::-webkit-input-placeholder {
@@ -34867,6 +35405,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .sm\:text-gray-50 {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .sm\:text-gray-100 {
     --text-opacity: 1;
     color: #f7fafc;
@@ -35427,6 +35971,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .sm\:hover\:text-gray-50:hover {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .sm\:hover\:text-gray-100:hover {
     --text-opacity: 1;
     color: #f7fafc;
@@ -35985,6 +36535,12 @@ MY NON-TAILWIND STYLES ENDS
     --text-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--text-opacity));
+  }
+
+  .sm\:focus\:text-gray-50:focus {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
   }
 
   .sm\:focus\:text-gray-100:focus {
@@ -36860,6 +37416,10 @@ MY NON-TAILWIND STYLES ENDS
     width: 1px;
   }
 
+  .sm\:w-1\.5 {
+    width: 0.13rem;
+  }
+
   .sm\:w-1\/2 {
     width: 50%;
   }
@@ -37095,6 +37655,11 @@ MY NON-TAILWIND STYLES ENDS
     gap: 1px;
   }
 
+  .sm\:gap-1\.5 {
+    grid-gap: 0.13rem;
+    gap: 0.13rem;
+  }
+
   .sm\:col-gap-0 {
     grid-column-gap: 0;
     -moz-column-gap: 0;
@@ -37209,6 +37774,12 @@ MY NON-TAILWIND STYLES ENDS
          column-gap: 1px;
   }
 
+  .sm\:col-gap-1\.5 {
+    grid-column-gap: 0.13rem;
+    -moz-column-gap: 0.13rem;
+         column-gap: 0.13rem;
+  }
+
   .sm\:row-gap-0 {
     grid-row-gap: 0;
     row-gap: 0;
@@ -37302,6 +37873,11 @@ MY NON-TAILWIND STYLES ENDS
   .sm\:row-gap-px {
     grid-row-gap: 1px;
     row-gap: 1px;
+  }
+
+  .sm\:row-gap-1\.5 {
+    grid-row-gap: 0.13rem;
+    row-gap: 0.13rem;
   }
 
   .sm\:grid-flow-row {
@@ -38257,6 +38833,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .sm\:translate-x-1\.5 {
+    --transform-translate-x: 0.13rem;
+  }
+
   .sm\:-translate-x-1 {
     --transform-translate-x: -0.25rem;
   }
@@ -38327,6 +38907,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:-translate-x-px {
     --transform-translate-x: -1px;
+  }
+
+  .sm\:-translate-x-1\.5 {
+    --transform-translate-x: -0.13rem;
   }
 
   .sm\:-translate-x-full {
@@ -38421,6 +39005,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .sm\:translate-y-1\.5 {
+    --transform-translate-y: 0.13rem;
+  }
+
   .sm\:-translate-y-1 {
     --transform-translate-y: -0.25rem;
   }
@@ -38491,6 +39079,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:-translate-y-px {
     --transform-translate-y: -1px;
+  }
+
+  .sm\:-translate-y-1\.5 {
+    --transform-translate-y: -0.13rem;
   }
 
   .sm\:-translate-y-full {
@@ -38585,6 +39177,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .sm\:hover\:translate-x-1\.5:hover {
+    --transform-translate-x: 0.13rem;
+  }
+
   .sm\:hover\:-translate-x-1:hover {
     --transform-translate-x: -0.25rem;
   }
@@ -38655,6 +39251,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:hover\:-translate-x-px:hover {
     --transform-translate-x: -1px;
+  }
+
+  .sm\:hover\:-translate-x-1\.5:hover {
+    --transform-translate-x: -0.13rem;
   }
 
   .sm\:hover\:-translate-x-full:hover {
@@ -38749,6 +39349,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .sm\:hover\:translate-y-1\.5:hover {
+    --transform-translate-y: 0.13rem;
+  }
+
   .sm\:hover\:-translate-y-1:hover {
     --transform-translate-y: -0.25rem;
   }
@@ -38819,6 +39423,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:hover\:-translate-y-px:hover {
     --transform-translate-y: -1px;
+  }
+
+  .sm\:hover\:-translate-y-1\.5:hover {
+    --transform-translate-y: -0.13rem;
   }
 
   .sm\:hover\:-translate-y-full:hover {
@@ -38913,6 +39521,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .sm\:focus\:translate-x-1\.5:focus {
+    --transform-translate-x: 0.13rem;
+  }
+
   .sm\:focus\:-translate-x-1:focus {
     --transform-translate-x: -0.25rem;
   }
@@ -38983,6 +39595,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:focus\:-translate-x-px:focus {
     --transform-translate-x: -1px;
+  }
+
+  .sm\:focus\:-translate-x-1\.5:focus {
+    --transform-translate-x: -0.13rem;
   }
 
   .sm\:focus\:-translate-x-full:focus {
@@ -39077,6 +39693,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .sm\:focus\:translate-y-1\.5:focus {
+    --transform-translate-y: 0.13rem;
+  }
+
   .sm\:focus\:-translate-y-1:focus {
     --transform-translate-y: -0.25rem;
   }
@@ -39147,6 +39767,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .sm\:focus\:-translate-y-px:focus {
     --transform-translate-y: -1px;
+  }
+
+  .sm\:focus\:-translate-y-1\.5:focus {
+    --transform-translate-y: -0.13rem;
   }
 
   .sm\:focus\:-translate-y-full:focus {
@@ -39671,6 +40295,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .md\:space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(0.13rem * var(--space-y-reverse));
+  }
+
+  .md\:space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.13rem * var(--space-x-reverse));
+    margin-left: calc(0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .md\:-space-y-1 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
     margin-top: calc(-0.25rem * calc(1 - var(--space-y-reverse)));
@@ -39887,6 +40523,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(-1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .md\:-space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(-0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(-0.13rem * var(--space-y-reverse));
+  }
+
+  .md\:-space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(-0.13rem * var(--space-x-reverse));
+    margin-left: calc(-0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .md\:space-y-reverse > :not(template) ~ :not(template) {
     --space-y-reverse: 1;
   }
@@ -39981,6 +40629,12 @@ MY NON-TAILWIND STYLES ENDS
     --divide-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--divide-opacity));
+  }
+
+  .md\:divide-gray-50 > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--divide-opacity));
   }
 
   .md\:divide-gray-100 > :not(template) ~ :not(template) {
@@ -40627,6 +41281,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .md\:bg-gray-50 {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .md\:bg-gray-100 {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -41185,6 +41845,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .md\:hover\:bg-gray-50:hover {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .md\:hover\:bg-gray-100:hover {
@@ -41747,6 +42413,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .md\:focus\:bg-gray-50:focus {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .md\:focus\:bg-gray-100:focus {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -42305,6 +42977,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .md\:active\:bg-gray-50:active {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .md\:active\:bg-gray-100:active {
@@ -43007,6 +43685,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .md\:border-gray-50 {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .md\:border-gray-100 {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -43567,6 +44251,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .md\:hover\:border-gray-50:hover {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .md\:hover\:border-gray-100:hover {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -44125,6 +44815,12 @@ MY NON-TAILWIND STYLES ENDS
     --border-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--border-opacity));
+  }
+
+  .md\:focus\:border-gray-50:focus {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
   }
 
   .md\:focus\:border-gray-100:focus {
@@ -45973,6 +46669,10 @@ MY NON-TAILWIND STYLES ENDS
     height: 1px;
   }
 
+  .md\:h-1\.5 {
+    height: 0.13rem;
+  }
+
   .md\:h-full {
     height: 100%;
   }
@@ -46177,6 +46877,10 @@ MY NON-TAILWIND STYLES ENDS
     margin: 1px;
   }
 
+  .md\:m-1\.5 {
+    margin: 0.13rem;
+  }
+
   .md\:-m-1 {
     margin: -0.25rem;
   }
@@ -46247,6 +46951,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:-m-px {
     margin: -1px;
+  }
+
+  .md\:-m-1\.5 {
+    margin: -0.13rem;
   }
 
   .md\:my-0 {
@@ -46449,6 +47157,16 @@ MY NON-TAILWIND STYLES ENDS
     margin-right: 1px;
   }
 
+  .md\:my-1\.5 {
+    margin-top: 0.13rem;
+    margin-bottom: 0.13rem;
+  }
+
+  .md\:mx-1\.5 {
+    margin-left: 0.13rem;
+    margin-right: 0.13rem;
+  }
+
   .md\:-my-1 {
     margin-top: -0.25rem;
     margin-bottom: -0.25rem;
@@ -46627,6 +47345,16 @@ MY NON-TAILWIND STYLES ENDS
   .md\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .md\:-my-1\.5 {
+    margin-top: -0.13rem;
+    margin-bottom: -0.13rem;
+  }
+
+  .md\:-mx-1\.5 {
+    margin-left: -0.13rem;
+    margin-right: -0.13rem;
   }
 
   .md\:mt-0 {
@@ -46949,6 +47677,22 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: 1px;
   }
 
+  .md\:mt-1\.5 {
+    margin-top: 0.13rem;
+  }
+
+  .md\:mr-1\.5 {
+    margin-right: 0.13rem;
+  }
+
+  .md\:mb-1\.5 {
+    margin-bottom: 0.13rem;
+  }
+
+  .md\:ml-1\.5 {
+    margin-left: 0.13rem;
+  }
+
   .md\:-mt-1 {
     margin-top: -0.25rem;
   }
@@ -47235,6 +47979,22 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:-ml-px {
     margin-left: -1px;
+  }
+
+  .md\:-mt-1\.5 {
+    margin-top: -0.13rem;
+  }
+
+  .md\:-mr-1\.5 {
+    margin-right: -0.13rem;
+  }
+
+  .md\:-mb-1\.5 {
+    margin-bottom: -0.13rem;
+  }
+
+  .md\:-ml-1\.5 {
+    margin-left: -0.13rem;
   }
 
   .md\:max-h-full {
@@ -47599,6 +48359,10 @@ MY NON-TAILWIND STYLES ENDS
     padding: 1px;
   }
 
+  .md\:p-1\.5 {
+    padding: 0.13rem;
+  }
+
   .md\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -47787,6 +48551,16 @@ MY NON-TAILWIND STYLES ENDS
   .md\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .md\:py-1\.5 {
+    padding-top: 0.13rem;
+    padding-bottom: 0.13rem;
+  }
+
+  .md\:px-1\.5 {
+    padding-left: 0.13rem;
+    padding-right: 0.13rem;
   }
 
   .md\:pt-0 {
@@ -48093,6 +48867,22 @@ MY NON-TAILWIND STYLES ENDS
     padding-left: 1px;
   }
 
+  .md\:pt-1\.5 {
+    padding-top: 0.13rem;
+  }
+
+  .md\:pr-1\.5 {
+    padding-right: 0.13rem;
+  }
+
+  .md\:pb-1\.5 {
+    padding-bottom: 0.13rem;
+  }
+
+  .md\:pl-1\.5 {
+    padding-left: 0.13rem;
+  }
+
   .md\:placeholder-transparent::-webkit-input-placeholder {
     color: transparent;
   }
@@ -48191,6 +48981,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-gray-50::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-gray-50::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-gray-50:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-gray-50::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-gray-50::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .md\:placeholder-gray-100::-webkit-input-placeholder {
@@ -50991,6 +51811,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-gray-50:focus::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-gray-50:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-gray-50:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-gray-50:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-gray-50:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .md\:focus\:placeholder-gray-100:focus::-webkit-input-placeholder {
@@ -54188,6 +55038,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .md\:text-gray-50 {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .md\:text-gray-100 {
     --text-opacity: 1;
     color: #f7fafc;
@@ -54748,6 +55604,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .md\:hover\:text-gray-50:hover {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .md\:hover\:text-gray-100:hover {
     --text-opacity: 1;
     color: #f7fafc;
@@ -55306,6 +56168,12 @@ MY NON-TAILWIND STYLES ENDS
     --text-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--text-opacity));
+  }
+
+  .md\:focus\:text-gray-50:focus {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
   }
 
   .md\:focus\:text-gray-100:focus {
@@ -56181,6 +57049,10 @@ MY NON-TAILWIND STYLES ENDS
     width: 1px;
   }
 
+  .md\:w-1\.5 {
+    width: 0.13rem;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -56416,6 +57288,11 @@ MY NON-TAILWIND STYLES ENDS
     gap: 1px;
   }
 
+  .md\:gap-1\.5 {
+    grid-gap: 0.13rem;
+    gap: 0.13rem;
+  }
+
   .md\:col-gap-0 {
     grid-column-gap: 0;
     -moz-column-gap: 0;
@@ -56530,6 +57407,12 @@ MY NON-TAILWIND STYLES ENDS
          column-gap: 1px;
   }
 
+  .md\:col-gap-1\.5 {
+    grid-column-gap: 0.13rem;
+    -moz-column-gap: 0.13rem;
+         column-gap: 0.13rem;
+  }
+
   .md\:row-gap-0 {
     grid-row-gap: 0;
     row-gap: 0;
@@ -56623,6 +57506,11 @@ MY NON-TAILWIND STYLES ENDS
   .md\:row-gap-px {
     grid-row-gap: 1px;
     row-gap: 1px;
+  }
+
+  .md\:row-gap-1\.5 {
+    grid-row-gap: 0.13rem;
+    row-gap: 0.13rem;
   }
 
   .md\:grid-flow-row {
@@ -57578,6 +58466,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .md\:translate-x-1\.5 {
+    --transform-translate-x: 0.13rem;
+  }
+
   .md\:-translate-x-1 {
     --transform-translate-x: -0.25rem;
   }
@@ -57648,6 +58540,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:-translate-x-px {
     --transform-translate-x: -1px;
+  }
+
+  .md\:-translate-x-1\.5 {
+    --transform-translate-x: -0.13rem;
   }
 
   .md\:-translate-x-full {
@@ -57742,6 +58638,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .md\:translate-y-1\.5 {
+    --transform-translate-y: 0.13rem;
+  }
+
   .md\:-translate-y-1 {
     --transform-translate-y: -0.25rem;
   }
@@ -57812,6 +58712,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:-translate-y-px {
     --transform-translate-y: -1px;
+  }
+
+  .md\:-translate-y-1\.5 {
+    --transform-translate-y: -0.13rem;
   }
 
   .md\:-translate-y-full {
@@ -57906,6 +58810,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .md\:hover\:translate-x-1\.5:hover {
+    --transform-translate-x: 0.13rem;
+  }
+
   .md\:hover\:-translate-x-1:hover {
     --transform-translate-x: -0.25rem;
   }
@@ -57976,6 +58884,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:hover\:-translate-x-px:hover {
     --transform-translate-x: -1px;
+  }
+
+  .md\:hover\:-translate-x-1\.5:hover {
+    --transform-translate-x: -0.13rem;
   }
 
   .md\:hover\:-translate-x-full:hover {
@@ -58070,6 +58982,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .md\:hover\:translate-y-1\.5:hover {
+    --transform-translate-y: 0.13rem;
+  }
+
   .md\:hover\:-translate-y-1:hover {
     --transform-translate-y: -0.25rem;
   }
@@ -58140,6 +59056,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:hover\:-translate-y-px:hover {
     --transform-translate-y: -1px;
+  }
+
+  .md\:hover\:-translate-y-1\.5:hover {
+    --transform-translate-y: -0.13rem;
   }
 
   .md\:hover\:-translate-y-full:hover {
@@ -58234,6 +59154,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .md\:focus\:translate-x-1\.5:focus {
+    --transform-translate-x: 0.13rem;
+  }
+
   .md\:focus\:-translate-x-1:focus {
     --transform-translate-x: -0.25rem;
   }
@@ -58304,6 +59228,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:focus\:-translate-x-px:focus {
     --transform-translate-x: -1px;
+  }
+
+  .md\:focus\:-translate-x-1\.5:focus {
+    --transform-translate-x: -0.13rem;
   }
 
   .md\:focus\:-translate-x-full:focus {
@@ -58398,6 +59326,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .md\:focus\:translate-y-1\.5:focus {
+    --transform-translate-y: 0.13rem;
+  }
+
   .md\:focus\:-translate-y-1:focus {
     --transform-translate-y: -0.25rem;
   }
@@ -58468,6 +59400,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .md\:focus\:-translate-y-px:focus {
     --transform-translate-y: -1px;
+  }
+
+  .md\:focus\:-translate-y-1\.5:focus {
+    --transform-translate-y: -0.13rem;
   }
 
   .md\:focus\:-translate-y-full:focus {
@@ -58992,6 +59928,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .lg\:space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(0.13rem * var(--space-y-reverse));
+  }
+
+  .lg\:space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.13rem * var(--space-x-reverse));
+    margin-left: calc(0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .lg\:-space-y-1 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
     margin-top: calc(-0.25rem * calc(1 - var(--space-y-reverse)));
@@ -59208,6 +60156,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(-1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .lg\:-space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(-0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(-0.13rem * var(--space-y-reverse));
+  }
+
+  .lg\:-space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(-0.13rem * var(--space-x-reverse));
+    margin-left: calc(-0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .lg\:space-y-reverse > :not(template) ~ :not(template) {
     --space-y-reverse: 1;
   }
@@ -59302,6 +60262,12 @@ MY NON-TAILWIND STYLES ENDS
     --divide-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--divide-opacity));
+  }
+
+  .lg\:divide-gray-50 > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--divide-opacity));
   }
 
   .lg\:divide-gray-100 > :not(template) ~ :not(template) {
@@ -59948,6 +60914,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .lg\:bg-gray-50 {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .lg\:bg-gray-100 {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -60506,6 +61478,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .lg\:hover\:bg-gray-50:hover {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .lg\:hover\:bg-gray-100:hover {
@@ -61068,6 +62046,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .lg\:focus\:bg-gray-50:focus {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .lg\:focus\:bg-gray-100:focus {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -61626,6 +62610,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .lg\:active\:bg-gray-50:active {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .lg\:active\:bg-gray-100:active {
@@ -62328,6 +63318,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .lg\:border-gray-50 {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .lg\:border-gray-100 {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -62888,6 +63884,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .lg\:hover\:border-gray-50:hover {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .lg\:hover\:border-gray-100:hover {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -63446,6 +64448,12 @@ MY NON-TAILWIND STYLES ENDS
     --border-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--border-opacity));
+  }
+
+  .lg\:focus\:border-gray-50:focus {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
   }
 
   .lg\:focus\:border-gray-100:focus {
@@ -65294,6 +66302,10 @@ MY NON-TAILWIND STYLES ENDS
     height: 1px;
   }
 
+  .lg\:h-1\.5 {
+    height: 0.13rem;
+  }
+
   .lg\:h-full {
     height: 100%;
   }
@@ -65498,6 +66510,10 @@ MY NON-TAILWIND STYLES ENDS
     margin: 1px;
   }
 
+  .lg\:m-1\.5 {
+    margin: 0.13rem;
+  }
+
   .lg\:-m-1 {
     margin: -0.25rem;
   }
@@ -65568,6 +66584,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:-m-px {
     margin: -1px;
+  }
+
+  .lg\:-m-1\.5 {
+    margin: -0.13rem;
   }
 
   .lg\:my-0 {
@@ -65770,6 +66790,16 @@ MY NON-TAILWIND STYLES ENDS
     margin-right: 1px;
   }
 
+  .lg\:my-1\.5 {
+    margin-top: 0.13rem;
+    margin-bottom: 0.13rem;
+  }
+
+  .lg\:mx-1\.5 {
+    margin-left: 0.13rem;
+    margin-right: 0.13rem;
+  }
+
   .lg\:-my-1 {
     margin-top: -0.25rem;
     margin-bottom: -0.25rem;
@@ -65948,6 +66978,16 @@ MY NON-TAILWIND STYLES ENDS
   .lg\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .lg\:-my-1\.5 {
+    margin-top: -0.13rem;
+    margin-bottom: -0.13rem;
+  }
+
+  .lg\:-mx-1\.5 {
+    margin-left: -0.13rem;
+    margin-right: -0.13rem;
   }
 
   .lg\:mt-0 {
@@ -66270,6 +67310,22 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: 1px;
   }
 
+  .lg\:mt-1\.5 {
+    margin-top: 0.13rem;
+  }
+
+  .lg\:mr-1\.5 {
+    margin-right: 0.13rem;
+  }
+
+  .lg\:mb-1\.5 {
+    margin-bottom: 0.13rem;
+  }
+
+  .lg\:ml-1\.5 {
+    margin-left: 0.13rem;
+  }
+
   .lg\:-mt-1 {
     margin-top: -0.25rem;
   }
@@ -66556,6 +67612,22 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:-ml-px {
     margin-left: -1px;
+  }
+
+  .lg\:-mt-1\.5 {
+    margin-top: -0.13rem;
+  }
+
+  .lg\:-mr-1\.5 {
+    margin-right: -0.13rem;
+  }
+
+  .lg\:-mb-1\.5 {
+    margin-bottom: -0.13rem;
+  }
+
+  .lg\:-ml-1\.5 {
+    margin-left: -0.13rem;
   }
 
   .lg\:max-h-full {
@@ -66920,6 +67992,10 @@ MY NON-TAILWIND STYLES ENDS
     padding: 1px;
   }
 
+  .lg\:p-1\.5 {
+    padding: 0.13rem;
+  }
+
   .lg\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -67108,6 +68184,16 @@ MY NON-TAILWIND STYLES ENDS
   .lg\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .lg\:py-1\.5 {
+    padding-top: 0.13rem;
+    padding-bottom: 0.13rem;
+  }
+
+  .lg\:px-1\.5 {
+    padding-left: 0.13rem;
+    padding-right: 0.13rem;
   }
 
   .lg\:pt-0 {
@@ -67414,6 +68500,22 @@ MY NON-TAILWIND STYLES ENDS
     padding-left: 1px;
   }
 
+  .lg\:pt-1\.5 {
+    padding-top: 0.13rem;
+  }
+
+  .lg\:pr-1\.5 {
+    padding-right: 0.13rem;
+  }
+
+  .lg\:pb-1\.5 {
+    padding-bottom: 0.13rem;
+  }
+
+  .lg\:pl-1\.5 {
+    padding-left: 0.13rem;
+  }
+
   .lg\:placeholder-transparent::-webkit-input-placeholder {
     color: transparent;
   }
@@ -67512,6 +68614,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-gray-50::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-gray-50::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-gray-50:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-gray-50::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-gray-50::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .lg\:placeholder-gray-100::-webkit-input-placeholder {
@@ -70312,6 +71444,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-gray-50:focus::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-gray-50:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-gray-50:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-gray-50:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-gray-50:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .lg\:focus\:placeholder-gray-100:focus::-webkit-input-placeholder {
@@ -73509,6 +74671,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .lg\:text-gray-50 {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .lg\:text-gray-100 {
     --text-opacity: 1;
     color: #f7fafc;
@@ -74069,6 +75237,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .lg\:hover\:text-gray-50:hover {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .lg\:hover\:text-gray-100:hover {
     --text-opacity: 1;
     color: #f7fafc;
@@ -74627,6 +75801,12 @@ MY NON-TAILWIND STYLES ENDS
     --text-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--text-opacity));
+  }
+
+  .lg\:focus\:text-gray-50:focus {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
   }
 
   .lg\:focus\:text-gray-100:focus {
@@ -75502,6 +76682,10 @@ MY NON-TAILWIND STYLES ENDS
     width: 1px;
   }
 
+  .lg\:w-1\.5 {
+    width: 0.13rem;
+  }
+
   .lg\:w-1\/2 {
     width: 50%;
   }
@@ -75737,6 +76921,11 @@ MY NON-TAILWIND STYLES ENDS
     gap: 1px;
   }
 
+  .lg\:gap-1\.5 {
+    grid-gap: 0.13rem;
+    gap: 0.13rem;
+  }
+
   .lg\:col-gap-0 {
     grid-column-gap: 0;
     -moz-column-gap: 0;
@@ -75851,6 +77040,12 @@ MY NON-TAILWIND STYLES ENDS
          column-gap: 1px;
   }
 
+  .lg\:col-gap-1\.5 {
+    grid-column-gap: 0.13rem;
+    -moz-column-gap: 0.13rem;
+         column-gap: 0.13rem;
+  }
+
   .lg\:row-gap-0 {
     grid-row-gap: 0;
     row-gap: 0;
@@ -75944,6 +77139,11 @@ MY NON-TAILWIND STYLES ENDS
   .lg\:row-gap-px {
     grid-row-gap: 1px;
     row-gap: 1px;
+  }
+
+  .lg\:row-gap-1\.5 {
+    grid-row-gap: 0.13rem;
+    row-gap: 0.13rem;
   }
 
   .lg\:grid-flow-row {
@@ -76899,6 +78099,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .lg\:translate-x-1\.5 {
+    --transform-translate-x: 0.13rem;
+  }
+
   .lg\:-translate-x-1 {
     --transform-translate-x: -0.25rem;
   }
@@ -76969,6 +78173,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:-translate-x-px {
     --transform-translate-x: -1px;
+  }
+
+  .lg\:-translate-x-1\.5 {
+    --transform-translate-x: -0.13rem;
   }
 
   .lg\:-translate-x-full {
@@ -77063,6 +78271,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .lg\:translate-y-1\.5 {
+    --transform-translate-y: 0.13rem;
+  }
+
   .lg\:-translate-y-1 {
     --transform-translate-y: -0.25rem;
   }
@@ -77133,6 +78345,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:-translate-y-px {
     --transform-translate-y: -1px;
+  }
+
+  .lg\:-translate-y-1\.5 {
+    --transform-translate-y: -0.13rem;
   }
 
   .lg\:-translate-y-full {
@@ -77227,6 +78443,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .lg\:hover\:translate-x-1\.5:hover {
+    --transform-translate-x: 0.13rem;
+  }
+
   .lg\:hover\:-translate-x-1:hover {
     --transform-translate-x: -0.25rem;
   }
@@ -77297,6 +78517,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:hover\:-translate-x-px:hover {
     --transform-translate-x: -1px;
+  }
+
+  .lg\:hover\:-translate-x-1\.5:hover {
+    --transform-translate-x: -0.13rem;
   }
 
   .lg\:hover\:-translate-x-full:hover {
@@ -77391,6 +78615,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .lg\:hover\:translate-y-1\.5:hover {
+    --transform-translate-y: 0.13rem;
+  }
+
   .lg\:hover\:-translate-y-1:hover {
     --transform-translate-y: -0.25rem;
   }
@@ -77461,6 +78689,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:hover\:-translate-y-px:hover {
     --transform-translate-y: -1px;
+  }
+
+  .lg\:hover\:-translate-y-1\.5:hover {
+    --transform-translate-y: -0.13rem;
   }
 
   .lg\:hover\:-translate-y-full:hover {
@@ -77555,6 +78787,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .lg\:focus\:translate-x-1\.5:focus {
+    --transform-translate-x: 0.13rem;
+  }
+
   .lg\:focus\:-translate-x-1:focus {
     --transform-translate-x: -0.25rem;
   }
@@ -77625,6 +78861,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:focus\:-translate-x-px:focus {
     --transform-translate-x: -1px;
+  }
+
+  .lg\:focus\:-translate-x-1\.5:focus {
+    --transform-translate-x: -0.13rem;
   }
 
   .lg\:focus\:-translate-x-full:focus {
@@ -77719,6 +78959,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .lg\:focus\:translate-y-1\.5:focus {
+    --transform-translate-y: 0.13rem;
+  }
+
   .lg\:focus\:-translate-y-1:focus {
     --transform-translate-y: -0.25rem;
   }
@@ -77789,6 +79033,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:focus\:-translate-y-px:focus {
     --transform-translate-y: -1px;
+  }
+
+  .lg\:focus\:-translate-y-1\.5:focus {
+    --transform-translate-y: -0.13rem;
   }
 
   .lg\:focus\:-translate-y-full:focus {
@@ -78313,6 +79561,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .xl\:space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(0.13rem * var(--space-y-reverse));
+  }
+
+  .xl\:space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.13rem * var(--space-x-reverse));
+    margin-left: calc(0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .xl\:-space-y-1 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
     margin-top: calc(-0.25rem * calc(1 - var(--space-y-reverse)));
@@ -78529,6 +79789,18 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: calc(-1px * calc(1 - var(--space-x-reverse)));
   }
 
+  .xl\:-space-y-1\.5 > :not(template) ~ :not(template) {
+    --space-y-reverse: 0;
+    margin-top: calc(-0.13rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(-0.13rem * var(--space-y-reverse));
+  }
+
+  .xl\:-space-x-1\.5 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(-0.13rem * var(--space-x-reverse));
+    margin-left: calc(-0.13rem * calc(1 - var(--space-x-reverse)));
+  }
+
   .xl\:space-y-reverse > :not(template) ~ :not(template) {
     --space-y-reverse: 1;
   }
@@ -78623,6 +79895,12 @@ MY NON-TAILWIND STYLES ENDS
     --divide-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--divide-opacity));
+  }
+
+  .xl\:divide-gray-50 > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--divide-opacity));
   }
 
   .xl\:divide-gray-100 > :not(template) ~ :not(template) {
@@ -79269,6 +80547,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .xl\:bg-gray-50 {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .xl\:bg-gray-100 {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -79827,6 +81111,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .xl\:hover\:bg-gray-50:hover {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .xl\:hover\:bg-gray-100:hover {
@@ -80389,6 +81679,12 @@ MY NON-TAILWIND STYLES ENDS
     background-color: rgba(255, 255, 255, var(--bg-opacity));
   }
 
+  .xl\:focus\:bg-gray-50:focus {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
+  }
+
   .xl\:focus\:bg-gray-100:focus {
     --bg-opacity: 1;
     background-color: #f7fafc;
@@ -80947,6 +82243,12 @@ MY NON-TAILWIND STYLES ENDS
     --bg-opacity: 1;
     background-color: #fff;
     background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+
+  .xl\:active\:bg-gray-50:active {
+    --bg-opacity: 1;
+    background-color: #f9fafb;
+    background-color: rgba(249, 250, 251, var(--bg-opacity));
   }
 
   .xl\:active\:bg-gray-100:active {
@@ -81649,6 +82951,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .xl\:border-gray-50 {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .xl\:border-gray-100 {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -82209,6 +83517,12 @@ MY NON-TAILWIND STYLES ENDS
     border-color: rgba(255, 255, 255, var(--border-opacity));
   }
 
+  .xl\:hover\:border-gray-50:hover {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
+  }
+
   .xl\:hover\:border-gray-100:hover {
     --border-opacity: 1;
     border-color: #f7fafc;
@@ -82767,6 +84081,12 @@ MY NON-TAILWIND STYLES ENDS
     --border-opacity: 1;
     border-color: #fff;
     border-color: rgba(255, 255, 255, var(--border-opacity));
+  }
+
+  .xl\:focus\:border-gray-50:focus {
+    --border-opacity: 1;
+    border-color: #f9fafb;
+    border-color: rgba(249, 250, 251, var(--border-opacity));
   }
 
   .xl\:focus\:border-gray-100:focus {
@@ -84615,6 +85935,10 @@ MY NON-TAILWIND STYLES ENDS
     height: 1px;
   }
 
+  .xl\:h-1\.5 {
+    height: 0.13rem;
+  }
+
   .xl\:h-full {
     height: 100%;
   }
@@ -84819,6 +86143,10 @@ MY NON-TAILWIND STYLES ENDS
     margin: 1px;
   }
 
+  .xl\:m-1\.5 {
+    margin: 0.13rem;
+  }
+
   .xl\:-m-1 {
     margin: -0.25rem;
   }
@@ -84889,6 +86217,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:-m-px {
     margin: -1px;
+  }
+
+  .xl\:-m-1\.5 {
+    margin: -0.13rem;
   }
 
   .xl\:my-0 {
@@ -85091,6 +86423,16 @@ MY NON-TAILWIND STYLES ENDS
     margin-right: 1px;
   }
 
+  .xl\:my-1\.5 {
+    margin-top: 0.13rem;
+    margin-bottom: 0.13rem;
+  }
+
+  .xl\:mx-1\.5 {
+    margin-left: 0.13rem;
+    margin-right: 0.13rem;
+  }
+
   .xl\:-my-1 {
     margin-top: -0.25rem;
     margin-bottom: -0.25rem;
@@ -85269,6 +86611,16 @@ MY NON-TAILWIND STYLES ENDS
   .xl\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .xl\:-my-1\.5 {
+    margin-top: -0.13rem;
+    margin-bottom: -0.13rem;
+  }
+
+  .xl\:-mx-1\.5 {
+    margin-left: -0.13rem;
+    margin-right: -0.13rem;
   }
 
   .xl\:mt-0 {
@@ -85591,6 +86943,22 @@ MY NON-TAILWIND STYLES ENDS
     margin-left: 1px;
   }
 
+  .xl\:mt-1\.5 {
+    margin-top: 0.13rem;
+  }
+
+  .xl\:mr-1\.5 {
+    margin-right: 0.13rem;
+  }
+
+  .xl\:mb-1\.5 {
+    margin-bottom: 0.13rem;
+  }
+
+  .xl\:ml-1\.5 {
+    margin-left: 0.13rem;
+  }
+
   .xl\:-mt-1 {
     margin-top: -0.25rem;
   }
@@ -85877,6 +87245,22 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:-ml-px {
     margin-left: -1px;
+  }
+
+  .xl\:-mt-1\.5 {
+    margin-top: -0.13rem;
+  }
+
+  .xl\:-mr-1\.5 {
+    margin-right: -0.13rem;
+  }
+
+  .xl\:-mb-1\.5 {
+    margin-bottom: -0.13rem;
+  }
+
+  .xl\:-ml-1\.5 {
+    margin-left: -0.13rem;
   }
 
   .xl\:max-h-full {
@@ -86241,6 +87625,10 @@ MY NON-TAILWIND STYLES ENDS
     padding: 1px;
   }
 
+  .xl\:p-1\.5 {
+    padding: 0.13rem;
+  }
+
   .xl\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -86429,6 +87817,16 @@ MY NON-TAILWIND STYLES ENDS
   .xl\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .xl\:py-1\.5 {
+    padding-top: 0.13rem;
+    padding-bottom: 0.13rem;
+  }
+
+  .xl\:px-1\.5 {
+    padding-left: 0.13rem;
+    padding-right: 0.13rem;
   }
 
   .xl\:pt-0 {
@@ -86735,6 +88133,22 @@ MY NON-TAILWIND STYLES ENDS
     padding-left: 1px;
   }
 
+  .xl\:pt-1\.5 {
+    padding-top: 0.13rem;
+  }
+
+  .xl\:pr-1\.5 {
+    padding-right: 0.13rem;
+  }
+
+  .xl\:pb-1\.5 {
+    padding-bottom: 0.13rem;
+  }
+
+  .xl\:pl-1\.5 {
+    padding-left: 0.13rem;
+  }
+
   .xl\:placeholder-transparent::-webkit-input-placeholder {
     color: transparent;
   }
@@ -86833,6 +88247,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-gray-50::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-gray-50::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-gray-50:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-gray-50::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-gray-50::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .xl\:placeholder-gray-100::-webkit-input-placeholder {
@@ -89633,6 +91077,36 @@ MY NON-TAILWIND STYLES ENDS
     --placeholder-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-gray-50:focus::-webkit-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-gray-50:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-gray-50:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-gray-50:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-gray-50:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--placeholder-opacity));
   }
 
   .xl\:focus\:placeholder-gray-100:focus::-webkit-input-placeholder {
@@ -92830,6 +94304,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .xl\:text-gray-50 {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .xl\:text-gray-100 {
     --text-opacity: 1;
     color: #f7fafc;
@@ -93390,6 +94870,12 @@ MY NON-TAILWIND STYLES ENDS
     color: rgba(255, 255, 255, var(--text-opacity));
   }
 
+  .xl\:hover\:text-gray-50:hover {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
+  }
+
   .xl\:hover\:text-gray-100:hover {
     --text-opacity: 1;
     color: #f7fafc;
@@ -93948,6 +95434,12 @@ MY NON-TAILWIND STYLES ENDS
     --text-opacity: 1;
     color: #fff;
     color: rgba(255, 255, 255, var(--text-opacity));
+  }
+
+  .xl\:focus\:text-gray-50:focus {
+    --text-opacity: 1;
+    color: #f9fafb;
+    color: rgba(249, 250, 251, var(--text-opacity));
   }
 
   .xl\:focus\:text-gray-100:focus {
@@ -94823,6 +96315,10 @@ MY NON-TAILWIND STYLES ENDS
     width: 1px;
   }
 
+  .xl\:w-1\.5 {
+    width: 0.13rem;
+  }
+
   .xl\:w-1\/2 {
     width: 50%;
   }
@@ -95058,6 +96554,11 @@ MY NON-TAILWIND STYLES ENDS
     gap: 1px;
   }
 
+  .xl\:gap-1\.5 {
+    grid-gap: 0.13rem;
+    gap: 0.13rem;
+  }
+
   .xl\:col-gap-0 {
     grid-column-gap: 0;
     -moz-column-gap: 0;
@@ -95172,6 +96673,12 @@ MY NON-TAILWIND STYLES ENDS
          column-gap: 1px;
   }
 
+  .xl\:col-gap-1\.5 {
+    grid-column-gap: 0.13rem;
+    -moz-column-gap: 0.13rem;
+         column-gap: 0.13rem;
+  }
+
   .xl\:row-gap-0 {
     grid-row-gap: 0;
     row-gap: 0;
@@ -95265,6 +96772,11 @@ MY NON-TAILWIND STYLES ENDS
   .xl\:row-gap-px {
     grid-row-gap: 1px;
     row-gap: 1px;
+  }
+
+  .xl\:row-gap-1\.5 {
+    grid-row-gap: 0.13rem;
+    row-gap: 0.13rem;
   }
 
   .xl\:grid-flow-row {
@@ -96220,6 +97732,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .xl\:translate-x-1\.5 {
+    --transform-translate-x: 0.13rem;
+  }
+
   .xl\:-translate-x-1 {
     --transform-translate-x: -0.25rem;
   }
@@ -96290,6 +97806,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:-translate-x-px {
     --transform-translate-x: -1px;
+  }
+
+  .xl\:-translate-x-1\.5 {
+    --transform-translate-x: -0.13rem;
   }
 
   .xl\:-translate-x-full {
@@ -96384,6 +97904,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .xl\:translate-y-1\.5 {
+    --transform-translate-y: 0.13rem;
+  }
+
   .xl\:-translate-y-1 {
     --transform-translate-y: -0.25rem;
   }
@@ -96454,6 +97978,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:-translate-y-px {
     --transform-translate-y: -1px;
+  }
+
+  .xl\:-translate-y-1\.5 {
+    --transform-translate-y: -0.13rem;
   }
 
   .xl\:-translate-y-full {
@@ -96548,6 +98076,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .xl\:hover\:translate-x-1\.5:hover {
+    --transform-translate-x: 0.13rem;
+  }
+
   .xl\:hover\:-translate-x-1:hover {
     --transform-translate-x: -0.25rem;
   }
@@ -96618,6 +98150,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:hover\:-translate-x-px:hover {
     --transform-translate-x: -1px;
+  }
+
+  .xl\:hover\:-translate-x-1\.5:hover {
+    --transform-translate-x: -0.13rem;
   }
 
   .xl\:hover\:-translate-x-full:hover {
@@ -96712,6 +98248,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .xl\:hover\:translate-y-1\.5:hover {
+    --transform-translate-y: 0.13rem;
+  }
+
   .xl\:hover\:-translate-y-1:hover {
     --transform-translate-y: -0.25rem;
   }
@@ -96782,6 +98322,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:hover\:-translate-y-px:hover {
     --transform-translate-y: -1px;
+  }
+
+  .xl\:hover\:-translate-y-1\.5:hover {
+    --transform-translate-y: -0.13rem;
   }
 
   .xl\:hover\:-translate-y-full:hover {
@@ -96876,6 +98420,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-x: 1px;
   }
 
+  .xl\:focus\:translate-x-1\.5:focus {
+    --transform-translate-x: 0.13rem;
+  }
+
   .xl\:focus\:-translate-x-1:focus {
     --transform-translate-x: -0.25rem;
   }
@@ -96946,6 +98494,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:focus\:-translate-x-px:focus {
     --transform-translate-x: -1px;
+  }
+
+  .xl\:focus\:-translate-x-1\.5:focus {
+    --transform-translate-x: -0.13rem;
   }
 
   .xl\:focus\:-translate-x-full:focus {
@@ -97040,6 +98592,10 @@ MY NON-TAILWIND STYLES ENDS
     --transform-translate-y: 1px;
   }
 
+  .xl\:focus\:translate-y-1\.5:focus {
+    --transform-translate-y: 0.13rem;
+  }
+
   .xl\:focus\:-translate-y-1:focus {
     --transform-translate-y: -0.25rem;
   }
@@ -97110,6 +98666,10 @@ MY NON-TAILWIND STYLES ENDS
 
   .xl\:focus\:-translate-y-px:focus {
     --transform-translate-y: -1px;
+  }
+
+  .xl\:focus\:-translate-y-1\.5:focus {
+    --transform-translate-y: -0.13rem;
   }
 
   .xl\:focus\:-translate-y-full:focus {

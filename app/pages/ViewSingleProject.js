@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import { dateFormattedUserCreationDate } from '../helpers/JSHelpers'
+import { dateFormattedUserCreationDate } from '../helpers/JSHelpers';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -113,14 +113,30 @@ function ViewSingleProject(props) {
   const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
   const titleCSS = 'text-gray-700';
 
-
   return (
     <Page margin='mx-2' title={project.title}>
       <div>
         <div className='flex justify-between items-center'>
-          <h2 className='my-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-            {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
-          </h2>
+          <div className='mb-6'>
+            <h2 className='mt-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+              {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
+            </h2>
+            <div className='flex flex-wrap'>
+              <div class='mt-2 flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
+                <svg class='flex-shrink-0 mr-1.5 h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
+                  <path fillRule='evenodd' d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z' clipRule='evenodd' />
+                </svg>
+                {project.location}
+              </div>
+
+              <div class='mt-2 flex items-center text-sm leading-5 text-gray-600'>
+                <svg class='flex-shrink-0 mr-1.5 h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
+                  <path fillRule='evenodd' d='M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z' clipRule='evenodd' />
+                </svg>
+                Bidding closing on {formatDate()}
+              </div>
+            </div>
+          </div>
           {isOwner() && (
             <span className='flex block pt-2'>
               <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
@@ -136,21 +152,9 @@ function ViewSingleProject(props) {
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
         <div className='border border-gray-200 rounded'>
-          <div className='border-b p-2 mb-4 bg-gray-100'>
+          <div className='border-b p-2 mb-4 bg-gray-50'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
-
-          <fieldset className='border-t border-b p-2 my-4'>
-            <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Location & Deadline:</legend>
-            <div className='flex flex-wrap justify-between'>
-              <p className={containerCSS}>
-                <span className={titleCSS}>Project Location:</span> {project.location}
-              </p>
-              <p className={containerCSS}>
-                <span className={titleCSS}>Bid Submission Deadline:</span> {formatDate()}
-              </p>
-            </div>
-          </fieldset>
 
           {/* PROFILE */}
           <p className='px-2 mt-4 mb-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Project posted on {dateFormatted} by:</p>
@@ -188,22 +192,21 @@ function ViewSingleProject(props) {
             Add a Bid
           </Link>
         </div>
-        <div className=''>
-          <fieldset className='border rounded p-2 my-4 bg-gray-100'>
-            <legend>Bids</legend>
-            {project.bids?.length > 0 ? (
-              project.bids.map((bid, index) => {
-                return (
-                  <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
-                    <span>Bid number# {index + 1}</span> <span>Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
-                  </Link>
-                );
-              })
-            ) : (
-              <div>No Bids</div>
-            )}
-          </fieldset>
-        </div>
+
+        <fieldset className='border rounded p-2 my-4 bg-gray-50'>
+          <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</legend>
+          {project.bids?.length > 0 ? (
+            project.bids.map((bid, index) => {
+              return (
+                <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
+                  <span>Bid number# {index + 1}</span> <span>Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
+                </Link>
+              );
+            })
+          ) : (
+            <div>No Bids</div>
+          )}
+        </fieldset>
       </div>
     </Page>
   );
