@@ -199,7 +199,7 @@ function ViewSingleBid(props) {
         <div className='flex justify-end pr-1 font font-semibold leading-wide'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
 
         {/* OTHER DETAILS */}
-        <fieldset className='border-t border-b p-2 bg-gray-100'>
+        <fieldset className='border-t border-b p-2 bg-gray-50'>
           <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</legend>
           <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </fieldset>
