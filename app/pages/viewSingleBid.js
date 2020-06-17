@@ -161,8 +161,8 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
-      <div className='flex justify-between items-center'>
-        <h2 className='my-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+      <div className='flex justify-between items-center my-6'>
+        <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           {appState.loggedIn ? (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") : state.profileInfo.firstName + "'s"} bid for:{' '}
           <Link to={`/project/${state.params.projectId}`}>
             <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
@@ -183,9 +183,9 @@ function ViewSingleBid(props) {
       </div>
 
       {/* ITEMIZE LIST */}
-      <label htmlFor='project-body' className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
+      <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>
         Itemize Lists:
-      </label>
+      </p>
       <div className='border border-gray-200 rounded'>
         <div style={{ minHeight: 4 + 'rem' }}>
           <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
@@ -199,10 +199,10 @@ function ViewSingleBid(props) {
         <div className='flex justify-end pr-1 font font-semibold leading-wide'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
 
         {/* OTHER DETAILS */}
-        <fieldset className='border-t border-b p-2 bg-gray-50'>
-          <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</legend>
-          <ReactMarkdown source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-        </fieldset>
+
+        <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+        <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+
         {/* PROFILE */}
         <p className='text-lg leading-7 font-medium tracking-tight text-gray-900 px-2 mt-4 mb-2'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
