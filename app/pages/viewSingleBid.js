@@ -183,9 +183,7 @@ function ViewSingleBid(props) {
       </div>
 
       {/* ITEMIZE LIST */}
-      <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>
-        Itemize Lists:
-      </p>
+      <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>
       <div className='border border-gray-200 rounded'>
         <div style={{ minHeight: 4 + 'rem' }}>
           <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
@@ -196,7 +194,7 @@ function ViewSingleBid(props) {
           </div>
           {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
         </div>
-        <div className='flex justify-end pr-1 font font-semibold leading-wide'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+        <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
 
         {/* OTHER DETAILS */}
 

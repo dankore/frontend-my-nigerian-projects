@@ -240,7 +240,7 @@ function CreateBid(props) {
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
-        <h2 className='my-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9'>
+        <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           Creating a bid for{' '}
           <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
@@ -282,23 +282,24 @@ function CreateBid(props) {
 
           {/* ITEMIZE LIST */}
           <div className='mb-4 relative'>
-            <label htmlFor='project-body' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700'>
+            <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
               Itemize Lists <span className='text-red-600'>*</span>
-            </label>
+            </p>
             <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
               <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
-                <p className='text-red-400 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Delete</p>
+                <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Delete</p>
               </div>
               {state.items.map(itemHtmlTemplate)}
             </div>
-            <div className='flex justify-end pr-1'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
+            <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
           </div>
 
           {/* ADD ITEM */}
+          <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Items:</p>
           <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
             <div className='mb-4 relative lg:mr-2'>
               <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
@@ -327,16 +328,14 @@ function CreateBid(props) {
 
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
-            <label htmlFor='other-details' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Other Details
-            </label>
+            <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
             <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
 
           {/* CONTACT */}
 
           <fieldset className='border rounded p-2 mb-4'>
-            <legend className=''>Contact:</legend>
+            <legend className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Contact:</legend>
             <div className='lg:w-auto lg:flex justify-between'>
               <div className='mb-4 lg:mb-0 relative'>
                 <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
