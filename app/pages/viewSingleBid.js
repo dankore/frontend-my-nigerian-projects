@@ -162,12 +162,25 @@ function ViewSingleBid(props) {
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center my-6'>
-        <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-          {appState.loggedIn ? (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") : state.profileInfo.firstName + "'s"} bid for:{' '}
-          <Link to={`/project/${state.params.projectId}`}>
-            <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
-          </Link>
-        </h2>
+        <div>
+          <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+            {appState.loggedIn ? (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") : state.profileInfo.firstName + "'s"} bid for:{' '}
+            <Link to={`/project/${state.params.projectId}`}>
+              <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
+            </Link>
+          </h2>
+          <div className='flex flex-wrap mt-2'>
+            <div class='flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
+              <i className='fas fa-id-badge'></i>
+              <p className='ml-1.5'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+            </div>
+
+            <div class='flex items-center text-sm leading-5 text-gray-600'>
+              <i className='fas fa-user-cog'></i>
+              <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
+            </div>
+          </div>
+        </div>
         {isOwner() && (
           <span className='flex block pt-2'>
             <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
@@ -225,14 +238,6 @@ function ViewSingleBid(props) {
             <div className='flex items-center mr-3'>
               <i className='fas fa-phone'></i>
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
-            </div>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-user-cog'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
-            </div>
-            <div className='flex items-center'>
-              <i className='fas fa-id-badge'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
             </div>
           </div>
         </div>
