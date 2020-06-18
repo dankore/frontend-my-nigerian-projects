@@ -324,7 +324,12 @@ function RegistrationPage(props) {
                 </div>
               </CSSTransition>
             </div>
-            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3 transition duration-150 ease-in-out'>Create Account</button>
+            <button type="submit" className="relative w-full flex justify-center mx-2 mt-4 p-3 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:border-blue-800 focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out">
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <svg className="h-5 w-5 text-blue-500  transition ease-in-out duration-150" fill="none" stroke-linecap="round" strokeLinejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                </span>
+                Create Account
+            </button>
             <div className='text-xs flex justify-center w-full'>
               <p>By clicking Create Account, you agree to the</p>
               <Link to='/terms' className='text-blue-600 ml-1' rel='nofollow'>
