@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Page from '../components/Page';
 import { Link } from 'react-router-dom';
+import StateContext from '../StateContext';
 
 function About() {
+  const appState = useContext(StateContext);
+
   return (
     <Page margin='mx-2' title='About the Bidding App'>
       <div className='py-12 bg-white'>
@@ -51,11 +54,13 @@ function About() {
       </div>
 
       <div className='mt-6 flex justify-around'>
-        <div className='inline-flex rounded'>
-          <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            Get Started
-          </Link>
-        </div>
+        {!appState.loggedIn && (
+          <div className='inline-flex rounded'>
+            <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              Get Started
+            </Link>
+          </div>
+        )}
         <div className='ml-3 inline-flex rounded border'>
           <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             Browse Projects
