@@ -170,12 +170,12 @@ function ViewSingleBid(props) {
             </Link>
           </h2>
           <div className='flex flex-wrap mt-2'>
-            <div class='flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
+            <div className='flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
               <i className='fas fa-id-badge'></i>
               <p className='ml-1.5'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
             </div>
 
-            <div class='flex items-center text-sm leading-5 text-gray-600'>
+            <div className='flex items-center text-sm leading-5 text-gray-600'>
               <i className='fas fa-user-cog'></i>
               <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
             </div>

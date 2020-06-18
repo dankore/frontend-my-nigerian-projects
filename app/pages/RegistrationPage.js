@@ -39,6 +39,7 @@ function RegistrationPage(props) {
       hasErrors: false,
       message: '',
     },
+    isCreating: false,
     submitCount: 0,
   };
 
@@ -137,6 +138,12 @@ function RegistrationPage(props) {
           draft.password.message = 'Password must be at least 6 characters.';
         }
         return;
+      case 'isCreatingStarted':
+        draft.isCreating = true;
+        return;
+      case 'isCreatingFinished':
+        draft.isCreating = false;
+        return;
       // SUBMIT
       case 'submitForm':
         if (!draft.username.hasErrors && draft.username.isUnique && !draft.firstName.hasErrors && !draft.lastName.hasErrors && !draft.email.hasErrors && draft.email.isUnique && !draft.password.hasErrors) {
@@ -214,6 +221,7 @@ function RegistrationPage(props) {
   useEffect(() => {
     if (state.submitCount) {
       const request = Axios.CancelToken.source();
+      dispatch({ type: 'isCreatingStarted' });
       (async function submitRegistration() {
         try {
           const response = await Axios.post(
@@ -228,7 +236,8 @@ function RegistrationPage(props) {
             { cancelToken: request.token }
           );
           if (response.data) {
-            props.history.push('/');
+            dispatch({ type: 'isCreatingFinished' });
+            props.history.push('/browse');
             appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
             // LOG USER IN
             appDispatch({ type: 'login', data: response.data });
@@ -324,13 +333,15 @@ function RegistrationPage(props) {
                 </div>
               </CSSTransition>
             </div>
-            <button type="submit" className="relative w-full flex justify-center mx-2 mt-4 p-3 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:border-blue-800 focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out">
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                    <svg className="h-5 w-5 text-blue-500  transition ease-in-out duration-150" fill="none" stroke-linecap="round" strokeLinejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                </span>
-                Create Account
+            <button type='submit' className='relative w-full flex justify-center mx-2 mt-4 p-3 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:border-blue-800 focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out'>
+              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
+                <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='none' stroke-linecap='round' strokeLinejoin='round' stroke-width='2' viewBox='0 0 24 24' stroke='currentColor'>
+                  <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
+                </svg>
+              </span>
+              {state.isCreating ? 'Creating...' : 'Create Account'}
             </button>
-            <div className='text-xs flex justify-center w-full'>
+            <div className='text-xs mt-1 flex justify-center w-full'>
               <p>By clicking Create Account, you agree to the</p>
               <Link to='/terms' className='text-blue-600 ml-1' rel='nofollow'>
                 Terms of Use

@@ -54,7 +54,6 @@ function CreateBid(props) {
     switch (action.type) {
       case 'fetchingProjectComplete':
         draft.project.title = action.value.title;
-        draft.email.value = action.value.email;
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -137,6 +136,7 @@ function CreateBid(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+  console.log(appState.user);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -241,7 +241,7 @@ function CreateBid(props) {
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-          Creating a bid for{' '}
+          You are creating a bid for:{' '}
           <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
           </Link>
