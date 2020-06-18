@@ -97,7 +97,13 @@ function LoginPage(props) {
 
   return (
     <Page title='Login'>
-      <div className='px-2 max-w-sm mx-auto'>
+      <div className='max-w-sm mx-auto'>
+        <div className='flex justify-center text-blue-600'>
+          <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
+            <path d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'></path>
+          </svg>
+        </div>
+        <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Login to Your Bidding App Account</p>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
           <div className='relative mb-4'>
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
@@ -124,7 +130,7 @@ function LoginPage(props) {
             </CSSTransition>
           </div>
           <div className='mt-6'>
-            <button type='submit' className='relative w-full justify-center inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <button type='submit' className='relative w-full  inline-flex items-center justify-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                 <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />

@@ -49,21 +49,17 @@ function About() {
           </div>
         </div>
       </div>
-      <div className=''>
-        <div className='max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between'>
-          <h2 className='mr-2 text-2xl leading-9 font-bold tracking-tight text-gray-900 sm:text-3xl sm:leading-10'>Want to give it a try?</h2>
-          <div className='mt-8 flex lg:flex-shrink-0 lg:mt-0'>
-            <div className='inline-flex rounded-md'>
-              <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-                Get Started
-              </Link>
-            </div>
-            <div className='ml-3 inline-flex rounded-md border'>
-              <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-                Browse Projects
-              </Link>
-            </div>
-          </div>
+
+      <div className='mt-6 flex justify-around'>
+        <div className='inline-flex rounded'>
+          <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            Get Started
+          </Link>
+        </div>
+        <div className='ml-3 inline-flex rounded border'>
+          <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            Browse Projects
+          </Link>
         </div>
       </div>
     </Page>
