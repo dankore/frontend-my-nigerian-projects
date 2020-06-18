@@ -236,12 +236,12 @@ function ViewSingleBid(props) {
         <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
         <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
 
-        {/* PROFILE */}
+        {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
         <p className='text-lg leading-7 font-medium tracking-tight text-gray-900 px-2 mt-4 mb-2'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
             <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
-              <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='Profile Pic' />
+              <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
             </Link>
           </div>
           <div className='flex justify-center text-lg'>
