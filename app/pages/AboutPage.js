@@ -1,102 +1,53 @@
-import React, { useEffect } from "react";
-import Page from "../components/Page";
+import React, { useEffect } from 'react';
+import Page from '../components/Page';
 
 function About() {
   return (
     <Page margin='mx-2' title='About the Bidding App'>
-        <div className="py-12 bg-white">
-  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="lg:text-center">
-      <p className="text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase">The Bidding App
-      </p>
-      <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-        Get paid helping me with my projects in Nigeria
-      </h3>
-      <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
-       /////
-      </p>
-       
-    </div>
+      <div className='py-12 bg-white'>
+        <div className='max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='lg:text-center'>
+            <p className='text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App</p>
+            <h3 className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10'>Get paid helping me with my projects in Nigeria</h3>
+          </div>
 
-    <div className="mt-10">
-      <ul className="md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10">
-        <li>
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                <svg className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"/>
-                </svg>
-              </div>
-            </div>
-            <div className="ml-4">
-              <h4 className="text-lg leading-6 font-medium text-gray-900">Get paid
-              </h4>
-              <p className="mt-2 text-base leading-6 text-gray-500">
-                Make some money on the side by helping me accomplish my projects in Nigeria. Some of the projects I have done in the past include building 
-                houses, shops, borehole(well), buying land, and more. Check it out, I might have something for you.               </p>
-            </div>
+          <div className='mt-10'>
+            <ul className='md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10'>
+              <li>
+                <div className='flex'>
+                  <div className='flex-shrink-0'>
+                    <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+                      <svg className='h-6 w-6' viewBox='0 0 20 20' fill='currentColor'>
+                        <path d='M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z' />
+                        <path fillRule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z' clipRule='evenodd' />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className='ml-4'>
+                    <h4 className='text-lg leading-6 font-medium text-gray-900'>Get paid</h4>
+                    <p className='mt-2 text-base leading-6 text-gray-500'>Make some money on the side by helping me accomplish my projects in Nigeria. Some of the projects I have done in the past include building houses, shops, borehole(well), buying land, and more. Check it out, I might have something for you. </p>
+                  </div>
+                </div>
+              </li>
+              <li className='mt-10 md:mt-0'>
+                <div className='flex'>
+                  <div className='flex-shrink-0'>
+                    <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+                      <svg className='h-6 w-6' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                        <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div className='ml-4'>
+                    <h4 className='text-lg leading-6 font-medium text-gray-900'>Post Your Projects</h4>
+                    <p className='mt-2 text-base leading-6 text-gray-500'>Feel free to post your own projects as well. Bidding could help save you money and get quality job. </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-        </li>
-        <li className="mt-10 md:mt-0">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                <svg className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"/>
-                </svg>
-              </div>
-            </div>
-            <div className="ml-4">
-              <h4 className="text-lg leading-6 font-medium text-gray-900">No hidden fees
-              </h4>
-              <p className="mt-2 text-base leading-6 text-gray-500">
-                Feel free to post your own projects as well. Bidding could help you save money and get quality job.              </p>
-            </div>
-          </div>
-        </li>
-        <li className="mt-10 md:mt-0">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-              </div>
-            </div>
-            <div className="ml-4">
-              <h4 className="text-lg leading-6 font-medium text-gray-900">Transfers are instant
-              </h4>
-              <p className="mt-2 text-base leading-6 text-gray-500">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-              </p>
-            </div>
-          </div>
-        </li>
-        <li className="mt-10 md:mt-0">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
-                </svg>
-              </div>
-            </div>
-            <div className="ml-4">
-              <h4 className="text-lg leading-6 font-medium text-gray-900">Mobile notifications
-              </h4>
-              <p className="mt-2 text-base leading-6 text-gray-500">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-              </p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+        </div>
+      </div>
     </Page>
   );
 }
