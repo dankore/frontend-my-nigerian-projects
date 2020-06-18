@@ -6,7 +6,7 @@ function Terms() {
   return (
     <Page margin='mx-2' title='Terms'>
       <div className='flex justify-center my-20'>
-        <svg style={{ width: 500 + 'px', height: 200 + 'px' }} data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='574.99478' height='764' viewBox='0 0 574.99478 764'>
+        <svg style={{ width: 500 + 'px', height: 200 + 'px' }} dataName='Layer 1' xmlns='http://www.w3.org/2000/svg' width='574.99478' height='764' viewBox='0 0 574.99478 764'>
           <title>Terms</title>
           <path d='M869.443,802.83547H313.68507V92.17481s590.04937-54.39333,555.75792,0S869.443,802.83547,869.443,802.83547Z' transform='translate(-312.50261 -68)' fill='#f2f2f2' />
           <polygon points='558.123 736.018 0 736.018 0 22.992 332.43 22.992 332.43 25.357 2.365 25.357 2.365 733.653 555.758 733.653 555.758 170.13 558.123 170.13 558.123 736.018' fill='#3f3d56' />
