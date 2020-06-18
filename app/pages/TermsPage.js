@@ -6,7 +6,7 @@ function Terms() {
   return (
     <Page margin='mx-2' title='Terms'>
       <div className='flex justify-center my-20'>
-        <svg style={{ width: 500 + 'px', height: 200 + 'px' }} dataName='Layer 1' xmlns='http://www.w3.org/2000/svg' width='574.99478' height='764' viewBox='0 0 574.99478 764'>
+        <svg style={{ width: 500 + 'px', height: 200 + 'px' }} xmlns='http://www.w3.org/2000/svg' width='574.99478' height='764' viewBox='0 0 574.99478 764'>
           <title>Terms</title>
           <path d='M869.443,802.83547H313.68507V92.17481s590.04937-54.39333,555.75792,0S869.443,802.83547,869.443,802.83547Z' transform='translate(-312.50261 -68)' fill='#f2f2f2' />
           <polygon points='558.123 736.018 0 736.018 0 22.992 332.43 22.992 332.43 25.357 2.365 25.357 2.365 733.653 555.758 733.653 555.758 170.13 558.123 170.13 558.123 736.018' fill='#3f3d56' />
@@ -35,7 +35,7 @@ function Terms() {
           <path d='M391.86793,757.73523c18.40229,17.91389,20.65,45.45171,20.65,45.45171s-27.58831-1.50633-45.99061-19.42023-20.65-45.45171-20.65-45.45171S373.46563,739.82133,391.86793,757.73523Z' transform='translate(-312.50261 -68)' fill='#3182ce' />
         </svg>
       </div>
-      <h1 className='mt-12 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>Terms of Use</h1>
+      <h1 className='mt-12 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Terms of Use</h1>
       <div className='relative z-10 leading-normal'>
         <p className='mt-4'>Thank you for stopping by!</p>
         <p className='mt-4'>This website is operated by The Bidding App. Throughout the site, the terms “we”, “I”, “us”, “our”, and “Website” refer to The Bidding App. The Bidding App offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
