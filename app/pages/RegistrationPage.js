@@ -333,7 +333,7 @@ function RegistrationPage(props) {
                 </div>
               </CSSTransition>
             </div>
-            <button type='submit' className='relative w-full flex justify-center mx-2 mt-4 p-3 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:border-blue-800 focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out'>
+            <button type='submit' className='mx-2 mt-2 relative w-full justify-center inline-flex items-center justify-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                 <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='none' stroke-linecap='round' strokeLinejoin='round' stroke-width='2' viewBox='0 0 24 24' stroke='currentColor'>
                   <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
