@@ -175,6 +175,8 @@ function ViewSingleBid(props) {
     return <NotFoundPage />;
   }
 
+  const bidHasItems = state.projectAndBid.bid.items.length > 0;
+
   return (
     <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
       <div className='flex justify-between items-center my-6'>
@@ -211,19 +213,23 @@ function ViewSingleBid(props) {
         )}
       </div>
 
-      {/* ITEMIZE LIST */}
-      <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>
+      {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
+      {bidHasItems && <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>}
       <div className='border border-gray-200 rounded'>
-        <div style={{ minHeight: 4 + 'rem' }}>
-          <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
-            <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
-            <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
-            <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
-            <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
-          </div>
-          {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
-        </div>
-        <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+        {bidHasItems && (
+          <>
+            <div style={{ minHeight: 4 + 'rem' }}>
+              <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
+              </div>
+              {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
+            </div>
+            <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+          </>
+        )}
 
         {/* OTHER DETAILS */}
 
