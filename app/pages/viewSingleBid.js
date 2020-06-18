@@ -152,6 +152,22 @@ function ViewSingleBid(props) {
     }
   }
 
+  function outPutName() {
+    if (appState.loggedIn) {
+      if (state.profileInfo.firstName) {
+        return (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") + ' bid for';
+      } else {
+        return '{User deleted their profile}';
+      }
+    } else {
+      if (state.profileInfo.firstName) {
+        return state.profileInfo.firstName + "'s bid for";
+      } else {
+        return '{User deleted their profile}';
+      }
+    }
+  }
+
   if (state.isFetching) {
     return <LoadingDotsIcon />;
   }
@@ -164,7 +180,7 @@ function ViewSingleBid(props) {
       <div className='flex justify-between items-center my-6'>
         <div>
           <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-            {appState.loggedIn ? (state.profileInfo.firstName == appState.user.firstName ? 'Your' : state.profileInfo.firstName + "'s") : state.profileInfo.firstName + "'s"} bid for:{' '}
+            {outPutName()}:{' '}
             <Link to={`/project/${state.params.projectId}`}>
               <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
             </Link>
