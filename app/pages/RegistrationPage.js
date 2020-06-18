@@ -324,7 +324,7 @@ function RegistrationPage(props) {
                 </div>
               </CSSTransition>
             </div>
-            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>Create Account</button>
+            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3 transition duration-150 ease-in-out'>Create Account</button>
             <div className='text-xs flex justify-center w-full'>
               <p>By clicking Create Account, you agree to the</p>
               <Link to='/terms' className='text-blue-600 ml-1' rel='nofollow'>

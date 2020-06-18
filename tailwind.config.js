@@ -709,7 +709,7 @@ module.exports = {
     skew: ['responsive', 'hover', 'focus'],
     transitionProperty: ['responsive'],
     transitionTimingFunction: ['responsive'],
-    transitionDuration: ['responsive'],
+    transitionDuration: ['responsive', 'hover', 'focus'],
     transitionDelay: ['responsive'],
   },
   corePlugins: {},

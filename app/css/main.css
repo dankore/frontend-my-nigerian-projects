@@ -20222,6 +20222,70 @@ video {
   transition-duration: 1000ms;
 }
 
+.hover\:duration-75:hover {
+  transition-duration: 75ms;
+}
+
+.hover\:duration-100:hover {
+  transition-duration: 100ms;
+}
+
+.hover\:duration-150:hover {
+  transition-duration: 150ms;
+}
+
+.hover\:duration-200:hover {
+  transition-duration: 200ms;
+}
+
+.hover\:duration-300:hover {
+  transition-duration: 300ms;
+}
+
+.hover\:duration-500:hover {
+  transition-duration: 500ms;
+}
+
+.hover\:duration-700:hover {
+  transition-duration: 700ms;
+}
+
+.hover\:duration-1000:hover {
+  transition-duration: 1000ms;
+}
+
+.focus\:duration-75:focus {
+  transition-duration: 75ms;
+}
+
+.focus\:duration-100:focus {
+  transition-duration: 100ms;
+}
+
+.focus\:duration-150:focus {
+  transition-duration: 150ms;
+}
+
+.focus\:duration-200:focus {
+  transition-duration: 200ms;
+}
+
+.focus\:duration-300:focus {
+  transition-duration: 300ms;
+}
+
+.focus\:duration-500:focus {
+  transition-duration: 500ms;
+}
+
+.focus\:duration-700:focus {
+  transition-duration: 700ms;
+}
+
+.focus\:duration-1000:focus {
+  transition-duration: 1000ms;
+}
+
 .delay-75 {
   transition-delay: 75ms;
 }
@@ -40033,6 +40097,70 @@ MY NON-TAILWIND STYLES ENDS
     transition-duration: 1000ms;
   }
 
+  .sm\:hover\:duration-75:hover {
+    transition-duration: 75ms;
+  }
+
+  .sm\:hover\:duration-100:hover {
+    transition-duration: 100ms;
+  }
+
+  .sm\:hover\:duration-150:hover {
+    transition-duration: 150ms;
+  }
+
+  .sm\:hover\:duration-200:hover {
+    transition-duration: 200ms;
+  }
+
+  .sm\:hover\:duration-300:hover {
+    transition-duration: 300ms;
+  }
+
+  .sm\:hover\:duration-500:hover {
+    transition-duration: 500ms;
+  }
+
+  .sm\:hover\:duration-700:hover {
+    transition-duration: 700ms;
+  }
+
+  .sm\:hover\:duration-1000:hover {
+    transition-duration: 1000ms;
+  }
+
+  .sm\:focus\:duration-75:focus {
+    transition-duration: 75ms;
+  }
+
+  .sm\:focus\:duration-100:focus {
+    transition-duration: 100ms;
+  }
+
+  .sm\:focus\:duration-150:focus {
+    transition-duration: 150ms;
+  }
+
+  .sm\:focus\:duration-200:focus {
+    transition-duration: 200ms;
+  }
+
+  .sm\:focus\:duration-300:focus {
+    transition-duration: 300ms;
+  }
+
+  .sm\:focus\:duration-500:focus {
+    transition-duration: 500ms;
+  }
+
+  .sm\:focus\:duration-700:focus {
+    transition-duration: 700ms;
+  }
+
+  .sm\:focus\:duration-1000:focus {
+    transition-duration: 1000ms;
+  }
+
   .sm\:delay-75 {
     transition-delay: 75ms;
   }
@@ -59663,6 +59791,70 @@ MY NON-TAILWIND STYLES ENDS
   }
 
   .md\:duration-1000 {
+    transition-duration: 1000ms;
+  }
+
+  .md\:hover\:duration-75:hover {
+    transition-duration: 75ms;
+  }
+
+  .md\:hover\:duration-100:hover {
+    transition-duration: 100ms;
+  }
+
+  .md\:hover\:duration-150:hover {
+    transition-duration: 150ms;
+  }
+
+  .md\:hover\:duration-200:hover {
+    transition-duration: 200ms;
+  }
+
+  .md\:hover\:duration-300:hover {
+    transition-duration: 300ms;
+  }
+
+  .md\:hover\:duration-500:hover {
+    transition-duration: 500ms;
+  }
+
+  .md\:hover\:duration-700:hover {
+    transition-duration: 700ms;
+  }
+
+  .md\:hover\:duration-1000:hover {
+    transition-duration: 1000ms;
+  }
+
+  .md\:focus\:duration-75:focus {
+    transition-duration: 75ms;
+  }
+
+  .md\:focus\:duration-100:focus {
+    transition-duration: 100ms;
+  }
+
+  .md\:focus\:duration-150:focus {
+    transition-duration: 150ms;
+  }
+
+  .md\:focus\:duration-200:focus {
+    transition-duration: 200ms;
+  }
+
+  .md\:focus\:duration-300:focus {
+    transition-duration: 300ms;
+  }
+
+  .md\:focus\:duration-500:focus {
+    transition-duration: 500ms;
+  }
+
+  .md\:focus\:duration-700:focus {
+    transition-duration: 700ms;
+  }
+
+  .md\:focus\:duration-1000:focus {
     transition-duration: 1000ms;
   }
 
@@ -79299,6 +79491,70 @@ MY NON-TAILWIND STYLES ENDS
     transition-duration: 1000ms;
   }
 
+  .lg\:hover\:duration-75:hover {
+    transition-duration: 75ms;
+  }
+
+  .lg\:hover\:duration-100:hover {
+    transition-duration: 100ms;
+  }
+
+  .lg\:hover\:duration-150:hover {
+    transition-duration: 150ms;
+  }
+
+  .lg\:hover\:duration-200:hover {
+    transition-duration: 200ms;
+  }
+
+  .lg\:hover\:duration-300:hover {
+    transition-duration: 300ms;
+  }
+
+  .lg\:hover\:duration-500:hover {
+    transition-duration: 500ms;
+  }
+
+  .lg\:hover\:duration-700:hover {
+    transition-duration: 700ms;
+  }
+
+  .lg\:hover\:duration-1000:hover {
+    transition-duration: 1000ms;
+  }
+
+  .lg\:focus\:duration-75:focus {
+    transition-duration: 75ms;
+  }
+
+  .lg\:focus\:duration-100:focus {
+    transition-duration: 100ms;
+  }
+
+  .lg\:focus\:duration-150:focus {
+    transition-duration: 150ms;
+  }
+
+  .lg\:focus\:duration-200:focus {
+    transition-duration: 200ms;
+  }
+
+  .lg\:focus\:duration-300:focus {
+    transition-duration: 300ms;
+  }
+
+  .lg\:focus\:duration-500:focus {
+    transition-duration: 500ms;
+  }
+
+  .lg\:focus\:duration-700:focus {
+    transition-duration: 700ms;
+  }
+
+  .lg\:focus\:duration-1000:focus {
+    transition-duration: 1000ms;
+  }
+
   .lg\:delay-75 {
     transition-delay: 75ms;
   }
@@ -98929,6 +99185,70 @@ MY NON-TAILWIND STYLES ENDS
   }
 
   .xl\:duration-1000 {
+    transition-duration: 1000ms;
+  }
+
+  .xl\:hover\:duration-75:hover {
+    transition-duration: 75ms;
+  }
+
+  .xl\:hover\:duration-100:hover {
+    transition-duration: 100ms;
+  }
+
+  .xl\:hover\:duration-150:hover {
+    transition-duration: 150ms;
+  }
+
+  .xl\:hover\:duration-200:hover {
+    transition-duration: 200ms;
+  }
+
+  .xl\:hover\:duration-300:hover {
+    transition-duration: 300ms;
+  }
+
+  .xl\:hover\:duration-500:hover {
+    transition-duration: 500ms;
+  }
+
+  .xl\:hover\:duration-700:hover {
+    transition-duration: 700ms;
+  }
+
+  .xl\:hover\:duration-1000:hover {
+    transition-duration: 1000ms;
+  }
+
+  .xl\:focus\:duration-75:focus {
+    transition-duration: 75ms;
+  }
+
+  .xl\:focus\:duration-100:focus {
+    transition-duration: 100ms;
+  }
+
+  .xl\:focus\:duration-150:focus {
+    transition-duration: 150ms;
+  }
+
+  .xl\:focus\:duration-200:focus {
+    transition-duration: 200ms;
+  }
+
+  .xl\:focus\:duration-300:focus {
+    transition-duration: 300ms;
+  }
+
+  .xl\:focus\:duration-500:focus {
+    transition-duration: 500ms;
+  }
+
+  .xl\:focus\:duration-700:focus {
+    transition-duration: 700ms;
+  }
+
+  .xl\:focus\:duration-1000:focus {
     transition-duration: 1000ms;
   }
 
