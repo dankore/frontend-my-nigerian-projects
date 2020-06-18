@@ -3,10 +3,102 @@ import Page from "../components/Page";
 
 function About() {
   return (
-    <Page margin='mx-2' title='About Me'>
-      <p className='lead text-muted'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis dolorum labore quisquam vel id dicta fuga! Ducimus, quo. Dolore commodi aliquid error veritatis consequuntur, excepturi cumque fuga eum incidunt doloremque?</p>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At qui enim rem totam voluptatum. Aut saepe temporibus, facilis ex a iste expedita minima dolorum dicta doloribus libero aliquid, quae maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat suscipit beatae eum, est soluta ducimus ratione et impedit sapiente, nihil, atque dignissimos adipisci? Totam atque officia quis voluptates sed veniam?</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptates quisquam possimus tenetur, dicta enim rerum quis, quaerat id nobis provident quo dolorum sapiente temporibus facere non repellendus consequatur cupiditate!</p>
+    <Page margin='mx-2' title='About the Bidding App'>
+        <div className="py-12 bg-white">
+  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="lg:text-center">
+      <p className="text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase">The Bidding App
+      </p>
+      <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+        Get paid helping me with my projects in Nigeria
+      </h3>
+      <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
+        Make some money on the side by helping me accomplish my projects in Nigeria. Some of the projects I have done in the past include building 
+        houses, shops, borehole(well), buying land, and more. Check it out, I might have something for you. 
+      </p>
+       <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
+        Feel free to post your own projects as well. Bidding could help you save money and get quality job. 
+      </p>
+    </div>
+
+    <div className="mt-10">
+      <ul className="md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10">
+        <li>
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                </svg>
+              </div>
+            </div>
+            <div className="ml-4">
+              <h4 className="text-lg leading-6 font-medium text-gray-900">Competitive exchange rates
+              </h4>
+              <p className="mt-2 text-base leading-6 text-gray-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li className="mt-10 md:mt-0">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                </svg>
+              </div>
+            </div>
+            <div className="ml-4">
+              <h4 className="text-lg leading-6 font-medium text-gray-900">No hidden fees
+              </h4>
+              <p className="mt-2 text-base leading-6 text-gray-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li className="mt-10 md:mt-0">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="ml-4">
+              <h4 className="text-lg leading-6 font-medium text-gray-900">Transfers are instant
+              </h4>
+              <p className="mt-2 text-base leading-6 text-gray-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li className="mt-10 md:mt-0">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                </svg>
+              </div>
+            </div>
+            <div className="ml-4">
+              <h4 className="text-lg leading-6 font-medium text-gray-900">Mobile notifications
+              </h4>
+              <p className="mt-2 text-base leading-6 text-gray-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
     </Page>
   );
 }
