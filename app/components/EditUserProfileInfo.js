@@ -262,8 +262,14 @@ function EditUserProfileInfo(props) {
                 </div>
               </CSSTransition>
             </div>
-
-            <button className='rounded w-full bg-blue-600 hover:bg-blue-800 text-white m-3 p-3'>{state.isSaving ? 'Saving...' : 'Save Changes'}</button>
+            <button type='submit' className='relative w-full m-3 inline-flex items-center justify-center py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                <path d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'></path>
+                <polyline points='17 21 17 13 7 13 7 21'></polyline>
+                <polyline points='7 3 7 8 15 8'></polyline>
+              </svg>
+              {state.isSaving ? 'Saving...' : 'Save Changes'}
+            </button>
           </div>
         </form>
       </div>
