@@ -231,10 +231,13 @@ function ViewSingleBid(props) {
           </>
         )}
 
-        {/* OTHER DETAILS */}
-
-        <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-        <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
+        {state.projectAndBid.bid.otherDetails && (
+          <>
+            <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+            <ReactMarkdown className='bg-red-500 border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+          </>
+        )}
 
         {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
         <p className='text-lg leading-7 font-medium tracking-tight text-gray-900 px-2 mt-4 mb-2'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
@@ -251,7 +254,7 @@ function ViewSingleBid(props) {
           </div>
           <p className='flex justify-center mb-2 text-xs'>Member since: {formatDate()}</p>
 
-          <hr />
+          <hr className='border-gray-400'/>
           <div className='flex justify-center flex-wrap text-xs px-2'>
             <div className='flex items-center mr-3'>
               <i className='fas fa-envelope'></i>

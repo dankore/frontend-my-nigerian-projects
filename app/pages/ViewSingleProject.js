@@ -171,7 +171,7 @@ function ViewSingleProject(props) {
             </div>
             <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormattedUserCreationDate(project.author.userCreationDate)}</p>
 
-            <hr />
+            <hr className='border-gray-400' />
             <div className='flex justify-center flex-wrap text-xs px-2'>
               <div className='flex items-center mr-3'>
                 <i className='fas fa-envelope'></i>
