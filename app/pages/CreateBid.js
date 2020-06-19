@@ -8,6 +8,8 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
+import { daysRemaining } from '../helpers/JSHelpers';
+
 
 function CreateBid(props) {
   const appState = useContext(StateContext);
@@ -15,6 +17,7 @@ function CreateBid(props) {
   const initialState = {
     project: {
       title: '',
+      bidSubmissionDeadline: '',
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
     whatBestDescribesYou: {
@@ -54,6 +57,7 @@ function CreateBid(props) {
     switch (action.type) {
       case 'fetchingProjectComplete':
         draft.project.title = action.value.title;
+        draft.project.bidSubmissionDeadline = action.value.bidSubmissionDeadline;
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -361,12 +365,21 @@ function CreateBid(props) {
             </div>
           </fieldset>
 
-          <button type='submit' className='relative w-full  inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-              <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
-            </svg>
-            Submit bid
-          </button>
+          {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
+            <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+              </svg>
+              Submit bid
+            </button>
+          ) : (
+            <div className='flex justify-end'>
+              <div className='cursor-pointer w-full inline-flex items-center justify-center text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
+                <i className='fas fa-stop-circle mr-1'></i>
+                Bidding Closed
+              </div>
+            </div>
+          )}
         </div>
       </form>
     </Page>

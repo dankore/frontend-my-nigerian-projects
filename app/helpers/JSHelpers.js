@@ -1,5 +1,18 @@
 module.exports = {
-    dateFormatted: function(dateString){
+  daysRemaining: function (dateString) {
+    /**
+     * @param dateString comes in this format e.g yyyy-mm-dd
+     * @returns an int
+     */
+    // TIME DIFF IN DAYS
+    const pastOrFutureDate = new Date(dateString);
+    const todaysDate = new Date();
+    const timeDifferenceInSecs = pastOrFutureDate - todaysDate;
+
+    let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
+    return days;
+  },
+  dateFormatted: function (dateString) {
     /**
      * @param dateString comes in this format e.g yyyy-mm-dd
      * @returns format 06/30/2020
@@ -10,8 +23,8 @@ module.exports = {
       return `${datePartsArray[1]}/${datePartsArray[2]}/${datePartsArray[0]}`;
     }
   },
-  dateFormattedUserCreationDate:  function(dateString){
-       if (dateString && typeof dateString == 'string') {
+  dateFormattedUserCreationDate: function (dateString) {
+    if (dateString && typeof dateString == 'string') {
       let month = new Array();
       month[1] = 'January';
       month[2] = 'February';
@@ -35,5 +48,5 @@ module.exports = {
       // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
       return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
     }
-  }
-}
+  },
+};
