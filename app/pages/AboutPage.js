@@ -14,6 +14,20 @@ function About() {
             <p className='text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App</p>
             <h3 className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10'>Get paid helping me with my projects in Nigeria</h3>
           </div>
+          <div className='my-12 flex justify-center'>
+            {!appState.loggedIn && (
+              <div className='inline-flex rounded'>
+                <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                  Get Started
+                </Link>
+              </div>
+            )}
+            <div className='ml-3 inline-flex rounded border'>
+              <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                Browse Projects
+              </Link>
+            </div>
+          </div>
 
           <div className='mt-10'>
             <ul className='md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10'>
@@ -50,21 +64,6 @@ function About() {
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-
-      <div className='mt-6 flex justify-around'>
-        {!appState.loggedIn && (
-          <div className='inline-flex rounded'>
-            <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              Get Started
-            </Link>
-          </div>
-        )}
-        <div className='ml-3 inline-flex rounded border'>
-          <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            Browse Projects
-          </Link>
         </div>
       </div>
     </Page>
