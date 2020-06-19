@@ -235,7 +235,7 @@ function ViewSingleBid(props) {
         {state.projectAndBid.bid.otherDetails && (
           <>
             <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-            <ReactMarkdown className='bg-red-500 border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+            <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </>
         )}
 
