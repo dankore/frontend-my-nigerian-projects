@@ -3,6 +3,14 @@ import Page from '../components/Page';
 import { Link } from 'react-router-dom';
 
 function Terms() {
+  function Mailto({ email, ...props }) {
+    return (
+      <a className='text-blue-600' href={`mailto:${email}`}>
+        {props.children}
+      </a>
+    );
+  }
+
   return (
     <Page margin='mx-2' title='Terms'>
       <div className='flex justify-center my-20'>
@@ -130,11 +138,7 @@ function Terms() {
         <p className='mt-4'>You can review the most current version of the Terms of Service at any time at this page. We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes.</p>
         <h3 className='mt-8 mb-4'>SECTION 20 - CONTACT INFORMATION</h3>
         <p>
-          If you have any questions about the Terms of Services, please contact us at
-          <Link className='text-blue-dark' to='mailto:adamu.dankore@gmail.com'>
-            {' '}
-            adamu.dankore@gmail.com.
-          </Link>
+          If you have any questions about the Terms of Use, please contact me at <Mailto email='adamu.dankore@gmail.com'>adamu.dankore@gmail.com</Mailto>.
         </p>
       </div>
     </Page>

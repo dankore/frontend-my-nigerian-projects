@@ -3,6 +3,14 @@ import Page from '../components/Page';
 import { Link } from 'react-router-dom';
 
 function PrivacyPolicyPage() {
+  function Mailto({ email, ...props }) {
+    return (
+      <a className='text-blue-600' href={`mailto:${email}`}>
+        {props.children}
+      </a>
+    );
+  }
+
   return (
     <Page margin='mx-2' title='Privacy'>
       <div className='flex justify-center my-20'>
@@ -139,11 +147,7 @@ function PrivacyPolicyPage() {
         <p className='mt-2'>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         <h3 className='mt-8 mb-4'>Contact Us</h3>
         <p>
-          If you have any questions about this Privacy Policy, please contact us at
-          <Link className='text-blue-dark' to='mailto:adamu.dankore@gmail.com'>
-            {' '}
-            adamu.dankore@gmail.com.
-          </Link>
+          If you have any questions about the Privacy Policy, please contact me at <Mailto email='adamu.dankore@gmail.com'>adamu.dankore@gmail.com</Mailto>.
         </p>
       </div>
     </Page>
