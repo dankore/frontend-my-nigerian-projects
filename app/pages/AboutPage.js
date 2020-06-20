@@ -12,7 +12,7 @@ function About() {
         <div className='max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='lg:text-center'>
             <p className='text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App</p>
-            <h3 className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10'>Get paid helping me with my projects in Nigeria</h3>
+            <h3 className='mt-2 max-w-3xl text-2xl leading-8 font-semibold font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:text-4xl lg:leading-10 lg:mx-auto lg:text-center'>Get paid helping me with my projects in Nigeria</h3>
           </div>
           <div className='my-12 flex justify-center'>
             {!appState.loggedIn && (
