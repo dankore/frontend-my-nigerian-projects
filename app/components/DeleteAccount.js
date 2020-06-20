@@ -15,15 +15,15 @@ function DeleteAccount() {
     const request = Axios.CancelToken.source();
 
     if (areYouSure) {
-      const response = await Axios.post('/delete-account', { userId: appState.user._id }, { cancelToken: request.token });
+      const response = await Axios.post('/delete-account', { userId: appState.user._id, token: appState.user.token }, { cancelToken: request.token });
       if (response.data == 'Success') {
         appDispatch({ type: 'logout' });
       } else {
         alert('Delete failed. Please try again.');
       }
     }
-    console.log("don't delete");
   }
+
   return (
     <Page title='Delete Account'>
       <div className='inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center'>
