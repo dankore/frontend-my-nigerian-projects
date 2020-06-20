@@ -27,7 +27,7 @@ function Project(props) {
       return <span className='bg-yellow-300 p-1 rounded'>Hurry, bid submission ends today!</span>;
     }
     if (days < 0) {
-      return <span className='bg-red-300 p-1 rounded'>Bid submission is closed.</span>;
+      return <span className='bg-red-300 p-1 rounded'>Bidding closed.</span>;
     }
 
     return <span className='bg-green-300 p-1 rounded'>{`Bidding closing in ${days} days`}</span>;
