@@ -178,7 +178,7 @@ function ViewSingleBid(props) {
   const bidHasItems = state.projectAndBid.bid.items.length > 0;
 
   return (
-    <Page margin='mx-2' title={`Bid by ${state.profileInfo.firstName} ${state.profileInfo.lastName}`}>
+    <Page margin='mx-2' title={`Bid for ${state.projectAndBid.projectTitle}`}>
       <div className='flex justify-between items-center my-6'>
         <div>
           <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
