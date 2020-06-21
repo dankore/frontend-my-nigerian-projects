@@ -1,14 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import Page from './Page';
 import StateContext from '../StateContext';
-import { useImmer } from 'use-immer';
 import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
+import { withRouter } from 'react-router-dom';
 
-function DeleteAccount() {
+function DeleteAccount(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
-  const [state, setState] = useImmer();
 
   async function handleDeleteAccount() {
     const areYouSure = confirm('Are you sure?');
@@ -17,9 +16,11 @@ function DeleteAccount() {
     if (areYouSure) {
       const response = await Axios.post('/delete-account', { userId: appState.user._id, token: appState.user.token }, { cancelToken: request.token });
       if (response.data == 'Success') {
+        props.history.push('/')
+        appDispatch({ type: 'flashMessage', value: 'Account successfully deleted.' });
         appDispatch({ type: 'logout' });
       } else {
-        alert('Delete failed. Please try again.');
+        appDispatch({ type: 'flashMessageError', value: 'Delete failed. Please try again.' });
       }
     }
   }
@@ -58,4 +59,4 @@ function DeleteAccount() {
   );
 }
 
-export default DeleteAccount;
+export default withRouter(DeleteAccount);

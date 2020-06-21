@@ -41,7 +41,7 @@ function HowToBid() {
               <span className='h-10 w-10 bg-blue-500 flex items-center justify-center rounded-full text-lg leading-10 font-display font-bold text-white'>04</span>
             </div>
             <div className='ml-4'>
-              <p className='text-lg leading-6 font-medium text-gray-900'>Wait for the project owner to made a decision</p>
+              <p className='text-lg leading-6 font-medium text-gray-900'>Wait for the project owner to make a decision</p>
             </div>
           </div>
         </div>
