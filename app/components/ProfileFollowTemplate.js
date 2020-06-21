@@ -11,7 +11,6 @@ function ProfileFollow(props) {
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
-  const [user, setUser] = useState();
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -38,7 +37,7 @@ function ProfileFollow(props) {
         return 'You do not have any followers';
       } else {
         if (!appState.loggedIn) {
-          return `This user has no followers yet. Login or Register to get the latest projects from ${props.name}.`;
+          return `This user has no followers yet. Login or Register to get ${props.firstName}'s latest projects.`;
         }
         return 'This user has no followers. Click the Follow button to get the latest from this user.';
       }
@@ -49,7 +48,7 @@ function ProfileFollow(props) {
         return 'You are not following anyone';
       } else {
         if (!appState.loggedIn) {
-          return `This user is not following anyone yet. Login or Register to get the latest projects from ${props.name}.`;
+          return `This user is not following anyone yet. Login or Register to get ${props.firstName}'s latest projects.`;
         }
         return 'This user is not following anyone yet.';
       }

@@ -185,7 +185,7 @@ function ViewSingleProject(props) {
           </div>
         </div>
       </div>
-      {/* BIDS */}
+      {/* BIDS: DON'T ALLOW OWNERS OF A PROJECT TO ADD BID. HIDE BID BTN */}
       <div>
         {appState.loggedIn ? isOwner() ? '' : (
               <>
