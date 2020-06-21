@@ -187,7 +187,9 @@ function ViewSingleProject(props) {
       </div>
       {/* BIDS */}
       <div>
-        {daysRemaining(project.bidSubmissionDeadline) > -1 ? (
+        {appState.loggedIn ? isOwner() ? '' : (
+              <>
+            {daysRemaining(project.bidSubmissionDeadline) > -1 ? (
           <div className='flex justify-end'>
             <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
               <i className='fas fa-plus mr-1'></i>
@@ -201,6 +203,26 @@ function ViewSingleProject(props) {
               Bidding Closed
             </div>
           </div>
+        )}
+            </>
+        )  : (
+              <>
+            {daysRemaining(project.bidSubmissionDeadline) > -1 ? (
+          <div className='flex justify-end'>
+            <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
+              <i className='fas fa-plus mr-1'></i>
+              Add a Bid
+            </Link>
+          </div>
+        ) : (
+          <div className='flex justify-end'>
+            <div className='cursor-pointer text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
+              <i className='fas fa-stop-circle mr-1'></i>
+              Bidding Closed
+            </div>
+          </div>
+        )}
+            </>
         )}
 
         <fieldset className='border rounded p-2 my-4 bg-gray-50'>
