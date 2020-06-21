@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { useImmerReducer } from 'use-immer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -15,26 +15,27 @@ Axios.defaults.baseURL =  'https://backend-bidding-app.herokuapp.com';
 
 // COMPONENTS
 import Header from './components/Header';
-import HomePage from './pages/HomePage';
+const HomePage = lazy(()=> import('./pages/HomePage'));
 import Footer from './components/Footer';
 import About from './pages/AboutPage';
 import Terms from './pages/TermsPage';
 import HowToBid from './pages/HowToBidPage';
-import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage';
+const LoginPage = lazy(()=> import('./pages/LoginPage'));
+const RegistrationPage = lazy(()=> import('./pages/RegistrationPage'));
 import NotFoundPage from './pages/NotFoundPage';
-import ProfilePage from './pages/ProfilePage';
-import CreateProject from './pages/CreateProject';
-import ViewSingleProject from './pages/ViewSingleProject';
+const ProfilePage = lazy(()=> import('./pages/ProfilePage'));
+const CreateProject = lazy(()=> import('./pages/CreateProject'));
+const ViewSingleProject = lazy(()=> import('./pages/ViewSingleProject'));
 import FlashMessageSuccess from './components/FlashMessageSuccess';
-import EditProjectPage from './pages/EditProjectPage';
+const EditProjectPage = lazy(()=> import('./pages/EditProjectPage'));
 import FlashMessageErrors from './components/FlashMessageErrors';
-import SettingsPage from './pages/SettingsPage';
+const SettingsPage = lazy(()=> import('./pages/SettingsPage'));
 import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
 import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
-import CreateBid from './pages/CreateBid';
-import ViewSingleBid from './pages/viewSingleBid';
+const CreateBid = lazy(()=> import('./pages/CreateBid'));
+const ViewSingleBid = lazy(()=> import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import LoadingDotsIcon from './components/LoadingDotsIcon';
 // COMPONENTS END
 
 function Main() {
@@ -144,6 +145,7 @@ function Main() {
           <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
+          <Suspense fallback={<LoadingDotsIcon />}>
           <Switch>
             <Route exact path='/'>
               <Redirect to='/browse' />
@@ -186,6 +188,7 @@ function Main() {
               <NotFoundPage />
             </Route>
           </Switch>
+          </Suspense>
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>
