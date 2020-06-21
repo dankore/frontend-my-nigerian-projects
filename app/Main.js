@@ -11,7 +11,7 @@ import DispatchContext from './DispatchContext';
 
 // AXIOS COMMON URL
 console.log(process.env.BACKENDURL);
-Axios.defaults.baseURL =  'https://backend-bidding-app.herokuapp.com';
+Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-bidding-app.herokuapp.com';
 
 // COMPONENTS
 import Header from './components/Header';
