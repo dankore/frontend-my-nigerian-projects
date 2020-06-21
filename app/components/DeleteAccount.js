@@ -16,9 +16,9 @@ function DeleteAccount(props) {
     if (areYouSure) {
       const response = await Axios.post('/delete-account', { userId: appState.user._id, token: appState.user.token }, { cancelToken: request.token });
       if (response.data == 'Success') {
+        appDispatch({ type: 'logout' });
         props.history.push('/')
         appDispatch({ type: 'flashMessage', value: 'Account successfully deleted.' });
-        appDispatch({ type: 'logout' });
       } else {
         appDispatch({ type: 'flashMessageError', value: 'Delete failed. Please try again.' });
       }
