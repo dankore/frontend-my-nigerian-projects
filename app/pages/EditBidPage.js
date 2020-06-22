@@ -305,7 +305,7 @@ function EditBidPage(props) {
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
                 <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Delete</p>
               </div>
-              {state.items.map(itemHtmlTemplate)}
+              {state.fetchedData.bid.items.map(itemHtmlTemplate)}
             </div>
             <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
           </div>
@@ -374,21 +374,12 @@ function EditBidPage(props) {
             </div>
           </fieldset>
 
-          {/* {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
-            <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-                <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
-              </svg>
-              Submit bid
-            </button>
-          ) : (
-            <div className='flex justify-end'>
-              <div className='cursor-pointer w-full inline-flex items-center justify-center text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
-                <i className='fas fa-stop-circle mr-1'></i>
-                Bidding Closed
-              </div>
-            </div>
-          )} */}
+          <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+            <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+            </svg>
+            Submit bid
+          </button>
         </div>
       </form>
     </Page>
