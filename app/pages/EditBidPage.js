@@ -11,7 +11,7 @@ import DispatchContext from '../DispatchContext';
 import { daysRemaining } from '../helpers/JSHelpers';
 
 
-function EditBid(props) {
+function EditBidPage(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
@@ -141,25 +141,25 @@ function EditBid(props) {
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  useEffect(() => {
-    const request = Axios.CancelToken.source();
-    const projectId = state.projectId;
+//   useEffect(() => {
+//     const request = Axios.CancelToken.source();
+//     const projectId = state.projectId;
 
-    (async function fetchProjectForCreateBid() {
-      try {
-        const response = await Axios.get(`/project/${projectId}`, { cancelToken: request.token });
-        if (response.data) {
-          dispatch({ type: 'fetchingProjectComplete', value: response.data });
-        } else {
-          dispatch({ type: 'notFound' });
-        }
-      } catch (error) {
-        console.log('Problem getting project details. CreateBid.js file.');
-      }
-    })();
+//     (async function fetchProjectForCreateBid() {
+//       try {
+//         const response = await Axios.get(`/project/${projectId}`, { cancelToken: request.token });
+//         if (response.data) {
+//           dispatch({ type: 'fetchingProjectComplete', value: response.data });
+//         } else {
+//           dispatch({ type: 'notFound' });
+//         }
+//       } catch (error) {
+//         console.log('Problem getting project details. CreateBid.js file.');
+//       }
+//     })();
 
-    return () => request.cancel();
-  }, []);
+//     return () => request.cancel();
+//   }, []);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -386,4 +386,4 @@ function EditBid(props) {
   );
 }
 
-export default withRouter(EditBid);
+export default withRouter(EditBidPage);
