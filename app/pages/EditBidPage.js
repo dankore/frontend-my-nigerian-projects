@@ -71,7 +71,7 @@ function EditBidPage(props) {
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
-          draft.items.push(action.value);
+          draft.fetchedData.bid.items.push(action.value);
           draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
         }
         return;
@@ -115,7 +115,7 @@ function EditBidPage(props) {
         draft.otherDetails.value = action.value;
         return;
       case 'deleteItem':
-        draft.items.splice(action.value.index, 1);
+        draft.fetchedData.bid.items.splice(action.value.index, 1);
         draft.itemTotal -= +action.value.quantity * +action.value.price_per_item;
         return;
       case 'phoneUpdate':
@@ -150,7 +150,7 @@ function EditBidPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  console.log(state.fetchedData.bid.email)
+  
   useEffect(() => {
     const request = Axios.CancelToken.source();
     
