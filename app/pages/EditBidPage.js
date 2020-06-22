@@ -10,25 +10,24 @@ import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from 
 import DispatchContext from '../DispatchContext';
 import { daysRemaining } from '../helpers/JSHelpers';
 
-
 function EditBidPage(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
     fetchedData: {
-        projectTitle: '',
-        bid: {
-            id: '',
-            whatBestDescribesYou: '',
-            yearsOfExperience: '',
-            items: [],
-            otherDetails: "",
-            phone: '',
-            email: '',
-            userCreationDate: '',
-            bidAuthor: { authorId: '', username: '' },
-            bidCreationDate: ''
-        },
+      projectTitle: '',
+      bid: {
+        id: '',
+        whatBestDescribesYou: '',
+        yearsOfExperience: '',
+        items: [],
+        otherDetails: '',
+        phone: '',
+        email: '',
+        userCreationDate: '',
+        bidAuthor: { authorId: '', username: '' },
+        bidCreationDate: '',
+      },
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
     whatBestDescribesYou: {
@@ -68,7 +67,7 @@ function EditBidPage(props) {
     switch (action.type) {
       case 'fetchingProjectComplete':
         draft.fetchedData = action.value;
-        draft.itemTotal = action.value.bid.items.reduce((total, cur)=> total + (+cur.quantity * +cur.price_per_item),0);
+        draft.itemTotal = action.value.bid.items.reduce((total, cur) => total + +cur.quantity * +cur.price_per_item, 0);
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -151,20 +150,20 @@ function EditBidPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  
+
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    
+
     (async function fetchProjectForCreateBid() {
       try {
-         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId }, { cancelToken: request.token });
-         if (data) {
+        const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId }, { cancelToken: request.token });
+        if (data) {
           dispatch({ type: 'fetchingProjectComplete', value: data });
         } else {
           dispatch({ type: 'notFound' });
         }
       } catch (error) {
-        console.log({viewSingleBidError: error});
+        console.log({ viewSingleBidError: error });
       }
     })();
 
@@ -174,7 +173,6 @@ function EditBidPage(props) {
   useEffect(() => {
     const request = Axios.CancelToken.source();
     if (state.sendCount) {
-        
       (async function saveEditedBid() {
         try {
           const response = await Axios.post(
@@ -258,7 +256,7 @@ function EditBidPage(props) {
       <form onSubmit={handleSubmitBid}>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           Editing your bid for:{' '}
-          <Link to={`/`} className='underline hover:text-blue-600'>
+          <Link to={`/${state.params.projectId}`} className='underline hover:text-blue-600'>
             {state.fetchedData.projectTitle}
           </Link>
         </h2>
@@ -380,7 +378,7 @@ function EditBidPage(props) {
 
           <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-            <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+              <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
             </svg>
             Save Updates
           </button>
