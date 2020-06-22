@@ -36,6 +36,7 @@ const CreateBid = lazy(()=> import('./pages/CreateBid'));
 const ViewSingleBid = lazy(()=> import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
+import EditBidPage from './pages/EditBidPage';
 // COMPONENTS END
 
 function Main() {
@@ -160,8 +161,11 @@ function Main() {
             <Route path='/project/:id' exact>
               <ViewSingleProject />
             </Route>
-            <Route path='/:projectId/bid/:bidId'>
+            <Route path='/:projectId/bid/:bidId' exact>
               <ViewSingleBid />
+            </Route>
+             <Route path='/:projectId/bid/:bidId/edit'>
+              <EditBidPage />
             </Route>
             <Route path='/create-bid/:id' exact>
               {state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}

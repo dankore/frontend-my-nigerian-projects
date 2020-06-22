@@ -201,7 +201,7 @@ function ViewSingleBid(props) {
         </div>
         {isOwner() && (
           <span className='flex block pt-2'>
-            <Link to={'#'} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+            <Link to={`/${state.params.projectId}/bid/${state.params.bidId}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
               <i className='fas fa-edit'></i>
             </Link>
             <ReactToolTip place='bottom' id='edit-btn' />
