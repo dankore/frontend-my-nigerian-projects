@@ -15,9 +15,20 @@ function EditBidPage(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const initialState = {
-    project: {
-      title: '',
-      bidSubmissionDeadline: '',
+    fetchedData: {
+        projectTitle: '',
+        bid: {
+            id: '',
+            whatBestDescribesYou: '',
+            yearsOfExperience: '',
+            items: [],
+            otherDetails: "",
+            phone: '',
+            email: '',
+            userCreationDate: '',
+            bidAuthor: { authorId: '', username: '' },
+            bidCreationDate: ''
+        },
     },
     item: { name: '', quantity: 0, price_per_item: 0 },
     whatBestDescribesYou: {
@@ -48,7 +59,7 @@ function EditBidPage(props) {
     items: [],
     itemTotal: 0,
     notFound: false,
-    projectId: useParams().id,
+    params: useParams(),
     isOpen: false,
     sendCount: 0,
   };
@@ -56,8 +67,7 @@ function EditBidPage(props) {
   function reducer(draft, action) {
     switch (action.type) {
       case 'fetchingProjectComplete':
-        draft.project.title = action.value.title;
-        draft.project.bidSubmissionDeadline = action.value.bidSubmissionDeadline;
+        draft.fetchedData = action.value;
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -140,26 +150,25 @@ function EditBidPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+  console.log(state.fetchedData)
+  useEffect(() => {
+    const request = Axios.CancelToken.source();
+    
+    (async function fetchProjectForCreateBid() {
+      try {
+         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId }, { cancelToken: request.token });
+         if (data) {
+          dispatch({ type: 'fetchingProjectComplete', value: data });
+        } else {
+          dispatch({ type: 'notFound' });
+        }
+      } catch (error) {
+        console.log('Problem getting project details. CreateBid.js file.');
+      }
+    })();
 
-//   useEffect(() => {
-//     const request = Axios.CancelToken.source();
-//     const projectId = state.projectId;
-
-//     (async function fetchProjectForCreateBid() {
-//       try {
-//         const response = await Axios.get(`/project/${projectId}`, { cancelToken: request.token });
-//         if (response.data) {
-//           dispatch({ type: 'fetchingProjectComplete', value: response.data });
-//         } else {
-//           dispatch({ type: 'notFound' });
-//         }
-//       } catch (error) {
-//         console.log('Problem getting project details. CreateBid.js file.');
-//       }
-//     })();
-
-//     return () => request.cancel();
-//   }, []);
+    return () => request.cancel();
+  }, []);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -245,9 +254,9 @@ function EditBidPage(props) {
       <form onSubmit={handleSubmitBid}>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           You are creating a bid for:{' '}
-          <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
+          {/* <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
-          </Link>
+          </Link> */}
         </h2>
         <div className='border border-gray-200 p-2 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
@@ -365,7 +374,7 @@ function EditBidPage(props) {
             </div>
           </fieldset>
 
-          {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
+          {/* {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
             <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                 <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
@@ -379,7 +388,7 @@ function EditBidPage(props) {
                 Bidding Closed
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </form>
     </Page>
