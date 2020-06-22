@@ -174,34 +174,35 @@ function EditBidPage(props) {
   useEffect(() => {
     const request = Axios.CancelToken.source();
     if (state.sendCount) {
-        console.log('inside send')
-    //   (async function saveBid() {
-    //     try {
-    //       const response = await Axios.post(
-    //         '/create-bid',
-    //         {
-    //           projectId: state.projectId,
-    //           whatBestDescribesYou: state.whatBestDescribesYou.value,
-    //           yearsOfExperience: state.yearsOfExperience.value,
-    //           items: state.items,
-    //           otherDetails: state.otherDetails.value,
-    //           phone: state.phone.value,
-    //           email: state.email.value,
-    //           userCreationDate: appState.user.userCreationDate,
-    //           token: appState.user.token,
-    //         },
-    //         { cancelToken: request.token }
-    //       );
+        
+      (async function saveEditedBid() {
+        try {
+          const response = await Axios.post(
+            '/edit-bid',
+            {
+              projectId: state.params.projectId,
+              bidId: state.params.bidId,
+              whatBestDescribesYou: state.fetchedData.bid.whatBestDescribesYou,
+              yearsOfExperience: state.fetchedData.bid.yearsOfExperience,
+              items: state.fetchedData.bid.items,
+              otherDetails: state.fetchedData.bid.otherDetails,
+              phone: state.fetchedData.bid.phone,
+              email: state.fetchedData.bid.email,
+              userCreationDate: appState.user.userCreationDate,
+              token: appState.user.token,
+            },
+            { cancelToken: request.token }
+          );
 
-    //       if (response.data == 'Success') {
-    //         props.history.goBack();
-    //       } else {
-    //         appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
-    //       }
-    //     } catch (error) {
-    //       console.log({ errorCreatingBid: error });
-    //     }
-    //   })();
+          if (response.data == 'Success') {
+            props.history.goBack();
+          } else {
+            appDispatch({ type: 'flashMessageError', value: 'Editing bid failed. Please try again.' });
+          }
+        } catch (error) {
+          console.log({ errorCreatingBid: error });
+        }
+      })();
     }
     return () => request.cancel();
   }, [state.sendCount]);
