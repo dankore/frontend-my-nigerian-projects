@@ -19,7 +19,7 @@ function SettingsPage() {
         </NavLink>
 
         <NavLink to='/settings/delete-account' activeStyle={activeNavCSS} className={navLinkCSS}>
-          Change Your Password
+          Delete Account
         </NavLink>
       </ul>
 
