@@ -68,6 +68,7 @@ function EditBidPage(props) {
     switch (action.type) {
       case 'fetchingProjectComplete':
         draft.fetchedData = action.value;
+        draft.itemTotal = action.value.bid.items.reduce((total, cur)=> total + (+cur.quantity * +cur.price_per_item),0);
         return;
       case 'addItem':
         if (draft.item.name != '' && draft.item.quantity != '' && draft.item.price_per_item != '') {
@@ -80,20 +81,20 @@ function EditBidPage(props) {
         return;
       case 'whatBestDescribesYou':
         draft.whatBestDescribesYou.hasErrors = false;
-        draft.whatBestDescribesYou.value = action.value;
+        draft.fetchedData.bid.whatBestDescribesYou = action.value;
         return;
       case 'whatBestDescribesYouRules':
-        if (draft.whatBestDescribesYou.value == '') {
+        if (draft.fetchedData.bid.whatBestDescribesYou == '') {
           draft.whatBestDescribesYou.hasErrors = true;
           draft.whatBestDescribesYou.message = 'Please choose from the options.';
         }
         return;
       case 'yearsExperienceUpdate':
         draft.yearsOfExperience.hasErrors = false;
-        draft.yearsOfExperience.value = action.value;
+        draft.fetchedData.bid.yearsOfExperience = action.value;
         return;
       case 'yearsExperienceUpdateRules':
-        if (draft.yearsOfExperience.value == 0) {
+        if (draft.fetchedData.bid.yearsOfExperience < 0) {
           draft.yearsOfExperience.hasErrors = true;
           draft.yearsOfExperience.message = 'Years of experience required.';
         }
@@ -112,7 +113,7 @@ function EditBidPage(props) {
         draft.itemTotal += +action.value.quantity * +action.value.price_per_item;
         return;
       case 'otherDetails':
-        draft.otherDetails.value = action.value;
+        draft.fetchedData.bid.otherDetails = action.value;
         return;
       case 'deleteItem':
         draft.fetchedData.bid.items.splice(action.value.index, 1);
@@ -120,7 +121,7 @@ function EditBidPage(props) {
         return;
       case 'phoneUpdate':
         draft.phone.hasErrors = false;
-        draft.phone.value = action.value;
+        draft.fetchedData.bid.phone = action.value;
         return;
       case 'phoneRules':
         if (!action.value.trim()) {
@@ -130,7 +131,7 @@ function EditBidPage(props) {
         return;
       case 'emailUpdate':
         draft.email.hasErrors = false;
-        draft.email.value = action.value;
+        draft.fetchedData.bid.email = action.value;
         return;
       case 'emailRules':
         if (!action.value.trim()) {
@@ -142,7 +143,7 @@ function EditBidPage(props) {
         draft.isOpen = !draft.isOpen;
         return;
       case 'submitForm':
-        if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '' && !draft.phone.hasErrors && draft.phone.value != '' && !draft.email.hasErrors && draft.email.value != '') {
+        if (!draft.whatBestDescribesYou.hasErrors && draft.fetchedData.bid.whatBestDescribesYou != '' && !draft.yearsOfExperience.hasErrors && draft.fetchedData.bid.yearsOfExperience != '' && !draft.phone.hasErrors && draft.fetchedData.bid.phone != '' && !draft.email.hasErrors && draft.fetchedData.bid.email != '') {
           draft.sendCount++;
         }
         return;
@@ -163,7 +164,7 @@ function EditBidPage(props) {
           dispatch({ type: 'notFound' });
         }
       } catch (error) {
-        console.log('Problem getting project details. CreateBid.js file.');
+        console.log({viewSingleBidError: error});
       }
     })();
 
@@ -173,33 +174,34 @@ function EditBidPage(props) {
   useEffect(() => {
     const request = Axios.CancelToken.source();
     if (state.sendCount) {
-      (async function saveBid() {
-        try {
-          const response = await Axios.post(
-            '/create-bid',
-            {
-              projectId: state.projectId,
-              whatBestDescribesYou: state.whatBestDescribesYou.value,
-              yearsOfExperience: state.yearsOfExperience.value,
-              items: state.items,
-              otherDetails: state.otherDetails.value,
-              phone: state.phone.value,
-              email: state.email.value,
-              userCreationDate: appState.user.userCreationDate,
-              token: appState.user.token,
-            },
-            { cancelToken: request.token }
-          );
+        console.log('inside send')
+    //   (async function saveBid() {
+    //     try {
+    //       const response = await Axios.post(
+    //         '/create-bid',
+    //         {
+    //           projectId: state.projectId,
+    //           whatBestDescribesYou: state.whatBestDescribesYou.value,
+    //           yearsOfExperience: state.yearsOfExperience.value,
+    //           items: state.items,
+    //           otherDetails: state.otherDetails.value,
+    //           phone: state.phone.value,
+    //           email: state.email.value,
+    //           userCreationDate: appState.user.userCreationDate,
+    //           token: appState.user.token,
+    //         },
+    //         { cancelToken: request.token }
+    //       );
 
-          if (response.data == 'Success') {
-            props.history.goBack();
-          } else {
-            appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
-          }
-        } catch (error) {
-          console.log({ errorCreatingBid: error });
-        }
-      })();
+    //       if (response.data == 'Success') {
+    //         props.history.goBack();
+    //       } else {
+    //         appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
+    //       }
+    //     } catch (error) {
+    //       console.log({ errorCreatingBid: error });
+    //     }
+    //   })();
     }
     return () => request.cancel();
   }, [state.sendCount]);
@@ -224,10 +226,10 @@ function EditBidPage(props) {
 
   function handleSubmitBid(e) {
     e.preventDefault();
-    dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
-    dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
-    dispatch({ type: 'phoneRules', value: state.phone.value });
-    dispatch({ type: 'emailRules', value: state.email.value });
+    dispatch({ type: 'whatBestDescribesYouRules', value: state.fetchedData.bid.whatBestDescribesYou });
+    dispatch({ type: 'yearsExperienceUpdateRules', value: state.fetchedData.bid.yearsOfExperience });
+    dispatch({ type: 'phoneRules', value: state.fetchedData.bid.phone });
+    dispatch({ type: 'emailRules', value: state.fetchedData.bid.email });
     dispatch({ type: 'submitForm' });
   }
 

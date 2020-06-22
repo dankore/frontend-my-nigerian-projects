@@ -83,7 +83,7 @@ function CreateBid(props) {
         draft.yearsOfExperience.value = action.value;
         return;
       case 'yearsExperienceUpdateRules':
-        if (draft.yearsOfExperience.value == 0) {
+        if (draft.yearsOfExperience.value < 0) {
           draft.yearsOfExperience.hasErrors = true;
           draft.yearsOfExperience.message = 'Years of experience required.';
         }
