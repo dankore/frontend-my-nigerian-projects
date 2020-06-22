@@ -150,7 +150,7 @@ function EditBidPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  console.log(state.fetchedData)
+  console.log(state.fetchedData.bid.email)
   useEffect(() => {
     const request = Axios.CancelToken.source();
     
@@ -253,10 +253,10 @@ function EditBidPage(props) {
     <Page margin='mx-2' wide={true} title='Edit Bid'>
       <form onSubmit={handleSubmitBid}>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-          You are creating a bid for:{' '}
-          {/* <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
-            {state.project.title}
-          </Link> */}
+          Editing your bid for:{' '}
+          <Link to={`/`} className='underline hover:text-blue-600'>
+            {state.fetchedData.projectTitle}
+          </Link>
         </h2>
         <div className='border border-gray-200 p-2 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
@@ -265,7 +265,7 @@ function EditBidPage(props) {
               What best describes you? <span className='text-red-600'>*</span>
             </label>
             <span className='relative inline-block'>
-              <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+              <select value={state.fetchedData.bid.whatBestDescribesYou} onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
                 <option></option>
                 <option>I will get someone else to do the work(contractor)</option>
                 <option>I will do the work myself</option>
@@ -283,7 +283,7 @@ function EditBidPage(props) {
               Years of experience in this field <span className='text-red-600'>*</span>
             </label>
             <span className='relative inline-block'>
-              <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
+              <input value={state.fetchedData.bid.yearsOfExperience} onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
               <CSSTransition in={state.yearsOfExperience.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.yearsOfExperience.message}
@@ -341,7 +341,7 @@ function EditBidPage(props) {
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
             <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-            <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
+            <textarea value={state.fetchedData.bid.otherDetails} onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
 
           {/* CONTACT */}
@@ -353,7 +353,7 @@ function EditBidPage(props) {
                 <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                   Email <span className='text-red-600'>*</span>
                 </label>
-                <input onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} value={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                <input value={state.fetchedData.bid.email} onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
                 <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                   <div style={CSSTransitionStyle} className='liveValidateMessage'>
                     {state.email.message}
@@ -364,7 +364,7 @@ function EditBidPage(props) {
                 <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                   Phone Number <span className='text-red-600'>*</span>
                 </label>
-                <input onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                <input value={state.fetchedData.bid.phone} onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
                 <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                   <div style={CSSTransitionStyle} className='liveValidateMessage'>
                     {state.phone.message}
