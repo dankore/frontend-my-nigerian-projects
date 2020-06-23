@@ -26,6 +26,7 @@ function ViewSingleBid(props) {
         email: '',
         userCreationDate: '',
         bidCreationDate: '',
+        updatedDate: '',
       },
     },
     profileInfo: {
@@ -240,7 +241,6 @@ function ViewSingleBid(props) {
         )}
 
         {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
-        <p className='text-lg leading-7 font-medium tracking-tight text-gray-900 px-2 mt-4 mb-2'>Bid posted on {dateFormatted(state.projectAndBid.bid.bidCreationDate)} by:</p>
         <div className='bg-gray-700 py-2 rounded-b text-white'>
           <div className='flex justify-center'>
             <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
@@ -257,6 +257,10 @@ function ViewSingleBid(props) {
           <hr className='border-gray-400'/>
           <div className='flex justify-center flex-wrap text-xs px-2'>
             <div className='flex items-center mr-3'>
+              <i className="fas fa-clock"></i>
+              <p className='ml-1'>Posted: {state.projectAndBid.bid.bidCreationDate}</p>
+            </div>
+            <div className='flex items-center mr-3'>
               <i className='fas fa-envelope'></i>
               <p className='ml-1'>{state.projectAndBid.bid.email}</p>
             </div>
@@ -264,6 +268,12 @@ function ViewSingleBid(props) {
               <i className='fas fa-phone'></i>
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
+            {state.projectAndBid.bid.updatedDate && (
+                <div className='flex items-center mr-3'>
+              <i className="fas fa-pencil-alt"></i>
+              <p className='ml-1'>Updated: ${state.projectAndBid.bid.updatedDate}</p>
+            </div>
+            )}
           </div>
         </div>
       </div>
