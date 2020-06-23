@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Container from "./Container";
+import DispatchContext from '../DispatchContext';
 
 function Page(props) {
+  const appDispatch = useContext(DispatchContext);
   useEffect(() => {
     document.title = `${props.title} | Bid For My Projects`;
+    appDispatch({ type: 'alwaysCloseTheseMenus' });
     window.scrollTo(0, 0);
   }, [props.title]);
 

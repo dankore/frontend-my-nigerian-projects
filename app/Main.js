@@ -15,28 +15,28 @@ Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-bidding-app.
 
 // COMPONENTS
 import Header from './components/Header';
-const HomePage = lazy(()=> import('./pages/HomePage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
 import Footer from './components/Footer';
 import About from './pages/AboutPage';
 import Terms from './pages/TermsPage';
 import HowToBid from './pages/HowToBidPage';
-const LoginPage = lazy(()=> import('./pages/LoginPage'));
-const RegistrationPage = lazy(()=> import('./pages/RegistrationPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));
 import NotFoundPage from './pages/NotFoundPage';
-const ProfilePage = lazy(()=> import('./pages/ProfilePage'));
-const CreateProject = lazy(()=> import('./pages/CreateProject'));
-const ViewSingleProject = lazy(()=> import('./pages/ViewSingleProject'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const CreateProject = lazy(() => import('./pages/CreateProject'));
+const ViewSingleProject = lazy(() => import('./pages/ViewSingleProject'));
 import FlashMessageSuccess from './components/FlashMessageSuccess';
-const EditProjectPage = lazy(()=> import('./pages/EditProjectPage'));
+const EditProjectPage = lazy(() => import('./pages/EditProjectPage'));
 import FlashMessageErrors from './components/FlashMessageErrors';
-const SettingsPage = lazy(()=> import('./pages/SettingsPage'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
 import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
-const CreateBid = lazy(()=> import('./pages/CreateBid'));
-const ViewSingleBid = lazy(()=> import('./pages/ViewSingleBid'));
+const CreateBid = lazy(() => import('./pages/CreateBid'));
+const ViewSingleBid = lazy(() => import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
-const EditBidPage = lazy(()=> import('./pages/EditBidPage'));
+const EditBidPage = lazy(() => import('./pages/EditBidPage'));
 // COMPONENTS END
 
 function Main() {
@@ -80,6 +80,10 @@ function Main() {
         return;
       case 'toggleSideMenu':
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
+        return;
+      case 'alwaysCloseTheseMenus':
+        draft.isSideMenuOpen = false;
+        draft.isSettingsTabOpen = false;
         return;
       case 'updateUserInfo':
         localStorage.setItem('biddingApp-id', action.data._id);
@@ -147,51 +151,49 @@ function Main() {
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
           <Suspense fallback={<LoadingDotsIcon />}>
-          <Switch>
-            <Route exact path='/'>
-              <Redirect to='/browse' />
-            </Route>
-            <Route strict path='/browse'>
-              <HomePage />
-            </Route>
-            <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <YouMustBeLoggedInToViewThisPage />}</Route>
-            <Route path='/project/:id/edit' exact>
-              <EditProjectPage />
-            </Route>
-            <Route path='/project/:id' exact>
-              <ViewSingleProject />
-            </Route>
-            <Route path='/:projectId/bid/:bidId'>
-              <ViewSingleBid />
-            </Route>
-             <Route path='/bid/:projectId/:bidId/edit'>
-              {state.loggedIn ? <EditBidPage /> : <YouMustBeLoggedInToViewThisPage />}
-            </Route>
-            <Route path='/create-bid/:id' exact>
-              {state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}
-            </Route>
-            <Route path='/profile/:username'>
-              <ProfilePage />
-            </Route>
-            <Route path='/about'>
-              <About />
-            </Route>
-            <Route path='/terms'>
-              <Terms />
-            </Route>
-            <Route path='/privacy'>
-              <PrivacyPolicyPage />
-            </Route>
-            <Route path='/settings'>{state.loggedIn ? <SettingsPage /> : <YouMustBeLoggedInToViewThisPage />}</Route>
-            <Route path='/how-to-bid'>
-              <HowToBid />
-            </Route>
-            <Route path='/login'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <LoginPage />}</Route>
-            <Route path='/register'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <RegistrationPage />}</Route>
-            <Route>
-              <NotFoundPage />
-            </Route>
-          </Switch>
+            <Switch>
+              <Route exact path='/'>
+                <Redirect to='/browse' />
+              </Route>
+              <Route strict path='/browse'>
+                <HomePage />
+              </Route>
+              <Route path='/create-project'>{state.loggedIn ? <CreateProject /> : <YouMustBeLoggedInToViewThisPage />}</Route>
+              <Route path='/project/:id/edit' exact>
+                <EditProjectPage />
+              </Route>
+              <Route path='/project/:id' exact>
+                <ViewSingleProject />
+              </Route>
+              <Route path='/:projectId/bid/:bidId'>
+                <ViewSingleBid />
+              </Route>
+              <Route path='/bid/:projectId/:bidId/edit'>{state.loggedIn ? <EditBidPage /> : <YouMustBeLoggedInToViewThisPage />}</Route>
+              <Route path='/create-bid/:id' exact>
+                {state.loggedIn ? <CreateBid /> : <YouMustBeLoggedInToViewThisPage />}
+              </Route>
+              <Route path='/profile/:username'>
+                <ProfilePage />
+              </Route>
+              <Route path='/about'>
+                <About />
+              </Route>
+              <Route path='/terms'>
+                <Terms />
+              </Route>
+              <Route path='/privacy'>
+                <PrivacyPolicyPage />
+              </Route>
+              <Route path='/settings'>{state.loggedIn ? <SettingsPage /> : <YouMustBeLoggedInToViewThisPage />}</Route>
+              <Route path='/how-to-bid'>
+                <HowToBid />
+              </Route>
+              <Route path='/login'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <LoginPage />}</Route>
+              <Route path='/register'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <RegistrationPage />}</Route>
+              <Route>
+                <NotFoundPage />
+              </Route>
+            </Switch>
           </Suspense>
           <Footer />
         </BrowserRouter>
