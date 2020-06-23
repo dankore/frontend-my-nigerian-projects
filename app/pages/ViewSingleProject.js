@@ -150,12 +150,11 @@ function ViewSingleProject(props) {
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
         <div className='border border-gray-200 rounded'>
-          <div className='border-b p-2 mb-4 bg-gray-50'>
+          <div className='border-b p-2 bg-gray-50'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
 
           {/* PROFILE */}
-          <p className='px-2 mt-4 mb-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Project posted on {dateFormatted} by:</p>
           <div className='bg-gray-700 py-2 rounded-b text-white'>
             <div className='flex justify-center'>
               <Link to={`/profile/${project.author.username}`}>
@@ -172,6 +171,10 @@ function ViewSingleProject(props) {
             <hr className='border-gray-400' />
             <div className='flex justify-center flex-wrap text-xs px-2'>
               <div className='flex items-center mr-3'>
+                <i className='fas fa-clock'></i>
+                <p className='ml-1'>Posted: {dateFormatted}</p>
+              </div>
+              <div className='flex items-center mr-3'>
                 <i className='fas fa-envelope'></i>
                 <p className='ml-1'>{project.email}</p>
               </div>
@@ -179,6 +182,12 @@ function ViewSingleProject(props) {
                 <i className='fas fa-phone'></i>
                 <p className='ml-1'>{project.phone}</p>
               </div>
+              {project.updatedDate && (
+                <div className='flex items-center mr-3'>
+                  <i className='fas fa-pencil-alt'></i>
+                  <p className='ml-1'>Updated: {}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
