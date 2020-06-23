@@ -109,10 +109,8 @@ function ViewSingleProject(props) {
   }
 
   const date = new Date(project.createdDate);
-  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  const containerCSS = 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm';
-  const titleCSS = 'text-gray-700';
-
+  const dateFormatted = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getUTCFullYear()}`;
+  
   return (
     <Page margin='mx-2' title={project.title}>
       <div>

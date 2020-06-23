@@ -126,7 +126,7 @@ function ViewSingleBid(props) {
     return array.reduce((total, currentElem) => total + +currentElem.quantity * +currentElem.price_per_item, 0);
   }
 
-  function formatDate() {
+  function formatMemberSinceDate() {
     if (state.projectAndBid.bid.userCreationDate && typeof state.projectAndBid.bid.userCreationDate == 'string') {
       let month = new Array();
       month[1] = 'January';
@@ -174,6 +174,19 @@ function ViewSingleBid(props) {
   }
   if (state.isNotFound) {
     return <NotFoundPage />;
+  }
+
+  function formatUpdatedDate(){
+    const date = new Date(state.projectAndBid.bid.updatedDate);
+    const year = date.getUTCFullYear();
+    let month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+
+    if(month < 10){
+        month = '0' + month;
+    }
+
+    return `${year}-${month}-${day}`;
   }
 
   const bidHasItems = state.projectAndBid.bid.items.length > 0;
@@ -252,7 +265,7 @@ function ViewSingleBid(props) {
               {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
             </Link>
           </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {formatDate()}</p>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {formatMemberSinceDate()}</p>
 
           <hr className='border-gray-400'/>
           <div className='flex justify-center flex-wrap text-xs px-2'>
@@ -271,7 +284,7 @@ function ViewSingleBid(props) {
             {state.projectAndBid.bid.updatedDate && (
                 <div className='flex items-center mr-3'>
               <i className="fas fa-pencil-alt"></i>
-              <p className='ml-1'>Updated: ${state.projectAndBid.bid.updatedDate}</p>
+              <p className='ml-1'>Updated: {formatUpdatedDate()}</p>
             </div>
             )}
           </div>

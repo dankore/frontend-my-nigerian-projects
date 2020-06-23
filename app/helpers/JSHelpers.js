@@ -2,7 +2,7 @@ module.exports = {
   daysRemaining: function (dateString) {
     /**
      * @param dateString comes in this format e.g yyyy-mm-dd
-     * @returns an int
+     * @returns e.g 2
      */
     // TIME DIFF IN DAYS
     const pastOrFutureDate = new Date(dateString);
@@ -15,7 +15,7 @@ module.exports = {
   dateFormatted: function (dateString) {
     /**
      * @param dateString comes in this format e.g yyyy-mm-dd
-     * @returns format 06/30/2020
+     * @returns e.g 06/30/2020
      */
 
     if (dateString) {
@@ -41,7 +41,7 @@ module.exports = {
 
       /**
        * @param dateString is in this format e.g yyyy-mm-dd
-       * @returns format May 29, 2020
+       * @returns e.g May 29, 2020
        */
 
       const datePartsArray = dateString.split('-');
