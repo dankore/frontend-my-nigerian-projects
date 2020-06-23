@@ -36,7 +36,7 @@ const CreateBid = lazy(()=> import('./pages/CreateBid'));
 const ViewSingleBid = lazy(()=> import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
-import EditBidPage from './pages/EditBidPage';
+const EditBidPage = lazy(()=> import('./pages/EditBidPage'));
 // COMPONENTS END
 
 function Main() {
