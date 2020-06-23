@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import { dateFormattedUserCreationDate, daysRemaining } from '../helpers/JSHelpers';
+import { dateFormattedUserCreationDate, daysRemaining, formatPostedAndUpdatedDate } from '../helpers/JSHelpers';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -108,9 +108,6 @@ function ViewSingleProject(props) {
     }, 0);
   }
 
-  const date = new Date(project.createdDate);
-  const dateFormatted = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getUTCFullYear()}`;
-  
   return (
     <Page margin='mx-2' title={project.title}>
       <div>
@@ -172,7 +169,7 @@ function ViewSingleProject(props) {
             <div className='flex justify-center flex-wrap text-xs px-2'>
               <div className='flex items-center mr-3'>
                 <i className='fas fa-clock'></i>
-                <p className='ml-1'>Posted: {dateFormatted}</p>
+                <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(project.createdDate)}</p>
               </div>
               <div className='flex items-center mr-3'>
                 <i className='fas fa-envelope'></i>
@@ -185,7 +182,7 @@ function ViewSingleProject(props) {
               {project.updatedDate && (
                 <div className='flex items-center mr-3'>
                   <i className='fas fa-pencil-alt'></i>
-                  <p className='ml-1'>Updated: {}</p>
+                  <p className='ml-1'>Updated: {formatPostedAndUpdatedDate(project.updatedDate)}</p>
                 </div>
               )}
             </div>

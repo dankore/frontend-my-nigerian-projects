@@ -9,7 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
 import ReactMarkdown from 'react-markdown';
-import { dateFormatted, dateFormattedUserCreationDate } from '../helpers/JSHelpers';
+import { dateFormatted, dateFormattedUserCreationDate, formatPostedAndUpdatedDate } from '../helpers/JSHelpers';
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -176,19 +176,6 @@ function ViewSingleBid(props) {
     return <NotFoundPage />;
   }
 
-  function formatUpdatedDate(){
-    const date = new Date(state.projectAndBid.bid.updatedDate);
-    const year = date.getUTCFullYear();
-    let month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-
-    if(month < 10){
-        month = '0' + month;
-    }
-
-    return `${year}-${month}-${day}`;
-  }
-
   const bidHasItems = state.projectAndBid.bid.items.length > 0;
 
   return (
@@ -267,11 +254,11 @@ function ViewSingleBid(props) {
           </div>
           <p className='flex justify-center mb-2 text-xs'>Member since: {formatMemberSinceDate()}</p>
 
-          <hr className='border-gray-400'/>
+          <hr className='border-gray-400' />
           <div className='flex justify-center flex-wrap text-xs px-2'>
             <div className='flex items-center mr-3'>
-              <i className="fas fa-clock"></i>
-              <p className='ml-1'>Posted: {state.projectAndBid.bid.bidCreationDate}</p>
+              <i className='fas fa-clock'></i>
+              <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(state.projectAndBid.bid.bidCreationDate)}</p>
             </div>
             <div className='flex items-center mr-3'>
               <i className='fas fa-envelope'></i>
@@ -282,10 +269,10 @@ function ViewSingleBid(props) {
               <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
             </div>
             {state.projectAndBid.bid.updatedDate && (
-                <div className='flex items-center mr-3'>
-              <i className="fas fa-pencil-alt"></i>
-              <p className='ml-1'>Updated: {formatUpdatedDate()}</p>
-            </div>
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-pencil-alt'></i>
+                <p className='ml-1'>Updated: {formatPostedAndUpdatedDate(state.projectAndBid.bid.updatedDate)}</p>
+              </div>
             )}
           </div>
         </div>

@@ -1,4 +1,16 @@
 module.exports = {
+  formatPostedAndUpdatedDate: function (dateString) {
+    const date = new Date(dateString);
+    const year = date.getUTCFullYear();
+    let month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return `${year}-${month}-${day}`;
+  },
   daysRemaining: function (dateString) {
     /**
      * @param dateString comes in this format e.g yyyy-mm-dd
