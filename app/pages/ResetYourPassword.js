@@ -14,7 +14,7 @@ function LoginPage(props) {
       value: '',
       hasErrors: false,
       message: '',
-      isUnique: false,
+      isRegisteredEmail: false,
       checkCount: 0,
     },
     isLoggingIn: false,
@@ -40,13 +40,13 @@ function LoginPage(props) {
           draft.email.checkCount++;
         }
         return;
-     case 'emailNotInDatabase':
+     case 'isRegisteredEmail':
         if (!action.value) {
           draft.email.hasErrors = true;
-          draft.email.isUnique = false;
-          draft.email.message = 'No record of that email in our database. Please enter the email used when you opened an account with us.';
+          draft.email.isRegisteredEmail = false;
+          draft.email.message = 'No account with that email address exists.';
         } else {
-          draft.email.isUnique = true;
+          draft.email.isRegisteredEmail = true;
         }
         return;
       case 'isLoggingInStart':
@@ -55,8 +55,11 @@ function LoginPage(props) {
       case 'isLoggingInFinished':
         draft.isLoggingIn = false;
         return;
+      case 'zeroCheckCount':
+          draft.email.checkCount = 0;
+          return;
       case 'submitForm':
-        if (draft.email.value != "" && !draft.email.hasErrors && !draft.email.isUnique) {
+        if (draft.email.value != "" && !draft.email.hasErrors && draft.email.isRegisteredEmail) {
           draft.submitCount++;
           console.log("inside submitcount")
         }
@@ -65,7 +68,6 @@ function LoginPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  
 
  // EMAIL IS UNIQUE
   useEffect(() => {
@@ -74,7 +76,8 @@ function LoginPage(props) {
       (async function checkForEmail() {
         try {
           const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
-          dispatch({ type: 'emailNotInDatabase', value: response.data });
+        //   console.log(response.data)
+          dispatch({ type: 'isRegisteredEmail', value: response.data });
         } catch (error) {
           alert('Having difficulty looking for your email. Please try again.');
         }
@@ -90,31 +93,33 @@ function LoginPage(props) {
     }
   }, [state.email.value])
 
-//   useEffect(() => {
-//     if (state.submitCount) {
-//       const request = Axios.CancelToken.source();
-//       dispatch({ type: 'isLoggingInStart' });
-//       (async function submitLogin() {
-//         try {
-//           const response = await Axios.post('/login', { username: state.username.value, password: state.password.value }, { cancelToken: request.token });
-//           if (response.data) {
-//             dispatch({ type: 'isLoggingInFinished' });
-//             appDispatch({ type: 'login', data: response.data });
-//             props.history.push('/browse');
-//             appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
-//           } else {
-//             dispatch({ type: 'isLoggingInFinished' });
-            // appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
-//           }
-//         } catch (error) {
-//           dispatch({ type: 'isLoggingInFinished' });
-//           appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
-//         }
-//       })();
+  useEffect(() => {
+    if (state.submitCount) {
+      const request = Axios.CancelToken.source();
+      dispatch({ type: 'isLoggingInStart' });
+      (async function submitLogin() {
+        try {
+          const response = await Axios.post('/reset-password', { email: state.email.value }, { cancelToken: request.token });
+          console.log(response.data)
+        //   if (response.data) {
+        //     dispatch({ type: 'isLoggingInFinished' });
+        //     appDispatch({ type: 'login', data: response.data });
+        //     props.history.push('/browse');
+        //     appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
+        //   } else {
+        //     dispatch({ type: 'isLoggingInFinished' });
+        //     appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
+        //   }
+        } catch (error) {
+            console.log(error)
+        //   dispatch({ type: 'isLoggingInFinished' });
+        //   appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem logging you in. Please try again." });
+        }
+      })();
 
-//       return () => request.cancel();
-//     }
-//   }, [state.submitCount]);
+      return () => request.cancel();
+    }
+  }, [state.submitCount]);
 
 
 
@@ -122,9 +127,8 @@ function LoginPage(props) {
     e.preventDefault();
     dispatch({ type: 'emailImmediately', value: state.email.value });
     dispatch({ type: 'emailAfterDelay', value: state.email.value });
-    dispatch({ type: 'emailNotInDatabase', value: state.email.value });
     dispatch({ type: 'submitForm' });
-    console.log("passed all vals")
+    dispatch({type: 'zeroCheckCount'});
   }
 
   return (
