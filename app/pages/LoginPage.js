@@ -117,10 +117,13 @@ function LoginPage(props) {
             </CSSTransition>
           </div>
           <div className='relative mb-4'>
-            <div className='flex justify-between mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
+            <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='password' className=''>
                 Enter Your Password{' '}
               </label>
+              <Link to='/reset-password' className='block text-blue-600'>
+                Forgot your password? 
+              </Link>
             </div>
             <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
             <CSSTransition in={state.password.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
