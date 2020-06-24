@@ -19,6 +19,7 @@ function LoginPage(props) {
     },
     isLoggingIn: false,
     showNextStep: false,
+    closeAlert: true,
     submitCount: 0,
   };
 
@@ -61,6 +62,12 @@ function LoginPage(props) {
         return;
       case 'showNextStep':
         draft.showNextStep = true;
+        return;
+      case 'closeAlert':
+        draft.closeAlert = false;
+        return;
+      case 'closeAlertSetToTrue':
+        draft.closeAlert = true;
         return;
       case 'submitForm':
         if (draft.email.value != '' && !draft.email.hasErrors && draft.email.isRegisteredEmail) {
@@ -127,6 +134,7 @@ function LoginPage(props) {
     dispatch({ type: 'emailAfterDelay', value: state.email.value });
     dispatch({ type: 'submitForm' });
     dispatch({ type: 'zeroCheckCount' });
+    dispatch({ type: 'closeAlertSetToTrue' });
   }
 
   return (
@@ -142,14 +150,20 @@ function LoginPage(props) {
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
           {/* EMAIL */}
           <div className='relative w-full mb-3'>
-            {state.showNextStep && (
+            {state.showNextStep && state.closeAlert && (
               <div className='absolute z-10 flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3 rounded'>
-                <svg className='fill-current w-10 h-10 mr-2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
+                <svg className='fill-current w-20 h-20 mr-2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
                   <path d='M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z' />
                 </svg>
                 <p>
-                  Check your email inbox at <span className='font-bold text-red-200'>{state.email.value}</span> for further instruction. Check your SPAM folder if you cannot locate the email in your regular inbox.
+                  Check your email inbox at <span className='font-bold text-red-300'>{state.email.value}</span> for further instruction. Check your SPAM folder if you cannot locate the email in your regular inbox.
                 </p>
+                <span onClick={() => dispatch({ type: 'closeAlert' })} className='absolute top-0 bottom-0 right-0 px-4 py-3'>
+                  <svg className='fill-current h-6 w-6 text-red-500' role='button' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
+                    <title>Close</title>
+                    <path d='M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z' />
+                  </svg>
+                </span>
               </div>
             )}
             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='email'>
@@ -170,7 +184,7 @@ function LoginPage(props) {
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
                 </svg>
               </span>
-              {state.isLoggingIn ? 'Logging in...' : 'Send me account recovery token'}
+              {state.isLoggingIn ? 'Sending...' : 'Send me recovery token'}
             </button>
           </div>
         </form>
