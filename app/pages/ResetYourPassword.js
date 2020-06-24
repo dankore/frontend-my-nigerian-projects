@@ -10,23 +10,69 @@ import { CSSTransitionStyle } from '../helpers/CSSHelpers';
 function LoginPage(props) {
   const appDispatch = useContext(DispatchContext);
   const initialState = {
-    username: {
+   email: {
       value: '',
       hasErrors: false,
       message: '',
-    },
-    password: {
-      value: '',
-      hasErrors: false,
-      message: '',
+      isUnique: false,
+      checkCount: 0,
     },
     isLoggingIn: false,
     submitCount: 0,
   };
 
-  const state = {}
+ function reducer(draft, action) {
+    switch (action.type) {
+      case 'emailAfterDelay':
+        if (!/^\S+@\S+$/.test(draft.email.value)) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Please provide a valid email.';
+        }
+        if (!draft.email.hasErrors && !action.noNeedToSendAxiosRequest) {
+          draft.email.checkCount++;
+        }
+        return;
+     case 'emailIsUnique':
+        if (action.value) {
+          draft.email.hasErrors = true;
+          draft.email.isUnique = false;
+          draft.email.message = 'That email is already being used.';
+        } else {
+          draft.email.isUnique = true;
+        }
+        return;
+      case 'isLoggingInStart':
+        draft.isLoggingIn = true;
+        return;
+      case 'isLoggingInFinished':
+        draft.isLoggingIn = false;
+        return;
+      case 'submitForm':
+        if (draft.username.value.length != '' && draft.password.value != '' && !draft.username.hasErrors && !draft.password.hasErrors) {
+          draft.submitCount++;
+        }
+        return;
+    }
+  }
 
- 
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+ // EMAIL IS UNIQUE
+  useEffect(() => {
+    if (state.email.checkCount) {
+      const request = Axios.CancelToken.source();
+      (async function checkForEmail() {
+        try {
+          const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
+          dispatch({ type: 'emailIsUnique', value: response.data });
+        } catch (error) {
+          alert('Having difficulty looking for your email. Please try again.');
+        }
+      })();
+      return () => request.cancel();
+    }
+  }, [state.email.checkCount]);
+
 //   useEffect(() => {
 //     if (state.submitCount) {
 //       const request = Axios.CancelToken.source();
@@ -41,7 +87,7 @@ function LoginPage(props) {
 //             appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
 //           } else {
 //             dispatch({ type: 'isLoggingInFinished' });
-//             appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
+            // appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });
 //           }
 //         } catch (error) {
 //           dispatch({ type: 'isLoggingInFinished' });
@@ -52,6 +98,8 @@ function LoginPage(props) {
 //       return () => request.cancel();
 //     }
 //   }, [state.submitCount]);
+
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -64,37 +112,36 @@ function LoginPage(props) {
     <Page title='Login'>
       <div className='max-w-sm mx-auto'>
         <div className='flex justify-center text-blue-600'>
-          <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
-            <path d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'></path>
-          </svg>
+          <svg className='w-12' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-unlock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
         </div>
-        <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Reset Your Password</p>
+        <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Account Recovery</p>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
-          <div className='relative mb-4'>
-            <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Enter Your Username
-            </label>
-            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
-            {/* <CSSTransition in={state.username.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.username.message}
-              </div>
-            </CSSTransition> */}
-          </div>
-         
+          {/* EMAIL */}
+          <div className='relative w-full mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='email'>
+                Enter Your Email <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'emailImmediately', value: e.target.value })} id='email' autoComplete='off' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='email' type='text' />
+              <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.email.message}
+                </div>
+              </CSSTransition>
+            </div>
+         {/* SUBMIT BTN */}
           <div className='mt-6'>
-            <button type='submit' className='relative w-full  inline-flex items-center justify-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <button type='submit' className='relative w-full  inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                 <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
                 </svg>
               </span>
-              {state.isLoggingIn ? 'Logging in...' : 'Reset Password'}
+              {state.isLoggingIn ? 'Logging in...' : 'Send me account recovery token'}
             </button>
           </div>
         </form>
-        <Link to='/register' className='block mt-3 px-4'>
-          Don't have an account? <span className='text-blue-600'>Create yours for free</span>
+        <Link to='/login' className='block mt-3 px-4 text-center'>
+          Remember your password? <span className='text-blue-600'>Login</span>
         </Link>
       </div>
     </Page>
