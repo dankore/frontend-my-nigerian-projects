@@ -25,7 +25,7 @@ function LoginPage(props) {
     switch (action.type) {
      case 'emailImmediately':
          draft.email.hasErrors = false;
-         draft.email.value = action.value;
+         draft.email.value = action.value.trim();
          if(!draft.email.value){
              draft.email.hasErrors = true;
              draft.email.message = "Email field is required, please."
