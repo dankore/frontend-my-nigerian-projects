@@ -177,10 +177,10 @@ function Main() {
               <Route path='/profile/:username'>
                 <ProfilePage />
               </Route>
-              <Route path='/reset-password/:token'>
-                <AccountRecoveryEnterPassword />
+              <Route path='/reset-password/:token'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <AccountRecoveryEnterPassword />}</Route>
+              <Route path='/reset-password' exact>
+                {state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <ResetYourPassword />}
               </Route>
-              <Route path='/reset-password' exact>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <ResetYourPassword />}</Route>
               <Route path='/about'>
                 <About />
               </Route>
