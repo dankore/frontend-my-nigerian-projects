@@ -23,20 +23,28 @@ function LoginPage(props) {
 
  function reducer(draft, action) {
     switch (action.type) {
+     case 'emailImmediately':
+         draft.email.hasErrors = false;
+         draft.email.value = action.value;
+         if(!draft.email.value){
+             draft.email.hasErrors = true;
+             draft.email.message = "Email field is required, please."
+         }
+         return;
       case 'emailAfterDelay':
         if (!/^\S+@\S+$/.test(draft.email.value)) {
           draft.email.hasErrors = true;
           draft.email.message = 'Please provide a valid email.';
         }
-        if (!draft.email.hasErrors && !action.noNeedToSendAxiosRequest) {
+        if (!draft.email.hasErrors) {
           draft.email.checkCount++;
         }
         return;
      case 'emailIsUnique':
-        if (action.value) {
+        if (!action.value) {
           draft.email.hasErrors = true;
           draft.email.isUnique = false;
-          draft.email.message = 'That email is already being used.';
+          draft.email.message = 'No record of that email in our database. Please enter the email used when you opened an account with us.';
         } else {
           draft.email.isUnique = true;
         }
@@ -56,6 +64,7 @@ function LoginPage(props) {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+  console.log({state})
 
  // EMAIL IS UNIQUE
   useEffect(() => {
@@ -72,6 +81,13 @@ function LoginPage(props) {
       return () => request.cancel();
     }
   }, [state.email.checkCount]);
+
+  useEffect(()=>{
+    if(state.email.value){
+        const delay = setTimeout(()=> dispatch({type: 'emailAfterDelay'}), 800);
+        return () => clearTimeout(delay)
+    }
+  }, [state.email.value])
 
 //   useEffect(() => {
 //     if (state.submitCount) {
