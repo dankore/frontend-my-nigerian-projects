@@ -40,7 +40,7 @@ function LoginPage(props) {
           draft.email.checkCount++;
         }
         return;
-     case 'emailIsUnique':
+     case 'emailNotInDatabase':
         if (!action.value) {
           draft.email.hasErrors = true;
           draft.email.isUnique = false;
@@ -56,15 +56,16 @@ function LoginPage(props) {
         draft.isLoggingIn = false;
         return;
       case 'submitForm':
-        if (draft.username.value.length != '' && draft.password.value != '' && !draft.username.hasErrors && !draft.password.hasErrors) {
+        if (draft.email.value != "" && !draft.email.hasErrors && !draft.email.isUnique) {
           draft.submitCount++;
+          console.log("inside submitcount")
         }
         return;
     }
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  console.log({state})
+  
 
  // EMAIL IS UNIQUE
   useEffect(() => {
@@ -73,7 +74,7 @@ function LoginPage(props) {
       (async function checkForEmail() {
         try {
           const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
-          dispatch({ type: 'emailIsUnique', value: response.data });
+          dispatch({ type: 'emailNotInDatabase', value: response.data });
         } catch (error) {
           alert('Having difficulty looking for your email. Please try again.');
         }
@@ -119,9 +120,11 @@ function LoginPage(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch({ type: 'usernameCatchError' });
-    dispatch({ type: 'passwordCatchError' });
+    dispatch({ type: 'emailImmediately', value: state.email.value });
+    dispatch({ type: 'emailAfterDelay', value: state.email.value });
+    dispatch({ type: 'emailNotInDatabase', value: state.email.value });
     dispatch({ type: 'submitForm' });
+    console.log("passed all vals")
   }
 
   return (
