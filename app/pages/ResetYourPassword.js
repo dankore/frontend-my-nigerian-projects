@@ -140,10 +140,9 @@ function LoginPage(props) {
   return (
     <Page title='Login'>
       <div className='max-w-sm mx-auto'>
-        <div className='flex justify-center text-blue-600'>
-          <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' className='feather feather-unlock'>
-            <rect x='3' y='11' width='18' height='11' rx='2' ry='2'></rect>
-            <path d='M7 11V7a5 5 0 0 1 9.9-1'></path>
+        <div className='flex justify-center text-4xl text-blue-600'>
+          <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
+            <path d='M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z'></path>
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Account Recovery</p>

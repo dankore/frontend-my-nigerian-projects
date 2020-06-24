@@ -122,7 +122,7 @@ function LoginPage(props) {
                 Enter Your Password{' '}
               </label>
               <Link to='/reset-password' className='block text-blue-600'>
-                Forgot your password? 
+                Forgot your password?
               </Link>
             </div>
             <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
