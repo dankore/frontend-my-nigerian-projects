@@ -124,7 +124,7 @@ function AccountRecoveryEnterPassword(props) {
       const request = Axios.CancelToken.source();
       (async function sendFormResetPassword() {
         try {
-          const response = Axios.post('/save-new-password', { password: state.password.value, reEnteredPassword: state.reEnteredPassword.value }, { cancelToken: request.token });
+          const response = Axios.post('/save-new-password', { password: state.password.value, reEnteredPassword: state.reEnteredPassword.value, token: state.passwordResetToken }, { cancelToken: request.token });
           console.log({ responseData: response.data });
           if (response.data == 'Success') {
             props.history.push('/login');
