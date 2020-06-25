@@ -97,7 +97,7 @@ function LoginPage(props) {
   }, [state.email.value]);
 
   useEffect(() => {
-    if (state.submitCount) {
+    if (state.submitCount && state.submitCount < 5) {
       const request = Axios.CancelToken.source();
       dispatch({ type: 'isSendingTokenStart' });
       (async function submitLogin() {
