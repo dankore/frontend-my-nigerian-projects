@@ -19,7 +19,6 @@ function LoginPage(props) {
     },
     isLoggingIn: false,
     showNextStep: false,
-    closeAlert: true,
     submitCount: 0,
   };
 
@@ -57,17 +56,11 @@ function LoginPage(props) {
       case 'isSendingTokenFinished':
         draft.isLoggingIn = false;
         return;
-      case 'zeroCheckCount':
-        draft.email.checkCount = 0;
-        return;
       case 'showNextStep':
         draft.showNextStep = true;
         return;
       case 'closeAlert':
-        draft.closeAlert = false;
-        return;
-      case 'closeAlertSetToTrue':
-        draft.closeAlert = true;
+        draft.showNextStep = false;
         return;
       case 'submitForm':
         if (draft.email.value != '' && !draft.email.hasErrors && draft.email.isRegisteredEmail) {
@@ -110,7 +103,6 @@ function LoginPage(props) {
       (async function submitLogin() {
         try {
           const response = await Axios.post('/reset-password', { email: state.email.value }, { cancelToken: request.token });
-          console.log(response.data);
           if (response.data == 'Success') {
             dispatch({ type: 'isSendingTokenFinished' });
             dispatch({ type: 'showNextStep' });
@@ -133,8 +125,6 @@ function LoginPage(props) {
     dispatch({ type: 'emailImmediately', value: state.email.value });
     dispatch({ type: 'emailAfterDelay', value: state.email.value });
     dispatch({ type: 'submitForm' });
-    dispatch({ type: 'zeroCheckCount' });
-    dispatch({ type: 'closeAlertSetToTrue' });
   }
 
   return (
@@ -149,7 +139,7 @@ function LoginPage(props) {
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
           {/* EMAIL */}
           <div className='relative w-full mb-3'>
-            {state.showNextStep && state.closeAlert && (
+            {state.showNextStep && (
               <div className='absolute z-10 flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3 rounded'>
                 <svg className='fill-current w-20 h-20 mr-2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
                   <path d='M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z' />
