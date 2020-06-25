@@ -79,7 +79,6 @@ function LoginPage(props) {
       (async function checkForEmail() {
         try {
           const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
-          console.log(response.data);
           dispatch({ type: 'isRegisteredEmail', value: response.data });
         } catch (error) {
           alert('Having difficulty looking for your email. Please try again.');
