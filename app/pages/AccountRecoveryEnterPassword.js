@@ -20,7 +20,8 @@ function AccountRecoveryEnterPassword(props) {
             hasErrors: false,
             message: ''
         },
-        passwordResetToken: useParams().token
+        passwordResetToken: useParams().token,
+        sendCount: 0,
     }
 
     function reducer(draft, action){
@@ -57,8 +58,13 @@ function AccountRecoveryEnterPassword(props) {
             case 'reEnterPasswordAfterDelay':
                if(draft.password.value != draft.reEnterPassword.value){
                    draft.reEnterPassword.hasErrors = true;
-                   draft.reEnterPassword.message = 'Password do not match.';
+                   draft.reEnterPassword.message = 'Passwords do not match.';
                }
+                return;
+            case "sendForm":
+                if(draft.password.value != "" && !draft.password.hasErrors && draft.reEnterPassword.value != "" && !draft.reEnterPassword.hasErrors){
+                    draft.sendCount++;
+                }
                 return;
             
         }
@@ -68,18 +74,31 @@ function AccountRecoveryEnterPassword(props) {
 
     function handleSubmit(e){
         e.preventDefault();
+        dispatch({type: "passwordImmediately", value: state.password.value});
+        dispatch({type: "passwordAfterDelay", value: state.password.value});
 
+        dispatch({type: "reEnterPasswordImmediately", value: state.reEnterPassword.value});
+        dispatch({type: "reEnterPasswordAfterDelay", value: state.reEnterPassword.value});
+        dispatch({type: "sendForm"})
     }
 
     // PASSWORD AFTER DELAY
-    useEffect(()=>{
+    useEffect(() => {
         if(state.password.value){
             const delay = setTimeout(() => dispatch({type: "passwordAfterDelay"}), 800);
             return () => clearTimeout(delay);
         }
     }, [state.password.value])
 
+     // RE ENTER PASSWORD AFTER DELAY
+    useEffect(() => {
+        if(state.reEnterPassword.value){
+            const delay = setTimeout(() => dispatch({type: "reEnterPasswordAfterDelay"}), 800);
+            return () => clearTimeout(delay);
+        }
+    }, [state.reEnterPassword.value])
 
+     // CHECK TOKEN
     useEffect(()=>{
         const request = Axios.CancelToken.source();
         (async function fetchDataRelatedtoPasswordResetToken(){
