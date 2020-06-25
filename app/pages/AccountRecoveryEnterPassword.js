@@ -20,7 +20,6 @@ function AccountRecoveryEnterPassword(props) {
 
     const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-    console.log(state)
 
     useEffect(()=>{
         const request = Axios.CancelToken.source();
@@ -28,7 +27,7 @@ function AccountRecoveryEnterPassword(props) {
             try {
                 const response = await Axios.post('/choose-new-password', { passwordResetToken: state.passwordResetToken }, { cancelToken: request.token })
                 if(response.data == "Success"){
-                    // DO NOTHING?
+                    console.log("valid token");
                 } else {
                     props.history.push("/reset-password");
                     appDispatch({type: 'flashMessageError', value: "Password reset token is invalid or has expired. Please generate another token below."})
