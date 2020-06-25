@@ -109,7 +109,7 @@ function LoginPage(props) {
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
             </label>
-            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' className='w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.username.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.username.message}
@@ -125,7 +125,7 @@ function LoginPage(props) {
                 Forgot your password?
               </Link>
             </div>
-            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.password.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.password.message}
@@ -133,7 +133,7 @@ function LoginPage(props) {
             </CSSTransition>
           </div>
           <div className='mt-6'>
-            <button type='submit' className='relative w-full  inline-flex items-center justify-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <button type='submit' className='relative w-full  inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                 <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />

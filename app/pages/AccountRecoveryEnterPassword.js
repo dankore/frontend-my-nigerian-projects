@@ -15,7 +15,7 @@ function AccountRecoveryEnterPassword(props) {
       hasErrors: false,
       message: '',
     },
-    reEnterPassword: {
+    reEnteredPassword: {
       value: '',
       hasErrors: false,
       message: '',
@@ -47,23 +47,23 @@ function AccountRecoveryEnterPassword(props) {
           draft.password.message = 'Password must be at least 6 characters.';
         }
         return;
-      case 'reEnterPasswordImmediately':
-        draft.reEnterPassword.hasErrors = false;
-        draft.reEnterPassword.value = action.value;
+      case 'reEnteredPasswordImmediately':
+        draft.reEnteredPassword.hasErrors = false;
+        draft.reEnteredPassword.value = action.value;
 
-        if (draft.reEnterPassword.value.trim() == '') {
-          draft.reEnterPassword.hasErrors = true;
-          draft.reEnterPassword.message = 'Password field is empty.';
+        if (draft.reEnteredPassword.value.trim() == '') {
+          draft.reEnteredPassword.hasErrors = true;
+          draft.reEnteredPassword.message = 'Password field is empty.';
         }
         return;
-      case 'reEnterPasswordAfterDelay':
-        if (draft.password.value != draft.reEnterPassword.value) {
-          draft.reEnterPassword.hasErrors = true;
-          draft.reEnterPassword.message = 'Passwords do not match.';
+      case 'reEnteredPasswordAfterDelay':
+        if (draft.password.value != draft.reEnteredPassword.value) {
+          draft.reEnteredPassword.hasErrors = true;
+          draft.reEnteredPassword.message = 'Passwords do not match.';
         }
         return;
       case 'sendForm':
-        if (draft.password.value != '' && !draft.password.hasErrors && draft.reEnterPassword.value != '' && !draft.reEnterPassword.hasErrors) {
+        if (draft.password.value != '' && !draft.password.hasErrors && draft.reEnteredPassword.value != '' && !draft.reEnteredPassword.hasErrors) {
           draft.sendCount++;
         }
         return;
@@ -77,8 +77,8 @@ function AccountRecoveryEnterPassword(props) {
     dispatch({ type: 'passwordImmediately', value: state.password.value });
     dispatch({ type: 'passwordAfterDelay', value: state.password.value });
 
-    dispatch({ type: 'reEnterPasswordImmediately', value: state.reEnterPassword.value });
-    dispatch({ type: 'reEnterPasswordAfterDelay', value: state.reEnterPassword.value });
+    dispatch({ type: 'reEnteredPasswordImmediately', value: state.reEnteredPassword.value });
+    dispatch({ type: 'reEnteredPasswordAfterDelay', value: state.reEnteredPassword.value });
     dispatch({ type: 'sendForm' });
   }
 
@@ -92,16 +92,16 @@ function AccountRecoveryEnterPassword(props) {
 
   // RE ENTER PASSWORD AFTER DELAY
   useEffect(() => {
-    if (state.reEnterPassword.value) {
-      const delay = setTimeout(() => dispatch({ type: 'reEnterPasswordAfterDelay' }), 800);
+    if (state.reEnteredPassword.value) {
+      const delay = setTimeout(() => dispatch({ type: 'reEnteredPasswordAfterDelay' }), 800);
       return () => clearTimeout(delay);
     }
-  }, [state.reEnterPassword.value]);
+  }, [state.reEnteredPassword.value]);
 
   // CHECK TOKEN
   useEffect(() => {
     const request = Axios.CancelToken.source();
-    (async function fetchDataRelatedtoPasswordResetToken() {
+    (async function fetchDataRelatedToPasswordResetToken() {
       try {
         const response = await Axios.post('/choose-new-password', { passwordResetToken: state.passwordResetToken }, { cancelToken: request.token });
         if (response.data == 'Success') {
@@ -112,11 +112,32 @@ function AccountRecoveryEnterPassword(props) {
           appDispatch({ type: 'flashMessageError', value: 'Password reset token is invalid or has expired. Please generate another token below.' });
         }
       } catch (error) {
-        console.log({ fetchDataRelatedtoPasswordResetToken: error.message });
+        console.log({ fetchDataRelatedToPasswordResetToken: error.message });
       }
     })();
     return () => request.cancel();
   }, []);
+
+  // SEND FORM
+  useEffect(() => {
+    if (state.sendCount) {
+      const request = Axios.CancelToken.source();
+      (async function sendFormResetPassword() {
+        try {
+          const response = Axios.post('/save-new-password', { password: state.password.value, reEnteredPassword: state.reEnteredPassword.value }, { cancelToken: request.token });
+          console.log({ responseData: response.data });
+          if (response.data == 'Success') {
+            props.history.push('/login');
+          } else {
+            appDispatch({ type: 'flashMessageError', value: response.data });
+          }
+        } catch (error) {
+          console.log({ sendFormResetPassword: error.message });
+        }
+      })();
+      return () => request.cancel();
+    }
+  }, [state.sendCount]);
 
   return (
     <Page title='Choose New Password' margin='mx-2'>
@@ -126,13 +147,13 @@ function AccountRecoveryEnterPassword(props) {
         </svg>
       </div>
       <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Choose a New Password</p>
-      <div className='w-full max-w-md sm:max-w-sm mx-auto mt-6 mx-4'>
+      <div className='w-full max-w-md sm:max-w-sm mx-auto mt-6'>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
           <div className='relative mb-4'>
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='password'>New Password </label>
             </div>
-            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.password.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.password.message}
@@ -143,16 +164,16 @@ function AccountRecoveryEnterPassword(props) {
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='re-enter-password'>Re-enter New Password </label>
             </div>
-            <input onChange={e => dispatch({ type: 'reEnterPasswordImmediately', value: e.target.value })} id='re-enter-password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
             <p className='text-red-300 text-xs italic'>Password should be a minimum of 6 characters</p>
-            <CSSTransition in={state.reEnterPassword.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
+            <CSSTransition in={state.reEnteredPassword.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.reEnterPassword.message}
+                {state.reEnteredPassword.message}
               </div>
             </CSSTransition>
           </div>
 
-          <button type='submit' className='relative w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+          <button type='submit' className='relative w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
               <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                 <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
