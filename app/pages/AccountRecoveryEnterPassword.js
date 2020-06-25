@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import { useParams, withRouter } from 'react-router-dom';
 import { useImmerReducer } from 'use-immer';
 import Axios from 'axios';
+import DispatchContext from '../DispatchContext';
 
 function AccountRecoveryEnterPassword(props) {
+    const appDispatch = useContext(DispatchContext);
     const initialState = {
         passwordResetToken: useParams().token
     }
@@ -26,15 +28,16 @@ function AccountRecoveryEnterPassword(props) {
             try {
                 const response = await Axios.post('/choose-new-password', { passwordResetToken: state.passwordResetToken }, { cancelToken: request.token })
                 if(response.data == "Success"){
-                    //
+                    // DO NOTHING?
                 } else {
                     props.history.push("/reset-password");
                     appDispatch({type: 'flashMessageError', value: "Password reset token is invalid or has expired. Please generate another token below."})
                 }
             } catch (error) {
-                
+                console.log({fetchDataRelatedtoPasswordResetToken: error.message})
             }
         })();
+        return ()=> request.cancel();
     }, [])
 
 
