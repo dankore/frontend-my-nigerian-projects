@@ -6,6 +6,7 @@ import Axios from 'axios';
 import DispatchContext from '../DispatchContext';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionStyle } from '../helpers/CSSHelpers';
+import LoadingDotsIcon from '../components/LoadingDotsIcon';
 
 function AccountRecoveryEnterPassword(props) {
     const appDispatch = useContext(DispatchContext);
@@ -21,6 +22,7 @@ function AccountRecoveryEnterPassword(props) {
             message: ''
         },
         passwordResetToken: useParams().token,
+        isLoading: false,
         sendCount: 0,
     }
 
@@ -120,7 +122,6 @@ function AccountRecoveryEnterPassword(props) {
     }, [])
 
 
-
   return (
     <Page title='Choose New Password' margin='mx-2'>
         <div className='flex justify-center text-blue-600'>
@@ -151,16 +152,15 @@ function AccountRecoveryEnterPassword(props) {
               </label>
             </div>
             <input onChange={e => dispatch({ type: 'reEnterPasswordImmediately', value: e.target.value })} id='re-enter-password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded py-1 px-3 text-gray-700 leading-tight' />
+            <p className='text-red-300 text-xs italic'>Password should be a minimum of 6 characters</p>
             <CSSTransition in={state.reEnterPassword.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.reEnterPassword.message}
               </div>
             </CSSTransition>
           </div>
-            <p className="text-red-600 text-xs mb-6 italic">
-            New password should be a minimun of 6 characters
-            </p>
-           <button type='submit' className='relative w-full inline-flex items-center justify-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+
+           <button type='submit' className='relative w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                 <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />

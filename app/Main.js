@@ -37,7 +37,7 @@ const ViewSingleBid = lazy(() => import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
 import ResetYourPassword from './pages/ResetYourPassword';
-import AccountRecoveryEnterPassword from './pages/AccountRecoveryEnterPassword';
+const AccountRecoveryEnterPassword = lazy(() => import("./pages/AccountRecoveryEnterPassword"));
 const EditBidPage = lazy(() => import('./pages/EditBidPage'));
 // COMPONENTS END
 
