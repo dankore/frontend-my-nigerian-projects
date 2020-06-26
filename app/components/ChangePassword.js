@@ -147,7 +147,7 @@ function ChangePassword(props) {
   return (
     <Page title='Change Password'>
       <div className='-mt-6'>
-        <form onSubmit={handleSubmitChangePassword} className='mx-auto p-3 border rounded bg-white'>
+        <form onSubmit={handleSubmitChangePassword} className='mx-auto p-3 rounded'>
           <div className='flex flex-wrap'>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>

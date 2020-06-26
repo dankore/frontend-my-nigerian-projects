@@ -9,7 +9,7 @@ import DeleteAccount from '../components/DeleteAccount';
 function SettingsPage() {
   return (
     <Page margin='mx-2' title='Settings'>
-      <ul className='flex overflow-x-auto inline-block min-w-full shadow overflow-hidden border-b border-gray-200'>
+      <ul className='flex overflow-x-auto min-w-full shadow overflow-hidden border-b border-gray-200'>
         <NavLink exact to='/settings' activeStyle={activeNavCSS} className={navLinkCSS}>
           Edit Profile Info
         </NavLink>
@@ -23,7 +23,7 @@ function SettingsPage() {
         </NavLink>
       </ul>
 
-      <div className=''>
+      <div>
         <Switch>
           <Route exact path='/settings'>
             <EditUserProfileInfo />

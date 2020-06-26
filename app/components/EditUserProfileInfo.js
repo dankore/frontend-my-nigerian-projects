@@ -56,6 +56,7 @@ function EditUserProfileInfo(props) {
       case 'usernameImmediately':
         draft.profileData.profileUsername.hasErrors = false;
         draft.profileData.profileUsername.value = action.value;
+        
         if (draft.profileData.profileUsername.value.length > 30) {
           draft.profileData.profileUsername.hasErrors = true;
           draft.profileData.profileUsername.message = 'Username cannot exceed 30 characters.';
@@ -92,7 +93,7 @@ function EditUserProfileInfo(props) {
         draft.profileData.profileFirstName.hasErrors = false;
         draft.profileData.profileFirstName.value = action.value;
 
-        if (draft.profileData.profileFirstName.length == '') {
+        if (draft.profileData.profileFirstName.value.length == '') {
           draft.profileData.profileFirstName.hasErrors = true;
           draft.profileData.profileFirstName.message = 'First name field cannot be empty.';
         }
@@ -102,7 +103,7 @@ function EditUserProfileInfo(props) {
         draft.profileData.profileLastName.hasErrors = false;
         draft.profileData.profileLastName.value = action.value;
 
-        if (draft.profileData.profileLastName.length == '') {
+        if (draft.profileData.profileLastName.value.length == '') {
           draft.profileData.profileLastName.hasErrors = true;
           draft.profileData.profileLastName.message = 'Last name field cannot be empty.';
         }
@@ -118,7 +119,7 @@ function EditUserProfileInfo(props) {
         return;
       // SUBMIT
       case 'submitForm':
-        if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && !draft.profileData.profileLastName.hasErrors) {
+        if (!draft.profileData.profileUsername.hasErrors && draft.profileData.profileUsername.isUnique && !draft.profileData.profileFirstName.hasErrors && draft.profileData.profileFirstName.value != '' && !draft.profileData.profileLastName.hasErrors && draft.profileData.profileLastName.value != '') {
           draft.submitCount++;
         }
         return;
@@ -225,7 +226,7 @@ function EditUserProfileInfo(props) {
   return (
     <Page title='Edit Profile Info'>
       <div className='-mt-6'>
-        <form onSubmit={handleSubmit} className='mx-auto p-3 border rounded bg-white'>
+        <form onSubmit={handleSubmit} className='mx-auto p-3 rounded'>
           <div className='flex flex-wrap'>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
