@@ -38,11 +38,12 @@ function Project(props) {
       <div className='flex border border-gray-200 p-3 hover:bg-gray-100'>
         <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
         <div className='ml-3'>
-          <div className='text-sm leading-5 font-medium'>
+          <div className='font-bold leading-5'>
             {project.author.firstName} {project.author.lastName}
           </div>
-          <div className='text-sm leading-5'>{formatTitleAndDescription(project.title)}</div>
-          <div className='text-xs leading-5 font-semibold rounded-full'>{timeRemainingInDays()}</div>
+          <div className='text-sm font-semibold leading-5'>{formatTitleAndDescription(project.title)}</div>
+          <div className='text-sm leading-5'>{formatTitleAndDescription(project.description)}</div>
+          <div className='text-xs mt-4 leading-5 font-semibold rounded-full'>{timeRemainingInDays()}</div>
         </div>
       </div>
     </Link>
