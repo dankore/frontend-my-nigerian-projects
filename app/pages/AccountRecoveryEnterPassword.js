@@ -105,7 +105,7 @@ function AccountRecoveryEnterPassword(props) {
       try {
         const response = await Axios.post('/choose-new-password', { passwordResetToken: state.passwordResetToken }, { cancelToken: request.token });
         if (response.data == 'Success') {
-          // DO NOTHING?
+          // TOKEN IS VALID STAY ON THIS PAGE
           console.log('valid token');
         } else {
           props.history.push('/reset-password');
@@ -124,10 +124,10 @@ function AccountRecoveryEnterPassword(props) {
       const request = Axios.CancelToken.source();
       (async function sendFormResetPassword() {
         try {
-          const response = Axios.post('/save-new-password', { password: state.password.value, reEnteredPassword: state.reEnteredPassword.value, token: state.passwordResetToken }, { cancelToken: request.token });
-          console.log({ responseData: response.data });
+          const response = await Axios.post('/save-new-password', { password: state.password.value, reEnteredPassword: state.reEnteredPassword.value, token: state.passwordResetToken }, { cancelToken: request.token });
           if (response.data == 'Success') {
             props.history.push('/login');
+            appDispatch({ type: 'flashMessage', value: 'Password successfully changed. You can now login to your account.' });
           } else {
             appDispatch({ type: 'flashMessageError', value: response.data });
           }
