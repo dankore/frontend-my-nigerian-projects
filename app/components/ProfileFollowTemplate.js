@@ -22,13 +22,11 @@ function ProfileFollow(props) {
         setIsLoading(false);
         setProjects(response.data);
       } catch (error) {
-        appDispatch({ type: 'flashMessageError', value: `Problem with fetching ${props.action}.` });
+        console.log(`Problem with fetching ${props.action}.`);
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
-    return () => {
-      request.cancel();
-    };
+    return () => request.cancel();
   }, [username, props.action, props.followerCount]);
 
   function noFollowBlankTemplate(s) {
