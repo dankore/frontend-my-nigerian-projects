@@ -54,7 +54,7 @@ function HowToBid() {
             </div>
           )}
           <div className='ml-3 w-full inline-flex text-center rounded border'>
-            <Link to='/' className='w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <Link to='/' className='w-full inline-flex items-center justify-center px-4 py-2 border border-gray-100 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               Homepage
             </Link>
           </div>
