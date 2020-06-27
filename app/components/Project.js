@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatPostedAndUpdatedDate } from '../helpers/JSHelpers';
+import { dateFormatted_Like_This_May_29_2020 } from '../helpers/JSHelpers';
 
 function Project(props) {
   const project = props.project;
   const date = new Date(project.createdDate);
-  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+ 
   // TRUNCATE TITLE AND DESCRIPTION
   const formatTitleAndDescription = s => {
     const inputToArray = s.split(' ');
@@ -64,7 +64,7 @@ function Project(props) {
           <div className='flex flex-wrap items-center text-xs mt-3'>
             <div className='flex items-center mr-3'>
               <i className='fas fa-clock'></i>
-              <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(project.createdDate)}</p>
+              <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
             </div>
             <div className='flex items-center mr-3'>{timeRemainingInDays()}</div>
             <div className='flex items-center mr-3'>

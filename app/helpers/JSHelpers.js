@@ -1,16 +1,4 @@
 module.exports = {
-  formatPostedAndUpdatedDate: function (dateString) {
-    const date = new Date(dateString);
-    const year = date.getUTCFullYear();
-    let month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    return `${year}-${month}-${day}`;
-  },
   daysRemaining: function (dateString) {
     /**
      * @param dateString comes in this format e.g yyyy-mm-dd
@@ -24,19 +12,14 @@ module.exports = {
     let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
     return days;
   },
-  dateFormatted: function (dateString) {
-    /**
-     * @param dateString comes in this format e.g yyyy-mm-dd
-     * @returns e.g 06/30/2020
-     */
 
-    if (dateString) {
-      const datePartsArray = dateString.split('-');
-      return `${datePartsArray[1]}/${datePartsArray[2]}/${datePartsArray[0]}`;
-    }
-  },
-  dateFormattedUserCreationDate: function (dateString) {
+  dateFormatted_Like_This_May_29_2020: function (dateString) {
     if (dateString && typeof dateString == 'string') {
+      const date = new Date(dateString);
+      const year = date.getUTCFullYear();
+      const monthNumber = date.getUTCMonth() + 1;
+      const day = date.getUTCDate();
+
       let month = new Array();
       month[1] = 'January';
       month[2] = 'February';
@@ -52,13 +35,13 @@ module.exports = {
       month[12] = 'December';
 
       /**
-       * @param dateString is in this format e.g yyyy-mm-dd
+       * @param dateString is in this format e.g yyyy-mm-dd or otherwise
        * @returns e.g May 29, 2020
        */
 
-      const datePartsArray = dateString.split('-');
-      // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
-      return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
+      return `${month[+monthNumber]} ${day}, ${year}`;
     }
-  },
+  }
+
+  // END OF MODULE
 };

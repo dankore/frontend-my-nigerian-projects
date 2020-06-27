@@ -9,7 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../DispatchContext';
 import ReactMarkdown from 'react-markdown';
-import { dateFormatted, dateFormattedUserCreationDate, formatPostedAndUpdatedDate } from '../helpers/JSHelpers';
+import { dateFormatted_Like_This_May_29_2020 } from '../helpers/JSHelpers';
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -258,7 +258,7 @@ function ViewSingleBid(props) {
           <div className='flex justify-center flex-wrap text-xs px-2'>
             <div className='flex items-center mr-3'>
               <i className='fas fa-clock'></i>
-              <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(state.projectAndBid.bid.bidCreationDate)}</p>
+              <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.bidCreationDate)}</p>
             </div>
             <div className='flex items-center mr-3'>
               <i className='fas fa-envelope'></i>
@@ -271,7 +271,7 @@ function ViewSingleBid(props) {
             {state.projectAndBid.bid.updatedDate && (
               <div className='flex items-center mr-3'>
                 <i className='fas fa-pencil-alt'></i>
-                <p className='ml-1'>Updated: {formatPostedAndUpdatedDate(state.projectAndBid.bid.updatedDate)}</p>
+                <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.updatedDate)}</p>
               </div>
             )}
           </div>

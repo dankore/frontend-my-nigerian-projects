@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import { dateFormattedUserCreationDate, daysRemaining, formatPostedAndUpdatedDate } from '../helpers/JSHelpers';
+import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../helpers/JSHelpers';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -163,13 +163,13 @@ function ViewSingleProject(props) {
                 {project.author.firstName} {project.author.lastName}
               </Link>
             </div>
-            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormattedUserCreationDate(project.author.userCreationDate)}</p>
+            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(project.author.userCreationDate)}</p>
 
             <hr className='border-gray-400' />
             <div className='flex justify-center flex-wrap text-xs px-2'>
               <div className='flex items-center mr-3'>
                 <i className='fas fa-clock'></i>
-                <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(project.createdDate)}</p>
+                <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
               </div>
               <div className='flex items-center mr-3'>
                 <i className='fas fa-envelope'></i>
@@ -182,7 +182,7 @@ function ViewSingleProject(props) {
               {project.updatedDate && (
                 <div className='flex items-center mr-3'>
                   <i className='fas fa-pencil-alt'></i>
-                  <p className='ml-1'>Updated: {formatPostedAndUpdatedDate(project.updatedDate)}</p>
+                  <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(project.updatedDate)}</p>
                 </div>
               )}
             </div>
