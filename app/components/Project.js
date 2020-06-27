@@ -24,16 +24,14 @@ function Project(props) {
     let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
     //CONDITIONS
     if (days == 0) {
-      return <span className='text-yellow-600 p-1 rounded'>Bidding ends today</span>;
+      return <span className='text-yellow-700 p-1 rounded'>Bidding ends today</span>;
     }
     if (days < 0) {
-      return <span className='text-red-600 p-1 rounded'>Bidding closed</span>;
+      return <span className='text-red-700 p-1 rounded'>Bidding closed</span>;
     }
 
     return <span className='text-green-700 font-semibold p-1 rounded'>{`Bidding closing in ${days} days`}</span>;
   }
-
-  console.log(project);
 
   return (
     <Link to={`/project/${project._id}`}>
