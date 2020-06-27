@@ -69,7 +69,7 @@ function Project(props) {
             <div className='flex items-center mr-3'>{timeRemainingInDays()}</div>
             <div className='flex items-center mr-3'>
               <i className='far fa-comment-alt'></i>
-              <div className='ml-1'>Number of bids: {project.bids ? (project.bids.length > 0 ? project.bids.length : 0) : 0}</div>
+              <div className='ml-1'>{project.bids ? (project.bids.length == 0 ? project.bids.length + 'bid' : project.bids.length > 1 ? project.bids.length + ' bids' : project.bids.length + ' bid') : 0 + ' bid'}</div>
             </div>
           </div>
         </div>

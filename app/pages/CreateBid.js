@@ -26,7 +26,7 @@ function CreateBid(props) {
       message: '',
     },
     yearsOfExperience: {
-      value: 0,
+      value: -1,
       hasErrors: false,
       message: '',
     },
