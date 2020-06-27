@@ -81,6 +81,14 @@ function ViewSingleProject(props) {
     }, 0);
   }
 
+  function whatBestDescribesYou(string) {
+    if (string == 'I will get someone else to do the work(contractor)') {
+      return 'I will get someone else to do the work';
+    } else {
+      return string;
+    }
+  }
+
   return (
     <Page margin='mx-2' title={project.title}>
       <div>
@@ -212,7 +220,8 @@ function ViewSingleProject(props) {
             project.bids.map((bid, index) => {
               return (
                 <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
-                  <span>Bid number# {index + 1}</span> <span>Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
+                  <span>Bid #{index + 1}</span>: <span>{whatBestDescribesYou(bid.whatBestDescribesYou)}, </span>{" "}
+                  <span className='font-mono text-blue-600'>Total Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
                 </Link>
               );
             })
