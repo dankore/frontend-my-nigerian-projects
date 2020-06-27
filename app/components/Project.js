@@ -24,13 +24,28 @@ function Project(props) {
     let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
     //CONDITIONS
     if (days == 0) {
-      return <span className='text-yellow-700 p-1 rounded'>Bidding ends today</span>;
+      return (
+        <>
+          <i className='fas fa-hourglass-half'></i>
+          <span className='text-yellow-500 font-semibold p-1 rounded'>Bidding ends today</span>
+        </>
+      );
     }
     if (days < 0) {
-      return <span className='text-red-700 p-1 rounded'>Bidding closed</span>;
+      return (
+        <>
+          <i className='fas fa-hourglass-end'></i>
+          <span className='text-red-700 font-semibold p-1 rounded'>Bidding closed</span>
+        </>
+      );
     }
 
-    return <span className='text-green-700 font-semibold p-1 rounded'>{`Bidding closing in ${days} days`}</span>;
+    return (
+      <>
+        <i className='fas fa-hourglass-half'></i>
+        <span className='text-green-700 font-semibold p-1 rounded'>{`Bidding closing in ${days} days`}</span>
+      </>
+    );
   }
 
   return (
@@ -51,12 +66,9 @@ function Project(props) {
               <i className='fas fa-clock'></i>
               <p className='ml-1'>Posted: {formatPostedAndUpdatedDate(project.createdDate)}</p>
             </div>
+            <div className='flex items-center mr-3'>{timeRemainingInDays()}</div>
             <div className='flex items-center mr-3'>
-              <i class='fas fa-hourglass-half'></i>
-              {timeRemainingInDays()}
-            </div>
-            <div className='flex items-center mr-3'>
-              <i class='far fa-comment-alt'></i>
+              <i className='far fa-comment-alt'></i>
               <div className='ml-1'>Number of bids: {project.bids ? (project.bids.length > 0 ? project.bids.length : 0) : 0}</div>
             </div>
           </div>
