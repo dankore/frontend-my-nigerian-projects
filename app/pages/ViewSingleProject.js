@@ -74,33 +74,6 @@ function ViewSingleProject(props) {
     }
   }
 
-  function formatDate() {
-    let month = new Array();
-    month[1] = 'January';
-    month[2] = 'February';
-    month[3] = 'March';
-    month[4] = 'April';
-    month[5] = 'May';
-    month[6] = 'June';
-    month[7] = 'July';
-    month[8] = 'August';
-    month[9] = 'September';
-    month[10] = 'October';
-    month[11] = 'November';
-    month[12] = 'December';
-
-    /**
-     * @param project.bidSubmissionDeadline comes in this format e.g mm-dd-yyyy
-     * @returns format May 29, 2020
-     */
-
-    if (project.bidSubmissionDeadline) {
-      const datePartsArray = project.bidSubmissionDeadline.split('-');
-      // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
-      return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
-    }
-  }
-
   function bidItemsTotal(array) {
     return array.reduce((total, currentElem) => {
       const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
@@ -128,12 +101,12 @@ function ViewSingleProject(props) {
                 <svg className='flex-shrink-0 mr-1.5 h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
                   <path fillRule='evenodd' d='M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z' clipRule='evenodd' />
                 </svg>
-                {daysRemaining(project.bidSubmissionDeadline) > -1 ? 'Bidding closes on' : 'Bidding closed on'} {formatDate()}
+                {daysRemaining(project.bidSubmissionDeadline) > -1 ? 'Bidding closes on' : 'Bidding closed on'} {dateFormatted_Like_This_May_29_2020(project.bidSubmissionDeadline)}
               </div>
             </div>
           </div>
           {isOwner() && (
-            <span className='flex block pt-2'>
+            <span className='flex pt-2'>
               <Link to={`/project/${project._id}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
                 <i className='fas fa-edit'></i>
               </Link>
@@ -204,7 +177,7 @@ function ViewSingleProject(props) {
                   </Link>
                 </div>
               ) : (
-                <div className='flex justify-end'>
+                <div className='flex justify-end -mb-3'>
                   <div className='cursor-pointer text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
                     <i className='fas fa-stop-circle mr-1'></i>
                     Bidding Closed
@@ -223,7 +196,7 @@ function ViewSingleProject(props) {
                 </Link>
               </div>
             ) : (
-              <div className='flex justify-end'>
+              <div className='flex justify-end -mb-3'>
                 <div className='cursor-pointer text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
                   <i className='fas fa-stop-circle mr-1'></i>
                   Bidding Closed
@@ -237,6 +210,7 @@ function ViewSingleProject(props) {
           <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</legend>
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
+              console.log(bid);
               return (
                 <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
                   <span>Bid number# {index + 1}</span> <span>Cost: {new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</span>
