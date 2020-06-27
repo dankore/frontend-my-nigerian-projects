@@ -322,7 +322,7 @@ function CreateBid(props) {
               <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                 Price per Item <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+              <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
             </div>
           </div>
           <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
