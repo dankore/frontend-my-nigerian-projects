@@ -153,14 +153,14 @@ function ChangePassword(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='old-password'>
                 Current Password <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <input onChange={e => dispatch({ type: 'currentPasswordImmediately', value: e.target.value })} id='old-password' autoComplete='off' spellCheck='false' className='shadow-inner appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
             </div>
 
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='new-password'>
                 New Password <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <input onChange={e => dispatch({ type: 'newPasswordImmediately', value: e.target.value })} id='new-password' autoComplete='off' spellCheck='false' className='shadow-inner appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
               <CSSTransition in={state.newPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.newPassword.message}
@@ -172,7 +172,7 @@ function ChangePassword(props) {
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='re-enter-new-password'>
                 Re-Enter New Password <span className='text-red-600'>*</span>
               </label>
-              <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
+              <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-new-password' autoComplete='off' spellCheck='false' className='shadow-inner appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type='password' />
               <CSSTransition in={state.reEnteredNewPassword.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
                 <div style={CSSTransitionStyle} className='liveValidateMessage'>
                   {state.reEnteredNewPassword.message}

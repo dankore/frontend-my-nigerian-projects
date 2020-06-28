@@ -46,14 +46,12 @@ function DeleteAccount(props) {
               </div>
             </div>
           </div>
-          <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-            <button onClick={handleDeleteAccount} type='submit' className='relative w-full m-3 inline-flex items-center justify-center py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              <svg className='h-5 w-5 text-red-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-                <path d='M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6'></path>
-              </svg>
-              Delete
-            </button>
-          </div>
+          <button onClick={handleDeleteAccount} type='submit' className='relative w-full m-3 inline-flex items-center justify-center py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <svg className='h-5 w-5 text-red-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+              <path d='M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6'></path>
+            </svg>
+            Delete
+          </button>
         </div>
       </div>
     </Page>

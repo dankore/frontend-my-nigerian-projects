@@ -154,7 +154,7 @@ function AccountRecoveryEnterPassword(props) {
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='password'>New Password </label>
             </div>
-            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' className='shadow-inner w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.password.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.password.message}
@@ -165,7 +165,7 @@ function AccountRecoveryEnterPassword(props) {
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='re-enter-password'>Re-enter New Password </label>
             </div>
-            <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-password' type='password' className='w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'reEnteredPasswordImmediately', value: e.target.value })} id='re-enter-password' type='password' className='shadow-inner w-full py-3 px-4 appearance-none bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white border rounded text-gray-700 leading-tight' />
             <p className='text-red-300 text-xs italic'>Password should be a minimum of 6 characters</p>
             <CSSTransition in={state.reEnteredPassword.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>

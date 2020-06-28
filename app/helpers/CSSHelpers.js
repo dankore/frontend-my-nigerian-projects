@@ -19,8 +19,8 @@ module.exports = {
   },
   CSSTransitionStyle: { color: '#e53e3e', fontSize: 0.75 + 'em' },
   contactContainerCSS: 'rounded border border-gray-300 px-3 mb-2 lg:mb-0 font-semibold text-sm',
-  inputTextAreaCSSCreateBid: 'p-2 bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
-  inputTextAreaCSS: 'py-2 px-4  bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
+  inputTextAreaCSSCreateBid: 'shadow-inner p-2 bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
+  inputTextAreaCSS: 'shadow-inner py-2 px-4  bg-gray-200 focus:outline-none appearance-none focus:border-gray-500 focus:bg-white border rounded leading-tight ',
   navLinkCSS: 'cursor-pointer mr-px bg-white inline-block py-2 px-4 text-blue-500 hover:border hover:rounded-t font-semibold',
   navLinkCSSSettings: 'cursor-pointer mr-px bg-white inline-block py-2 px-4 text-blue-500 hover:border hover:rounded font-semibold',
 };
