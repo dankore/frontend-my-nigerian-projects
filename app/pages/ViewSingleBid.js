@@ -101,7 +101,7 @@ function ViewSingleBid(props) {
         const response = await Axios.delete('/delete-bid', { data: { projectId: state.params.projectId, bidId: state.params.bidId, token: appState.user.token } });
         if (response.data == 'Success') {
           appDispatch({ type: 'flashMessage', value: 'Bid deleted.' });
-          props.history.goBack();
+          props.history.push(`/project/${state.params.projectId}`);
         }
       } catch (error) {
         console.log({ errorDeleteBid: error });

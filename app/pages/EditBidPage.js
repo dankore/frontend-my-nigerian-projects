@@ -197,7 +197,7 @@ function EditBidPage(props) {
           );
 
           if (response.data == 'Success') {
-            props.history.goBack();
+            props.history.push(`/${state.params.projectId}/bid/${state.params.bidId}`);
             appDispatch({ type: 'flashMessage', value: 'Bid successfully updated.' });
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Editing bid failed. Please try again.' });

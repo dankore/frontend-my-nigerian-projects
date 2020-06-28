@@ -186,7 +186,8 @@ function CreateBid(props) {
           );
 
           if (response.data == 'Success') {
-            props.history.goBack();
+            // TODO: REDIRECT TO BID
+            props.history.push(`/project/${state.projectId}`);
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
           }
