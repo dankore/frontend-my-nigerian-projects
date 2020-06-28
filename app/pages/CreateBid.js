@@ -10,7 +10,6 @@ import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from 
 import DispatchContext from '../DispatchContext';
 import { daysRemaining } from '../helpers/JSHelpers';
 
-
 function CreateBid(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
@@ -50,6 +49,7 @@ function CreateBid(props) {
     notFound: false,
     projectId: useParams().id,
     isOpen: false,
+    openAddItem: false,
     sendCount: 0,
   };
 
@@ -130,6 +130,9 @@ function CreateBid(props) {
         return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
+        return;
+      case 'openAddItemForm':
+        draft.openAddItem = !draft.openAddItem;
         return;
       case 'submitForm':
         if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '' && !draft.phone.hasErrors && draft.phone.value != '' && !draft.email.hasErrors && draft.email.value != '') {
@@ -302,32 +305,43 @@ function CreateBid(props) {
           </div>
 
           {/* ADD ITEM */}
-          <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Items:</p>
-          <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
-            <div className='mb-4 relative lg:mr-2'>
-              <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                Item Name <span className='text-red-600'>*</span>
-              </label>
-              <input onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
-            </div>
-
-            <div className='mb-4 relative lg:mx-2'>
-              <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                Quantity <span className='text-red-600'>*</span>
-              </label>
-              <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
-            </div>
-
-            <div className='mb-4 relative lg:mx-2'>
-              <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                Price per Item <span className='text-red-600'>*</span>
-              </label>
-              <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+          <div className='flex justify-end'>
+            <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='bg-green-600 hover:bg-green-800 w-16 h-16 text-center text-white rounded-full cursor-pointer'>
+              <span>&#10010;</span>
+              <p className='text-xs'>Add Item</p>
             </div>
           </div>
-          <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
-            Add Item
-          </div>
+
+          {state.openAddItem && (
+            <fieldset className='border rounded p-2 mb-4'>
+              <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item:</legend>
+              <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
+                <div className='mb-4 relative lg:mr-2'>
+                  <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                    Item Name <span className='text-red-600'>*</span>
+                  </label>
+                  <input onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                </div>
+
+                <div className='mb-4 relative lg:mx-2'>
+                  <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                    Quantity <span className='text-red-600'>*</span>
+                  </label>
+                  <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                </div>
+
+                <div className='mb-4 relative lg:mx-2'>
+                  <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                    Price per Item <span className='text-red-600'>*</span>
+                  </label>
+                  <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                </div>
+              </div>
+              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
+                Add Item
+              </div>
+            </fieldset>
+          )}
 
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
