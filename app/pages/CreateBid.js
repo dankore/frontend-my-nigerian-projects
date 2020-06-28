@@ -185,9 +185,8 @@ function CreateBid(props) {
             { cancelToken: request.token }
           );
 
-          if (response.data == 'Success') {
-            // TODO: REDIRECT TO BID
-            props.history.push(`/project/${state.projectId}`);
+          if (response.data.status == 'Success') {
+            props.history.push(`/${state.projectId}/bid/${response.data.bidId}`);
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
           }
