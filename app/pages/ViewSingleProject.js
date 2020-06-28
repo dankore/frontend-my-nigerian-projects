@@ -218,7 +218,6 @@ function ViewSingleProject(props) {
           <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</legend>
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
-              console.log(bid)
               return (
                 <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap rounded border border-blue-600 bg-white my-2 p-2'>
                   <div className='flex items-center text-sm leading-5 mr-6'>
