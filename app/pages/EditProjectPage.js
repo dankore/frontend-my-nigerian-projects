@@ -7,9 +7,9 @@ import { useImmerReducer } from 'use-immer';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import NotFoundPage from './NotFoundPage';
-import { inputTextAreaCSS } from '../helpers/CSSHelpers';
+import { inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import { CSSTransition } from 'react-transition-group';
-import { CSSTransitionStyle } from '../helpers/CSSHelpers';
+import { formatMinDate } from '../helpers/JSHelpers';
 
 function EditProjectPage(props) {
   const appState = useContext(StateContext);
@@ -229,21 +229,6 @@ function EditProjectPage(props) {
     dispatch({ type: 'submitRequest' });
   }
 
-  function formatMinDate() {
-    const date = new Date();
-    const year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    if (month < 10) {
-      month = '0' + month;
-    }
-    if (day < 10) {
-      day = '0' + day;
-    }
-
-    return `${year}-${month}-${day}`;
-  }
 
   if (state.notFound) {
     return <NotFoundPage />;

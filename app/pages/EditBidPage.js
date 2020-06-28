@@ -256,7 +256,7 @@ function EditBidPage(props) {
       <form onSubmit={handleSubmitBid}>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           Editing your bid for:{' '}
-          <Link to={`/${state.params.projectId}`} className='underline hover:text-blue-600'>
+          <Link to={`/project/${state.params.projectId}`} className='underline hover:text-blue-600'>
             {state.fetchedData.projectTitle}
           </Link>
         </h2>
@@ -305,7 +305,7 @@ function EditBidPage(props) {
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
-                <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Delete</p>
+                <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium uppercase tracking-wider'>Delete</p>
               </div>
               {state.fetchedData.bid.items.map(itemHtmlTemplate)}
             </div>

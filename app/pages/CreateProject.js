@@ -7,7 +7,7 @@ import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import { inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import { CSSTransition } from 'react-transition-group';
-
+import { formatMinDate } from '../helpers/JSHelpers';
 
 function CreateProject(props) {
   const appState = useContext(StateContext);
@@ -222,7 +222,7 @@ function CreateProject(props) {
             <label htmlFor='location' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Location <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} placeholder='City/Town, State'/>
+            <input onKeyUp={e => dispatch({ type: 'locationRules', value: e.target.value })} onChange={e => dispatch({ type: 'locationUpdate', value: e.target.value })} id='location' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} placeholder='City/Town, State' />
             <CSSTransition in={state.location.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.location.message}
@@ -233,7 +233,7 @@ function CreateProject(props) {
             <label htmlFor='bid-submission-deadline' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Bid Submission Deadline <span className='text-red-600'>*</span>
             </label>
-            <input onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='bid-submission-deadline' type='date' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} style={{ minHeight: 2.5 + 'rem' }} />
+            <input onKeyUp={e => dispatch({ type: 'bidSubmissionDeadlineRules', value: e.target.value })} onChange={e => dispatch({ type: 'dateNeedByUpdate', value: e.target.value })} id='bid-submission-deadline' type='date' min={`${formatMinDate()}`} autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} style={{ minHeight: 2.5 + 'rem' }} />
             <CSSTransition in={state.bidSubmissionDeadline.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.bidSubmissionDeadline.message}
@@ -282,8 +282,11 @@ function CreateProject(props) {
           </div>
         </fieldset>
 
-        <button disabled={state.isSaving} className='w-full text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-2 py-3'>
-          {state.isSaving ? 'Saving..' : 'Save New Project'}
+        <button disabled={state.isSaving} type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+          <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+            <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+          </svg>
+          {state.isSaving ? 'Saving...' : 'Save New Project'}
         </button>
       </form>
     </Page>
