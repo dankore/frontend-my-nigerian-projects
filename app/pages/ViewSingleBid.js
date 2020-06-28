@@ -169,7 +169,7 @@ function ViewSingleBid(props) {
 
             <div className='flex items-center text-sm leading-5 text-gray-600'>
               <i className='fas fa-user-cog'></i>
-              <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} Years` : `${state.projectAndBid.bid.yearsOfExperience} Year`} of experience </p>
+              <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} years` : `${state.projectAndBid.bid.yearsOfExperience} year`} of experience </p>
             </div>
           </div>
         </div>
@@ -225,7 +225,7 @@ function ViewSingleBid(props) {
               {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
             </Link>
           </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(tate.projectAndBid.bid.userCreationDate)}</p>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.userCreationDate)}</p>
 
           <hr className='border-gray-400' />
           <div className='flex justify-center flex-wrap text-xs px-2'>
