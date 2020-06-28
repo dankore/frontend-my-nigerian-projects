@@ -63,6 +63,10 @@ function Project(props) {
           <div className='text-sm leading-5'>{formatTitleAndDescription(project.description)}</div>
           <div className='flex flex-wrap items-center text-xs mt-3'>
             <div className='flex items-center mr-3'>
+              <i className='fas fa-map-marker-alt'></i>
+              <p className='ml-1'>{project.location}</p>
+            </div>
+            <div className='flex items-center mr-3'>
               <i className='fas fa-clock'></i>
               <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
             </div>
