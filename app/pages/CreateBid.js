@@ -305,13 +305,15 @@ function CreateBid(props) {
           </div>
 
           {/* ADD ITEM */}
+          {/* TOGGLE */}
           <div className='flex justify-end'>
-            <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='bg-green-600 hover:bg-green-800 w-16 h-16 text-center text-white rounded-full cursor-pointer'>
-              <span>&#10010;</span>
-              <p className='text-xs'>Add Item</p>
+            <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='flex items-center bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
+              <p className='inline-block'>&#10010;</p>
+              <p className='text-xs mx-2'>Add Item</p>
+              <p>{state.openAddItem ? <span>&#708; </span> : <span>&#709; </span>}</p>
             </div>
           </div>
-
+          {/* INPUTS */}
           {state.openAddItem && (
             <fieldset className='border rounded p-2 mb-4'>
               <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item:</legend>
