@@ -43,7 +43,7 @@ function ProfilePage() {
           draft.profileData = response.data;
         });
       } catch (error) {
-        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+        console.log('Fetching username failed.');
       }
     })();
     // CANCEL REQUEST
@@ -67,7 +67,7 @@ function ProfilePage() {
             draft.followActionLoading = false;
           });
         } catch (error) {
-          appDispatch({ type: 'flashMessageError', value: 'Fetching Followers failed.' });
+          console.log('Fetching Followers failed.');
         }
       })();
       // CANCEL REQUEST
@@ -94,7 +94,7 @@ function ProfilePage() {
             draft.followActionLoading = false;
           });
         } catch (error) {
-          appDispatch({ type: 'flashMessageError', value: 'Fetching Following failed.' });
+           console.log('Fetching Following failed.');
         }
       })();
       // CANCEL REQUEST
