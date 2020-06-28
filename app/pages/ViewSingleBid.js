@@ -126,33 +126,6 @@ function ViewSingleBid(props) {
     return array.reduce((total, currentElem) => total + +currentElem.quantity * +currentElem.price_per_item, 0);
   }
 
-  function formatMemberSinceDate() {
-    if (state.projectAndBid.bid.userCreationDate && typeof state.projectAndBid.bid.userCreationDate == 'string') {
-      let month = new Array();
-      month[1] = 'January';
-      month[2] = 'February';
-      month[3] = 'March';
-      month[4] = 'April';
-      month[5] = 'May';
-      month[6] = 'June';
-      month[7] = 'July';
-      month[8] = 'August';
-      month[9] = 'September';
-      month[10] = 'October';
-      month[11] = 'November';
-      month[12] = 'December';
-
-      /**
-       * @param state.projectAndBid.bid.userCreationDate is in this format e.g yyyy-mm-dd
-       * @returns format May 29, 2020
-       */
-
-      const datePartsArray = state.projectAndBid.bid.userCreationDate.split('-');
-      // the plus(+) sign converts string to number, gets rid of the trailing zero in the month
-      return `${month[+datePartsArray[1]]} ${datePartsArray[2]}, ${datePartsArray[0]}`;
-    }
-  }
-
   function outPutName() {
     if (appState.loggedIn) {
       if (state.profileInfo.firstName) {
@@ -252,7 +225,7 @@ function ViewSingleBid(props) {
               {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
             </Link>
           </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {formatMemberSinceDate()}</p>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(tate.projectAndBid.bid.userCreationDate)}</p>
 
           <hr className='border-gray-400' />
           <div className='flex justify-center flex-wrap text-xs px-2'>
