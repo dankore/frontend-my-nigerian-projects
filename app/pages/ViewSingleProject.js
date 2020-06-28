@@ -220,19 +220,19 @@ function ViewSingleProject(props) {
             project.bids.map((bid, index) => {
               console.log(bid)
               return (
-                <Link key={index} to={`/${id}/bid/${bid.id}`} className='block rounded border border-blue-600 bg-white my-2 p-2'>
-                  <div className='font-mono text-blue-600'></div>
-                  <div className='flex items-center text-sm leading-5 mr-2 sm:mr-6'>
-                    <i className='fas fa-id-badge'></i>
+                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap rounded border border-blue-600 bg-white my-2 p-2'>
+                  <div className='flex items-center text-sm leading-5 mr-6'>
+                    <i className='text-gray-700 fas fa-id-badge'></i>
                     <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
                   </div>
-                  <div className='flex items-center text-sm leading-5 mr-2 sm:mr-6'>
-                    <i className='fas fa-money-bill-wave'></i>
+
+                  <div className='flex items-center text-sm leading-5 mr-6'>
+                    <i className='text-gray-700 fas fa-money-bill-wave'></i>
                     <p className='ml-1.5'>{new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</p>
                   </div>
 
                   <div className='flex items-center text-sm leading-5'>
-                    <i className='fas fa-user-cog'></i>
+                    <i className='text-gray-700 fas fa-user-cog'></i>
                     <p className='ml-1.5'>{bid.yearsOfExperience > 1 ? `${bid.yearsOfExperience} years` : `${bid.yearsOfExperience} year`} of experience </p>
                   </div>
                 </Link>
