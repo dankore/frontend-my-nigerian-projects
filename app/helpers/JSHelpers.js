@@ -1,16 +1,18 @@
 module.exports = {
   daysRemaining: function (dateString) {
-    /**
-     * @param dateString comes in this format e.g yyyy-mm-dd
-     * @returns e.g 2
-     */
-    // TIME DIFF IN DAYS
-    const pastOrFutureDate = new Date(dateString);
-    const todaysDate = new Date();
-    const timeDifferenceInSecs = pastOrFutureDate - todaysDate;
+    if (dateString) {
+      /**
+       * @param dateString comes in this format e.g yyyy-mm-dd
+       * @returns e.g 2
+       */
+      // TIME DIFF IN DAYS
+      const pastOrFutureDate = new Date(dateString);
+      const todaysDate = new Date();
+      const timeDifferenceInSecs = pastOrFutureDate - todaysDate;
 
-    let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
-    return days;
+      let days /** TIME DIFFERENCE IN DAYS */ = Math.ceil(timeDifferenceInSecs / (24 * 60 * 60 * 1000));
+      return days;
+    }
   },
 
   dateFormatted_Like_This_May_29_2020: function (dateString) {
@@ -43,7 +45,7 @@ module.exports = {
     }
   },
 
-  formatMinDate: function() {
+  formatMinDate: function () {
     const date = new Date();
     const year = date.getFullYear();
     let month = date.getMonth() + 1;

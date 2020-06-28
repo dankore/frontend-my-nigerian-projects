@@ -187,6 +187,7 @@ function CreateBid(props) {
 
           if (response.data.status == 'Success') {
             props.history.push(`/${state.projectId}/bid/${response.data.bidId}`);
+            appDispatch({ type: 'flashMessage', value: 'Bid successfully added.' });
           } else {
             appDispatch({ type: 'flashMessageError', value: 'Adding bid failed. Please try again.' });
           }
@@ -271,7 +272,6 @@ function CreateBid(props) {
               </CSSTransition>
             </span>
           </div>
-
           <div className='mb-4 lg:flex lg:items-center'>
             <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
               Years of experience in this field <span className='text-red-600'>*</span>
@@ -285,7 +285,6 @@ function CreateBid(props) {
               </CSSTransition>
             </span>
           </div>
-
           {/* ITEMIZE LIST */}
           <div className='mb-4 relative'>
             <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
@@ -303,7 +302,6 @@ function CreateBid(props) {
             </div>
             <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
           </div>
-
           {/* ADD ITEM */}
           {/* TOGGLE */}
           <div className='flex justify-end'>
@@ -343,15 +341,12 @@ function CreateBid(props) {
               </div>
             </fieldset>
           )}
-
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
             <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
             <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
           </div>
-
           {/* CONTACT */}
-
           <fieldset className='border rounded p-2 mb-4'>
             <legend className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Contact:</legend>
             <div className='lg:w-auto lg:flex justify-between'>
@@ -379,7 +374,6 @@ function CreateBid(props) {
               </div>
             </div>
           </fieldset>
-
           {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
             <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
