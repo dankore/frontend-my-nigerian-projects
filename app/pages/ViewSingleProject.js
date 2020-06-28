@@ -181,7 +181,7 @@ function ViewSingleProject(props) {
                 <div className='flex justify-end -mb-3'>
                   <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
                     <i className='fas fa-plus mr-1'></i>
-                    Add a Bid
+                    Add Bid
                   </Link>
                 </div>
               ) : (
