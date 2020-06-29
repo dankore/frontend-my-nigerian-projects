@@ -94,7 +94,7 @@ function ProfilePage() {
             draft.followActionLoading = false;
           });
         } catch (error) {
-           console.log('Fetching Following failed.');
+          console.log('Fetching Following failed.');
         }
       })();
       // CANCEL REQUEST
@@ -117,7 +117,7 @@ function ProfilePage() {
   }
 
   return (
-    <Page margin='mx-2' title='Profile Page'>
+    <>
       <h2 className='flex items-center'>
         <Link to={`/profile/${state.profileData.profileUsername}`}>
           <img className='h-10 w-10 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
@@ -138,8 +138,8 @@ function ProfilePage() {
         )}
       </h2>
 
-      <div className='mt-2 align-middle inline-block min-w-full'>
-        <ul className='flex mb-3 border-b'>
+      <div className='w-full shadow-sm border-b border-gray-500 bg-white pt-6'>
+        <ul className='flex justify-center max-w-lg mx-auto'>
           <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Projects: {state.profileData.counts.projectCount}
           </NavLink>
@@ -152,7 +152,8 @@ function ProfilePage() {
             Following: {state.profileData.counts.followingCount}
           </NavLink>
         </ul>
-
+      </div>
+      <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
         <Switch>
           <Route exact path='/profile/:username'>
             <ProfileProjects />
@@ -164,8 +165,8 @@ function ProfilePage() {
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
           </Route>
         </Switch>
-      </div>
-    </Page>
+      </Page>
+    </>
   );
 }
 

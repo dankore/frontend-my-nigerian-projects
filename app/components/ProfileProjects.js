@@ -21,7 +21,7 @@ function ProfileProjects() {
         setIsLoading(false);
         setProjects(response.data);
       } catch (error) {
-        alert('Problem with fetching projects.');
+        console.log('Problem with fetching projects.');
       }
     })();
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
