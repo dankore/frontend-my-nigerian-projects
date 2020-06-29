@@ -274,7 +274,6 @@ function RegistrationPage(props) {
 
   return (
     <Page title='Registration'>
-      <div className='max-w-sm mx-auto'>
         <div className='flex justify-center text-blue-600'>
           <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
             <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
@@ -283,7 +282,7 @@ function RegistrationPage(props) {
 
         <p className='text-2xl font-semibold text-center leading-tight mt-3'>Create Your Bidding App Account</p>
         <p className='text-center mb-8'>Get paid helping me with my projects in Nigeria</p>
-        <form onSubmit={handleSubmit} className='mx-auto p-3 border rounded bg-white'>
+        <form onSubmit={handleSubmit} className='mx-auto lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
           <div className='flex flex-wrap -mx-3 mt-1'>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
@@ -357,7 +356,6 @@ function RegistrationPage(props) {
             </div>
           </div>
         </form>
-      </div>
     </Page>
   );
 }

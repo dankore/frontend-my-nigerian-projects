@@ -97,14 +97,14 @@ function LoginPage(props) {
 
   return (
     <Page title='Login'>
-      <div className='max-w-sm mx-auto'>
+      <div className='lg:max-w-sm mx-auto'>
         <div className='flex justify-center text-blue-600'>
           <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
             <path d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'></path>
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Login to Your Bidding App Account</p>
-        <form onSubmit={handleSubmit} className='p-3 sm:p-4 border rounded'>
+        <form onSubmit={handleSubmit} className='p-3 sm:p-4 border bg-white lg:rounded-lg'>
           <div className='relative mb-4'>
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
