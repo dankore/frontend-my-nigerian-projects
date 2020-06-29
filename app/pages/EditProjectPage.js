@@ -240,10 +240,17 @@ function EditProjectPage(props) {
 
   return (
     <Page margin='mx-2' title='Edit Project'>
-      <Link className='text-blue-600 mb-3 inline-block' to={`/project/${state.id}`}>
-        &laquo;Back to previous link
+      <Link className='text-blue-600 mb-3 px-2 inline-block' to={`/project/${state.id}`}>
+        &laquo;Back to project
       </Link>
-      <form onSubmit={submitEditProjectForm}>
+      <div className='flex justify-center text-blue-600'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+          <path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path>
+          <path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path>
+        </svg>
+      </div>
+      <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Edit Project</p>
+      <form onSubmit={submitEditProjectForm} className='bg-white shadow-sm lg:rounded-lg p-3'>
         <div className='relative mb-4'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -322,10 +329,10 @@ function EditProjectPage(props) {
         </fieldset>
 
         <button disabled={state.isSaving} type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+          <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
             <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
-            </svg>
-            {state.isSaving ? 'Saving...' : 'Save Updates'}
+          </svg>
+          {state.isSaving ? 'Saving...' : 'Save Updates'}
         </button>
       </form>
     </Page>

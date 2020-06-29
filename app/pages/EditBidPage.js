@@ -257,14 +257,20 @@ function EditBidPage(props) {
 
   return (
     <Page margin='mx-2' wide={true} title='Edit Bid'>
-      <form onSubmit={handleSubmitBid}>
+      <div className='flex justify-center text-blue-600'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+          <path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path>
+          <path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path>
+        </svg>
+      </div>
+      <p className='text-xl font-semibold text-center leading-tight'>Edit Your Bid For:</p>
+      <form onSubmit={handleSubmitBid} className='mt-4'>
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-          Editing your bid for:{' '}
           <Link to={`/project/${state.params.projectId}`} className='underline hover:text-blue-600'>
             {state.fetchedData.projectTitle}
           </Link>
         </h2>
-        <div className='border border-gray-200 p-2 rounded'>
+        <div className='shadow-sm bg-white lg:rounded-lg p-3 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
           <div className='mb-4'>
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
