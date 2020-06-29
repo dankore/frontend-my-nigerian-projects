@@ -255,7 +255,7 @@ function CreateBid(props) {
           <p className='text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>You are creating a bid for:</p>
         </div>
 
-        <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+        <h2 className='px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
           </Link>
