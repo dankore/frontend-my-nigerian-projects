@@ -118,7 +118,30 @@ function ProfilePage() {
 
   return (
     <>
-      <div className='w-full shadow-sm border-b border-gray-500 bg-white pt-6'>
+      <div className='w-full shadow-sm border-b border-gray-500 bg-white'>
+        <div className='bg-white max-w-2xl mx-auto'>
+          <div className='px-2 pt-10 h-20 bg-gradient'></div>
+          <h2 className='flex items-center px-2 -mt-6'>
+            <Link to={`/profile/${state.profileData.profileUsername}`}>
+              <img className='h-20 w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
+            </Link>
+            <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
+              {state.profileData.profileFirstName} {state.profileData.profileLastName}
+            </Link>
+
+            {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
+              <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 rounded'>
+                Follow <i className='fas fa-user-plus'></i>
+              </button>
+            )}
+            {appState.loggedIn && state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
+              <button onClick={stopFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-red-600 focus:outline-none hover:bg-red-700 rounded'>
+                Stop Following <i className='fas fa-user-times'></i>
+              </button>
+            )}
+          </h2>
+        </div>
+
         <ul className='flex justify-center z-5'>
           <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Projects: {state.profileData.counts.projectCount}
@@ -133,26 +156,6 @@ function ProfilePage() {
           </NavLink>
         </ul>
       </div>
-
-      <h2 className='flex items-center px-2 max-w-2xl mx-auto -mt-5 z-0'>
-        <Link to={`/profile/${state.profileData.profileUsername}`}>
-          <img className='h-24 w-24 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
-        </Link>
-        <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
-          {state.profileData.profileFirstName} {state.profileData.profileLastName}
-        </Link>
-
-        {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
-          <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 px-1 rounded'>
-            Follow <i className='fas fa-user-plus'></i>
-          </button>
-        )}
-        {appState.loggedIn && state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
-          <button onClick={stopFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-red-600 focus:outline-none hover:bg-red-700 px-1 rounded'>
-            Stop Following <i className='fas fa-user-times'></i>
-          </button>
-        )}
-      </h2>
 
       {/*  */}
       <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
