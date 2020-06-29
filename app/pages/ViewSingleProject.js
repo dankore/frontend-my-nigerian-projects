@@ -214,12 +214,12 @@ function ViewSingleProject(props) {
           </>
         )}
 
-        <div className='px-2 mb-4'>
-          <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</p>
+        <div className='mb-4'>
+          <p className='px-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</p>
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
               return (
-                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-lg rounded-lg border border-blue-600 bg-white my-2 p-2'>
+                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-lg lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
                   <div className='flex items-center text-sm leading-5 mr-6'>
                     <i className='text-gray-700 fas fa-id-badge'></i>
                     <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
