@@ -204,7 +204,14 @@ function CreateProject(props) {
 
   return (
     <Page margin='mx-2' title='Create New Project'>
-      <form onSubmit={handleProjectSubmit}>
+      <div className='flex justify-center text-blue-600'>
+        <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+          <line x1='12' y1='5' x2='12' y2='19'></line>
+          <line x1='5' y1='12' x2='19' y2='12'></line>
+        </svg>
+      </div>
+      <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Create New Project</p>
+      <form onSubmit={handleProjectSubmit} className='shadow-sm bg-white p-3 lg:rounded-lg'>
         <div className='mb-4 relative'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title <span className='text-red-600'>*</span>

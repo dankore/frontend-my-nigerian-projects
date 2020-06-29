@@ -142,7 +142,7 @@ function ProfilePage() {
           </h2>
         </div>
 
-        <ul className='flex justify-center z-5'>
+        <ul className='flex justify-center'>
           <NavLink exact to={`/profile/${state.profileData.profileUsername}`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Projects: {state.profileData.counts.projectCount}
           </NavLink>
@@ -157,7 +157,7 @@ function ProfilePage() {
         </ul>
       </div>
 
-      {/*  */}
+      {/* PAGE */}
       <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
         <Switch>
           <Route exact path='/profile/:username'>

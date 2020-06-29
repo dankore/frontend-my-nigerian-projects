@@ -247,13 +247,21 @@ function CreateBid(props) {
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
+        <div className='flex items-center max-w-sm mx-auto mb-3'>
+          <svg className='text-blue-600' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <line x1='12' y1='5' x2='12' y2='19'></line>
+            <line x1='5' y1='12' x2='19' y2='12'></line>
+          </svg>
+          <p className='text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>You are creating a bid for:</p>
+        </div>
+
         <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-          You are creating a bid for:{' '}
           <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
           </Link>
         </h2>
-        <div className='border border-gray-200 p-2 rounded'>
+
+        <div className='border border-gray-200 bg-white p-3 shadow-sm lg:rounded-lg'>
           {/* WHAT BEST DESCRIBES YOU */}
           <div className='mb-4'>
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
