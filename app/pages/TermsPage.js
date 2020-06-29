@@ -43,8 +43,8 @@ function Terms() {
           <path d='M391.86793,757.73523c18.40229,17.91389,20.65,45.45171,20.65,45.45171s-27.58831-1.50633-45.99061-19.42023-20.65-45.45171-20.65-45.45171S373.46563,739.82133,391.86793,757.73523Z' transform='translate(-312.50261 -68)' fill='#3182ce' />
         </svg>
       </div>
-      <h1 className='mt-12 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Terms of Use</h1>
-      <div className='relative z-10 leading-normal'>
+      <h1 className='mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Terms of Use</h1>
+      <div className='relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow-sm'>
         <p className='mt-4'>Thank you for stopping by!</p>
         <p className='mt-4'>This website is operated by The Bidding App. Throughout the site, the terms “we”, “I”, “us”, “our”, and “Website” refer to The Bidding App. The Bidding App offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
         <p className='mt-4'>By visiting our site and/or purchasing something from us and other users, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and / or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, Merchants, and / or contributors of content.</p>

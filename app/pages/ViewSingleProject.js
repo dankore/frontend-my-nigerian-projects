@@ -127,8 +127,7 @@ function ViewSingleProject(props) {
           )}
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
-        <div className='border border-gray-200 rounded'>
-          <div className='border-b p-2 bg-white'>
+          <div className='p-2 bg-white'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
 
@@ -168,7 +167,6 @@ function ViewSingleProject(props) {
               )}
             </div>
           </div>
-        </div>
       </div>
       {/* BIDS: DON'T ALLOW OWNERS OF A PROJECT TO ADD BID. HIDE BID BTN */}
       <div className='mt-8'>
