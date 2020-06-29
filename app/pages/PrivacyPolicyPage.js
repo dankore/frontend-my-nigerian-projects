@@ -65,7 +65,7 @@ function PrivacyPolicyPage() {
           <circle cx='566.3852' cy='489.97186' r='2.81784' fill='#3182ce' />
         </svg>
       </div>
-      <h1 className='mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Privacy Policy</h1>
+      <h1 className='px-2 mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Privacy Policy</h1>
       <div className='mt-4 relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow-sm'>
         <p>
           The Bidding App ("us", "we", "I", or "our") operates the
