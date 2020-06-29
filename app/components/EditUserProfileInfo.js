@@ -225,7 +225,7 @@ function EditUserProfileInfo(props) {
 
   return (
     <Page title='Edit Profile Info'>
-      <div className='-mt-6'>
+      <div className='-mt-6 bg-white lg:rounded-lg shadow-xs'>
         <form onSubmit={handleSubmit} className='mx-auto p-3 rounded'>
           <div className='flex flex-wrap'>
             <div className='relative w-full px-3 mb-3'>

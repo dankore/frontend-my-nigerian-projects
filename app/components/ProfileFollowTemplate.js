@@ -62,7 +62,7 @@ function ProfileFollow(props) {
       {projects.length > 0 ? (
         projects.map((follow, index) => {
           return (
-            <Link key={index} to={`/profile/${follow.username}`} className='bg-white rounded-lg hover:bg-gray-100 flex items-center p-2'>
+            <Link key={index} to={`/profile/${follow.username}`} className='bg-white lg:rounded-lg hover:bg-gray-100 flex items-center p-2'>
               <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
               {follow.username}
             </Link>

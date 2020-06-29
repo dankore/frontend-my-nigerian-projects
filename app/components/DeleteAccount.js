@@ -27,8 +27,8 @@ function DeleteAccount(props) {
 
   return (
     <Page title='Delete Account'>
-      <div className='inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center'>
-        <div className='bg-white rounded overflow-hidden transform transition-all sm:max-w-lg sm:w-full' role='dialog' aria-modal='true' aria-labelledby='modal-headline'>
+      <div className='bg-white lg:rounded-lg shadow-xs inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center'>
+        <div className='overflow-hidden transform transition-all sm:max-w-lg sm:w-full' role='dialog'>
           <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
             <div className='sm:flex sm:items-start'>
               <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
