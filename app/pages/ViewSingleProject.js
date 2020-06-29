@@ -91,7 +91,7 @@ function ViewSingleProject(props) {
 
   return (
     <Page margin='mx-2' title={project.title}>
-      <div className='shadow-lg my-6'>
+      <div className='shadow-md my-6'>
         <div className='bg-white rounded-t-lg p-3 mb-6 flex justify-between items-center'>
           <div className=''>
             <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
@@ -219,7 +219,7 @@ function ViewSingleProject(props) {
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
               return (
-                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-lg lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
+                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-md lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
                   <div className='flex items-center text-sm leading-5 mr-6'>
                     <i className='text-gray-700 fas fa-id-badge'></i>
                     <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>

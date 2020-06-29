@@ -11,7 +11,7 @@ function Header() {
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
   return (
-    <header className='bg-blue-600 px-2 shadow-md'>
+    <header className='bg-blue-600 px-2 shadow-lg'>
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : ''}`}>
         <div className='flex items-center'>
           <div>
