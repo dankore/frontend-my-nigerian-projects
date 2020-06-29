@@ -104,7 +104,7 @@ function LoginPage(props) {
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Login to Your Bidding App Account</p>
-        <form onSubmit={handleSubmit} className='p-3 sm:p-4 border bg-white lg:rounded-lg'>
+        <form onSubmit={handleSubmit} className='p-3 shadow-sm sm:p-4 border bg-white lg:rounded-lg'>
           <div className='relative mb-4'>
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
