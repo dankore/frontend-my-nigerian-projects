@@ -265,7 +265,7 @@ function EditBidPage(props) {
       </div>
       <p className='text-xl font-semibold text-center leading-tight'>Edit Your Bid For:</p>
       <form onSubmit={handleSubmitBid} className='mt-4'>
-        <h2 className='mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+        <h2 className='px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           <Link to={`/project/${state.params.projectId}`} className='underline hover:text-blue-600'>
             {state.fetchedData.projectTitle}
           </Link>
