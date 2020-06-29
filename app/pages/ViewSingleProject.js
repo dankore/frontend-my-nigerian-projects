@@ -91,10 +91,10 @@ function ViewSingleProject(props) {
 
   return (
     <Page margin='mx-2' title={project.title}>
-      <div>
-        <div className='flex justify-between items-center'>
-          <div className='mb-6'>
-            <h2 className='mt-4 mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+      <div className='shadow-lg my-6'>
+        <div className='bg-white rounded-t-lg p-3 mb-6 flex justify-between items-center'>
+          <div className=''>
+            <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
               {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
             </h2>
             <div className='flex flex-wrap mt-2'>
@@ -128,7 +128,7 @@ function ViewSingleProject(props) {
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
         <div className='border border-gray-200 rounded'>
-          <div className='border-b p-2 bg-gray-50'>
+          <div className='border-b p-2 bg-white'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
 
@@ -214,12 +214,12 @@ function ViewSingleProject(props) {
           </>
         )}
 
-        <fieldset className='border rounded px-2 mb-4 bg-gray-50'>
-          <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</legend>
+        <div className='px-2 mb-4'>
+          <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</p>
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
               return (
-                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap rounded border border-blue-600 bg-white my-2 p-2'>
+                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-lg rounded-lg border border-blue-600 bg-white my-2 p-2'>
                   <div className='flex items-center text-sm leading-5 mr-6'>
                     <i className='text-gray-700 fas fa-id-badge'></i>
                     <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
@@ -240,7 +240,7 @@ function ViewSingleProject(props) {
           ) : (
             <div>No bids... yet.</div>
           )}
-        </fieldset>
+        </div>
       </div>
     </Page>
   );

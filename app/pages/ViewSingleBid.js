@@ -111,7 +111,7 @@ function ViewSingleBid(props) {
 
   const itemHtmlTemplate = function (item, index) {
     return (
-      <div key={index} className='flex p-2 border border-gray-200 justify-between'>
+      <div key={index} className='flex p-2 border-t border-gray-400 bg-white justify-between'>
         <p style={{ maxWidth: 200 + 'px', overflowWrap: 'break-word', minWidth: 0 + 'px' }} className='mr-2'>
           {item.name}
         </p>
@@ -153,100 +153,102 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title={`Bid for ${state.projectAndBid.projectTitle}`}>
-      <div className='flex justify-between items-center my-6'>
-        <div>
-          <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-            {outPutName()}:{' '}
-            <Link to={`/project/${state.params.projectId}`}>
-              <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
-            </Link>
-          </h2>
-          <div className='flex flex-wrap mt-2'>
-            <div className='flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
-              <i className='fas fa-id-badge'></i>
-              <p className='ml-1.5'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
-            </div>
+      <div className='shadow-lg my-6'>
+        <div className='bg-white rounded-t-lg p-3 flex justify-between items-center '>
+          <div>
+            <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+              {outPutName()}:{' '}
+              <Link to={`/project/${state.params.projectId}`}>
+                <span className='underline hover:text-blue-600'>{state.projectAndBid.projectTitle}</span>
+              </Link>
+            </h2>
+            <div className='flex flex-wrap mt-2'>
+              <div className='flex items-center text-sm leading-5 text-gray-600 mr-2 sm:mr-6'>
+                <i className='fas fa-id-badge'></i>
+                <p className='ml-1.5'>{state.projectAndBid.bid.whatBestDescribesYou}</p>
+              </div>
 
-            <div className='flex items-center text-sm leading-5 text-gray-600'>
-              <i className='fas fa-user-cog'></i>
-              <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} years` : `${state.projectAndBid.bid.yearsOfExperience} year`} of experience </p>
+              <div className='flex items-center text-sm leading-5 text-gray-600'>
+                <i className='fas fa-user-cog'></i>
+                <p className='ml-1.5'>{state.projectAndBid.bid.yearsOfExperience > 1 ? `${state.projectAndBid.bid.yearsOfExperience} years` : `${state.projectAndBid.bid.yearsOfExperience} year`} of experience </p>
+              </div>
             </div>
           </div>
+          {isOwner() && (
+            <span className='flex pt-2'>
+              <Link to={`/bid/${state.params.projectId}/${state.params.bidId}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
+                <i className='fas fa-edit'></i>
+              </Link>
+              <ReactToolTip place='bottom' id='edit-btn' />
+              <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
+                <i className='fas fa-trash'></i>
+              </button>
+              <ReactToolTip place='bottom' id='delete-btn' />
+            </span>
+          )}
         </div>
-        {isOwner() && (
-          <span className='flex pt-2'>
-            <Link to={`/bid/${state.params.projectId}/${state.params.bidId}/edit`} className='text-blue-600 focus:outline-none mr-3' data-for='edit-btn' data-tip='edit'>
-              <i className='fas fa-edit'></i>
-            </Link>
-            <ReactToolTip place='bottom' id='edit-btn' />
-            <button onClick={handleDeleteBid} className='text-red-600 focus:outline-none' data-for='delete-btn' data-tip='Delete'>
-              <i className='fas fa-trash'></i>
-            </button>
-            <ReactToolTip place='bottom' id='delete-btn' />
-          </span>
-        )}
-      </div>
 
-      {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
-      {bidHasItems && <p className='ml-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>}
-      <div className='border border-gray-200 rounded'>
-        {bidHasItems && (
-          <>
-            <div style={{ minHeight: 4 + 'rem' }}>
-              <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
+        {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
+        {bidHasItems && <p className='ml-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>}
+        <div className='border border-gray-200 rounded'>
+          {bidHasItems && (
+            <>
+              <div style={{ minHeight: 4 + 'rem' }}>
+                <div className='flex p-2 bg-gray-700 text-white justify-between'>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
+                </div>
+                {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
               </div>
-              {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
-            </div>
-            <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
-          </>
-        )}
+              <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+            </>
+          )}
 
-        {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
-        {state.projectAndBid.bid.otherDetails && (
-          <>
-            <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-            <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-          </>
-        )}
+          {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
+          {state.projectAndBid.bid.otherDetails && (
+            <>
+              <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+              <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+            </>
+          )}
 
-        {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
-        <div className='bg-gray-700 py-2 rounded-b text-white'>
-          <div className='flex justify-center'>
-            <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
-              <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
-            </Link>
-          </div>
-          <div className='flex justify-center text-lg'>
-            <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
-              {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
-            </Link>
-          </div>
-          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.userCreationDate)}</p>
+          {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
+          <div className='bg-gray-700 py-2 rounded-b text-white'>
+            <div className='flex justify-center'>
+              <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
+                <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
+              </Link>
+            </div>
+            <div className='flex justify-center text-lg'>
+              <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
+                {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
+              </Link>
+            </div>
+            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.userCreationDate)}</p>
 
-          <hr className='border-gray-400' />
-          <div className='flex justify-center flex-wrap text-xs px-2'>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-clock'></i>
-              <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.bidCreationDate)}</p>
-            </div>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-envelope'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
-            </div>
-            <div className='flex items-center mr-3'>
-              <i className='fas fa-phone'></i>
-              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
-            </div>
-            {state.projectAndBid.bid.updatedDate && (
+            <hr className='border-gray-400' />
+            <div className='flex justify-center flex-wrap text-xs px-2'>
               <div className='flex items-center mr-3'>
-                <i className='fas fa-pencil-alt'></i>
-                <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.updatedDate)}</p>
+                <i className='fas fa-clock'></i>
+                <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.bidCreationDate)}</p>
               </div>
-            )}
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-envelope'></i>
+                <p className='ml-1'>{state.projectAndBid.bid.email}</p>
+              </div>
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-phone'></i>
+                <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
+              </div>
+              {state.projectAndBid.bid.updatedDate && (
+                <div className='flex items-center mr-3'>
+                  <i className='fas fa-pencil-alt'></i>
+                  <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.updatedDate)}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
