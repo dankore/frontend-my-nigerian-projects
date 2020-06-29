@@ -189,66 +189,64 @@ function ViewSingleBid(props) {
         </div>
 
         {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
-        {bidHasItems && <p className='ml-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>}
-        <div className='border border-gray-200 rounded'>
-          {bidHasItems && (
-            <>
-              <div style={{ minHeight: 4 + 'rem' }}>
-                <div className='flex p-2 bg-gray-700 text-white justify-between'>
-                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
-                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
-                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
-                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
-                </div>
-                {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
+        {bidHasItems && (
+          <>
+            <p className='ml-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>
+            <div style={{ minHeight: 4 + 'rem' }}>
+              <div className='flex p-2 bg-gray-700 text-white justify-between'>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
+                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
               </div>
-              <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
-            </>
-          )}
-
-          {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
-          {state.projectAndBid.bid.otherDetails && (
-            <>
-              <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-              <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-            </>
-          )}
-
-          {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
-          <div className='bg-gray-700 mt-6 py-2 rounded-b text-white'>
-            <div className='flex justify-center'>
-              <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
-                <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
-              </Link>
+              {state.projectAndBid.bid.items.map(itemHtmlTemplate)}
             </div>
-            <div className='flex justify-center text-lg'>
-              <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
-                {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
-              </Link>
-            </div>
-            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.userCreationDate)}</p>
+            <div className='flex justify-end mb-6 pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(bidItemsTotal(state.projectAndBid.bid.items))}</div>
+          </>
+        )}
 
-            <hr className='border-gray-400' />
-            <div className='flex justify-center flex-wrap text-xs px-2'>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-clock'></i>
-                <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.bidCreationDate)}</p>
-              </div>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-envelope'></i>
-                <p className='ml-1'>{state.projectAndBid.bid.email}</p>
-              </div>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-phone'></i>
-                <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
-              </div>
-              {state.projectAndBid.bid.updatedDate && (
-                <div className='flex items-center mr-3'>
-                  <i className='fas fa-pencil-alt'></i>
-                  <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.updatedDate)}</p>
-                </div>
-              )}
+        {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
+        {state.projectAndBid.bid.otherDetails && (
+          <>
+            <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+            <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+          </>
+        )}
+
+        {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
+        <div className='bg-gray-700 py-2 rounded-b text-white'>
+          <div className='flex justify-center'>
+            <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
+              <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
+            </Link>
+          </div>
+          <div className='flex justify-center text-lg'>
+            <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
+              {state.profileInfo.firstName ? state.profileInfo.firstName : '{User deleted'} {state.profileInfo.lastName ? state.profileInfo.lastName : 'their profile}'}
+            </Link>
+          </div>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.userCreationDate)}</p>
+
+          <hr className='border-gray-400' />
+          <div className='flex justify-center flex-wrap text-xs px-2'>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-clock'></i>
+              <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.bidCreationDate)}</p>
             </div>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-envelope'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.email}</p>
+            </div>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-phone'></i>
+              <p className='ml-1'>{state.projectAndBid.bid.phone}</p>
+            </div>
+            {state.projectAndBid.bid.updatedDate && (
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-pencil-alt'></i>
+                <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(state.projectAndBid.bid.updatedDate)}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

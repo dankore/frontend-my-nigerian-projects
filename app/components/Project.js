@@ -50,7 +50,7 @@ function Project(props) {
 
   return (
     <Link to={`/project/${project._id}`}>
-      <div className='flex border border-gray-200 p-3 hover:bg-gray-100'>
+      <div className='flex p-3 shadow-md lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100'>
         <img className='h-12 w-12 rounded-full' src={project.author.avatar} alt='Profile Pic' />
         <div className='ml-3'>
           <div className='flex items-center'>

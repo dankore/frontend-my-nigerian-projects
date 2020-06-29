@@ -101,9 +101,9 @@ function HomePage() {
   }
 
   return (
-    <Page margin='mx-2' title='Browse'>
-      <div className='mt-2 align-middle inline-block min-w-full'>
-        <ul className='flex border-b mb-4'>
+    <div className='align-middle inline-block min-w-full'>
+      <div className='w-full shadow-lg border-b border-gray-500 bg-gray-400 pt-10'>
+        <ul className='flex justify-center max-w-lg mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
             All Projects: {allProjects.feed.length}
           </NavLink>
@@ -112,6 +112,8 @@ function HomePage() {
             Projects from Those You Follow: {appState.loggedIn ? projectsThoseIFollow.feed.length : '(Login to View)'}
           </NavLink>
         </ul>
+      </div>
+      <Page margin='mx-2' title='Browse'>
         <Switch>
           <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
@@ -136,7 +138,7 @@ function HomePage() {
             {projectsThoseIFollow.feed.length == 0 && appState.loggedIn && noProjectsThoseIFollow()}
             {/* NOT LOGGED IN */}
             {!appState.loggedIn && (
-              <Link to='/login' className='relative w-full justify-center inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <Link to='/login' className='relative w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                   <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='currentColor' viewBox='0 0 20 20'>
                     <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
@@ -147,8 +149,8 @@ function HomePage() {
             )}
           </Route>
         </Switch>
-      </div>
-    </Page>
+      </Page>
+    </div>
   );
 }
 
