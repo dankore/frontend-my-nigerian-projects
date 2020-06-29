@@ -8,7 +8,7 @@ function About() {
 
   return (
     <Page margin='mx-2' title='About the Bidding App'>
-      <div className='py-12 bg-white'>
+      <div className='py-12 bg-white shadow-xs lg:rounded-lg'>
         <div className='max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='lg:text-center'>
             <p className='text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App</p>
@@ -17,13 +17,13 @@ function About() {
           <div className='my-12 flex justify-center'>
             {!appState.loggedIn && (
               <div className='inline-flex rounded'>
-                <Link to='/register' className='inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                <Link to='/register' className='inline-flex shadow-xs items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                   Get Started
                 </Link>
               </div>
             )}
             <div className='ml-3 inline-flex rounded border'>
-              <Link to='/' className='inline-flex items-center justify-center px-4 py-2 border border-gray-100 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <Link to='/' className='inline-flex shadow-xs items-center justify-center px-4 py-2 border border-gray-100 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 Browse Projects
               </Link>
             </div>
