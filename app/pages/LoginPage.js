@@ -143,7 +143,7 @@ function LoginPage(props) {
             </button>
           </div>
         </form>
-        <Link to='/register' className='block mt-3 px-4'>
+        <Link to='/register' className='block mt-3 px-4 bg-white p-3 shadow-sm lg:rounded-lg'>
           Don't have an account? <span className='text-blue-600'>Create yours for free</span>
         </Link>
       </div>
