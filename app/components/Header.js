@@ -21,7 +21,7 @@ function Header() {
 
             {/* SIDE MENU */}
             {appState && appState.isSideMenuOpen ? (
-              <div style={{ zIndex: 1 }} className='absolute bg-blue-600 text-white'>
+              <div style={{ zIndex: 1 }} className='absolute shadow-lg bg-blue-600 text-white'>
                 <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-2'} block`} to='/how-to-bid'>
                   <i className='fas fa-file-contract mr-1'></i>
                   How To Bid

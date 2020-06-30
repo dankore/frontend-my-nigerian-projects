@@ -241,7 +241,7 @@ function EditProjectPage(props) {
   return (
     <Page margin='mx-2' title='Edit Project'>
       <Link className='text-blue-600 mb-3 px-2 inline-block' to={`/project/${state.id}`}>
-        &laquo;Back to project
+        &laquo;&laquo; go to project
       </Link>
       <div className='flex justify-center text-blue-600'>
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
