@@ -128,6 +128,12 @@ function CreateBid(props) {
           draft.email.message = 'Email cannot be empty';
         }
         return;
+    case 'emailAfterDelay':
+        if (!/^\S+@\S+$/.test(draft.email.value)) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Please provide a valid email.';
+        }
+        return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
         return;
@@ -163,6 +169,15 @@ function CreateBid(props) {
 
     return () => request.cancel();
   }, []);
+
+  // DELAY: EMAIL
+  useEffect(() => {
+    if (state.email.value) {
+      const delay = setTimeout(() => dispatch({ type: 'emailAfterDelay' }), 800);
+
+      return () => clearTimeout(delay);
+    }
+  }, [state.email.value]);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -223,6 +238,7 @@ function CreateBid(props) {
     dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
     dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'emailRules', value: state.email.value });
+    dispatch({ type: 'emailAfterDelay', value: state.email.value});
     dispatch({ type: 'submitForm' });
   }
 
@@ -247,7 +263,7 @@ function CreateBid(props) {
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
-         <div className='flex justify-center text-blue-600'>
+        <div className='flex justify-center text-blue-600'>
         <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
           <line x1='12' y1='5' x2='12' y2='19'></line>
           <line x1='5' y1='12' x2='19' y2='12'></line>
