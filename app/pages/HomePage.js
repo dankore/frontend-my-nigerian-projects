@@ -103,7 +103,7 @@ function HomePage() {
   return (
     <div className='align-middle inline-block min-w-full'>
       <div className='w-full shadow-sm border-b border-gray-500 bg-white pt-6'>
-        <ul className='flex justify-center max-w-lg mx-auto'>
+        <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
             All Projects: {allProjects.feed.length}
           </NavLink>
