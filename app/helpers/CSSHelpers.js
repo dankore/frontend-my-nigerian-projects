@@ -1,6 +1,6 @@
 module.exports = {
   activeNavCSS: {
-    borderBottom: 'thick solid #3182ce',
+    borderBottom: '2px solid #3182ce',
   },
   activeNavCSSSettingsPage: {
     border: 1 + 'px',

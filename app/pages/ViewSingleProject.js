@@ -236,7 +236,7 @@ function ViewSingleProject(props) {
               );
             })
           ) : (
-            <div>No bids... yet.</div>
+            <div className='bg-white p-3 lg:rounded-lg shadow-sm'>No bids... yet.</div>
           )}
         </div>
       </div>
