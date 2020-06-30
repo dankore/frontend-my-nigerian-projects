@@ -36,7 +36,7 @@ function HomePage() {
           draft.feed = response.data;
         });
       } catch (error) {
-        appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+          console.log('Fetching username failed.')
       }
     })();
     // CANCEL REQUEST
@@ -58,7 +58,7 @@ function HomePage() {
             draft.feed = response.data;
           });
         } catch (error) {
-          appDispatch({ type: 'flashMessageError', value: 'Fetching Projects From Those You Follow Failed. Please Try Again.' });
+            console.log('Fetching Projects From Those You Follow Failed. Please Try Again.' )
         }
       })();
       // CANCEL REQUEST
@@ -80,7 +80,7 @@ function HomePage() {
             draft.followingCount = response.data.counts.followingCount;
           });
         } catch (error) {
-          appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
+            console.log('Fetching username failed.')
         }
       })();
       // CANCEL REQUEST
