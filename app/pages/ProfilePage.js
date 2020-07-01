@@ -124,7 +124,7 @@ function ProfilePage() {
           <h2 className='flex flex-wrap justify-between px-2 -mt-6'>
             <div className='flex items-center flex-wrap'>
               <Link to={`/profile/${state.profileData.profileUsername}`}>
-                <img className='h-20 w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
+                <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
               </Link>
               <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
