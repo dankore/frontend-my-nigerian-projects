@@ -2,11 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
-import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 
 function ProfileFollow(props) {
-  const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +62,7 @@ function ProfileFollow(props) {
           return (
             <Link key={index} to={`/profile/${follow.username}`} className='bg-white lg:rounded-lg mt-1 hover:bg-gray-100 flex items-center p-3'>
               <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
-              {follow.username}
+              {follow.firstName}{" "}{follow.lastName}
             </Link>
           );
         })
