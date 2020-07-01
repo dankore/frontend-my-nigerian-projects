@@ -58,18 +58,18 @@ function ProfileFollow(props) {
   }
 
   return (
-    <div className='border rounded'>
+    <div>
       {projects.length > 0 ? (
         projects.map((follow, index) => {
           return (
-            <Link key={index} to={`/profile/${follow.username}`} className='bg-white lg:rounded-lg hover:bg-gray-100 flex items-center p-2'>
+            <Link key={index} to={`/profile/${follow.username}`} className='bg-white lg:rounded-lg mt-1 hover:bg-gray-100 flex items-center p-3'>
               <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
               {follow.username}
             </Link>
           );
         })
       ) : (
-        <p className='p-4'>{`${noFollowBlankTemplate(props.action)}`}</p>
+        <p className='p-3 bg-white lg:rounded-lg'>{`${noFollowBlankTemplate(props.action)}`}</p>
       )}
     </div>
   );
