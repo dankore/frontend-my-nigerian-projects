@@ -121,7 +121,7 @@ function ProfilePage() {
       <div className='w-full shadow-sm border-b border-gray-500 bg-white'>
         <div className='bg-white max-w-2xl mx-auto'>
           <div className='px-2 pt-10 h-20 bg-gradient'></div>
-          <h2 className='flex flex-wrap justify-between px-2 -mt-6'>
+          <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
               <Link to={`/profile/${state.profileData.profileUsername}`}>
                 <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
@@ -130,7 +130,7 @@ function ProfilePage() {
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
             </div>
-            <div className='mt-8'>
+            <div className='mt-6 lg:mt-8'>
               {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != '...' && (
                 <button onClick={startFollowing} disabled={state.followActionLoading} className='px-2 text-white bg-blue-600 focus:outline-none hover:bg-blue-700 rounded'>
                   Follow <i className='fas fa-user-plus'></i>
