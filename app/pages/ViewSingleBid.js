@@ -207,10 +207,10 @@ function ViewSingleBid(props) {
 
         {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
         {state.projectAndBid.bid.otherDetails && (
-          <>
+          <div style={{overflowWrap: 'anywhere', minWidth: 0+'px'}}>
             <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
             <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-          </>
+          </div>
         )}
 
         {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}

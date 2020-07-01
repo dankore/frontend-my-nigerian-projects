@@ -127,7 +127,7 @@ function ViewSingleProject(props) {
           )}
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
-          <div className='p-2 bg-white'>
+          <div style={{overflowWrap: 'anywhere', minWidth: 0+'px'}} className='p-2 bg-white'>
             <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
 
