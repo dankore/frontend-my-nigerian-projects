@@ -125,7 +125,7 @@ function ProfilePage(props) {
     <>
       <div className='w-full shadow-sm border-b border-gray-500 bg-white'>
         <div className='bg-white max-w-2xl mx-auto'>
-          <div className='px-2 pt-10 h-20 bg-gradient'></div>
+          <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
               <Link to={`/profile/${state.profileData.profileUsername}`}>

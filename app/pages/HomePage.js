@@ -138,7 +138,7 @@ function HomePage() {
                 />
               </>
             ) : (
-              <h2 className='border border-gray-200 p-2'>No projects posted at this time.</h2>
+              <h2 className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</h2>
             )}
           </Route>
           <Route path='/browse/those-i-follow'>
