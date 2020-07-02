@@ -8,7 +8,7 @@ function HowToBid() {
 
   return (
     <Page margin='mx-2' title='How to Bid'>
-      <div className='bg-white shadow-xs lg:rounded-lg max-w-8xl mx-auto py-2 px-4 sm:px-6 lg:px-8'>
+      <div className='bg-white shadow-xs lg:rounded-lg max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
         <p className='text-base leading-6 font-semibold text-blue-600 uppercase tracking-wide lg:text-center'>Welcome</p>
         <h2 className='mt-2 max-w-3xl text-2xl leading-8 font-semibold font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:text-4xl lg:leading-10 lg:mx-auto lg:text-center'>How To Bid</h2>
         <div className='mt-8 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:mt-12'>
