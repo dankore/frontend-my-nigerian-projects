@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
-import DispatchContext from '../DispatchContext';
 import { Link, useParams, NavLink, Switch, Route } from 'react-router-dom';
 import Axios from 'axios';
 import { useImmer } from 'use-immer';
@@ -11,7 +10,6 @@ import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 
 function ProfilePage() {
   const appState = useContext(StateContext);
-  const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
 
   const [state, setState] = useImmer({

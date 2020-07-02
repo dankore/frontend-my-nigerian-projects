@@ -4,12 +4,24 @@ import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
 import Project from './Project';
 import StateContext from '../StateContext';
+import Pagination from './Pagination';
 
 function ProfileProjects() {
   const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState([]);
+  //PAGINATION STARTS
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectsPerPage] = useState(2);
+
+  // GET CURRENT PROJECT
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstPost = indexOfLastProject - projectsPerPage;
+  const currentProjects = projects.slice(indexOfFirstPost, indexOfLastProject);
+ // CHANGE PAGE
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  // PAGINATION ENDS
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
@@ -47,11 +59,18 @@ function ProfileProjects() {
   }
 
   return (
-    <div className=''>
+    <div>
       {projects.length > 0 ? (
-        projects.map(project => {
+       <>
+        {currentProjects.map(project => {
           return <Project project={project} key={project._id} />;
-        })
+        })}
+         <Pagination
+            projectsPerPage={projectsPerPage}
+            totalProjects={projects.length}
+            paginate={paginate}
+        />
+       </>
       ) : (
         <p className='p-4 border rounded'>{showThisWhenNoProject()}</p>
       )}
