@@ -25,11 +25,12 @@ function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage] = useState(2);
 
-  // Get current posts
+  // GET CURRENT PROJECT
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstPost = indexOfLastProject - projectsPerPage;
-  const currentProjects = allProjects.feed.slice(indexOfFirstPost, indexOfLastProject);
-// Change page
+  const currentProjectsAll = allProjects.feed.slice(indexOfFirstPost, indexOfLastProject);
+  const currentProjectsAThoseIFollow = projectsThoseIFollow.feed.slice(indexOfFirstPost, indexOfLastProject);
+ // CHANGE PAGE
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
@@ -126,7 +127,7 @@ function HomePage() {
           <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
               <>
-                {currentProjects.map(project => {
+                {currentProjectsAll.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
                 <Pagination
@@ -142,9 +143,14 @@ function HomePage() {
           <Route path='/browse/those-i-follow'>
             {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
               <>
-                {projectsThoseIFollow.feed.map(project => {
+                {currentProjectsAThoseIFollow.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
+                <Pagination
+                    projectsPerPage={projectsPerPage}
+                    totalProjects={projectsThoseIFollow.feed.length}
+                    paginate={paginate}
+                />
               </>
             )}
             {/* NO PROJECTS */}
