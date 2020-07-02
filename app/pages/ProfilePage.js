@@ -1,14 +1,16 @@
 import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
-import { Link, useParams, NavLink, Switch, Route } from 'react-router-dom';
+import { Link, useParams, NavLink, Switch, Route, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import { useImmer } from 'use-immer';
 import ProfileProjects from '../components/ProfileProjects';
 import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
+import DispatchContext from '../DispatchContext';
 
-function ProfilePage() {
+function ProfilePage(props) {
+  const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const { username } = useParams();
 
@@ -37,9 +39,14 @@ function ProfilePage() {
     (async function fetchDataByUsername() {
       try {
         const response = await Axios.post(`/profile/${username}`, { token: appState.user.token }, { CancelToken: request.token });
-        setState(draft => {
-          draft.profileData = response.data;
-        });
+        if(response.data){
+            setState(draft => {
+              draft.profileData = response.data;
+            });
+        } else {
+            props.history.push("/");
+            appDispatch({type: "flashMessageError", value: "User does not exists."})
+        }
       } catch (error) {
         console.log('Fetching username failed.');
       }
@@ -176,4 +183,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);

@@ -5,6 +5,7 @@ import Axios from 'axios';
 import Project from './Project';
 import StateContext from '../StateContext';
 import Pagination from './Pagination';
+import NotFoundPage from '../pages/NotFoundPage';
 
 function ProfileProjects() {
   const appState = useContext(StateContext);
@@ -18,7 +19,7 @@ function ProfileProjects() {
   // GET CURRENT PROJECT
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstPost = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstPost, indexOfLastProject);
+  const currentProjects = projects.slice(indexOfFirstPost, indexOfLastProject) 
  // CHANGE PAGE
   const paginate = pageNumber => setCurrentPage(pageNumber);
   // PAGINATION ENDS
@@ -31,7 +32,9 @@ function ProfileProjects() {
           cancelToken: request.token,
         });
         setIsLoading(false);
-        setProjects(response.data);
+        if(response.data){
+            setProjects(response.data);
+        }
       } catch (error) {
         console.log('Problem with fetching projects.');
       }
