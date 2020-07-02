@@ -244,7 +244,7 @@ function EditProjectPage(props) {
 
   return (
     <Page margin='mx-2' title='Edit Project'>
-      <Link className='text-blue-600 mb-3 px-2 inline-block' to={`/project/${state.id}`}>
+      <Link className='text-blue-600 absolute pl-2 block' to={`/project/${state.id}`}>
         &laquo;&laquo; go to project
       </Link>
       <div className='flex justify-center text-blue-600'>
