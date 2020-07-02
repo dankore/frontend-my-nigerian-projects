@@ -129,10 +129,10 @@ function HomePage() {
                 {currentProjects.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
-                <Pagination 
-                projectsPerPage={projectsPerPage}
-                totalProjects={allProjects.feed.length}
-                paginate={paginate}
+                <Pagination
+                    projectsPerPage={projectsPerPage}
+                    totalProjects={allProjects.feed.length}
+                    paginate={paginate}
                 />
               </>
             ) : (
