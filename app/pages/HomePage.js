@@ -29,7 +29,7 @@ function HomePage() {
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstPost = indexOfLastProject - projectsPerPage;
   const currentProjectsAll = allProjects.feed.slice(indexOfFirstPost, indexOfLastProject);
-  const currentProjectsAThoseIFollow = projectsThoseIFollow.feed.slice(indexOfFirstPost, indexOfLastProject);
+  const currentProjectsThoseIFollow = projectsThoseIFollow.feed.slice(indexOfFirstPost, indexOfLastProject);
  // CHANGE PAGE
   const paginate = pageNumber => setCurrentPage(pageNumber);
 // PAGINATION ENDS
@@ -144,7 +144,7 @@ function HomePage() {
           <Route path='/browse/those-i-follow'>
             {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
               <>
-                {currentProjectsAThoseIFollow.map(project => {
+                {currentProjectsThoseIFollow.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
                 <Pagination

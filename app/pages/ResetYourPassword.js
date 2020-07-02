@@ -135,7 +135,7 @@ function LoginPage(props) {
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Account Recovery</p>
-        <p className='text-left text-xl mb-4'>Step 1 of 2:</p>
+        <p className='text-left text-xl mb-4 px-2'>Step 1 of 2:</p>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 bg-white shadow-sm lg:rounded-lg'>
           {/* EMAIL */}
           <div className='relative w-full mb-3'>

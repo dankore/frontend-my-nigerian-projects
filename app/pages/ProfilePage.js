@@ -39,13 +39,13 @@ function ProfilePage(props) {
     (async function fetchDataByUsername() {
       try {
         const response = await Axios.post(`/profile/${username}`, { token: appState.user.token }, { CancelToken: request.token });
-        if(response.data){
-            setState(draft => {
-              draft.profileData = response.data;
-            });
+        if (response.data) {
+          setState(draft => {
+            draft.profileData = response.data;
+          });
         } else {
-            props.history.push("/");
-            appDispatch({type: "flashMessageError", value: "User does not exists."})
+          props.history.push('/');
+          appDispatch({ type: 'flashMessageError', value: 'User does not exists.' });
         }
       } catch (error) {
         console.log('Fetching username failed.');
