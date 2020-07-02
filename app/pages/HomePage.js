@@ -1,16 +1,15 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { NavLink, Switch, Route, Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { useImmer } from 'use-immer';
 import LoadingDotsIcon from '../components/LoadingDotsIcon';
 import Axios from 'axios';
-import DispatchContext from '../DispatchContext';
+import Pagination from '../components/Pagination';
 import Project from '../components/Project';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import StateContext from '../StateContext';
 
 function HomePage() {
-  const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const [allProjects, setAllProjects] = useImmer({
     isLoading: true,
@@ -23,6 +22,15 @@ function HomePage() {
   const [followingCount, setFollowingCount] = useImmer({
     followingCount: 0,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectsPerPage] = useState(2);
+
+  // Get current posts
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstPost = indexOfLastProject - projectsPerPage;
+  const currentProjects = allProjects.feed.slice(indexOfFirstPost, indexOfLastProject);
+// Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
@@ -118,9 +126,14 @@ function HomePage() {
           <Route exact path='/browse'>
             {allProjects.feed.length > 0 ? (
               <>
-                {allProjects.feed.map(project => {
+                {currentProjects.map(project => {
                   return <Project project={project} key={project._id} />;
                 })}
+                <Pagination 
+                projectsPerPage={projectsPerPage}
+                totalProjects={allProjects.feed.length}
+                paginate={paginate}
+                />
               </>
             ) : (
               <h2 className='border border-gray-200 p-2'>No projects posted at this time.</h2>
