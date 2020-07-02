@@ -8,7 +8,8 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
-import { daysRemaining } from '../helpers/JSHelpers';
+import  JSHelpers  from '../helpers/JSHelpers';
+
 
 function CreateBid(props) {
   const appState = useContext(StateContext);
@@ -268,12 +269,12 @@ function CreateBid(props) {
     <Page margin='mx-2' wide={true} title='Create Bid'>
       <form onSubmit={handleSubmitBid}>
         <div className='flex justify-center text-blue-600'>
-        <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-          <line x1='12' y1='5' x2='12' y2='19'></line>
-          <line x1='5' y1='12' x2='19' y2='12'></line>
-        </svg>
-      </div>
-      <p className='text-xl font-semibold text-center leading-tight mb-2 mt-3'>Create New Bid For:</p>
+          <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <line x1='12' y1='5' x2='12' y2='19'></line>
+            <line x1='5' y1='12' x2='19' y2='12'></line>
+          </svg>
+        </div>
+        <p className='text-xl font-semibold text-center leading-tight mb-2 mt-3'>Create New Bid For:</p>
         <h2 className='text-center px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
             {state.project.title}
@@ -334,7 +335,7 @@ function CreateBid(props) {
           <div className='flex justify-end'>
             <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='-mb-3 bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
               <i className='fas fa-plus mr-1'></i>
-              Open to Add Item
+              {state.openAddItem ? 'Close' : 'Open to Add Item'}
             </div>
           </div>
           {/* INPUTS */}
@@ -401,7 +402,7 @@ function CreateBid(props) {
               </div>
             </div>
           </fieldset>
-          {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
+          {JSHelpers.daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
             <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                 <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>

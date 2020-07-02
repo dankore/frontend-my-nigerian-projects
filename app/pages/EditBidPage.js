@@ -268,8 +268,8 @@ function EditBidPage(props) {
         </svg>
       </div>
       <p className='text-xl font-semibold text-center leading-tight'>Edit Your Bid For:</p>
-      <form onSubmit={handleSubmitBid} className='mt-4'>
-        <h2 className='px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+      <form onSubmit={handleSubmitBid}>
+        <h2 className='px-2 text-center mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
           <Link to={`/project/${state.params.projectId}`} className='underline hover:text-blue-600'>
             {state.fetchedData.projectTitle}
           </Link>
@@ -331,7 +331,7 @@ function EditBidPage(props) {
           <div className='flex justify-end'>
             <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='-mb-3 bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
               <i className='fas fa-plus mr-1'></i>
-              Open to Add Item
+              {state.openAddItem ? 'Close' : 'Open to Add Item'}
             </div>
           </div>
           {/* INPUTS */}

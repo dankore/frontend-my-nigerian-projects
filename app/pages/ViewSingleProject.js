@@ -213,7 +213,7 @@ function ViewSingleProject(props) {
         )}
 
         <div className='mb-4'>
-          <p className='px-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids:</p>
+          <p className='px-2 text-lg leading-7 shadow-sm font-medium tracking-tight text-gray-900'>Bids:</p>
           {project.bids?.length > 0 ? (
             project.bids.map((bid, index) => {
               return (
