@@ -128,7 +128,7 @@ function LoginPage(props) {
 
   return (
     <Page title='Step 1 of 2: Enter Email'>
-      <div className='max-w-sm mx-auto'>
+      <div className='lg:max-w-sm mx-auto'>
         <div className='flex justify-center text-4xl text-blue-600'>
           <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
             <path d='M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z'></path>
