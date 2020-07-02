@@ -75,7 +75,7 @@ function ProfileProjects() {
         />
        </>
       ) : (
-        <p className='p-4 border rounded'>{showThisWhenNoProject()}</p>
+        <p className='p-3 shadow-sm lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
       )}
     </div>
   );
