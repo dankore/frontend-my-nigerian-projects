@@ -22,9 +22,9 @@ function HomePage() {
   const [followingCount, setFollowingCount] = useImmer({
     followingCount: 0,
   });
+  //PAGINATION STARTS
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage] = useState(2);
-
+  const [projectsPerPage] = useState(5);
   // GET CURRENT PROJECT
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstPost = indexOfLastProject - projectsPerPage;
@@ -32,6 +32,7 @@ function HomePage() {
   const currentProjectsAThoseIFollow = projectsThoseIFollow.feed.slice(indexOfFirstPost, indexOfLastProject);
  // CHANGE PAGE
   const paginate = pageNumber => setCurrentPage(pageNumber);
+// PAGINATION ENDS
 
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST

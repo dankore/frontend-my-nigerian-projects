@@ -13,7 +13,7 @@ function ProfileProjects() {
   const [projects, setProjects] = useState([]);
   //PAGINATION STARTS
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage] = useState(2);
+  const [projectsPerPage] = useState(5);
 
   // GET CURRENT PROJECT
   const indexOfLastProject = currentPage * projectsPerPage;
