@@ -24,7 +24,7 @@ function HomePage() {
   });
   //PAGINATION STARTS
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage] = useState(5);
+  const [projectsPerPage] = useState(3);
   // GET CURRENT PROJECT
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstPost = indexOfLastProject - projectsPerPage;
