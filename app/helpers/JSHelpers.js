@@ -10,7 +10,7 @@ module.exports = {
       }
     });
 
-    return result;
+    return result.reverse();
   },
   daysRemaining: function (dateString) {
     if (dateString) {
