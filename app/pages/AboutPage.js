@@ -65,7 +65,7 @@ function About() {
           </Link>
         )}
 
-        <Link to='/' className='block shadow-sm ml-3 items-center justify-center px-4 py-2 border border-gray-100 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+        <Link to='/' className='block shadow-sm ml-3 items-center justify-center px-4 py-2 border border-gray-400 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
           Browse Projects
         </Link>
       </div>
