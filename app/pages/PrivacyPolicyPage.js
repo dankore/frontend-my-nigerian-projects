@@ -69,9 +69,9 @@ function PrivacyPolicyPage() {
       <div className='mt-4 relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow-sm'>
         <p>
           My Nigerian Projects ("us", "we", "I", or "our") operates the
-          <Link className='text-blue-dark' to=' https://bidding.netlify.app '>
+          <Link className='text-blue-dark' to='https://mynigerianprojects.com/browse'>
             {' '}
-            https://bidding.netlify.app{' '}
+            https://mynigerianprojects.com{' '}
           </Link>
           website and the COMING SOON mobile application (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.
         </p>
