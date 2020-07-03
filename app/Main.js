@@ -37,23 +37,23 @@ const ViewSingleBid = lazy(() => import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
 import ResetYourPassword from './pages/ResetYourPassword';
-const AccountRecoveryEnterPassword = lazy(() => import("./pages/AccountRecoveryEnterPassword"));
+const AccountRecoveryEnterPassword = lazy(() => import('./pages/AccountRecoveryEnterPassword'));
 const EditBidPage = lazy(() => import('./pages/EditBidPage'));
 // COMPONENTS END
 
 function Main() {
   const initialState = {
-    loggedIn: Boolean(localStorage.getItem('biddingApp-token')),
+    loggedIn: Boolean(localStorage.getItem('myNigerianProjects-token')),
     flashMessages: [],
     flashMessageErrors: [],
     user: {
-      _id: localStorage.getItem('biddingApp-id'),
-      token: localStorage.getItem('biddingApp-token'),
-      username: localStorage.getItem('biddingApp-username'),
-      firstName: localStorage.getItem('biddingApp-firstname'),
-      lastName: localStorage.getItem('biddingApp-lastname'),
-      avatar: localStorage.getItem('biddingApp-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
-      userCreationDate: localStorage.getItem('biddingApp-userCreationDate'),
+      _id: localStorage.getItem('myNigerianProjects-id'),
+      token: localStorage.getItem('myNigerianProjects-token'),
+      username: localStorage.getItem('myNigerianProjects-username'),
+      firstName: localStorage.getItem('myNigerianProjects-firstname'),
+      lastName: localStorage.getItem('myNigerianProjects-lastname'),
+      avatar: localStorage.getItem('myNigerianProjects-avatar') || 'https://gravatar.com/avatar/palceholder?s=128',
+      userCreationDate: localStorage.getItem('myNigerianProjects-userCreationDate'),
     },
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
@@ -88,11 +88,11 @@ function Main() {
         draft.isSettingsTabOpen = false;
         return;
       case 'updateUserInfo':
-        localStorage.setItem('biddingApp-id', action.data._id);
-        localStorage.setItem('biddingApp-username', action.data.username);
-        localStorage.setItem('biddingApp-firstname', action.data.firstName);
-        localStorage.setItem('biddingApp-lastname', action.data.lastName);
-        localStorage.setItem('biddingApp-token', action.data.token);
+        localStorage.setItem('myNigerianProjects-id', action.data._id);
+        localStorage.setItem('myNigerianProjects-username', action.data.username);
+        localStorage.setItem('myNigerianProjects-firstname', action.data.firstName);
+        localStorage.setItem('myNigerianProjects-lastname', action.data.lastName);
+        localStorage.setItem('myNigerianProjects-token', action.data.token);
         draft.user.username = action.data.username;
         draft.user.firstName = action.data.firstName;
         draft.user.lastName = action.data.lastName;
@@ -104,21 +104,21 @@ function Main() {
 
   useEffect(() => {
     if (state.loggedIn) {
-      localStorage.setItem('biddingApp-id', state.user._id);
-      localStorage.setItem('biddingApp-token', state.user.token);
-      localStorage.setItem('biddingApp-username', state.user.username);
-      localStorage.setItem('biddingApp-firstname', state.user.firstName);
-      localStorage.setItem('biddingApp-lastname', state.user.lastName);
-      localStorage.setItem('biddingApp-avatar', state.user.avatar);
-      localStorage.setItem('biddingApp-userCreationDate', state.user.userCreationDate);
+      localStorage.setItem('myNigerianProjects-id', state.user._id);
+      localStorage.setItem('myNigerianProjects-token', state.user.token);
+      localStorage.setItem('myNigerianProjects-username', state.user.username);
+      localStorage.setItem('myNigerianProjects-firstname', state.user.firstName);
+      localStorage.setItem('myNigerianProjects-lastname', state.user.lastName);
+      localStorage.setItem('myNigerianProjects-avatar', state.user.avatar);
+      localStorage.setItem('myNigerianProjects-userCreationDate', state.user.userCreationDate);
     } else {
-      localStorage.removeItem('biddingApp-id');
-      localStorage.removeItem('biddingApp-token');
-      localStorage.removeItem('biddingApp-username');
-      localStorage.removeItem('biddingApp-firstname');
-      localStorage.removeItem('biddingApp-lastname');
-      localStorage.removeItem('biddingApp-avatar');
-      localStorage.removeItem('biddingApp-userCreationDate');
+      localStorage.removeItem('myNigerianProjects-id');
+      localStorage.removeItem('myNigerianProjects-token');
+      localStorage.removeItem('myNigerianProjects-username');
+      localStorage.removeItem('myNigerianProjects-firstname');
+      localStorage.removeItem('myNigerianProjects-lastname');
+      localStorage.removeItem('myNigerianProjects-avatar');
+      localStorage.removeItem('myNigerianProjects-userCreationDate');
     }
   }, [state.loggedIn]);
 
