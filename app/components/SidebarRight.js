@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { removeDupsInObject_Id } from '../helpers/JSHelpers';
 import { Link } from 'react-router-dom';
 
-function Suggestions({ projects }) {
+function SidebarRight({ projects }) {
   projects = removeDupsInObject_Id(projects);
   projects = projects.slice(0, 6);
 
@@ -28,4 +28,4 @@ function Suggestions({ projects }) {
   );
 }
 
-export default Suggestions;
+export default SidebarRight;
