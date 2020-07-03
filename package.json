@@ -1,7 +1,7 @@
 {
-  "name": "frontend-bidding-app",
+  "name": "frontend-my-nigerian-projects",
   "version": "1.0.0",
-  "description": "Bidding App for My Projects",
+  "description": "My Nigerian Projects",
   "main": "Main.js",
   "scripts": {
     "dev": "npm-run-all -s watch:css generate webpackDev",

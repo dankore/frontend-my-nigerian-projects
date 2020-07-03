@@ -7,7 +7,7 @@ function About() {
   const appState = useContext(StateContext);
 
   return (
-    <Page margin='mx-2' title='About the Bidding App'>
+    <Page margin='mx-2' title='About My Nigerian Projects'>
       <div className='py-6 bg-white shadow-xs lg:rounded-lg'>
         <div className='max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='lg:text-center'>

@@ -65,10 +65,10 @@ function PrivacyPolicyPage() {
           <circle cx='566.3852' cy='489.97186' r='2.81784' fill='#3182ce' />
         </svg>
       </div>
-      <h1 className='px-2 mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>The Bidding App Privacy Policy</h1>
+      <h1 className='px-2 mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>My Nigerian Projects Privacy Policy</h1>
       <div className='mt-4 relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow-sm'>
         <p>
-          The Bidding App ("us", "we", "I", or "our") operates the
+          My Nigerian Projects ("us", "we", "I", or "our") operates the
           <Link className='text-blue-dark' to=' https://bidding.netlify.app '>
             {' '}
             https://bidding.netlify.app{' '}
@@ -109,7 +109,7 @@ function PrivacyPolicyPage() {
           for more info.
         </p>
         <h3 className='mt-8 mb-4'>Use of Data</h3>
-        <p>The Bidding App uses the collected data for various purposes:</p>
+        <p>My Nigerian Projects uses the collected data for various purposes:</p>
         <ul>
           <li className='mt-3'>To provide and maintain the Service</li>
           <li className='mt-3'>To notify you about changes to our Service</li>
@@ -122,13 +122,13 @@ function PrivacyPolicyPage() {
         <h3 className='mt-8 mb-4'>Transfer Of Data</h3>
         <p>Your information, including Personal Data, may be transferred to— and maintained on— computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction.</p>
         <p className='mt-2'>If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there. Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
-        <p className='mt-2'>The Bidding App will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+        <p className='mt-2'>My Nigerian Projects will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
         <h3 className='mt-8 mb-4'>Disclosure Of Data</h3>
         <h4 className='mb-4'>Legal Requirements</h4>
-        <p>The Bidding App may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
+        <p>My Nigerian Projects may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
           <li className='mt-2'>To comply with a legal obligation</li>
-          <li className='mt-2'>To protect and defend the rights or property of The Bidding App</li>
+          <li className='mt-2'>To protect and defend the rights or property of My Nigerian Projects</li>
           <li className='mt-2'>To prevent or investigate possible wrongdoing in connection with the Service</li>
           <li className='mt-2'>To protect the personal safety of users of the Service or the public</li>
           <li className='mt-2'>To protect against legal liability</li>
