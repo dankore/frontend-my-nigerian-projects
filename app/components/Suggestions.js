@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import { removeDupsInObject_Id } from '../helpers/JSHelpers';
+import { Link } from 'react-router-dom';
 
 function Suggestions({ projects }) {
-  projects = removeDupsInObject_Id(projects)
+  projects = removeDupsInObject_Id(projects);
+  projects = projects.slice(0, 6);
+  console.log(projects)
 
   return (
-    <div className='shadow-sm lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
-      <h2 className='lg:rounded-t-lg bg-white text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto lg:text-center'>Who to follow</h2>
+    <div className='shadow-sm max-w-2xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
+      <h2 className='border-b lg:rounded-t-lg bg-white text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Who to follow</h2>
       {projects?.map((project, index) => {
         return (
-          <div key={index} className='p-3 bg-white flex items-center mt-1'>
+          <Link to={`/profile/${project.author.username}`} key={index} className='p-3 bg-white flex items-center border-b hover:bg-gray-100'>
             <img className='h-12 w-12 rounded-full' src={project.author.avatar} alt='ProfilePic' />
             <div className='ml-3'>
               <div className='flex items-center'>
@@ -19,7 +22,7 @@ function Suggestions({ projects }) {
                 <div className='mx-1'>@{project.author.username}</div>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
