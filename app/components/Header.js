@@ -20,22 +20,18 @@ function Header() {
             </div>
 
             {/* SIDE MENU */}
-            {appState && appState.isSideMenuOpen ? (
+            {appState.isSideMenuOpen && (
               <div style={{ zIndex: 1 }} className='absolute shadow-lg bg-blue-600 text-white'>
                 <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className={`${linkButtonsCommonCSS} ${appState && appState.loggedIn ? '' : 'mt-2'} block`} to='/how-to-bid'>
                   <i className='fas fa-file-contract mr-1'></i>
                   How To Bid
                 </Link>
-                {appState && appState.loggedIn ? (
-                  <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
-                    <i className='fas fa-plus mr-1'></i>
-                    Create Project
-                  </Link>
-                ) : (
-                  ''
-                )}
+                <Link onClick={() => appDispatch({ type: 'toggleSideMenu' })} className='block bg-green-600 hover:bg-green-700 px-2 py-1' to='/create-project'>
+                  <i className='fas fa-plus mr-1'></i>
+                  Create Project
+                </Link>
               </div>
-            ) : null}
+            )}
           </div>
 
           <Link to='/' className='mx-auto lg:mx-0 flex items-center text-white hover:text-gray-400'>
