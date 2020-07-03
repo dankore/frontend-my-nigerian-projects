@@ -51,7 +51,7 @@ function Project(props) {
   return (
     <Link to={`/project/${project._id}`}>
       <div style={{overflowWrap: 'anywhere', minWidth: 0+'px'}} className='flex p-3 shadow-sm lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100'>
-        <img className='h-12 w-12 rounded-full' src={project.author.avatar} alt='Profile Pic' />
+        <img className='h-12 w-12 rounded-full' src={project.author.avatar} alt='ProfilePic' />
         <div className='ml-3'>
           <div className='flex items-center'>
             <div className='font-bold leading-5'>
