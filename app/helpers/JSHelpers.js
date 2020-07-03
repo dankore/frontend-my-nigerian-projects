@@ -1,4 +1,17 @@
 module.exports = {
+  removeDupsInObject_Id: function (arrayOfObjects) {
+    let checker = [],
+      result = [];
+
+    arrayOfObjects.map(object => {
+      if (!checker.includes(object.author._id)) {
+        checker.push(object.author._id);
+        result.push(object);
+      }
+    });
+
+    return result;
+  },
   daysRemaining: function (dateString) {
     if (dateString) {
       /**

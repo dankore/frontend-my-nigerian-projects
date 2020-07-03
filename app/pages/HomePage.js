@@ -9,6 +9,7 @@ import Project from '../components/Project';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import StateContext from '../StateContext';
 import Suggestions from '../components/Suggestions';
+import Dummy from '../components/Dummy';
 
 function HomePage() {
   const appState = useContext(StateContext);
@@ -125,7 +126,7 @@ function HomePage() {
         </ul>
       </div>
       <div className='lg:grid lg:grid-cols-3'>
-        <Suggestions />
+        <Dummy />
         <Page margin='mx-2' title='Browse'>
           <Switch>
             <Route exact path='/browse'>
@@ -165,7 +166,7 @@ function HomePage() {
             </Route>
           </Switch>
         </Page>
-        
+        <Suggestions projects={allProjects.feed} />
       </div>
     </div>
   );
