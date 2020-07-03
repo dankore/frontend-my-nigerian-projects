@@ -55,6 +55,7 @@ function ProfilePage(props) {
     return () => request.cancel();
   }, [username]);
 
+  // ADD FOLLOW
   useEffect(() => {
     if (state.startFollowingRequestCount) {
       setState(draft => {
@@ -63,7 +64,7 @@ function ProfilePage(props) {
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
       const request = Axios.CancelToken.source();
 
-      (async function fetchDataByUsername() {
+      (async function addFollow() {
         try {
           const response = await Axios.post(`/addFollow/${state.profileData.profileUsername}`, { token: appState.user.token }, { CancelToken: request.token });
           setState(draft => {
@@ -82,6 +83,7 @@ function ProfilePage(props) {
     }
   }, [state.startFollowingRequestCount]);
 
+  // REMOVE FOLLOW
   useEffect(() => {
     if (state.stopFollowingRequestCount) {
       setState(draft => {
@@ -90,7 +92,7 @@ function ProfilePage(props) {
       // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
       const request = Axios.CancelToken.source();
 
-      (async function fetchDataByUsername() {
+      (async function removeFollow() {
         try {
           const response = await Axios.post(`/removeFollow/${state.profileData.profileUsername}`, { token: appState.user.token }, { CancelToken: request.token });
           setState(draft => {

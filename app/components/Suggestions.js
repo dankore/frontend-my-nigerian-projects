@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function Suggestions({ projects }) {
   projects = removeDupsInObject_Id(projects);
   projects = projects.slice(0, 6);
+  console.log(projects)
 
   return (
     <div className='shadow-sm max-w-2xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
