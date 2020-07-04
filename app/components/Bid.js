@@ -1,8 +1,7 @@
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function Bid({bids, projectId}) {
-
+function Bid({ bids, projectId }) {
   function bidItemsTotal(array) {
     return array.reduce((total, currentElem) => {
       const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
@@ -12,11 +11,12 @@ function Bid({bids, projectId}) {
 
   return (
     <div className='mb-4'>
-      <p className='px-2 text-lg leading-7 shadow-sm font-medium tracking-tight text-gray-900'>Bids:</p>
+      <p className='px-2 text-lg leading-7 shadow-sm font-medium tracking-tight text-gray-900'>Bids[{bids.length}]:</p>
       {bids?.length > 0 ? (
         bids.map((bid, index) => {
+          console.log({ bid });
           return (
-            <Link key={index} to={`/${projectId}/bid/${bid.id}`} className='flex flex-wrap shadow-md lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
+            <Link key={index} to={`/${projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow-sm lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
               <div className='flex items-center text-sm leading-5 mr-6'>
                 <i className='text-gray-700 fas fa-id-badge'></i>
                 <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
@@ -41,4 +41,4 @@ function Bid({bids, projectId}) {
   );
 }
 
-export default Bid
+export default Bid;
