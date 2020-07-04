@@ -1,7 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import DispatchContext from '../DispatchContext';
+import StateContext from '../StateContext';
 
 function SidebarLeft() {
+  const appDispatch = useContext(DispatchContext);
+  const appState = useContext(StateContext);
+
   return (
     <div className='hidden lg:block max-w-2xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
       <h2 className=' lg:rounded-t-lg text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Quick Links</h2>
@@ -33,6 +38,17 @@ function SidebarLeft() {
         <i className='fas fa-key mr-1 text-gray-600'></i>
         Change Password
       </Link>
+      {appState.loggedIn ? (
+        <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-gray-100' to='#'>
+          <i className='fas fa-key mr-1 text-gray-600'></i>
+          Logout
+        </Link>
+      ) : (
+        <Link className=' p-3 flex items-center hover:bg-gray-100' to='/login'>
+          <i className='fas fa-sign-in-alt mr-1 text-gray-600'></i>
+          login
+        </Link>
+      )}
     </div>
   );
 }
