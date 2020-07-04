@@ -17,6 +17,10 @@ function SidebarLeft() {
         <i className='fas fa-unlock-alt mr-1 text-gray-600'></i>
         Reset Password
       </Link>
+      <Link className=' p-3 flex items-center hover:bg-gray-100' to='/about'>
+        <i className='far fa-address-card mr-1 text-gray-600'></i>
+        About
+      </Link>
     </div>
   );
 }
