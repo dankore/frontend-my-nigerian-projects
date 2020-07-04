@@ -9,6 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../helpers/JSHelpers';
+import Bid from '../components/Bid';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -74,21 +75,6 @@ function ViewSingleProject(props) {
     }
   }
 
-  function bidItemsTotal(array) {
-    return array.reduce((total, currentElem) => {
-      const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
-      return total + currentTotal;
-    }, 0);
-  }
-
-  function whatBestDescribesYou(string) {
-    if (string == 'I will get someone else to do the work(contractor)') {
-      return 'I will get someone else to do the work';
-    } else {
-      return string;
-    }
-  }
-
   return (
     <Page margin='mx-2' title={project.title}>
       <div className='shadow-md my-6'>
@@ -127,46 +113,46 @@ function ViewSingleProject(props) {
           )}
         </div>
         <p className='pl-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
-          <div style={{overflowWrap: 'anywhere', minWidth: 0+'px'}} className='p-2 bg-white'>
-            <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
-          </div>
+        <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }} className='p-2 bg-white'>
+          <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
+        </div>
 
-          {/* PROFILE */}
-          <div className='bg-gray-700 py-2 rounded-b text-white'>
-            <div className='flex justify-center'>
-              <Link to={`/profile/${project.author.username}`}>
-                <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
-              </Link>
-            </div>
-            <div className='flex justify-center text-lg'>
-              <Link to={`/profile/${project.author.username}`}>
-                {project.author.firstName} {project.author.lastName}
-              </Link>
-            </div>
-            <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(project.author.userCreationDate)}</p>
-
-            <hr className='border-gray-400' />
-            <div className='flex justify-center flex-wrap text-xs px-2'>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-clock'></i>
-                <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
-              </div>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-envelope'></i>
-                <p className='ml-1'>{project.email}</p>
-              </div>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-phone'></i>
-                <p className='ml-1'>{project.phone}</p>
-              </div>
-              {project.updatedDate && (
-                <div className='flex items-center mr-3'>
-                  <i className='fas fa-pencil-alt'></i>
-                  <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(project.updatedDate)}</p>
-                </div>
-              )}
-            </div>
+        {/* PROFILE */}
+        <div className='bg-gray-700 py-2 rounded-b text-white'>
+          <div className='flex justify-center'>
+            <Link to={`/profile/${project.author.username}`}>
+              <img className='h-10 w-10 rounded-full' src={project.author.avatar} alt='Profile Pic' />
+            </Link>
           </div>
+          <div className='flex justify-center text-lg'>
+            <Link to={`/profile/${project.author.username}`}>
+              {project.author.firstName} {project.author.lastName}
+            </Link>
+          </div>
+          <p className='flex justify-center mb-2 text-xs'>Member since: {dateFormatted_Like_This_May_29_2020(project.author.userCreationDate)}</p>
+
+          <hr className='border-gray-400' />
+          <div className='flex justify-center flex-wrap text-xs px-2'>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-clock'></i>
+              <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
+            </div>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-envelope'></i>
+              <p className='ml-1'>{project.email}</p>
+            </div>
+            <div className='flex items-center mr-3'>
+              <i className='fas fa-phone'></i>
+              <p className='ml-1'>{project.phone}</p>
+            </div>
+            {project.updatedDate && (
+              <div className='flex items-center mr-3'>
+                <i className='fas fa-pencil-alt'></i>
+                <p className='ml-1'>Updated: {dateFormatted_Like_This_May_29_2020(project.updatedDate)}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
       {/* BIDS: DON'T ALLOW OWNERS OF A PROJECT TO ADD BID. HIDE BID BTN */}
       <div className='mt-8'>
@@ -212,33 +198,8 @@ function ViewSingleProject(props) {
           </>
         )}
 
-        <div className='mb-4'>
-          <p className='px-2 text-lg leading-7 shadow-sm font-medium tracking-tight text-gray-900'>Bids:</p>
-          {project.bids?.length > 0 ? (
-            project.bids.map((bid, index) => {
-              return (
-                <Link key={index} to={`/${id}/bid/${bid.id}`} className='flex flex-wrap shadow-md lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
-                  <div className='flex items-center text-sm leading-5 mr-6'>
-                    <i className='text-gray-700 fas fa-id-badge'></i>
-                    <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
-                  </div>
-
-                  <div className='flex items-center text-sm leading-5 mr-6'>
-                    <i className='text-gray-700 fas fa-money-bill-wave'></i>
-                    <p className='ml-1.5'>{new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</p>
-                  </div>
-
-                  <div className='flex items-center text-sm leading-5'>
-                    <i className='text-gray-700 fas fa-user-cog'></i>
-                    <p className='ml-1.5'>{bid.yearsOfExperience > 1 ? `${bid.yearsOfExperience} years` : `${bid.yearsOfExperience} year`} of experience </p>
-                  </div>
-                </Link>
-              );
-            })
-          ) : (
-            <div className='bg-white p-3 lg:rounded-lg shadow-sm'>No bids... yet.</div>
-          )}
-        </div>
+        {/* BIDS */}
+        <Bid bids={project.bids} projectId={id} />
       </div>
     </Page>
   );
