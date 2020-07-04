@@ -110,6 +110,10 @@ function CreateProject(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone must be only numbers.';
         }
+         if (action.value.length > 30) {
+           draft.phone.hasErrors = true;
+           draft.phone.message = 'Phone cannot exceed 30 characters.';
+         }
         return;
       case 'descriptionRules':
         if (!action.value.trim()) {
