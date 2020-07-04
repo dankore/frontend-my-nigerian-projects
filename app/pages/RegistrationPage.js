@@ -105,7 +105,7 @@ function RegistrationPage(props) {
         draft.email.value = action.value;
         return;
       case 'emailAfterDelay':
-        if (!/^\S+@\S+$/.test(draft.email.value)) {
+        if (!/^\S+@\S+$/.test(draft.email.value.trim())) {
           draft.email.hasErrors = true;
           draft.email.message = 'Please provide a valid email.';
         }
