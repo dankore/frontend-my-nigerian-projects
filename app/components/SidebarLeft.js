@@ -34,7 +34,7 @@ function SidebarLeft() {
         <i className='fas fa-user-cog mr-2 text-gray-600'></i>
         Edit Profile Info
       </Link>
-      <Link className=' p-3 flex items-center hover:bg-gray-100' to='/settings/change-account'>
+      <Link className=' p-3 flex items-center hover:bg-gray-100' to='/settings/change-password'>
         <i className='fas fa-key mr-2 text-gray-600'></i>
         Change Password
       </Link>
