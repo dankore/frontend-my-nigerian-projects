@@ -11,7 +11,7 @@ function About() {
       <div className='bg-white shadow-sm lg:rounded-lg py-6 px-4 sm:px-6 lg:px-8'>
         <div className='lg:text-center'>
           <p className='text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>Welcome</p>
-          <h3 className='mt-2 max-w-3xl text-2xl leading-8 font-semibold font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:text-4xl lg:leading-10 lg:mx-auto lg:text-center'>Get paid helping me with my projects in Nigeria</h3>
+          <h3 className='mt-2 max-w-3xl text-2xl leading-8 font-semibold font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:text-4xl lg:leading-10 lg:mx-auto lg:text-center'>Get paid helping me with my projects in Nigeria.</h3>
         </div>
 
         <div className='mt-8 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:mt-12'>
@@ -85,7 +85,7 @@ function About() {
                 <linearGradient id='linear-gradient-2' x1='186.69' y1='183.91' x2='308.98' y2='183.91' xlinkHref='#linear-gradient' />
                 <linearGradient id='linear-gradient-3' x1='241.09' y1='143.35' x2='241.67' y2='154.41' xlinkHref='#linear-gradient' />
               </defs>
-              <title>Saving 1</title>
+              <title>Save</title>
               <path d='M225.05,18.52c-25.4,1.56-51.15,5-74.29,15.64-20.69,9.5-38.5,24.38-54.34,40.74C81.89,89.9,68.59,106.62,61,126.08,54.9,141.89,52.74,159,47,175c-10.45,29-32.44,53.4-38.88,83.53a113.59,113.59,0,0,0-1.64,32.72c4.94,62.4,47.81,120.25,106.06,143.13,26.75,10.51,55.78,14,84.51,14.38,35.62.48,71.13-3.66,106.51-7.79,59.82-7,121.43-14.54,173.93-44.05,7.62-4.29,15.09-9.08,21-15.49,8.38-9,13.32-20.69,16.55-32.56a143.18,143.18,0,0,0-4-87c-7.39-19.76-19.3-38.4-20.81-59.44-1.6-22.31,8.74-43.49,14.63-65.07,5.12-18.76,6.07-43.56-6.13-60.16-8.71-11.85-25.63-15.93-38.66-21.06a554.65,554.65,0,0,0-149.37-36A543.51,543.51,0,0,0,225.05,18.52Z' transform='translate(-6 -17.51)' fill='#15b1d4' opacity='0.24' style={{ isolation: 'isolate' }} />
               <ellipse cx='250.76' cy='369.03' rx='102.14' ry='15.3' fill='url(#linear-gradient)' />
               <path d='M260.92,171.76h-9.49a107,107,0,0,0-107,107v9.49a107,107,0,0,0,107,107h9.49a107,107,0,0,0,107-107v-9.49A107,107,0,0,0,260.92,171.76ZM361.75,287.2A100.64,100.64,0,0,1,261.11,387.85h-8.9A100.64,100.64,0,0,1,151.56,287.2v-8.93A100.63,100.63,0,0,1,252.21,177.65h8.9A100.63,100.63,0,0,1,361.75,278.27Z' transform='translate(-6 -17.51)' fill='#15b1d4' />
@@ -198,7 +198,7 @@ function About() {
               <path d='M241.71,370.65l1.66-3a9.92,9.92,0,0,1-3.85-3.82l1.82-1.61a9.07,9.07,0,0,0,3.59,3.65c2.13,1.17,4.23.73,5.17-1s.3-3.3-1.42-5.41c-2.39-2.87-3.52-5.28-2.09-7.88s4.16-3.39,7.16-2.33l1.65-3,1.85,1-1.59,2.9a9.11,9.11,0,0,1,3.31,3.18l-1.83,1.56a8.21,8.21,0,0,0-3.21-3.08c-2.3-1.27-3.92-.37-4.57.82-.86,1.56-.18,2.94,1.83,5.44,2.38,2.95,3.08,5.36,1.62,8-1.3,2.36-4.15,3.66-7.51,2.48l-1.71,3.1Z' transform='translate(-6 -17.51)' fill='#f8c244' />
             </svg>
           </div>
-          <h3 className='max-w-3xl text-2xl leading-8 font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:leading-10 lg:mx-auto lg:text-center'>Its free to post projects.</h3>
+          <h3 className='max-w-3xl text-2xl leading-8 font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:leading-10 lg:mx-auto lg:text-center'>It's free to post projects.</h3>
         </div>
       </div>
     </Page>
