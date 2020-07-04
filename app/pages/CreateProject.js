@@ -68,6 +68,10 @@ function CreateProject(props) {
           draft.location.hasErrors = true;
           draft.location.message = 'Location cannot be empty.';
         }
+        if (action.value.length > 60) {
+          draft.location.hasErrors = true;
+          draft.location.message = 'Location cannot exceed 60 characters.';
+        }
         return;
       case 'dateNeedByUpdate':
         draft.bidSubmissionDeadline.hasErrors = false;
@@ -102,9 +106,9 @@ function CreateProject(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone cannot be empty';
         }
-        if(/[^\d]/.test(action.value.trim())){
-             draft.phone.hasErrors = true;
-             draft.phone.message = 'Phone must be only numbers.';
+        if (/[^\d]/.test(action.value.trim())) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone must be only numbers.';
         }
         return;
       case 'descriptionRules':
@@ -141,11 +145,11 @@ function CreateProject(props) {
     (async function fetchData() {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-        if(response.data){
+        if (response.data) {
           dispatch({ type: 'emailUpdate', value: response.data.email });
         } else {
           props.history.push('/');
-          appDispatch({type: 'flashMessageError', value: 'User does not exist.'})
+          appDispatch({ type: 'flashMessageError', value: 'User does not exist.' });
         }
       } catch (error) {
         console.log({ CreateProject: error.message });
