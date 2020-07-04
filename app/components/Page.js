@@ -7,7 +7,7 @@ function Page(props) {
   useEffect(() => {
     document.title = `${props.title} | My Nigerian Projects`;
     appDispatch({ type: 'alwaysCloseTheseMenus' });
-    document.getElementById('app').addEventListener('click', () => appDispatch({ type: 'alwaysCloseTheseMenus' }));
+    // document.getElementById('app').addEventListener('click', () => appDispatch({ type: 'alwaysCloseTheseMenus' }));
     window.scrollTo(0, 0);
   }, [props.title]);
 
