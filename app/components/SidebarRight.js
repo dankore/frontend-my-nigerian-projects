@@ -8,7 +8,7 @@ function SidebarRight({ projects }) {
 
   return (
     <div className='max-w-2xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
-      <h2 className='  lg:rounded-t-lg  text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Who to follow</h2>
+      <h2 className='border-b  lg:rounded-t-lg  text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Who to follow</h2>
       {projects?.map((project, index) => {
         return (
           <Link to={`/profile/${project.author.username}`} key={index} className=' p-3  flex items-center  hover:bg-gray-100'>
