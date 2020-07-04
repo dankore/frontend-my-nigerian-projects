@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import DispatchContext from '../DispatchContext';
 
 function Bid({ bids, projectId }) {
+  const appDispatch = useContext(DispatchContext);
   function bidItemsTotal(array) {
     return array.reduce((total, currentElem) => {
       const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
