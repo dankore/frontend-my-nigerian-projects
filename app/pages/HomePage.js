@@ -88,9 +88,11 @@ function HomePage() {
       (async function fetchDataByUsername() {
         try {
           const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-          setFollowingCount(draft => {
-            draft.followingCount = response.data.counts.followingCount;
-          });
+          if(response.data){
+            setFollowingCount(draft => {
+              draft.followingCount = response.data.counts.followingCount;
+            });
+          }
         } catch (error) {
           console.log('Fetching username failed.');
         }
