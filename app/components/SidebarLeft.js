@@ -40,7 +40,7 @@ function SidebarLeft() {
       </Link>
       {appState.loggedIn ? (
         <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-gray-100' to='#'>
-          <i className='fas fa-key mr-1 text-gray-600'></i>
+          <i className='fas fa-sign-out-alt mr-1 text-gray-600'></i>
           Logout
         </Link>
       ) : (
