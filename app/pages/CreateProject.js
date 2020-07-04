@@ -141,7 +141,12 @@ function CreateProject(props) {
     (async function fetchData() {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-        dispatch({ type: 'emailUpdate', value: response.data.email });
+        if(response.data){
+          dispatch({ type: 'emailUpdate', value: response.data.email });
+        } else {
+          props.history.push('/');
+          appDispatch({type: 'flashMessageError', value: 'User does not exist.'})
+        }
       } catch (error) {
         console.log({ CreateProject: error.message });
       }
