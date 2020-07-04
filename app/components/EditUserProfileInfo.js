@@ -162,8 +162,14 @@ function EditUserProfileInfo(props) {
     (async function fetchData() {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-        dispatch({ type: 'fetchDataComplete', value: response.data });
-        dispatch({ type: 'isLoadingFinished' });
+        if(response.data){
+          dispatch({ type: 'fetchDataComplete', value: response.data });
+          dispatch({ type: 'isLoadingFinished' });
+        } else {
+          props.history.push('/');
+          appDispatch({type: 'flashMessageError', value: 'User does not exist.'})
+        }
+        
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
       }
