@@ -37,6 +37,7 @@ const ViewSingleBid = lazy(() => import('./pages/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/LoadingDotsIcon';
 import ResetYourPassword from './pages/ResetYourPassword';
+import CookiesPage from './pages/CookiesPage';
 const AccountRecoveryEnterPassword = lazy(() => import('./pages/AccountRecoveryEnterPassword'));
 const EditBidPage = lazy(() => import('./pages/EditBidPage'));
 // COMPONENTS END
@@ -183,6 +184,9 @@ function Main() {
               </Route>
               <Route path='/about'>
                 <About />
+              </Route>
+              <Route path='/cookies'>
+                  <CookiesPage />
               </Route>
               <Route path='/terms'>
                 <Terms />
