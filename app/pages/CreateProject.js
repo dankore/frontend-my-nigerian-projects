@@ -72,6 +72,10 @@ function CreateProject(props) {
           draft.location.hasErrors = true;
           draft.location.message = 'Location cannot exceed 60 characters.';
         }
+        if (/[!@$%^&*(),?":{};\[\]|<>]/.test(action.value.trim())) {
+          draft.location.hasErrors = true;
+          draft.location.message = 'Location cannot contain any of these characters (!@$%^&*(),?":{};|<>[]]).';
+        }
         return;
       case 'dateNeedByUpdate':
         draft.bidSubmissionDeadline.hasErrors = false;
