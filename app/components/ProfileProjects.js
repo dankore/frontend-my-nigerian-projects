@@ -4,24 +4,37 @@ import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
 import Project from './Project';
 import StateContext from '../StateContext';
-import Pagination from './Pagination';
-import NotFoundPage from '../pages/NotFoundPage';
+import { useImmer } from 'use-immer';
+import ReactPaginate from 'react-paginate';
 
 function ProfileProjects() {
   const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [projects, setProjects] = useState([]);
-  //PAGINATION STARTS
-  const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage] = useState(3);
+  const [projects, setProjects] = useImmer({
+    feed: [],
+    offset: 0,
+    elements: [],
+    perPage: 2,
+    currentPage: 0,
+  });
 
+  //PAGINATION STARTS
   // GET CURRENT PROJECT
-  const indexOfLastProject = currentPage * projectsPerPage;
-  const indexOfFirstPost = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstPost, indexOfLastProject) 
- // CHANGE PAGE
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  // const projects_all_current = allProjects.feed.slice(allProjects.offset, allProjects.offset + allProjects.perPage);
+  const current_projects = projects.feed.slice(projects.offset, projects.offset + projects.perPage);
+
+  // CHANGE PAGE
+  function handleProjectsPagination(e) {
+    const selectedPage = e.selected;
+    const offset = selectedPage * projects.perPage;
+
+    setProjects(draft => {
+      draft.currentPage = selectedPage;
+      draft.offset = offset;
+    });
+  }
+
   // PAGINATION ENDS
 
   useEffect(() => {
@@ -31,9 +44,13 @@ function ProfileProjects() {
         const response = await Axios.get(`/profile/${username}/projects`, {
           cancelToken: request.token,
         });
+
         setIsLoading(false);
-        if(response.data){
-            setProjects(response.data);
+        if (response.data) {
+          setProjects(draft => {
+            draft.feed = response.data;
+            draft.pageCount = Math.ceil(response.data.length / projects.perPage);
+          });
         }
       } catch (error) {
         console.log('Problem with fetching projects.');
@@ -63,17 +80,13 @@ function ProfileProjects() {
 
   return (
     <div>
-      {projects.length > 0 ? (
-       <>
-        {currentProjects.map(project => {
-          return <Project project={project} key={project._id} />;
-        })}
-         <Pagination
-            projectsPerPage={projectsPerPage}
-            totalProjects={projects.length}
-            paginate={paginate}
-        />
-       </>
+      {projects.feed.length > 0 ? (
+        <>
+          {current_projects.map(project => {
+            return <Project project={project} key={project._id} />;
+          })}
+          <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />
+        </>
       ) : (
         <p className='p-3 shadow-sm lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
       )}
