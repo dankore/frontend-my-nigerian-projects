@@ -86,6 +86,10 @@ function RegistrationPage(props) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name field cannot be empty.';
         }
+         if (/[^a-zA-Z]/.test(draft.firstName.value.trim())) {
+          draft.firstName.hasErrors = true;
+          draft.firstName.message = 'First name can only be letters.';
+        }
         return;
       // LAST NAME
       case 'lastnameImmediately':
@@ -95,6 +99,10 @@ function RegistrationPage(props) {
         if (draft.lastName.value.length == '') {
           draft.lastName.hasErrors = true;
           draft.lastName.message = 'Last name field cannot be empty.';
+        }
+        if (/[^a-zA-Z]/.test(draft.lastName.value.trim())) {
+           draft.lastName.hasErrors = true;
+          draft.lastName.message = 'First name can only be letters.';
         }
         return;
       case 'lastnameAfterDelay':
