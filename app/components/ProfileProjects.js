@@ -15,13 +15,12 @@ function ProfileProjects() {
     feed: [],
     offset: 0,
     elements: [],
-    perPage: 2,
+    perPage: 4,
     currentPage: 0,
   });
 
   //PAGINATION STARTS
   // GET CURRENT PROJECT
-  // const projects_all_current = allProjects.feed.slice(allProjects.offset, allProjects.offset + allProjects.perPage);
   const current_projects = projects.feed.slice(projects.offset, projects.offset + projects.perPage);
 
   // CHANGE PAGE
