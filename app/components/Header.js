@@ -10,6 +10,11 @@ function Header() {
   const appState = useContext(StateContext);
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
+  function handleLogout(){
+    appDispatch({ type: 'toggleSideMenu' })
+    appDispatch({ type: 'logout' })
+  }
+
   return (
     <header className='bg-blue-600 shadow-lg'>
       <nav className={`flex items-center justify-between lg:max-w-2xl lg:mx-auto ${appState && appState.loggedIn ? ' ' : ''}`}>
@@ -35,7 +40,7 @@ function Header() {
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
             {appState && appState.isSideMenuOpen && (<div style={{ zIndex: 1 }} className='block absolute w-full h-screen bg-blue-600 text-white shadow-lg lg:hidden lg:rounded-lg'>
-            <div className='hover:border-r-8 hover:border-gray-600 text-white'>
+            <div className='text-white'>
                 <Link className='p-3 flex items-center hover:bg-blue-800' to='/about'>
                 <i className='far fa-address-card mr-2'></i>
                 About
@@ -44,28 +49,28 @@ function Header() {
                 <i className='fas fa-file-contract mr-2'></i>
                 How To Bid
                 </Link>
-                <Link style={{color: '#CE7D31'}}className='p-3 flex items-center  hover:bg-blue-800' to='/create-project'>
-                <i className='fas fa-plus mr-2'></i>
+                <Link className='p-3 flex items-center  hover:bg-blue-800' to='/create-project'>
+                <i className='fas fa-plus mr-2 text-red-500'></i>
                 Create Project
                 </Link>
-                <Link className=' p-3 flex items-center hover:bg-blue-800' to='/reset-password'>
+                <Link className='p-3 flex items-center hover:bg-blue-800' to='/reset-password'>
                 <i className='fas fa-unlock-alt mr-2'></i>
                 Reset Password
                 </Link>
-                <Link className='p-3 flex items-center hover:bg-blue-800' to='/settings/delete-account'>
+                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-3 flex items-center hover:bg-blue-800' to='/settings/delete-account'>
                 <i className='fas fa-user-minus mr-2'></i>
                 Delete Account
                 </Link>
-                <Link className=' p-3 flex items-center hover:bg-blue-800' to='/settings'>
+                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className=' p-3 flex items-center hover:bg-blue-800' to='/settings'>
                 <i className='fas fa-user-cog mr-2'></i>
                 Edit Profile Info
                 </Link>
-                <Link className='p-3 flex items-center hover:bg-blue-800' to='/settings/change-password'>
+                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-3 flex items-center hover:bg-blue-800' to='/settings/change-password'>
                 <i className='fas fa-key mr-2'></i>
                 Change Password
                 </Link>
                 {appState.loggedIn ? (
-                <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-blue-800' to='#'>
+                <Link onClick={handleLogout} className=' p-3 flex items-center hover:bg-blue-800' to='#'>
                     <i className='fas fa-sign-out-alt mr-2'></i>
                     Logout
                 </Link>
