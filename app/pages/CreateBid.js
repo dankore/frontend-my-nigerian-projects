@@ -8,8 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
-import  JSHelpers  from '../helpers/JSHelpers';
-
+import JSHelpers from '../helpers/JSHelpers';
 
 function CreateBid(props) {
   const appState = useContext(StateContext);
@@ -88,31 +87,31 @@ function CreateBid(props) {
           draft.yearsOfExperience.hasErrors = true;
           draft.yearsOfExperience.message = 'Years of experience required.';
         }
-         if (draft.yearsOfExperience.value > 100) {
+        if (draft.yearsOfExperience.value > 100) {
           draft.yearsOfExperience.hasErrors = true;
           draft.yearsOfExperience.message = 'Years of experience cannot exceed 100 years.';
         }
         return;
       case 'itemNameUpdate':
-        if(action.value.length > 100){
-            draft.item.name = 'Item name cannot exceed 100 chatacters. Please delete this entry.'
-         } else {
-            draft.item.name = action.value;
-         }
+        if (action.value.length > 100) {
+          draft.item.name = 'Item name cannot exceed 100 chatacters. Please delete this entry.';
+        } else {
+          draft.item.name = action.value;
+        }
         return;
       case 'quantityUpdate':
-          if(action.value > Number.MAX_SAFE_INTEGER ){
-            draft.item.quantity = 'Quantity name cannot exceed 9007199254740991. Please delete this entry.'
-         } else {
-            draft.item.quantity = action.value;
-         }
+        if (action.value > Number.MAX_SAFE_INTEGER) {
+          draft.item.quantity = 'Quantity name cannot exceed 9007199254740991. Please delete this entry.';
+        } else {
+          draft.item.quantity = action.value;
+        }
         return;
       case 'pricePerItemUpdate':
-           if(action.value > Number.MAX_SAFE_INTEGER ){
-            draft.item.price_per_item = 'Price per item name cannot exceed 9007199254740991. Please delete this entry.'
-         } else {
-            draft.item.price_per_item = action.value;
-         }
+        if (action.value > Number.MAX_SAFE_INTEGER) {
+          draft.item.price_per_item = 'Price per item name cannot exceed 9007199254740991. Please delete this entry.';
+        } else {
+          draft.item.price_per_item = action.value;
+        }
         return;
       case 'totalUpdate':
         draft.itemTotal = action.value;
@@ -134,14 +133,14 @@ function CreateBid(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone cannot be empty';
         }
-        if(/[^\d]/.test(action.value.trim())){
-             draft.phone.hasErrors = true;
-             draft.phone.message = 'Phone must be only numbers.';
+        if (/[^\d]/.test(action.value.trim())) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone must be only numbers.';
         }
         if (action.value.length > 30) {
-           draft.phone.hasErrors = true;
-           draft.phone.message = 'Phone cannot exceed 30 characters.';
-         }
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone cannot exceed 30 characters.';
+        }
         return;
       case 'emailUpdate':
         draft.email.hasErrors = false;
@@ -153,7 +152,7 @@ function CreateBid(props) {
           draft.email.message = 'Email cannot be empty';
         }
         return;
-    case 'emailAfterDelay':
+      case 'emailAfterDelay':
         if (!/^\S+@\S+$/.test(draft.email.value)) {
           draft.email.hasErrors = true;
           draft.email.message = 'Please provide a valid email.';
@@ -263,7 +262,7 @@ function CreateBid(props) {
     dispatch({ type: 'yearsExperienceUpdateRules', value: state.yearsOfExperience.value });
     dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'emailRules', value: state.email.value });
-    dispatch({ type: 'emailAfterDelay', value: state.email.value});
+    dispatch({ type: 'emailAfterDelay', value: state.email.value });
     dispatch({ type: 'submitForm' });
   }
 
@@ -287,157 +286,159 @@ function CreateBid(props) {
 
   return (
     <Page margin='mx-2' wide={true} title='Create Bid'>
-      <div className='flex justify-center text-blue-600'>
-        <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-          <line x1='12' y1='5' x2='12' y2='19'></line>
-          <line x1='5' y1='12' x2='19' y2='12'></line>
-        </svg>
-      </div>
-      <p className='text-xl font-semibold text-center leading-tight'>Create New Bid For:</p>
-      <h2 className='text-center px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
-        <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
-          {state.project.title}
-        </Link>
-      </h2>
-      <form onSubmit={handleSubmitBid}>
-        <div className='border border-gray-200 bg-white p-3 shadow-sm lg:rounded-lg'>
-          {/* WHAT BEST DESCRIBES YOU */}
-          <div className='mb-4'>
-            <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
-              What best describes you? <span className='text-red-600'>*</span>
-            </label>
-            <span className='relative inline-block'>
-              <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
-                <option></option>
-                <option>I will get someone else to do the work(contractor)</option>
-                <option>I will do the work myself</option>
-              </select>
-              <CSSTransition in={state.whatBestDescribesYou.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
-                <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.whatBestDescribesYou.message}
+      <div className='-mt-6'>
+        <div className='flex justify-center text-blue-600'>
+          <svg className='w-12' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <line x1='12' y1='5' x2='12' y2='19'></line>
+            <line x1='5' y1='12' x2='19' y2='12'></line>
+          </svg>
+        </div>
+        <p className='text-xl font-semibold text-center leading-tight'>Create New Bid For:</p>
+        <h2 className='text-center px-2 mb-8 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
+          <Link to={`/project/${state.projectId}`} className='underline hover:text-blue-600'>
+            {state.project.title}
+          </Link>
+        </h2>
+        <form onSubmit={handleSubmitBid}>
+          <div className='border border-gray-200 bg-white p-3 shadow-sm lg:rounded-lg'>
+            {/* WHAT BEST DESCRIBES YOU */}
+            <div className='mb-4'>
+              <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
+                What best describes you? <span className='text-red-600'>*</span>
+              </label>
+              <span className='relative inline-block'>
+                <select onChange={e => dispatch({ type: 'whatBestDescribesYou', value: e.target.value })} className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto cursor-pointer'} id='as-what'>
+                  <option></option>
+                  <option>I will get someone else to do the work(contractor)</option>
+                  <option>I will do the work myself</option>
+                </select>
+                <CSSTransition in={state.whatBestDescribesYou.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
+                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                    {state.whatBestDescribesYou.message}
+                  </div>
+                </CSSTransition>
+              </span>
+            </div>
+            <div className='mb-4 lg:flex lg:items-center'>
+              <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
+                Years of experience in this field <span className='text-red-600'>*</span>
+              </label>
+              <span className='relative inline-block'>
+                <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
+                <CSSTransition in={state.yearsOfExperience.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
+                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                    {state.yearsOfExperience.message}
+                  </div>
+                </CSSTransition>
+              </span>
+            </div>
+            {/* ITEMIZE LIST */}
+            <div className='mb-4 relative'>
+              <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
+                Itemize Lists <span className='text-red-600'>*</span>
+              </p>
+              <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
+                <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
+                  <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
+                  <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium uppercase tracking-wider'>Delete</p>
                 </div>
-              </CSSTransition>
-            </span>
-          </div>
-          <div className='mb-4 lg:flex lg:items-center'>
-            <label htmlFor='yearsExperience' className='text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 lg:mr-2'>
-              Years of experience in this field <span className='text-red-600'>*</span>
-            </label>
-            <span className='relative inline-block'>
-              <input onChange={e => dispatch({ type: 'yearsExperienceUpdate', value: e.target.value })} id='yearsExperience' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + ' w-full lg:w-auto'} />
-              <CSSTransition in={state.yearsOfExperience.hasErrors} timeout={330} className='liveValidateMessage -mt-6' unmountOnExit>
-                <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                  {state.yearsOfExperience.message}
-                </div>
-              </CSSTransition>
-            </span>
-          </div>
-          {/* ITEMIZE LIST */}
-          <div className='mb-4 relative'>
-            <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
-              Itemize Lists <span className='text-red-600'>*</span>
-            </p>
-            <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
-              <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Price Per Item</p>
-                <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Total</p>
-                <p className='text-red-400 border-b border-gray-200 text-left text-xs leading-4 font-medium uppercase tracking-wider'>Delete</p>
+                {state.items.map(itemHtmlTemplate)}
               </div>
-              {state.items.map(itemHtmlTemplate)}
+              <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
             </div>
-            <div className='flex justify-end pr-1 text-lg leading-7 font-medium tracking-tight text-gray-900'>Grand Total: {new Intl.NumberFormat().format(state.itemTotal)}</div>
-          </div>
-          {/* ADD ITEM */}
-          {/* TOGGLE */}
-          <div className='flex justify-end'>
-            <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='-mb-3 bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
-              <i className='fas fa-plus mr-1'></i>
-              {state.openAddItem ? 'Close' : 'Open to Add Item'}
+            {/* ADD ITEM */}
+            {/* TOGGLE */}
+            <div className='flex justify-end'>
+              <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='-mb-3 bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
+                <i className='fas fa-plus mr-1'></i>
+                {state.openAddItem ? 'Close' : 'Open to Add Item'}
+              </div>
             </div>
-          </div>
-          {/* INPUTS */}
-          {state.openAddItem && (
+            {/* INPUTS */}
+            {state.openAddItem && (
+              <fieldset className='border rounded p-2 mb-4'>
+                <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item:</legend>
+                <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
+                  <div className='mb-4 relative lg:mr-2'>
+                    <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                      Item Name <span className='text-red-600'>*</span>
+                    </label>
+                    <input onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  </div>
+
+                  <div className='mb-4 relative lg:mx-2'>
+                    <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                      Quantity <span className='text-red-600'>*</span>
+                    </label>
+                    <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  </div>
+
+                  <div className='mb-4 relative lg:mx-2'>
+                    <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                      Price per Item <span className='text-red-600'>*</span>
+                    </label>
+                    <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  </div>
+                </div>
+                <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
+                  Add Item
+                </div>
+              </fieldset>
+            )}
+            {/* OTHER DETAILS */}
+            <div className='my-4 relative'>
+              <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+              <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
+            </div>
+            {/* CONTACT */}
             <fieldset className='border rounded p-2 mb-4'>
-              <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item:</legend>
-              <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
-                <div className='mb-4 relative lg:mr-2'>
-                  <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                    Item Name <span className='text-red-600'>*</span>
+              <legend className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Contact:</legend>
+              <div className='lg:w-auto lg:flex justify-between'>
+                <div className='mb-4 lg:mb-0 relative'>
+                  <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                    Email <span className='text-red-600'>*</span>
                   </label>
-                  <input onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  <input onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} value={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                  <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                    <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                      {state.email.message}
+                    </div>
+                  </CSSTransition>{' '}
                 </div>
-
-                <div className='mb-4 relative lg:mx-2'>
-                  <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                    Quantity <span className='text-red-600'>*</span>
+                <div className='relative'>
+                  <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
+                    Phone Number <span className='text-red-600'>*</span>
                   </label>
-                  <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  <input onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
+                  <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                    <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                      {state.phone.message}
+                    </div>
+                  </CSSTransition>{' '}
                 </div>
-
-                <div className='mb-4 relative lg:mx-2'>
-                  <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                    Price per Item <span className='text-red-600'>*</span>
-                  </label>
-                  <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
-                </div>
-              </div>
-              <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
-                Add Item
               </div>
             </fieldset>
-          )}
-          {/* OTHER DETAILS */}
-          <div className='my-4 relative'>
-            <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
-            <textarea onChange={e => dispatch({ type: 'otherDetails', value: e.target.value })} name='other-details' id='other-details' rows='6' className={inputTextAreaCSS + 'w-full'}></textarea>
+            {JSHelpers.daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
+              <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                  <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+                </svg>
+                Submit bid
+              </button>
+            ) : (
+              <div className='flex justify-end'>
+                <div className='cursor-pointer w-full inline-flex items-center justify-center text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
+                  <i className='fas fa-stop-circle mr-1'></i>
+                  Bidding Closed
+                </div>
+              </div>
+            )}
           </div>
-          {/* CONTACT */}
-          <fieldset className='border rounded p-2 mb-4'>
-            <legend className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Contact:</legend>
-            <div className='lg:w-auto lg:flex justify-between'>
-              <div className='mb-4 lg:mb-0 relative'>
-                <label htmlFor='email' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                  Email <span className='text-red-600'>*</span>
-                </label>
-                <input onChange={e => dispatch({ type: 'emailUpdate', value: e.target.value })} value={state.email.value} id='email' type='text' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
-                <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                    {state.email.message}
-                  </div>
-                </CSSTransition>{' '}
-              </div>
-              <div className='relative'>
-                <label htmlFor='phone' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-                  Phone Number <span className='text-red-600'>*</span>
-                </label>
-                <input onChange={e => dispatch({ type: 'phoneUpdate', value: e.target.value })} id='phone' type='tel' autoComplete='off' className={inputTextAreaCSS + 'w-full lg:w-auto'} />
-                <CSSTransition in={state.phone.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-                  <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                    {state.phone.message}
-                  </div>
-                </CSSTransition>{' '}
-              </div>
-            </div>
-          </fieldset>
-          {JSHelpers.daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
-            <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-                <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
-              </svg>
-              Submit bid
-            </button>
-          ) : (
-            <div className='flex justify-end'>
-              <div className='cursor-pointer w-full inline-flex items-center justify-center text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
-                <i className='fas fa-stop-circle mr-1'></i>
-                Bidding Closed
-              </div>
-            </div>
-          )}
-        </div>
-      </form>
+        </form>
+      </div>
     </Page>
   );
 }
