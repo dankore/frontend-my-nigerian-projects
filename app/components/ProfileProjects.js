@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
@@ -10,8 +10,8 @@ import ReactPaginate from 'react-paginate';
 function ProfileProjects() {
   const appState = useContext(StateContext);
   const { username } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useImmer({
+    isLoading: true, 
     feed: [],
     offset: 0,
     elements: [],
@@ -21,7 +21,7 @@ function ProfileProjects() {
 
   //PAGINATION STARTS
   // GET CURRENT PROJECT
-  const current_projects = projects.feed.slice(projects.offset, projects.offset + projects.perPage);
+  const current_paginated_projects = projects.feed.slice(projects.offset, projects.offset + projects.perPage);
 
   // CHANGE PAGE
   function handleProjectsPagination(e) {
@@ -43,8 +43,7 @@ function ProfileProjects() {
         const response = await Axios.get(`/profile/${username}/projects`, {
           cancelToken: request.token,
         });
-
-        setIsLoading(false);
+        setProjects( draft => {draft.isLoading = false})
         if (response.data) {
           setProjects(draft => {
             draft.feed = response.data;
@@ -73,7 +72,7 @@ function ProfileProjects() {
     }
   }
 
-  if (isLoading) {
+  if (projects.isLoading) {
     return <LoadingDotsIcon />;
   }
 
@@ -81,7 +80,7 @@ function ProfileProjects() {
     <div>
       {projects.feed.length > 0 ? (
         <>
-          {current_projects.map(project => {
+          {current_paginated_projects.map(project => {
             return <Project project={project} key={project._id} />;
           })}
           <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />

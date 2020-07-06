@@ -34,8 +34,8 @@ function HomePage() {
   });
 
   // NEW PAGINATION
-  const projects_all_current = allProjects.feed.slice(allProjects.offset, allProjects.offset + allProjects.perPage);
-  const projects_those_i_follow_current = projectsThoseIFollow.feed.slice(projectsThoseIFollow.offset, projectsThoseIFollow.offset + projectsThoseIFollow.perPage);
+  const current_paginated_projects = allProjects.feed.slice(allProjects.offset, allProjects.offset + allProjects.perPage);
+  const current_paginated_projects_those_i_follow = projectsThoseIFollow.feed.slice(projectsThoseIFollow.offset, projectsThoseIFollow.offset + projectsThoseIFollow.perPage);
 
   function handleAllProjectsPagination(e) {
     const selectedPage = e.selected;
@@ -157,7 +157,7 @@ function HomePage() {
             <Route exact path='/browse'>
               {allProjects.feed.length > 0 ? (
                 <>
-                  {projects_all_current.map(project => {
+                  {current_paginated_projects.map(project => {
                     return <Project project={project} key={project._id} />;
                   })}
                   <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={allProjects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAllProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />
@@ -169,7 +169,7 @@ function HomePage() {
             <Route path='/browse/those-i-follow'>
               {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
                 <>
-                  {projects_those_i_follow_current.map(project => {
+                  {current_paginated_projects_those_i_follow.map(project => {
                     return <Project project={project} key={project._id} />;
                   })}
                   <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projectsThoseIFollow.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAThoseIFollowProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />
