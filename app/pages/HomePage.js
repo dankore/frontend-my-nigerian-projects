@@ -152,7 +152,7 @@ function HomePage() {
       </div>
       <div className='lg:grid lg:grid-cols-3'>
         <SidebarLeft />
-        <Page margin='mx-2' title='Browse'>
+        <Page margin='mx-2' title='Browse All'>
           <Switch>
             <Route exact path='/browse'>
               {allProjects.feed.length > 0 ? (
