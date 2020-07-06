@@ -7,7 +7,7 @@ function SidebarRight({ projects }) {
   projects = projects.slice(0, 6);
 
   return (
-    <div className='max-w-2xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
+    <div className='max-w-xl mx-auto lg:w-3/4 lg:ml-16 lg:rounded-lg mt-10'>
       <h2 className='border-b  lg:rounded-t-lg  text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Who to follow</h2>
       {projects?.map((project, index) => {
         return (
