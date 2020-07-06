@@ -86,7 +86,7 @@ function RegistrationPage(props) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name field cannot be empty.';
         }
-         if (/[^a-zA-Z]/.test(draft.firstName.value.trim())) {
+        if (/[^a-zA-Z]/.test(draft.firstName.value.trim())) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name can only be letters.';
         }
@@ -101,7 +101,7 @@ function RegistrationPage(props) {
           draft.lastName.message = 'Last name field cannot be empty.';
         }
         if (/[^a-zA-Z]/.test(draft.lastName.value.trim())) {
-           draft.lastName.hasErrors = true;
+          draft.lastName.hasErrors = true;
           draft.lastName.message = 'First name can only be letters.';
         }
         return;
@@ -282,88 +282,90 @@ function RegistrationPage(props) {
 
   return (
     <Page title='Registration'>
-      <div className='flex justify-center text-blue-600'>
-        <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
-          <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
-        </svg>
-      </div>
-
-      <p className='text-2xl font-semibold text-center leading-tight mt-3'>Create Your My Nigerian Projects Account</p>
-      <p className='text-center mb-8'>Get paid helping me with my projects in Nigeria</p>
-      <form onSubmit={handleSubmit} className='mx-auto shadow-sm lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
-        <div className='flex flex-wrap -mx-3 mt-1'>
-          <div className='relative w-full px-3 mb-3'>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
-              Username <span className='text-red-600'>*</span>
-            </label>
-            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
-            <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.username.message}
-              </div>
-            </CSSTransition>
-          </div>
-          <div className='relative w-full px-3 mb-3'>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='first-name'>
-              First Name <span className='text-red-600'>*</span>
-            </label>
-            <input onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
-            <CSSTransition in={state.firstName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.firstName.message}
-              </div>
-            </CSSTransition>
-          </div>
-          <div className='relative w-full px-3 mb-3'>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='last-name'>
-              Last Name <span className='text-red-600'>*</span>
-            </label>
-            <input onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='off' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
-            <CSSTransition in={state.lastName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.lastName.message}
-              </div>
-            </CSSTransition>
-          </div>
-          <div className='relative w-full px-3 mb-3'>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='email'>
-              Email <span className='text-red-600'>*</span>
-            </label>
-            <input onChange={e => dispatch({ type: 'emailImmediately', value: e.target.value })} id='email' autoComplete='off' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='email' type='text' />
-            <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.email.message}
-              </div>
-            </CSSTransition>
-          </div>
-          <div className='relative w-full px-3'>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='password'>
-              password <span className='text-red-600'>*</span>
-            </label>
-            <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='password' type='password' autoComplete='new-password' />
-            <p className='text-red-300 text-xs mt-1 italic'>Password should be a minimum of 6 characters</p>
-            <CSSTransition in={state.password.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
-              <div style={CSSTransitionStyle} className='liveValidateMessage'>
-                {state.password.message}
-              </div>
-            </CSSTransition>
-          </div>
-          <button type='submit' className='mx-2 mt-2 relative w-full justify-center inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-              <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-                <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
-              </svg>
-            </span>
-            {state.isCreating ? 'Creating...' : 'Create Account'}
-          </button>
-          <div className='text-xs mt-1 flex justify-center w-full'>
-            <p>By clicking Create Account, you agree to the</p>
-            <Link to='/terms' className='text-blue-600 ml-1' rel='nofollow'>
-              Terms of Use
-            </Link>
-          </div>
+      <div className='-mt-6'>
+        <div className='flex justify-center text-blue-600'>
+          <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
+            <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
+          </svg>
         </div>
-      </form>
+
+        <p className='text-2xl font-semibold text-center leading-tight mt-3'>Create Your My Nigerian Projects Account</p>
+        <p className='text-center mb-8'>Get paid helping me with my projects in Nigeria</p>
+        <form onSubmit={handleSubmit} className='mx-auto shadow-sm lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
+          <div className='flex flex-wrap -mx-3 mt-1'>
+            <div className='relative w-full px-3 mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>
+                Username <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' autoComplete='off' spellCheck='false' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='username' type='text' />
+              <CSSTransition in={state.username.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.username.message}
+                </div>
+              </CSSTransition>
+            </div>
+            <div className='relative w-full px-3 mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='first-name'>
+                First Name <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'firstnameImmediately', value: e.target.value })} id='first-name' autoComplete='off' spellCheck='false' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' id='first-name' type='text' />
+              <CSSTransition in={state.firstName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.firstName.message}
+                </div>
+              </CSSTransition>
+            </div>
+            <div className='relative w-full px-3 mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='last-name'>
+                Last Name <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'lastnameImmediately', value: e.target.value })} id='last-name' autoComplete='off' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='last-name' type='text' />
+              <CSSTransition in={state.lastName.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.lastName.message}
+                </div>
+              </CSSTransition>
+            </div>
+            <div className='relative w-full px-3 mb-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='email'>
+                Email <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'emailImmediately', value: e.target.value })} id='email' autoComplete='off' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='email' type='text' />
+              <CSSTransition in={state.email.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.email.message}
+                </div>
+              </CSSTransition>
+            </div>
+            <div className='relative w-full px-3'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='password'>
+                password <span className='text-red-600'>*</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' className='appearance-none block w-full shadow-inner bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='password' type='password' autoComplete='new-password' />
+              <p className='text-red-300 text-xs mt-1 italic'>Password should be a minimum of 6 characters</p>
+              <CSSTransition in={state.password.hasErrors} timeout={330} className='liveValidateMessage' unmountOnExit>
+                <div style={CSSTransitionStyle} className='liveValidateMessage'>
+                  {state.password.message}
+                </div>
+              </CSSTransition>
+            </div>
+            <button type='submit' className='mx-2 mt-2 relative w-full justify-center inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
+                <svg className='h-5 w-5 text-blue-500  transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                  <path d='M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z'></path>
+                </svg>
+              </span>
+              {state.isCreating ? 'Creating...' : 'Create Account'}
+            </button>
+            <div className='text-xs mt-1 flex justify-center w-full'>
+              <p>By clicking Create Account, you agree to the</p>
+              <Link to='/terms' className='text-blue-600 ml-1' rel='nofollow'>
+                Terms of Use
+              </Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </Page>
   );
 }
