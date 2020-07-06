@@ -168,19 +168,24 @@ function ProfilePage(props) {
       </div>
 
       {/* PAGE */}
-      <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
-        <Switch>
-          <Route exact path='/profile/:username'>
+
+      <Switch>
+        <Route exact path='/profile/:username'>
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`}>
             <ProfileProjects />
+            </Page>
           </Route>
           <Route path='/profile/:username/followers'>
-            <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
+            <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
+              <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
+            </Page>
           </Route>
           <Route path='/profile/:username/following'>
+            <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
+            </Page>
           </Route>
         </Switch>
-      </Page>
     </>
   );
 }
