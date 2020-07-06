@@ -152,9 +152,10 @@ function HomePage() {
       </div>
       <div className='lg:grid lg:grid-cols-3'>
         <SidebarLeft />
-        <Page margin='mx-2' title='Browse All'>
-          <Switch>
-            <Route exact path='/browse'>
+
+        <Switch>
+          <Route exact path='/browse'>
+            <Page margin='mx-2' title='Browse All Projects'>
               {allProjects.feed.length > 0 ? (
                 <>
                   {current_paginated_projects.map(project => {
@@ -165,8 +166,10 @@ function HomePage() {
               ) : (
                 <h2 className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</h2>
               )}
-            </Route>
-            <Route path='/browse/those-i-follow'>
+            </Page>
+          </Route>
+          <Route path='/browse/those-i-follow'>
+            <Page margin='mx-2' title='Projects from Follows'>
               {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
                 <>
                   {current_paginated_projects_those_i_follow.map(project => {
@@ -188,9 +191,9 @@ function HomePage() {
                   Login to View Projects
                 </Link>
               )}
-            </Route>
-          </Switch>
-        </Page>
+            </Page>
+          </Route>
+        </Switch>
         <SidebarRight projects={allProjects.feed} />
       </div>
     </div>
