@@ -313,7 +313,7 @@ function EditBidPage(props) {
             <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
               Itemize Lists <span className='text-red-600'>*</span>
             </p>
-            <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem' }}>
+            <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem', overflowWrap: 'anywhere', minWidth: 0 + 'px' }}>
               <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>

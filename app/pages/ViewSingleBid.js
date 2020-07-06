@@ -192,7 +192,7 @@ function ViewSingleBid(props) {
         {bidHasItems && (
           <>
             <p className='ml-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Itemize Lists:</p>
-            <div style={{ minHeight: 4 + 'rem' }}>
+            <div style={{ minHeight: 4 + 'rem', overflowWrap: 'anywhere', minWidth: 0 + 'px' }}>
               <div className='flex p-2 bg-gray-700 text-white justify-between'>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Quantity</p>
@@ -207,7 +207,7 @@ function ViewSingleBid(props) {
 
         {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
         {state.projectAndBid.bid.otherDetails && (
-          <div style={{overflowWrap: 'anywhere', minWidth: 0+'px'}}>
+          <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }}>
             <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
             <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
