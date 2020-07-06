@@ -8,7 +8,7 @@ function HeaderLoggedOut() {
         <i className='fas fa-plus mr-1'></i>
         Register
       </Link>
-      <Link className='flex items-center hover:text-gray-400' to='/login'>
+      <Link className='flex items-center pr-1 hover:text-gray-400' to='/login'>
         <span className='text-3xl'>
           <i className='far fa-user-circle'></i>
         </span>
