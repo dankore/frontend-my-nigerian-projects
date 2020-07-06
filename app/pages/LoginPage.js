@@ -73,7 +73,7 @@ function LoginPage(props) {
             dispatch({ type: 'isLoggingInFinished' });
             appDispatch({ type: 'login', data: response.data });
             props.history.push('/browse');
-            appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
+            // appDispatch({ type: 'flashMessage', value: 'Logged In Successfully!' });
           } else {
             dispatch({ type: 'isLoggingInFinished' });
             appDispatch({ type: 'flashMessageError', value: 'Invalid username / password.' });

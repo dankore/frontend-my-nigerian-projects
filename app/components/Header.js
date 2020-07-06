@@ -39,7 +39,7 @@ function Header() {
             )}
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
-            {appState && appState.isSideMenuOpen && (<div style={{ zIndex: 200 }} className='block absolute w-full h-screen bg-blue-600 text-white shadow-lg lg:hidden lg:rounded-lg'>
+            {appState && appState.isSideMenuOpen && (<div style={{ zIndex: 50 }} className='block absolute w-full h-screen bg-blue-600 text-white shadow-lg lg:hidden lg:rounded-lg'>
             <div className='text-white'>
                 <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/about'>
                 <i className='far fa-address-card mr-2'></i>
