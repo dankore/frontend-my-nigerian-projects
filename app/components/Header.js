@@ -39,7 +39,7 @@ function Header() {
             )}
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
-            {appState && !appState.isSideMenuOpen && (
+            {appState && appState.isSideMenuOpen && (
               <div style={{ zIndex: 50 }} className='block absolute w-full h-screen bg-blue-600  shadow-lg lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-2'>
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
@@ -51,7 +51,7 @@ function Header() {
                     <p>How To Bid</p>
                   </Link>
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md  rounded-lg m-2 bg-white hover:bg-gray-200' to='/create-project'>
-                    <i className='text-gray-700 fas fa-plus text-red-500'></i>
+                    <i className='fas fa-plus text-red-500'></i>
                     <p>Create Project</p>
                   </Link>
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/reset-password'>
