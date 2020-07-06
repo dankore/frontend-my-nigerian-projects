@@ -58,6 +58,10 @@ function CreateProject(props) {
           draft.title.hasErrors = true;
           draft.title.message = 'Title cannot be empty';
         }
+        if (action.value.length > 100) {
+          draft.title.hasErrors = true;
+          draft.title.message = 'Title cannot exceed 100 characters.';
+        }
         return;
       case 'locationUpdate':
         draft.location.hasErrors = false;
@@ -68,9 +72,9 @@ function CreateProject(props) {
           draft.location.hasErrors = true;
           draft.location.message = 'Location cannot be empty.';
         }
-        if (action.value.length > 60) {
+        if (action.value.length > 100) {
           draft.location.hasErrors = true;
-          draft.location.message = 'Location cannot exceed 60 characters.';
+          draft.location.message = 'Location cannot exceed 100 characters.';
         }
         if (/[!@$%^&*(),?":{};\[\]|<>]/.test(action.value.trim())) {
           draft.location.hasErrors = true;
