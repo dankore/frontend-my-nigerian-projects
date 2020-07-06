@@ -88,6 +88,10 @@ function CreateBid(props) {
           draft.yearsOfExperience.hasErrors = true;
           draft.yearsOfExperience.message = 'Years of experience required.';
         }
+         if (draft.yearsOfExperience.value > 100) {
+          draft.yearsOfExperience.hasErrors = true;
+          draft.yearsOfExperience.message = 'Years of experience cannot exceed 100 years.';
+        }
         return;
       case 'itemNameUpdate':
         draft.item.name = action.value;
@@ -122,6 +126,10 @@ function CreateBid(props) {
              draft.phone.hasErrors = true;
              draft.phone.message = 'Phone must be only numbers.';
         }
+        if (action.value.length > 30) {
+           draft.phone.hasErrors = true;
+           draft.phone.message = 'Phone cannot exceed 30 characters.';
+         }
         return;
       case 'emailUpdate':
         draft.email.hasErrors = false;
