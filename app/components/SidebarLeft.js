@@ -39,17 +39,19 @@ function SidebarLeft() {
           <i className='fas fa-key mr-2 text-gray-600'></i>
           Change Password
         </Link>
-        {appState.loggedIn ? (
-          <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-gray-100' to='#'>
-            <i className='fas fa-sign-out-alt mr-2 text-gray-600'></i>
-            Logout
-          </Link>
-        ) : (
-          <Link className='p-3 flex items-center hover:bg-gray-100' to='/login'>
-            <i className='fas fa-sign-in-alt mr-2 text-gray-600'></i>
-            login
-          </Link>
-        )}
+        <div>
+          {appState.loggedIn ? (
+            <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-gray-100' to='#'>
+              <i className='fas fa-sign-out-alt mr-2 text-gray-600'></i>
+              Logout
+            </Link>
+          ) : (
+            <Link className='p-3 flex items-center hover:bg-gray-100' to='/login'>
+              <i className='fas fa-sign-in-alt mr-2 text-gray-600'></i>
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

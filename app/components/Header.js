@@ -10,9 +10,9 @@ function Header() {
   const appState = useContext(StateContext);
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
-  function handleLogout(){
-    appDispatch({ type: 'alwaysCloseTheseMenus' })
-    appDispatch({ type: 'logout' })
+  function handleLogout() {
+    appDispatch({ type: 'alwaysCloseTheseMenus' });
+    appDispatch({ type: 'logout' });
   }
 
   return (
@@ -39,49 +39,53 @@ function Header() {
             )}
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
-            {appState && appState.isSideMenuOpen && (<div style={{ zIndex: 50 }} className='block absolute w-full h-screen bg-blue-600 text-white shadow-lg lg:hidden lg:rounded-lg'>
-            <div className='text-white'>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/about'>
-                <i className='far fa-address-card mr-2'></i>
-                About
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/how-to-bid'>
-                <i className='fas fa-file-contract mr-2'></i>
-                How To Bid
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md  hover:bg-blue-800' to='/create-project'>
-                <i className='fas fa-plus mr-2 text-red-500'></i>
-                Create Project
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/reset-password'>
-                <i className='fas fa-unlock-alt mr-2'></i>
-                Reset Password
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/settings/delete-account'>
-                <i className='fas fa-user-minus mr-2'></i>
-                Delete Account
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className=' p-2 flex items-center text-md hover:bg-blue-800' to='/settings'>
-                <i className='fas fa-user-cog mr-2'></i>
-                Edit Profile Info
-                </Link>
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center text-md hover:bg-blue-800' to='/settings/change-password'>
-                <i className='fas fa-key mr-2'></i>
-                Change Password
-                </Link>
-                {appState.loggedIn ? (
-                <Link onClick={handleLogout} className=' p-2 flex items-center hover:bg-blue-800' to='#'>
-                    <i className='fas fa-sign-out-alt mr-2'></i>
-                    Logout
-                </Link>
-                ) : (
-                <Link onClick={()=> appDispatch({type: "alwaysCloseTheseMenus"})} className='p-2 flex items-center hover:bg-blue-800' to='/login'>
-                    <i className='fas fa-sign-in-alt mr-2'></i>
-                    login
-                </Link>
-                )}
-            </div>
-            </div>)}
+            {appState && !appState.isSideMenuOpen && (
+              <div style={{ zIndex: 50 }} className='block absolute w-full h-screen bg-blue-600  shadow-lg lg:hidden lg:rounded-lg'>
+                <div className='grid grid-cols-2'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
+                    <i className='text-gray-700 far fa-address-card'></i>
+                    <p>About</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/how-to-bid'>
+                    <i className='text-gray-700 fas fa-file-contract'></i>
+                    <p>How To Bid</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md  rounded-lg m-2 bg-white hover:bg-gray-200' to='/create-project'>
+                    <i className='text-gray-700 fas fa-plus text-red-500'></i>
+                    <p>Create Project</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/reset-password'>
+                    <i className='text-gray-700 fas fa-unlock-alt'></i>
+                    <p>Reset Password</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/delete-account'>
+                    <i className='text-gray-700 fas fa-user-minus'></i>
+                    <p>Delete Account</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className=' p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
+                    <i className='text-gray-700 fas fa-user-cog'></i>
+                    <p>Edit Profile Info</p>
+                  </Link>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/change-password'>
+                    <i className='text-gray-700 fas fa-key'></i>
+                    <p>Change Password</p>
+                  </Link>
+                  <div className='p-2 rounded-lg m-2 bg-white hover:bg-gray-200'>
+                    {appState.loggedIn ? (
+                      <Link onClick={handleLogout} to='#'>
+                        <i className='text-gray-700 fas fa-sign-out-alt'></i>
+                        <p>Logout</p>
+                      </Link>
+                    ) : (
+                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} to='/login'>
+                        <i className='text-gray-700 fas fa-sign-in-alt'></i>
+                        <p>Login</p>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <Link to='/' className='mx-auto lg:mx-0 flex items-center text-white hover:text-gray-400'>
