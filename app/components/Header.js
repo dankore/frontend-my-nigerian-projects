@@ -40,37 +40,37 @@ function Header() {
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
             {appState && appState.isSideMenuOpen && (
-              <div style={{ zIndex: 50 }} className='block absolute min-h-full w-full bg-blue-600  shadow-lg lg:hidden lg:rounded-lg'>
-                <div className='grid grid-cols-1'>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
+              <div style={{ zIndex: 50 }} className='block absolute min-h-full w-full bg-blue-600  lg:hidden lg:rounded-lg'>
+                <div className='grid grid-cols-1 my-5'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
                     <i className='text-gray-700 far fa-address-card'></i>
                     <p>About</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/how-to-bid'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/how-to-bid'>
                     <i className='text-gray-700 fas fa-file-contract'></i>
                     <p>How To Bid</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md  rounded-lg m-2 bg-white hover:bg-gray-200' to='/create-project'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md  rounded-lg m-2 bg-white hover:bg-gray-200' to='/create-project'>
                     <i className='fas fa-plus text-red-500'></i>
                     <p>Create Project</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/reset-password'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/reset-password'>
                     <i className='text-gray-700 fas fa-unlock-alt'></i>
                     <p>Reset Password</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/delete-account'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/delete-account'>
                     <i className='text-gray-700 fas fa-user-minus'></i>
                     <p>Delete Account</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className=' p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className=' p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
                     <i className='text-gray-700 fas fa-user-cog'></i>
                     <p>Edit Profile Info</p>
                   </Link>
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/change-password'>
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/change-password'>
                     <i className='text-gray-700 fas fa-key'></i>
                     <p>Change Password</p>
                   </Link>
-                  <div className='p-2 rounded-lg m-2 bg-white hover:bg-gray-200'>
+                  <div className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200'>
                     {appState.loggedIn ? (
                       <Link onClick={handleLogout} to='#'>
                         <i className='text-gray-700 fas fa-sign-out-alt'></i>
