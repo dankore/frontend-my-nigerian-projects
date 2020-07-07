@@ -7,7 +7,7 @@ import DispatchContext from '../DispatchContext';
 function Header(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
-  const linkButtonsCommonCSS = 'w-full pl-2 pr-20 text-left hover:bg-blue-800 py-1';
+  const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
 
   function handleLogout() {
     appDispatch({ type: 'alwaysCloseTheseMenus' });

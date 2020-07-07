@@ -28,7 +28,7 @@ function ProfileSettingsLoggedIn(props) {
       </Link>
       <button onClick={handleLogout} className={linkButtonsCommonCSS}>
         <i className='fas fa-sign-out-alt mr-1'></i>
-        Sign Out
+        Logout
       </button>
     </ul>
   );
