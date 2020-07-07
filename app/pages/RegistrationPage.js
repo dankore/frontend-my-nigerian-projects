@@ -90,6 +90,10 @@ function RegistrationPage(props) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name can only be letters.';
         }
+        if (draft.firstName.value.length > 50 ) {
+          draft.firstName.hasErrors = true;
+          draft.firstName.message = 'First name cannot exceed 50 characters.';
+        }
         return;
       // LAST NAME
       case 'lastnameImmediately':
@@ -103,6 +107,10 @@ function RegistrationPage(props) {
         if (/[^a-zA-Z]/.test(draft.lastName.value.trim())) {
           draft.lastName.hasErrors = true;
           draft.lastName.message = 'First name can only be letters.';
+        }
+         if (draft.lastName.value.length > 50 ) {
+          draft.lastName.hasErrors = true;
+          draft.lastName.message = 'Last name cannot exceed 50 characters.';
         }
         return;
       case 'lastnameAfterDelay':

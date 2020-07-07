@@ -101,6 +101,10 @@ function EditUserProfileInfo(props) {
           draft.profileData.profileFirstName.hasErrors = true;
           draft.profileData.profileFirstName.message = 'First name can only be letters.';
         }
+         if (draft.profileData.profileFirstName.value.length > 50 ) {
+          draft.profileData.profileFirstName.hasErrors = true;
+          draft.profileData.profileFirstName.message = 'First name cannot exceed 50 characters.';
+        }
         return;
       // LAST NAME
       case 'lastnameImmediately':
@@ -113,7 +117,11 @@ function EditUserProfileInfo(props) {
         }
          if (/[^a-zA-Z]/.test(draft.profileData.profileLastName.value.trim())) {
           draft.profileData.profileLastName.hasErrors = true;
-          draft.profileData.profileLastName.message = 'Last name name can only be letters.';
+          draft.profileData.profileLastName.message = 'Last name can only be letters.';
+        }
+          if (draft.profileData.profileLastName.value.length > 50 ) {
+          draft.profileData.profileLastName.hasErrors = true;
+          draft.profileData.profileLastName.message = 'Last name cannot exceed 50 characters.';
         }
         return;
       case 'isLoadingFinished':
@@ -204,12 +212,11 @@ function EditUserProfileInfo(props) {
             },
             { cancelToken: request.token }
           );
+           dispatch({ type: 'isSavingUpdateFinished' });
           if (response.data._id) {
-            appDispatch({ type: 'updateUserInfo', data: response.data });
-            appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
-            dispatch({ type: 'isSavingUpdateFinished' });
+                appDispatch({ type: 'updateUserInfo', data: response.data });
+                appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
           } else {
-               dispatch({ type: 'isSavingUpdateFinished' });
                appDispatch({ type: 'flashMessageError', value: response.data });
           }
         } catch (e) {
