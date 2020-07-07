@@ -7,15 +7,15 @@ function SidebarLeft(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
 
-  function handleLogout(){
-      appDispatch({ type: 'logout' });
-      props.history.push('/');
+  function handleLogout() {
+    appDispatch({ type: 'logout' });
+    props.history.push('/');
   }
 
   return (
-    <div className='hidden lg:block mx-auto lg:w-3/4  lg:rounded-lg mt-10'>
-      <h2 className='border-b lg:rounded-t-lg text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Quick Links</h2>
-      <div className='hover:border-r-8 hover:border-gray-600'>
+    <div className='flex justify-end w-full lg:rounded-lg mt-10'>
+      <div style={{ width: 250 + 'px' }} className='hidden lg:block'>
+        <h2 className='border-b lg:rounded-t-lg text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Quick Links</h2>
         <Link className='p-3 flex items-center hover:bg-gray-100' to='/about'>
           <i className='far fa-address-card mr-2 text-gray-600'></i>
           About
