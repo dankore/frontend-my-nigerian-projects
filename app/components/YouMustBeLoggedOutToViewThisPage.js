@@ -8,7 +8,7 @@ function YouMustBeLoggedOutToViewThisPage() {
 
   return (
     <Page margin='mx-2' title='Error'>
-      <div className='max-w-md mx-auto flex items-center rounded border border-gray-200 p-5'>
+      <div className='max-w-md bg-white shadow-sm lg:rounded-lg mx-auto flex items-center rounded border border-gray-200 p-5'>
         <i className='far fa-bell block text-5xl mr-4'></i>
         <div>
           <h2 className='text-3xl mb-3'>Oops!</h2>
