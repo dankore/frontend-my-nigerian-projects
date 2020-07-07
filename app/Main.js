@@ -186,7 +186,7 @@ function Main() {
                 <About />
               </Route>
               <Route path='/cookies'>
-                  <CookiesPage />
+                <CookiesPage />
               </Route>
               <Route path='/terms'>
                 <Terms />

@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
-import ProfileImageLoggedIn from './ProfileImageLoggedIn';
-
 
 function Header(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
-  const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
+  const linkButtonsCommonCSS = 'w-full pl-2 pr-20 text-left hover:bg-blue-800 py-1';
 
   function handleLogout() {
     appDispatch({ type: 'alwaysCloseTheseMenus' });
@@ -45,21 +42,22 @@ function Header(props) {
             {appState && appState.isSideMenuOpen && (
               <div style={{ zIndex: 50 }} className='block absolute min-h-screen w-full bg-blue-600  lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-1 my-5'>
-                    
-                    {appState && appState.loggedIn && (
+                  {appState && appState.loggedIn && (
                     <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to={`/profile/${appState.user.username}`}>
-                        <img className='mr-2 h-16 w-16 rounded-full' src={appState.user.avatar} alt='ProfilePic' />
-                        <div>
-                            <p>{appState.user.firstName}</p>
-                            <p className='text-xs'>See your profile</p>
-                        </div>
-                    </Link>)
-                    }
+                      <img className='mr-2 h-16 w-16 rounded-full' src={appState.user.avatar} alt='ProfilePic' />
+                      <div>
+                        <p>{appState.user.firstName}</p>
+                        <p className='text-xs'>See your profile</p>
+                      </div>
+                    </Link>
+                  )}
 
-                  {appState && appState.loggedIn && ( <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
-                    <i className='text-gray-700 fas fa-cog'></i>
-                    <p>Settings</p>
-                  </Link>)}
+                  {appState && appState.loggedIn && (
+                    <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
+                      <i className='text-gray-700 fas fa-cog'></i>
+                      <p>Settings</p>
+                    </Link>
+                  )}
 
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
                     <i className='text-gray-700 far fa-address-card'></i>
@@ -95,18 +93,17 @@ function Header(props) {
                     <p>Change Password</p>
                   </Link>
 
-                    {appState.loggedIn ? (
-                      <Link onClick={handleLogout} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='#'>
-                        <i className='text-gray-700 fas fa-sign-out-alt'></i>
-                        <p>Logout</p>
-                      </Link>
-                    ) : (
-                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='/login'>
-                        <i className='text-gray-700 fas fa-sign-in-alt'></i>
-                        <p>Login</p>
-                      </Link>
-                    )}
-
+                  {appState.loggedIn ? (
+                    <Link onClick={handleLogout} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='#'>
+                      <i className='text-gray-700 fas fa-sign-out-alt'></i>
+                      <p>Logout</p>
+                    </Link>
+                  ) : (
+                    <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='/login'>
+                      <i className='text-gray-700 fas fa-sign-in-alt'></i>
+                      <p>Login</p>
+                    </Link>
+                  )}
                 </div>
               </div>
             )}
@@ -118,30 +115,35 @@ function Header(props) {
           </Link>
         </div>
         {/* SHOW ON LARGE SCREEN */}
-        {appState && appState.loggedIn &&  <div className='hidden lg:block inline-block text-white'><HeaderLoggedIn /></div>}
-      
-       {/* SHOW ON SMALL SCREEN */}
-        {appState && !appState.loggedIn && ( 
-       <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='block lg:hidden inline-block mr-2 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
-        <i className='fas fa-plus mr-1'></i>
+        {appState && appState.loggedIn && (
+          <div className='hidden lg:block inline-block text-white'>
+            <HeaderLoggedIn />
+          </div>
+        )}
+
+        {/* SHOW ON SMALL SCREEN */}
+        {appState && !appState.loggedIn && (
+          <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='block lg:hidden inline-block mr-2 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
+            <i className='fas fa-plus mr-1'></i>
             Register
-        </Link>)}
+          </Link>
+        )}
 
         {/* LARGE SCREEN AND NOT LOGGED IN */}
-       {appState && !appState.loggedIn && (
-                  <div className='hidden lg:block lg:flex lg:justify-center text-white lg:ml-2 lg:items-center'>
-                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='block mr-5 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
-                          <i className='fas fa-plus mr-1'></i>
-                        Register
-                    </Link>
-                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center pr-1 hover:text-gray-400' to='/login'>
-                          <span className='text-3xl'>
-                              <i className='far fa-user-circle'></i>
-                          </span>
-                          <span className='mx-1'>Login</span>
-                      </Link>
-                  </div>
-       )}
+        {appState && !appState.loggedIn && (
+          <div className='hidden lg:block lg:flex lg:justify-center text-white lg:ml-2 lg:items-center'>
+            <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='block mr-5 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
+              <i className='fas fa-plus mr-1'></i>
+              Register
+            </Link>
+            <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center pr-1 hover:text-gray-400' to='/login'>
+              <span className='text-3xl'>
+                <i className='far fa-user-circle'></i>
+              </span>
+              <span className='mx-1'>Login</span>
+            </Link>
+          </div>
+        )}
       </nav>
     </header>
   );
