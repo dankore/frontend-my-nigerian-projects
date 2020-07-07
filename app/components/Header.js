@@ -45,19 +45,16 @@ function Header(props) {
             {appState && !appState.isSideMenuOpen && (
               <div style={{ zIndex: 50 }} className='block absolute min-h-screen w-full bg-blue-600  lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-1 my-5'>
-                    {appState && appState.loggedIn ? (
-                        <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to={`/profile/${appState.user.username}`}>
-                            <img className='mr-2 h-16 w-16 rounded-full' src={appState.user.avatar} alt='ProfilePic' />
-                            <div>
-                                <p>{appState.user.firstName}</p>
-                                <p className='text-xs'>See your profile</p>
-                            </div>
-                        </Link>
-                    ) : ( <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/login'>
-                            <i className='text-gray-700 far fa-user-circle'></i>
-                            <p>Login</p>
-                        </Link>)
-                        }
+                    
+                    {appState && appState.loggedIn && (
+                    <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to={`/profile/${appState.user.username}`}>
+                        <img className='mr-2 h-16 w-16 rounded-full' src={appState.user.avatar} alt='ProfilePic' />
+                        <div>
+                            <p>{appState.user.firstName}</p>
+                            <p className='text-xs'>See your profile</p>
+                        </div>
+                    </Link>)
+                    }
 
                   {appState && appState.loggedIn && ( <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
                     <i className='text-gray-700 fas fa-cog'></i>
