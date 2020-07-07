@@ -11,12 +11,6 @@ function HeaderLoggedOut() {
         <i className='fas fa-plus mr-1'></i>
         Register
       </Link>
-      <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='flex items-center pr-1 hover:text-gray-400' to='/login'>
-        <span className='text-3xl'>
-          <i className='far fa-user-circle'></i>
-        </span>
-        <span className='mx-1'>Login</span>
-      </Link>
     </div>
   );
 }
