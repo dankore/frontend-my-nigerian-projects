@@ -4,6 +4,8 @@ import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
+import ProfileImageLoggedIn from './ProfileImageLoggedIn';
+
 
 function Header(props) {
   const appDispatch = useContext(DispatchContext);
@@ -40,25 +42,44 @@ function Header(props) {
             )}
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
-            {appState && appState.isSideMenuOpen && (
+            {appState && !appState.isSideMenuOpen && (
               <div style={{ zIndex: 50 }} className='block absolute min-h-screen w-full bg-blue-600  lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-1 my-5'>
+                    {appState && appState.loggedIn ? (
+                        <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to={`/profile/${appState.user.username}`}>
+                            <img className='mr-2 h-16 w-16 rounded-full' src={appState.user.avatar} alt='ProfilePic' />
+                            <div>
+                                <p>{appState.user.firstName}</p>
+                                <p className='text-xs'>See your profile</p>
+                            </div>
+                        </Link>
+                    ) : <HeaderLoggedOut/>}
+
+                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
+                    <i className='text-gray-700 fas fa-cog'></i>
+                    <p>Settings</p>
+                  </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
                     <i className='text-gray-700 far fa-address-card'></i>
                     <p>About</p>
                   </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/how-to-bid'>
                     <i className='text-gray-700 fas fa-file-contract'></i>
                     <p>How To Bid</p>
                   </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md  rounded-lg m-2 bg-white hover:bg-gray-200' to='/create-project'>
                     <i className='fas fa-plus text-red-500'></i>
                     <p>Create Project</p>
                   </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/reset-password'>
                     <i className='text-gray-700 fas fa-unlock-alt'></i>
                     <p>Reset Password</p>
                   </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/delete-account'>
                     <i className='text-gray-700 fas fa-user-minus'></i>
                     <p>Delete Account</p>
@@ -67,10 +88,12 @@ function Header(props) {
                     <i className='text-gray-700 fas fa-user-cog'></i>
                     <p>Edit Profile Info</p>
                   </Link>
+
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings/change-password'>
                     <i className='text-gray-700 fas fa-key'></i>
                     <p>Change Password</p>
                   </Link>
+
                     {appState.loggedIn ? (
                       <Link onClick={handleLogout} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='#'>
                         <i className='text-gray-700 fas fa-sign-out-alt'></i>
@@ -82,6 +105,7 @@ function Header(props) {
                         <p>Login</p>
                       </Link>
                     )}
+
                 </div>
               </div>
             )}
@@ -93,7 +117,7 @@ function Header(props) {
           </Link>
         </div>
 
-        <div className='inline-block text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+        <div className='hidden lg:block inline-block text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
       </nav>
     </header>
   );
