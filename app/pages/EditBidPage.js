@@ -100,13 +100,25 @@ function EditBidPage(props) {
         }
         return;
       case 'itemNameUpdate':
-        draft.item.name = action.value;
+         if (action.value.length > 50) {
+          draft.item.name = 'Item name cannot exceed 50 chatacters. Please delete this entry.';
+        } else {
+          draft.item.name = action.value;
+        }
         return;
       case 'quantityUpdate':
-        draft.item.quantity = action.value;
+        if (action.value > Number.MAX_SAFE_INTEGER) {
+          draft.item.quantity = 'Quantity name cannot exceed 9007199254740991. Please delete this entry.';
+        } else {
+          draft.item.quantity = action.value;
+        }
         return;
       case 'pricePerItemUpdate':
-        draft.item.price_per_item = action.value;
+       if (action.value > Number.MAX_SAFE_INTEGER) {
+          draft.item.price_per_item = 'Price per item name cannot exceed 9007199254740991. Please delete this entry.';
+        } else {
+          draft.item.price_per_item = action.value;
+        }
         return;
       case 'totalUpdate':
         draft.itemTotal = action.value;

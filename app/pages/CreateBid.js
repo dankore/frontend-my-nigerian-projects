@@ -93,8 +93,8 @@ function CreateBid(props) {
         }
         return;
       case 'itemNameUpdate':
-        if (action.value.length > 100) {
-          draft.item.name = 'Item name cannot exceed 100 chatacters. Please delete this entry.';
+        if (action.value.length > 50) {
+          draft.item.name = 'Item name cannot exceed 50 chatacters. Please delete this entry.';
         } else {
           draft.item.name = action.value;
         }
