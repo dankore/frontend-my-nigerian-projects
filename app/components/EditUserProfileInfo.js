@@ -97,6 +97,10 @@ function EditUserProfileInfo(props) {
           draft.profileData.profileFirstName.hasErrors = true;
           draft.profileData.profileFirstName.message = 'First name field cannot be empty.';
         }
+        if (/[^a-zA-Z]/.test(draft.profileData.profileFirstName.value.trim())) {
+          draft.profileData.profileFirstName.hasErrors = true;
+          draft.profileData.profileFirstName.message = 'First name can only be letters.';
+        }
         return;
       // LAST NAME
       case 'lastnameImmediately':
@@ -106,6 +110,10 @@ function EditUserProfileInfo(props) {
         if (draft.profileData.profileLastName.value.length == '') {
           draft.profileData.profileLastName.hasErrors = true;
           draft.profileData.profileLastName.message = 'Last name field cannot be empty.';
+        }
+         if (/[^a-zA-Z]/.test(draft.profileData.profileLastName.value.trim())) {
+          draft.profileData.profileLastName.hasErrors = true;
+          draft.profileData.profileLastName.message = 'Last name name can only be letters.';
         }
         return;
       case 'isLoadingFinished':

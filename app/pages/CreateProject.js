@@ -104,6 +104,10 @@ function CreateProject(props) {
           draft.email.hasErrors = true;
           draft.email.message = 'Email cannot be empty';
         }
+        if (action.value.length > 100) {
+          draft.email.hasErrors = true;
+          draft.email.message = 'Email cannot exceed 100 characters.';
+        }
         return;
       case 'phoneUpdate':
         draft.phone.hasErrors = false;
