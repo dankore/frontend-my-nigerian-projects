@@ -13,8 +13,8 @@ function SidebarLeft(props) {
   }
 
   return (
-    <div className='flex justify-end w-full lg:rounded-lg mt-10'>
-      <div style={{ width: 250 + 'px' }} className='hidden lg:block'>
+    <div className='flex justify-end w-full mt-10'>
+      <div style={{ width: 200 + 'px' }} className='mr-16 hidden lg:block'>
         <h2 className='border-b lg:rounded-t-lg text-2xl leading-8 font-semibold font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto pl-3 py-2'>Quick Links</h2>
         <Link className='p-3 flex items-center hover:bg-gray-100' to='/about'>
           <i className='far fa-address-card mr-2 text-gray-600'></i>
