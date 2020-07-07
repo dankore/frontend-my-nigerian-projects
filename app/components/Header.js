@@ -122,7 +122,7 @@ function Header(props) {
       
        {/* SHOW ON SMALL SCREEN */}
         {appState && !appState.loggedIn && ( 
-       <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='block lg:hidden inline-block mr-5 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
+       <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='block lg:hidden inline-block mr-2 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
         <i className='fas fa-plus mr-1'></i>
             Register
         </Link>)}
