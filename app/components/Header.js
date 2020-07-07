@@ -53,12 +53,16 @@ function Header(props) {
                                 <p className='text-xs'>See your profile</p>
                             </div>
                         </Link>
-                    ) : <HeaderLoggedOut/>}
+                    ) : ( <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/login'>
+                            <i className='text-gray-700 far fa-user-circle'></i>
+                            <p>Login</p>
+                        </Link>)
+                        }
 
-                  <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
+                  {appState && appState.loggedIn && ( <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/settings'>
                     <i className='text-gray-700 fas fa-cog'></i>
                     <p>Settings</p>
-                  </Link>
+                  </Link>)}
 
                   <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to='/about'>
                     <i className='text-gray-700 far fa-address-card'></i>
