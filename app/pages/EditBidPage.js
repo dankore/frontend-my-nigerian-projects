@@ -128,7 +128,7 @@ function EditBidPage(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone cannot be empty';
         }
-         if(/[^\d]/.test(action.value.trim())){
+         if(/[^\d\+-]/.test(action.value.trim())){
              draft.phone.hasErrors = true;
              draft.phone.message = 'Phone must be only numbers.';
         }

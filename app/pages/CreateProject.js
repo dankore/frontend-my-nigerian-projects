@@ -76,7 +76,7 @@ function CreateProject(props) {
           draft.location.hasErrors = true;
           draft.location.message = 'Location cannot exceed 100 characters.';
         }
-        if (/[!@$%^&*(),?":{};\[\]|<>]/.test(action.value.trim())) {
+        if (/[!@$%^&*()?":{};\[\]|<>]/.test(action.value.trim())) {
           draft.location.hasErrors = true;
           draft.location.message = 'Location cannot contain any of these characters (!@$%^&*(),?":{};|<>[]]).';
         }
@@ -114,7 +114,7 @@ function CreateProject(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone cannot be empty';
         }
-        if (/[^\d]/.test(action.value.trim())) {
+        if (/[^\d\+-]/.test(action.value.trim())) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone must be only numbers.';
         }
