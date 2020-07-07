@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import DispatchContext from '../DispatchContext';
 import StateContext from '../StateContext';
 
-function SidebarLeft() {
+function SidebarLeft(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
+
+  function handleLogout(){
+      appDispatch({ type: 'logout' });
+      props.history.push('/');
+  }
 
   return (
     <div className='hidden lg:block mx-auto lg:w-3/4  lg:rounded-lg mt-10'>
@@ -41,7 +46,7 @@ function SidebarLeft() {
         </Link>
         <div>
           {appState.loggedIn ? (
-            <Link onClick={() => appDispatch({ type: 'logout' })} className=' p-3 flex items-center hover:bg-gray-100' to='#'>
+            <Link onClick={handleLogout} className='p-3 flex items-center hover:bg-gray-100' to='#'>
               <i className='fas fa-sign-out-alt mr-2 text-gray-600'></i>
               Logout
             </Link>
@@ -57,4 +62,4 @@ function SidebarLeft() {
   );
 }
 
-export default SidebarLeft;
+export default withRouter(SidebarLeft);

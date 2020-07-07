@@ -78,7 +78,7 @@ function CreateProject(props) {
         }
         if (/[!@$%^&*()?":{};\[\]|<>]/.test(action.value.trim())) {
           draft.location.hasErrors = true;
-          draft.location.message = 'Location cannot contain any of these characters (!@$%^&*(),?":{};|<>[]]).';
+          draft.location.message = 'Location cannot contain any of these characters (!@$%^&*()?":{};|<>[]]).';
         }
         return;
       case 'dateNeedByUpdate':
@@ -116,7 +116,7 @@ function CreateProject(props) {
         }
         if (/[^\d\+-]/.test(action.value.trim())) {
           draft.phone.hasErrors = true;
-          draft.phone.message = 'Phone must be only numbers.';
+          draft.phone.message = 'Phone must be numbers, + and -.';
         }
         if (action.value.length > 30) {
           draft.phone.hasErrors = true;

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import HeaderLoggedOut from './HeaderLoggedOut';
 import HeaderLoggedIn from './HeaderLoggedIn';
 import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 
-function Header() {
+function Header(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const linkButtonsCommonCSS = 'w-full px-2 text-left hover:bg-blue-800 py-1';
@@ -13,6 +13,7 @@ function Header() {
   function handleLogout() {
     appDispatch({ type: 'alwaysCloseTheseMenus' });
     appDispatch({ type: 'logout' });
+    props.history.push('/');
   }
 
   return (
@@ -70,19 +71,17 @@ function Header() {
                     <i className='text-gray-700 fas fa-key'></i>
                     <p>Change Password</p>
                   </Link>
-                  <div className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200'>
                     {appState.loggedIn ? (
-                      <Link onClick={handleLogout} to='#'>
+                      <Link onClick={handleLogout} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='#'>
                         <i className='text-gray-700 fas fa-sign-out-alt'></i>
                         <p>Logout</p>
                       </Link>
                     ) : (
-                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} to='/login'>
+                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='p-2 shadow-lg rounded-lg m-2 bg-white hover:bg-gray-200' to='/login'>
                         <i className='text-gray-700 fas fa-sign-in-alt'></i>
                         <p>Login</p>
                       </Link>
                     )}
-                  </div>
                 </div>
               </div>
             )}
@@ -100,4 +99,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default withRouter(Header);
