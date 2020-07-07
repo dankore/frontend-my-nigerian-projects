@@ -121,7 +121,8 @@ function Header(props) {
           </Link>
         </div>
 
-        <div className='hidden lg:block inline-block text-white'>{appState && appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}</div>
+        <div className='hidden lg:block inline-block text-white'>{appState && appState.loggedIn && <HeaderLoggedIn />}</div>
+        <div className='block lg:hidden inline-block text-white'>{appState && !appState.loggedIn && <HeaderLoggedOut /> }</div>
       </nav>
     </header>
   );
