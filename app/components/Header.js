@@ -42,7 +42,7 @@ function Header(props) {
             )}
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
-            {appState && !appState.isSideMenuOpen && (
+            {appState && appState.isSideMenuOpen && (
               <div style={{ zIndex: 50 }} className='block absolute min-h-screen w-full bg-blue-600  lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-1 my-5'>
                     
@@ -117,9 +117,31 @@ function Header(props) {
             <span className='hidden lg:block ml-2 font-semibold tracking-tight'>Bid for my Projects</span>
           </Link>
         </div>
+        {/* SHOW ON LARGE SCREEN */}
+        {appState && appState.loggedIn &&  <div className='hidden lg:block inline-block text-white'><HeaderLoggedIn /></div>}
+      
+       {/* SHOW ON SMALL SCREEN */}
+        {appState && !appState.loggedIn && ( 
+       <Link onClick={()=> appDispatch({type: 'alwaysCloseTheseMenus'})} className='block lg:hidden inline-block mr-5 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
+        <i className='fas fa-plus mr-1'></i>
+            Register
+        </Link>)}
 
-        <div className='hidden lg:block inline-block text-white'>{appState && appState.loggedIn && <HeaderLoggedIn />}</div>
-        <div className='block lg:hidden inline-block text-white'>{appState && !appState.loggedIn && <HeaderLoggedOut /> }</div>
+        {/* LARGE SCREEN AND NOT LOGGED IN */}
+       {appState && !appState.loggedIn && (
+                  <div className='hidden lg:block lg:flex lg:justify-center text-white lg:ml-2 lg:items-center'>
+                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='block mr-5 px-2 border border-transparent text-center my-1 sm:my-0 text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out' to='/register'>
+                          <i className='fas fa-plus mr-1'></i>
+                        Register
+                    </Link>
+                      <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center pr-1 hover:text-gray-400' to='/login'>
+                          <span className='text-3xl'>
+                              <i className='far fa-user-circle'></i>
+                          </span>
+                          <span className='mx-1'>Login</span>
+                      </Link>
+                  </div>
+       )}
       </nav>
     </header>
   );
