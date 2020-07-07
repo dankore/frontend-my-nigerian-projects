@@ -204,10 +204,13 @@ function EditUserProfileInfo(props) {
             },
             { cancelToken: request.token }
           );
-          if (response.data) {
+          if (response.data._id) {
             appDispatch({ type: 'updateUserInfo', data: response.data });
             appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
             dispatch({ type: 'isSavingUpdateFinished' });
+          } else {
+               dispatch({ type: 'isSavingUpdateFinished' });
+               appDispatch({ type: 'flashMessageError', value: response.data });
           }
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
