@@ -77,7 +77,7 @@ function ViewSingleProject(props) {
 
   return (
     <Page margin='mx-2' title={project.title}>
-      <div className='shadow-md my-6'>
+      <div className='shadow-md lg:rounded-lg'>
         <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>
             <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
