@@ -4,7 +4,6 @@ import { dateFormatted_Like_This_May_29_2020 } from '../helpers/JSHelpers';
 
 function Project(props) {
   const project = props.project;
-  const date = new Date(project.createdDate);
  
   // TRUNCATE TITLE AND DESCRIPTION
   const formatTitleAndDescription = s => {
