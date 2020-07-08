@@ -47,8 +47,6 @@ function Project(props) {
     );
   }
 
-  console.log(project.image);
-
   return (
     <Link to={`/project/${project._id}`}>
       <div className='shadow-sm lg:rounded-lg mb-2 bg-white hover:bg-gray-100'>
@@ -63,24 +61,27 @@ function Project(props) {
             </div>
             <div className='text-sm font-semibold leading-5'>{formatTitleAndDescription(project.title)}</div>
             <div className='text-sm leading-5'>{formatTitleAndDescription(project.description)}</div>
-            <div className='flex flex-wrap items-center text-xs mt-3'>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-map-marker-alt'></i>
-                <p className='ml-1'>{project.location}</p>
-              </div>
-              <div className='flex items-center mr-3'>
-                <i className='fas fa-clock'></i>
-                <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
-              </div>
-              <div className='flex items-center mr-3'>{timeRemainingInDays()}</div>
-              <div className='flex items-center mr-3'>
-                <i className='far fa-comment-alt'></i>
-                <div className='ml-1'>{project.bids ? (project.bids.length == 0 ? project.bids.length + ' bid' : project.bids.length > 1 ? project.bids.length + ' bids' : project.bids.length + ' bid') : 0 + ' bid'}</div>
-              </div>
-            </div>
           </div>
         </div>
-        {project.image && <img className='object-cover w-full h-32 lg:rounded-b-lg' src={project.image} />}
+
+        {/* COVER IMAGE */}
+        {project.image && <img className='object-cover w-full h-32' src={project.image} />}
+
+        <div className='flex flex-wrap items-center p-3 text-xs'>
+          <div className='flex items-center mr-3'>
+            <i className='fas fa-map-marker-alt'></i>
+            <p className='ml-1'>{project.location}</p>
+          </div>
+          <div className='flex items-center mr-3'>
+            <i className='fas fa-clock'></i>
+            <p className='ml-1'>Posted: {dateFormatted_Like_This_May_29_2020(project.createdDate)}</p>
+          </div>
+          <div className='flex items-center mr-3'>{timeRemainingInDays()}</div>
+          <div className='flex items-center mr-3'>
+            <i className='far fa-comment-alt'></i>
+            <div className='ml-1'>{project.bids ? (project.bids.length == 0 ? project.bids.length + ' bid' : project.bids.length > 1 ? project.bids.length + ' bids' : project.bids.length + ' bid') : 0 + ' bid'}</div>
+          </div>
+        </div>
       </div>
     </Link>
   );
