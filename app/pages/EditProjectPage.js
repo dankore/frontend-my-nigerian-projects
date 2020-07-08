@@ -220,6 +220,7 @@ function EditProjectPage(props) {
           if (state.image.value) {
             image_url = await handleUploadImage(state.image.value);
           }
+
           const response = await Axios.post(
             `/project/${state.id}/edit`,
             {
