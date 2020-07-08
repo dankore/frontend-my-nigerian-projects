@@ -1,4 +1,19 @@
 module.exports = {
+  handleUploadImage: async function (image) {
+    const data = new FormData();
+
+    data.append('file', image);
+    data.append('upload_preset', 'my-nigerian-projects');
+
+    const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+
+    const file = await res.json();
+
+    return file.secure_url;
+  },
   removeDupsInObject_Id: function (arrayOfObjects) {
     let checker = [],
       result = [];

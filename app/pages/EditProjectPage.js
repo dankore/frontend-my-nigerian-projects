@@ -9,7 +9,7 @@ import DispatchContext from '../DispatchContext';
 import NotFoundPage from './NotFoundPage';
 import { inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import { CSSTransition } from 'react-transition-group';
-import { formatMinDate } from '../helpers/JSHelpers';
+import { formatMinDate, handleUploadImage } from '../helpers/JSHelpers';
 
 function EditProjectPage(props) {
   const appState = useContext(StateContext);
@@ -214,31 +214,31 @@ function EditProjectPage(props) {
       const request = Axios.CancelToken.source();
       (async function fetchProject() {
         try {
-              // GET IMAGE URL
-              let image_url = '';
-              if (state.image.value) {
-                image_url = await handleUploadImage(state.image.value);
-              }
-              const response = await Axios.post(
-                `/project/${state.id}/edit`,
-                {
-                  title: state.title.value,
-                  location: state.location.value,
-                  bidSubmissionDeadline: state.bidSubmissionDeadline.value,
-                  description: state.description.value,
-                  email: state.email.value,
-                  phone: state.phone.value,
-                  image: image_url,
-                  token: appState.user.token,
-                },
-                {
-                  cancelToken: request.token,
-                }
-              );
-              dispatch({ type: 'saveRequestFinished' });
-              props.history.push(`/project/${state.id}`);
-              appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
-            } catch (error) {
+          // GET IMAGE URL
+          let image_url = '';
+          if (state.image.value) {
+            image_url = await handleUploadImage(state.image.value);
+          }
+          const response = await Axios.post(
+            `/project/${state.id}/edit`,
+            {
+              title: state.title.value,
+              location: state.location.value,
+              bidSubmissionDeadline: state.bidSubmissionDeadline.value,
+              description: state.description.value,
+              email: state.email.value,
+              phone: state.phone.value,
+              image: image_url,
+              token: appState.user.token,
+            },
+            {
+              cancelToken: request.token,
+            }
+          );
+          dispatch({ type: 'saveRequestFinished' });
+          props.history.push(`/project/${state.id}`);
+          appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
+        } catch (error) {
           appDispatch({ type: 'flashMessageError', value: 'Problem with fetching projects.' });
         }
       })();
@@ -259,24 +259,6 @@ function EditProjectPage(props) {
     dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'submitRequest' });
   }
-
-   async function handleUploadImage(image) {
-     const data = new FormData();
-
-     data.append('file', image);
-     data.append('upload_preset', 'my-nigerian-projects');
-
-     const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
-       method: 'POST',
-       body: data,
-     });
-
-     const file = await res.json();
-
-     return file.secure_url;
-   }
-
-
 
   if (state.notFound) {
     return <NotFoundPage />;

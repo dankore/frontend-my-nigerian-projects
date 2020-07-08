@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
-import { daysRemaining } from '../helpers/JSHelpers';
+import { handleUploadImage } from '../helpers/JSHelpers';
 
 function EditBidPage(props) {
   const appState = useContext(StateContext);
@@ -24,6 +24,7 @@ function EditBidPage(props) {
         otherDetails: '',
         phone: '',
         email: '',
+        image: '',
         userCreationDate: '',
         bidAuthor: { authorId: '', username: '' },
         bidCreationDate: '',
@@ -106,7 +107,7 @@ function EditBidPage(props) {
         return;
       case 'itemNameUpdate':
         if (action.value.length > 50) {
-          draft.item.name = 'Item name cannot exceed 50 chatacters. Please delete this entry.';
+          draft.item.name = 'Item name cannot exceed 50 characters. Please delete this entry.';
         } else {
           draft.item.name = action.value;
         }
@@ -166,7 +167,7 @@ function EditBidPage(props) {
         return;
       case 'imageUpdate':
         draft.image.hasErrors = false;
-        draft.image.value = action.value;
+        draft.fetchedData.bid.image = action.value;
         return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
@@ -208,36 +209,37 @@ function EditBidPage(props) {
     if (state.sendCount) {
       (async function saveEditedBid() {
         try {
-              // GET IMAGE URL
-              let image_url = '';
-              if (state.image.value) {
-                image_url = await handleUploadImage(state.image.value);
-              }
-              const response = await Axios.post(
-                '/edit-bid',
-                {
-                  projectId: state.params.projectId,
-                  bidId: state.params.bidId,
-                  whatBestDescribesYou: state.fetchedData.bid.whatBestDescribesYou,
-                  yearsOfExperience: state.fetchedData.bid.yearsOfExperience,
-                  items: state.fetchedData.bid.items,
-                  otherDetails: state.fetchedData.bid.otherDetails,
-                  phone: state.fetchedData.bid.phone,
-                  email: state.fetchedData.bid.email,
-                  image: image_url,
-                  userCreationDate: appState.user.userCreationDate,
-                  token: appState.user.token,
-                },
-                { cancelToken: request.token }
-              );
+          // GET IMAGE URL
+          let image_url = '';
+          if (state.fetchedData.bid.image) {
+            image_url = await handleUploadImage(state.fetchedData.bid.image);
+          }
 
-              if (response.data == 'Success') {
-                props.history.push(`/${state.params.projectId}/bid/${state.params.bidId}`);
-                appDispatch({ type: 'flashMessage', value: 'Bid successfully updated.' });
-              } else {
-                appDispatch({ type: 'flashMessageError', value: 'Editing bid failed. Please try again.' });
-              }
-            } catch (error) {
+          const response = await Axios.post(
+            '/edit-bid',
+            {
+              projectId: state.params.projectId,
+              bidId: state.params.bidId,
+              whatBestDescribesYou: state.fetchedData.bid.whatBestDescribesYou,
+              yearsOfExperience: state.fetchedData.bid.yearsOfExperience,
+              items: state.fetchedData.bid.items,
+              otherDetails: state.fetchedData.bid.otherDetails,
+              phone: state.fetchedData.bid.phone,
+              email: state.fetchedData.bid.email,
+              image: image_url,
+              userCreationDate: appState.user.userCreationDate,
+              token: appState.user.token,
+            },
+            { cancelToken: request.token }
+          );
+
+          if (response.data == 'Success') {
+            props.history.push(`/${state.params.projectId}/bid/${state.params.bidId}`);
+            appDispatch({ type: 'flashMessage', value: 'Bid successfully updated.' });
+          } else {
+            appDispatch({ type: 'flashMessageError', value: 'Editing bid failed. Please try again.' });
+          }
+        } catch (error) {
           console.log({ errorCreatingBid: error });
         }
       })();
@@ -262,22 +264,6 @@ function EditBidPage(props) {
 
     dispatch({ type: 'deleteItem', value: itemToDelete });
   }
-
-    async function handleUploadImage(image) {
-      const data = new FormData();
-
-      data.append('file', image);
-      data.append('upload_preset', 'my-nigerian-projects');
-
-      const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
-        method: 'POST',
-        body: data,
-      });
-
-      const file = await res.json();
-
-      return file.secure_url;
-    }
 
   function handleSubmitBid(e) {
     e.preventDefault();

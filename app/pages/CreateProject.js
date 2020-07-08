@@ -7,7 +7,7 @@ import StateContext from '../StateContext';
 import DispatchContext from '../DispatchContext';
 import { inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import { CSSTransition } from 'react-transition-group';
-import { formatMinDate } from '../helpers/JSHelpers';
+import { formatMinDate, handleUploadImage } from '../helpers/JSHelpers';
 
 function CreateProject(props) {
   const appState = useContext(StateContext);
@@ -227,22 +227,6 @@ function CreateProject(props) {
       };
     }
   }, [state.sendCount]);
-
-  async function handleUploadImage(image) {
-    const data = new FormData();
-
-    data.append('file', image);
-    data.append('upload_preset', 'my-nigerian-projects');
-
-    const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
-      method: 'POST',
-      body: data,
-    });
-
-    const file = await res.json();
-
-    return file.secure_url;
-  }
 
   function handleProjectSubmit(e) {
     e.preventDefault();

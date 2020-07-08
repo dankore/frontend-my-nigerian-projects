@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
-import JSHelpers from '../helpers/JSHelpers';
+import { daysRemaining, handleUploadImage } from '../helpers/JSHelpers';
 
 function CreateBid(props) {
   const appState = useContext(StateContext);
@@ -275,22 +275,6 @@ function CreateBid(props) {
     dispatch({ type: 'deleteItem', value: itemToDelete });
   }
 
-  async function handleUploadImage(image) {
-    const data = new FormData();
-
-    data.append('file', image);
-    data.append('upload_preset', 'my-nigerian-projects');
-
-    const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
-      method: 'POST',
-      body: data,
-    });
-
-    const file = await res.json();
-
-    return file.secure_url;
-  }
-
   function handleSubmitBid(e) {
     e.preventDefault();
     dispatch({ type: 'whatBestDescribesYouRules', value: state.whatBestDescribesYou.value });
@@ -463,7 +447,7 @@ function CreateBid(props) {
               </label>
               <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
             </div>
-            {JSHelpers.daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
+            {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
               <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                   <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
