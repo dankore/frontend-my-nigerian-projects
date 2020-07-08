@@ -46,6 +46,11 @@ function EditProjectPage(props) {
       hasErrors: false,
       message: '',
     },
+    image: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     isFetching: true,
     isSaving: false,
     id: useParams().id,
@@ -124,9 +129,9 @@ function EditProjectPage(props) {
           draft.phone.hasErrors = true;
           draft.phone.message = 'Phone cannot be empty';
         }
-         if(/[^\d\+-]/.test(action.value.trim())){
-             draft.phone.hasErrors = true;
-             draft.phone.message = 'Phone must be only numbers.';
+        if (/[^\d\+-]/.test(action.value.trim())) {
+          draft.phone.hasErrors = true;
+          draft.phone.message = 'Phone must be only numbers.';
         }
         return;
 
@@ -147,6 +152,10 @@ function EditProjectPage(props) {
           draft.description.hasErrors = true;
           draft.description.message = 'Description cannot be empty.';
         }
+        return;
+      case 'imageUpdate':
+        draft.image.hasErrors = false;
+        draft.image.value = action.value;
         return;
       case 'notFound':
         draft.notFound = true;
@@ -205,25 +214,31 @@ function EditProjectPage(props) {
       const request = Axios.CancelToken.source();
       (async function fetchProject() {
         try {
-          const response = await Axios.post(
-            `/project/${state.id}/edit`,
-            {
-              title: state.title.value,
-              location: state.location.value,
-              bidSubmissionDeadline: state.bidSubmissionDeadline.value,
-              description: state.description.value,
-              email: state.email.value,
-              phone: state.phone.value,
-              token: appState.user.token,
-            },
-            {
-              cancelToken: request.token,
-            }
-          );
-          dispatch({ type: 'saveRequestFinished' });
-          props.history.push(`/project/${state.id}`);
-          appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
-        } catch (error) {
+              // GET IMAGE URL
+              let image_url = '';
+              if (state.image.value) {
+                image_url = await handleUploadImage(state.image.value);
+              }
+              const response = await Axios.post(
+                `/project/${state.id}/edit`,
+                {
+                  title: state.title.value,
+                  location: state.location.value,
+                  bidSubmissionDeadline: state.bidSubmissionDeadline.value,
+                  description: state.description.value,
+                  email: state.email.value,
+                  phone: state.phone.value,
+                  image: image_url,
+                  token: appState.user.token,
+                },
+                {
+                  cancelToken: request.token,
+                }
+              );
+              dispatch({ type: 'saveRequestFinished' });
+              props.history.push(`/project/${state.id}`);
+              appDispatch({ type: 'flashMessage', value: 'Project updated successfully.' });
+            } catch (error) {
           appDispatch({ type: 'flashMessageError', value: 'Problem with fetching projects.' });
         }
       })();
@@ -244,6 +259,23 @@ function EditProjectPage(props) {
     dispatch({ type: 'phoneRules', value: state.phone.value });
     dispatch({ type: 'submitRequest' });
   }
+
+   async function handleUploadImage(image) {
+     const data = new FormData();
+
+     data.append('file', image);
+     data.append('upload_preset', 'my-nigerian-projects');
+
+     const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
+       method: 'POST',
+       body: data,
+     });
+
+     const file = await res.json();
+
+     return file.secure_url;
+   }
+
 
 
   if (state.notFound) {
@@ -343,6 +375,14 @@ function EditProjectPage(props) {
             </div>
           </div>
         </fieldset>
+
+        {/* IMAGE UPLOAD */}
+        <div className='w-full py-3 mb-4'>
+          <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
+            Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
+          </label>
+          <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+        </div>
 
         <button disabled={state.isSaving} type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
           <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>

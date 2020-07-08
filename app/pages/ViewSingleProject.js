@@ -19,8 +19,6 @@ function ViewSingleProject(props) {
   const [notFound, setNotfound] = useState(false);
   const [project, setProject] = useState();
 
-  console.log({project})
-
   useEffect(() => {
     const request = Axios.CancelToken.source();
     (async function fetchProject() {
@@ -80,8 +78,8 @@ function ViewSingleProject(props) {
   return (
     <Page margin='mx-2' title={project.title}>
       <div className='shadow-md my-6'>
-        <div className='bg-white rounded-t-lg p-3 flex justify-between items-center'>
-          <div className=''>
+        <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
+          <div>
             <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
               {appState.loggedIn ? (project.author.firstName == appState.user.firstName ? 'Your' : project.author.firstName + "'s") : project.author.firstName + "'s"} project: {project.title}
             </h2>
@@ -115,9 +113,9 @@ function ViewSingleProject(props) {
           )}
         </div>
 
-          {/* IMAGE  */}
-          {project.image && (<img className='object-cover bg-white h-48 w-full' src={`${project.image}`} alt='coverImage'/>)}
-       
+        {/* IMAGE  */}
+        {project.image && <img className='object-cover bg-white h-48 w-full' src={`${project.image}`} alt='coverImage' />}
+
         {/* DESCRIPTION */}
         <p className='pl-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
         <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }} className='p-2 bg-white'>

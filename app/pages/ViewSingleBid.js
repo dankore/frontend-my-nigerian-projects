@@ -154,7 +154,7 @@ function ViewSingleBid(props) {
   return (
     <Page margin='mx-2' title={`Bid for ${state.projectAndBid.projectTitle}`}>
       <div className='shadow-md my-6'>
-        <div className='bg-white rounded-t-lg p-3 flex justify-between items-center '>
+        <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center '>
           <div>
             <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
               {outPutName()}:{' '}

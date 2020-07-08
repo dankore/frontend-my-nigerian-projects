@@ -189,12 +189,12 @@ function CreateProject(props) {
       const request = Axios.CancelToken.source();
       (async function saveProject() {
         try {
-            // GET IMAGE URL
-            let image_url = '';
-            if(state.image.value){
-                image_url = await handleUploadImage(state.image.value)
-            }
-         
+          // GET IMAGE URL
+          let image_url = '';
+          if (state.image.value) {
+            image_url = await handleUploadImage(state.image.value);
+          }
+
           const response = await Axios.post(
             '/create-project',
             {
@@ -228,24 +228,20 @@ function CreateProject(props) {
     }
   }, [state.sendCount]);
 
-  async function handleUploadImage(image){
-      const data = new FormData();
+  async function handleUploadImage(image) {
+    const data = new FormData();
 
-      data.append('file', image );
-      data.append('upload_preset', 'my-nigerian-projects');
+    data.append('file', image);
+    data.append('upload_preset', 'my-nigerian-projects');
 
-      const res = await fetch(
-          '	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload',
-          {
-              method : 'POST',
-              body: data,
-          }
-      );
+    const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
+      method: 'POST',
+      body: data,
+    });
 
-     const file = await res.json();
+    const file = await res.json();
 
     return file.secure_url;
-       
   }
 
   function handleProjectSubmit(e) {
@@ -347,22 +343,11 @@ function CreateProject(props) {
             </div>
           </fieldset>
 
-           <div className="w-full py-3 mb-4">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-              htmlFor="nickname"
-            >
+          <div className='w-full py-3 mb-4'>
+            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
               Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
             </label>
-            <input
-              onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })}
-              name="file"
-              placeholder='Upload an image'
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="photo"
-              type="file"
-              accept="image/*"
-            />
+            <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
           </div>
 
           <button disabled={state.isSaving} type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
