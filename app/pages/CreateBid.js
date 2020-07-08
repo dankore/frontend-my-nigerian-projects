@@ -44,6 +44,11 @@ function CreateBid(props) {
       hasErrors: false,
       message: '',
     },
+    image: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     items: [],
     itemTotal: 0,
     notFound: false,
@@ -94,7 +99,7 @@ function CreateBid(props) {
         return;
       case 'itemNameUpdate':
         if (action.value.length > 50) {
-          draft.item.name = 'Item name cannot exceed 50 chatacters. Please delete this entry.';
+          draft.item.name = 'Item name cannot exceed 50 characters. Please delete this entry.';
         } else {
           draft.item.name = action.value;
         }
@@ -162,6 +167,10 @@ function CreateBid(props) {
           draft.email.message = 'Please provide a valid email.';
         }
         return;
+      case 'imageUpdate':
+        draft.image.hasErrors = false;
+        draft.image.value = action.value;
+        return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
         return;
@@ -212,6 +221,11 @@ function CreateBid(props) {
     if (state.sendCount) {
       (async function saveBid() {
         try {
+          // GET IMAGE URL
+          let image_url = '';
+          if (state.image.value) {
+            image_url = await handleUploadImage(state.image.value);
+          }
           const response = await Axios.post(
             '/create-bid',
             {
@@ -222,6 +236,7 @@ function CreateBid(props) {
               otherDetails: state.otherDetails.value,
               phone: state.phone.value,
               email: state.email.value,
+              image: image_url,
               userCreationDate: appState.user.userCreationDate,
               token: appState.user.token,
             },
@@ -258,6 +273,22 @@ function CreateBid(props) {
     };
 
     dispatch({ type: 'deleteItem', value: itemToDelete });
+  }
+
+  async function handleUploadImage(image) {
+    const data = new FormData();
+
+    data.append('file', image);
+    data.append('upload_preset', 'my-nigerian-projects');
+
+    const res = await fetch('	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+
+    const file = await res.json();
+
+    return file.secure_url;
   }
 
   function handleSubmitBid(e) {
@@ -425,6 +456,13 @@ function CreateBid(props) {
                 </div>
               </div>
             </fieldset>
+
+            <div className='w-full py-3 mb-4'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
+                Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+            </div>
             {JSHelpers.daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
               <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>

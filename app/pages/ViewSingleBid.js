@@ -154,7 +154,7 @@ function ViewSingleBid(props) {
   return (
     <Page margin='mx-2' title={`Bid for ${state.projectAndBid.projectTitle}`}>
       <div className='shadow-md my-6'>
-        <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center '>
+        <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>
             <h2 className='mr-3 text-2xl leading-8 font-semibold tracking-tight font-display text-gray-900 sm:text-3xl sm:leading-9'>
               {outPutName()}:{' '}
@@ -188,6 +188,9 @@ function ViewSingleBid(props) {
           )}
         </div>
 
+        {/* IMAGE  */}
+        {state.projectAndBid.bid.image && <img className='object-cover bg-white h-48 w-full' src={`${state.projectAndBid.bid.image}`} alt='coverImage' />}
+
         {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
         {bidHasItems && (
           <>
@@ -208,7 +211,7 @@ function ViewSingleBid(props) {
         {/* OTHER DETAILS: SHOW ONLY IS OTHER DETAILS FIELD IS NOT EMPTY */}
         {state.projectAndBid.bid.otherDetails && (
           <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }}>
-            <p className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
+            <p className='text-lg mt-6 ml-2 leading-7 font-medium tracking-tight text-gray-900'>Other Details:</p>
             <ReactMarkdown className='border-t border-b p-2 bg-gray-50' source={state.projectAndBid.bid.otherDetails} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
           </div>
         )}
