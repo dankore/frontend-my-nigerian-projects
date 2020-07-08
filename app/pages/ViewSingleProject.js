@@ -116,7 +116,7 @@ function ViewSingleProject(props) {
         </div>
 
           {/* IMAGE  */}
-          {project.image && (<img className='object-contain bg-white h-48 w-full' src={`${project.image}`} alt='projectImage'/>)}
+          {project.image && (<img className='object-cover bg-white h-48 w-full' src={`${project.image}`} alt='coverImage'/>)}
        
         {/* DESCRIPTION */}
         <p className='pl-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>

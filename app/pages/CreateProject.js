@@ -347,12 +347,12 @@ function CreateProject(props) {
             </div>
           </fieldset>
 
-           <div className="w-full px-3 py-3">
+           <div className="w-full py-3 mb-4">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
               htmlFor="nickname"
             >
-              Upload your photo
+              Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
             </label>
             <input
               onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })}
