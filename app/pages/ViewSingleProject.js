@@ -19,6 +19,8 @@ function ViewSingleProject(props) {
   const [notFound, setNotfound] = useState(false);
   const [project, setProject] = useState();
 
+  console.log({project})
+
   useEffect(() => {
     const request = Axios.CancelToken.source();
     (async function fetchProject() {

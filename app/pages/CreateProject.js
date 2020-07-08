@@ -43,6 +43,11 @@ function CreateProject(props) {
       hasErrors: false,
       message: '',
     },
+    image: {
+      value: '',
+      hasErrors: false,
+      message: '',
+    },
     sendCount: 0,
     isSaving: false,
   };
@@ -133,6 +138,10 @@ function CreateProject(props) {
           draft.description.message = 'Description cannot be empty';
         }
         return;
+      case 'imageUpdate':
+        draft.image.hasErrors = false;
+        draft.image.value = action.value;
+        return;
       case 'handleSubmit':
         if (
           // CONDITIONS BEFORE SUBMIT
@@ -180,6 +189,12 @@ function CreateProject(props) {
       const request = Axios.CancelToken.source();
       (async function saveProject() {
         try {
+            // GET IMAGE URL
+            let image_url = '';
+            if(state.image.value){
+                image_url = await handleUploadImage(state.image.value)
+            }
+         
           const response = await Axios.post(
             '/create-project',
             {
@@ -189,6 +204,7 @@ function CreateProject(props) {
               description: state.description.value,
               email: state.email.value,
               phone: state.phone.value,
+              image: image_url,
               token: appState.user.token,
             },
             {
@@ -211,6 +227,26 @@ function CreateProject(props) {
       };
     }
   }, [state.sendCount]);
+
+  async function handleUploadImage(image){
+      const data = new FormData();
+
+      data.append('file', image );
+      data.append('upload_preset', 'my-nigerian-projects');
+
+      const res = await fetch(
+          '	https://api.cloudinary.com/v1_1/dr3lobaf2/image/upload',
+          {
+              method : 'POST',
+              body: data,
+          }
+      );
+
+     const file = await res.json();
+
+    return file.secure_url;
+       
+  }
 
   function handleProjectSubmit(e) {
     e.preventDefault();
@@ -310,6 +346,24 @@ function CreateProject(props) {
               </div>
             </div>
           </fieldset>
+
+           <div className="w-full px-3 py-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+              htmlFor="nickname"
+            >
+              Upload your photo
+            </label>
+            <input
+              onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })}
+              name="file"
+              placeholder='Upload an image'
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="photo"
+              type="file"
+              accept="image/*"
+            />
+          </div>
 
           <button disabled={state.isSaving} type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
