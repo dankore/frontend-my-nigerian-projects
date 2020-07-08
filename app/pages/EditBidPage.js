@@ -72,7 +72,7 @@ function EditBidPage(props) {
 
   function reducer(draft, action) {
     switch (action.type) {
-      case 'fetchingProjectComplete':
+      case 'fetchingBidComplete':
         draft.fetchedData = action.value;
         draft.itemTotal = action.value.bid.items.reduce((total, cur) => total + +cur.quantity * +cur.price_per_item, 0);
         return;
@@ -192,7 +192,7 @@ function EditBidPage(props) {
       try {
         const { data } = await Axios.post('/view-single-bid', { projectId: state.params.projectId, bidId: state.params.bidId }, { cancelToken: request.token });
         if (data) {
-          dispatch({ type: 'fetchingProjectComplete', value: data });
+          dispatch({ type: 'fetchingBidComplete', value: data });
         } else {
           dispatch({ type: 'notFound' });
         }

@@ -68,6 +68,7 @@ function EditProjectPage(props) {
         draft.description.value = action.value.description;
         draft.email.value = action.value.email;
         draft.phone.value = action.value.phone;
+        draft.image.value = action.value.image;
         draft.isFetching = false;
         return;
       case 'titleChange':
