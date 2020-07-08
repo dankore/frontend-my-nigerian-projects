@@ -217,7 +217,7 @@ function ViewSingleBid(props) {
         )}
 
         {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
-        <div className='bg-gray-700 py-2 rounded-b text-white'>
+        <div className='bg-gray-700 py-2 lg:rounded-b-lg text-white'>
           <div className='flex justify-center'>
             <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
               <img className='h-10 w-10 rounded-full' src={state.profileInfo.avatar} alt='ProfilePic' />
