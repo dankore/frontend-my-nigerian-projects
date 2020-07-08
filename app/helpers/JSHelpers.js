@@ -5,7 +5,7 @@ module.exports = {
     data.append('file', image);
     data.append('upload_preset', 'my-nigerian-projects');
 
-    const res = await fetch(`${process.env.CLOUDINARY_API_BASE_URL}`, {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
       method: 'POST',
       body: data,
     });
