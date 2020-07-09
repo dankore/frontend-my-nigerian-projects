@@ -8,6 +8,7 @@ import ProfileProjects from '../components/ProfileProjects';
 import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
+import { handleUploadImage } from '../helpers/JSHelpers';
 
 function ProfilePage(props) {
   const appDispatch = useContext(DispatchContext);
@@ -29,6 +30,12 @@ function ProfilePage(props) {
         followerCount: '',
         followingCount: '',
       },
+    },
+    profilePicFile: {
+      value: '',
+      hasErrors: false,
+      message: '',
+      submitCountChangePic: 0,
     },
   });
 
@@ -105,11 +112,46 @@ function ProfilePage(props) {
         }
       })();
       // CANCEL REQUEST
-      return () => {
-        request.cancel();
-      };
+      return () => request.cancel();
     }
   }, [state.stopFollowingRequestCount]);
+
+  // CHANGE PROFILE PICTURE
+  useEffect(() => {
+    try {
+      if (state.profilePicFile.submitCountChangePic) {
+        const request = Axios.CancelToken.source();
+        (async function changeProfilePic() {
+          // SAVE IMAGE TO CLOUDINARY AND GET URL
+          let image_url = '';
+          if (state.profilePicFile.value) {
+            image_url = await handleUploadImage(state.profilePicFile.value);
+          }
+
+          const response = await Axios.post(
+            '/change-profile-pic',
+            {
+              userId: appState.user._id,
+              avatar: image_url,
+              token: appState.user.token,
+            },
+            { cancelToken: request.token }
+          );
+          if (response.data == 'Success') {
+            setState(draft => {
+              draft.profileData.profileAvatar = image_url;
+            });
+
+            appDispatch({ type: 'updateAvatar', value: image_url });
+          }
+        })();
+
+        return () => request.cancel();
+      }
+    } catch (error) {
+      console.log({ submitCountChangePicError: error.message });
+    }
+  }, [state.profilePicFile.submitCountChangePic]);
 
   function startFollowing() {
     setState(draft => {
@@ -123,6 +165,23 @@ function ProfilePage(props) {
     });
   }
 
+  function handleChangeProfilePic(e) {
+    let files = e.target.files[0];
+    setState(draft => {
+      draft.profilePicFile.value = files;
+    });
+  }
+
+  function handleChangeProfilePicSubmit(e) {
+    e.preventDefault();
+
+    if (state.profilePicFile.value && !state.profilePicFile.hasErrors) {
+      setState(draft => {
+        draft.profilePicFile.submitCountChangePic++;
+      });
+    }
+  }
+
   return (
     <>
       <div className='w-full shadow-sm border-b border-gray-500 bg-white'>
@@ -130,9 +189,9 @@ function ProfilePage(props) {
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
-              <Link to={`/profile/${state.profileData.profileUsername}`}>
+              <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })}>
                 <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
-              </Link>
+              </div>
               <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
@@ -166,26 +225,43 @@ function ProfilePage(props) {
           </NavLink>
         </ul>
       </div>
+      {/* MODAL CHANGE PROFILE IMAGE */}
+      {appState.toggleModal && (
+        <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
+          <div className='w-full py-3 mb-4'>
+            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
+              Upload Profile Picture <span className='text-gray-500 text-xs'>Optional</span>
+            </label>
+            <input onChange={handleChangeProfilePic} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+          </div>
 
-      {/* PAGE */}
+          <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+              <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+            </svg>
+            Submit bid
+          </button>
+        </form>
+      )}
 
+      {/* PAGES */}
       <Switch>
         <Route exact path='/profile/:username'>
           <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`}>
             <ProfileProjects />
-            </Page>
-          </Route>
-          <Route path='/profile/:username/followers'>
-            <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
-              <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
-            </Page>
-          </Route>
-          <Route path='/profile/:username/following'>
-            <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
+          </Page>
+        </Route>
+        <Route path='/profile/:username/followers'>
+          <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
+            <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
+          </Page>
+        </Route>
+        <Route path='/profile/:username/following'>
+          <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
-            </Page>
-          </Route>
-        </Switch>
+          </Page>
+        </Route>
+      </Switch>
     </>
   );
 }

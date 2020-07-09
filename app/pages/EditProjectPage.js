@@ -215,7 +215,7 @@ function EditProjectPage(props) {
       const request = Axios.CancelToken.source();
       (async function fetchProject() {
         try {
-          // GET IMAGE URL
+          // SAVE IMAGE TO CLOUDINARY AND GET URL
           let image_url = '';
           if (state.image.value) {
             image_url = await handleUploadImage(state.image.value);
