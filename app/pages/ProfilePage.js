@@ -118,7 +118,7 @@ function ProfilePage(props) {
   }, [state.stopFollowingRequestCount]);
 
   // CHANGE PROFILE PICTURE
-  useEffect(()=>{
+  useEffect(() => {
       try {
           if(state.profilePicFile.submitCountChangePic){
            
@@ -130,11 +130,19 @@ function ProfilePage(props) {
                     image_url = await handleUploadImage(state.profilePicFile.value);
                 }
 
-              const response = await Axios.post('/change-profile-pic', { profilePic: image_url, token: appState.user.token }, { cancelToken: request.token });
+              const response = await Axios.post('/change-profile-pic', 
+              { 
+                 userId: appState.user._id,
+                 avatar: image_url, 
+                 token: appState.user.token,
+
+                }, 
+                { cancelToken: request.token }
+                );
                 console.log(response.data);
-              if(response.data){
+              if(response.data=='Success'){
                 setState(draft => {
-                    draft.profileData.profileAvatar = response.data;
+                    draft.profileData.profileAvatar = image_url;
                 })
               }
 
@@ -161,7 +169,7 @@ function ProfilePage(props) {
 
   function handleChangeProfilePic(e){
       let files = e.target.files[0]
-      console.log(files)
+      console.log(files, appState.user._id)
       setState(draft => {
           draft.profilePicFile.value = files;
       })
