@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOMServer from "react-dom/server";
-import fs from "fs";
-import Footer from "./app/components/Footer";
-import Header from "./app/components/Header";
-import LoadingDotsIcon from "./app/components/LoadingDotsIcon";
-import { StaticRouter as Router } from "react-router-dom";
-import StateContext from "./app/StateContext";
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import fs from 'fs';
+import Footer from './app/components/Footer';
+import Header from './app/components/Header';
+import LoadingDotsIcon from './app/components/LoadingDotsIcon';
+import { StaticRouter as Router } from 'react-router-dom';
+import StateContext from './app/StateContext';
 
 function Shell() {
   return (
@@ -34,7 +34,7 @@ function html(x) {
         integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous">
       </script>
     </head>
-    <body class="bg-gray-200">
+    <body style="background-color: #f0f2f5; -webkit-font-smoothing: antialiased;">
       <div id="app">
       ${x}
       </div>
@@ -69,8 +69,8 @@ const overallHtmlString = html(reactHtml);
   will fail if the directory we told it to live within
   ("app" in this case) does not already exist.
 */
-const fileName = "./app/index-template.html";
+const fileName = './app/index-template.html';
 const stream = fs.createWriteStream(fileName);
-stream.once("open", () => {
+stream.once('open', () => {
   stream.end(overallHtmlString);
 });
