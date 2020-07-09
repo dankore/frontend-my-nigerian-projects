@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
 import { Link, useParams, NavLink, Switch, Route, withRouter } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
 
 function ProfilePage(props) {
+ const modalOverlay = useRef(null)
+ const modal = useRef(null);
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const { username } = useParams();
@@ -130,9 +132,9 @@ function ProfilePage(props) {
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
-              <Link to={`/profile/${state.profileData.profileUsername}`}>
+              <div className='cursor-pointer' onClick={()=> appDispatch({type: 'toggleChangeProfilePic'})}>
                 <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
-              </Link>
+              </div>
               <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
@@ -167,14 +169,13 @@ function ProfilePage(props) {
         </ul>
       </div>
       {/* MODAL CHANGE PROFILE IMAGE */}
-      <div className='modal'>
+      {appState.toggleModal && ( <div style={{zIndex: 1}} className='modal absolute bg-white'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
           cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+      </div>)}
 
       {/* PAGES */}
-
       <Switch>
         <Route exact path='/profile/:username'>
           <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`}>

@@ -20322,6 +20322,56 @@ video {
 MY NON-TAILWIND STYLES
 */
 
+/* MODAL */
+
+.modal-overlay {
+  background-color: silver;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* IE8 and lower */
+  /* zoom: 1; */
+  /* Triggers "hasLayout" in IE 7 and lower */
+  /* z-index: -1; */
+}
+
+.modal-overlay.active {
+  z-index: 0;
+  opacity: 0.7;
+  filter: alpha(opacity=50);
+  /* IE8 and lower */
+  zoom: 1;
+  /* Triggers "hasLayout" in IE 7 and lower */
+  cursor: pointer;
+}
+
+.modal {
+  padding: 10px 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 1;
+  transition: 200ms ease-in-out;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 1;
+}
+
+.modal::before {
+  content: "Add New Item";
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
 /* PAGINATION */
 
 .pagination {
