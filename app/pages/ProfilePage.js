@@ -160,8 +160,10 @@ function ProfilePage(props) {
   }
 
   function handleChangeProfilePic(e){
+      let files = e.target.files[0]
+      console.log(files)
       setState(draft => {
-          draft.profilePicFile.value = e.target.files[0];
+          draft.profilePicFile.value = files;
       })
   }
 
@@ -173,7 +175,7 @@ function ProfilePage(props) {
               draft.profilePicFile.submitCountChangePic++;
           })
       }
-      
+
   }
 
   return (
