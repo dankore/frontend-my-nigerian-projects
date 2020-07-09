@@ -125,6 +125,10 @@ function ProfilePage(props) {
     });
   }
 
+  function handleChangeProfilePicSubmit(e){
+      e.preventDefault();
+  }
+
   return (
     <>
       <div className='w-full shadow-sm border-b border-gray-500 bg-white'>
@@ -169,14 +173,24 @@ function ProfilePage(props) {
         </ul>
       </div>
       {/* MODAL CHANGE PROFILE IMAGE */}
-      {appState.toggleModal && ( <div style={{zIndex: 1}} className='modal absolute bg-white'>
-          <div className='w-full py-3 mb-4'>
+      {appState.toggleModal && ( 
+          <form onSubmit={handleChangeProfilePicSubmit} style={{zIndex: 1}} className='modal absolute bg-white'>
+          
+               <div className='w-full py-3 mb-4'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
                 Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
               </label>
               <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
             </div>
-      </div>)}
+           
+             <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                  <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+                </svg>
+                Submit bid
+              </button>
+          </form>
+      )}
 
       {/* PAGES */}
       <Switch>
