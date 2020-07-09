@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../components/Page';
 import StateContext from '../StateContext';
 import { Link, useParams, NavLink, Switch, Route, withRouter } from 'react-router-dom';
@@ -8,10 +8,10 @@ import ProfileProjects from '../components/ProfileProjects';
 import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
+import { handleUploadImage } from '../helpers/JSHelpers';
+
 
 function ProfilePage(props) {
- const modalOverlay = useRef(null)
- const modal = useRef(null);
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
   const { username } = useParams();
@@ -32,6 +32,12 @@ function ProfilePage(props) {
         followingCount: '',
       },
     },
+    profilePicFile: {
+        value: '',
+        hasErrors: false,
+        message: '',
+        submitCountChangePic: 0,
+    }
   });
 
   useEffect(() => {
@@ -107,11 +113,39 @@ function ProfilePage(props) {
         }
       })();
       // CANCEL REQUEST
-      return () => {
-        request.cancel();
-      };
+      return () => request.cancel();
     }
   }, [state.stopFollowingRequestCount]);
+
+  // CHANGE PROFILE PICTURE
+  useEffect(()=>{
+      try {
+          if(state.profilePicFile.submitCountChangePic){
+           
+          const request = Axios.CancelToken.source();
+          (async function changeProfilePic(){
+                 // GET IMAGE URL
+                let image_url = '';
+                if (state.profilePicFile.value) {
+                    image_url = await handleUploadImage(state.profilePicFile.value);
+                }
+
+              const response = await Axios.post('/change-profile-pic', { profilePic: image_url, token: appState.user.token }, { cancelToken: request.token });
+                console.log(response.data);
+              if(response.data){
+                setState(draft => {
+                    draft.profileData.profileAvatar = response.data;
+                })
+              }
+
+          })();
+
+          return () => request.cancel();
+      }
+      } catch (error) {
+          console.log({submitCountChangePicError: error.message})
+      }
+  }, [state.profilePicFile.submitCountChangePic])
 
   function startFollowing() {
     setState(draft => {
@@ -125,8 +159,21 @@ function ProfilePage(props) {
     });
   }
 
+  function handleChangeProfilePic(e){
+      setState(draft => {
+          draft.profilePicFile.value = e.target.files[0];
+      })
+  }
+
   function handleChangeProfilePicSubmit(e){
       e.preventDefault();
+
+      if(state.profilePicFile.value && !state.profilePicFile.hasErrors){
+          setState(draft=> {
+              draft.profilePicFile.submitCountChangePic++;
+          })
+      }
+      
   }
 
   return (
@@ -175,12 +222,11 @@ function ProfilePage(props) {
       {/* MODAL CHANGE PROFILE IMAGE */}
       {appState.toggleModal && ( 
           <form onSubmit={handleChangeProfilePicSubmit} style={{zIndex: 1}} className='modal absolute bg-white'>
-          
                <div className='w-full py-3 mb-4'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
-                Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
+                Upload Profile Picture <span className='text-gray-500 text-xs'>Optional</span>
               </label>
-              <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+              <input onChange={handleChangeProfilePic} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
             </div>
            
              <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
