@@ -40,6 +40,8 @@ function ProfilePage(props) {
     }
   });
 
+  console.log(state.profileData)
+
   useEffect(() => {
     // IF COMPONENT IS UNMOUNTED, CANCEL AXIOS REQUEST
     const request = Axios.CancelToken.source();
@@ -139,7 +141,6 @@ function ProfilePage(props) {
                 }, 
                 { cancelToken: request.token }
                 );
-                console.log(response.data);
               if(response.data=='Success'){
                 setState(draft => {
                     draft.profileData.profileAvatar = image_url;
@@ -169,7 +170,6 @@ function ProfilePage(props) {
 
   function handleChangeProfilePic(e){
       let files = e.target.files[0]
-      console.log(files, appState.user._id)
       setState(draft => {
           draft.profilePicFile.value = files;
       })
