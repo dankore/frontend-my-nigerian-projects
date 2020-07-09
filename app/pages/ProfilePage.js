@@ -170,9 +170,12 @@ function ProfilePage(props) {
       </div>
       {/* MODAL CHANGE PROFILE IMAGE */}
       {appState.toggleModal && ( <div style={{zIndex: 1}} className='modal absolute bg-white'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <div className='w-full py-3 mb-4'>
+              <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
+                Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
+              </label>
+              <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+            </div>
       </div>)}
 
       {/* PAGES */}
