@@ -214,10 +214,10 @@ function EditBidPage(props) {
   useEffect(() => {
     const request = Axios.CancelToken.source();
     if (state.sendCount) {
-     dispatch({ type: 'saveRequestStarted' });
+      dispatch({ type: 'saveRequestStarted' });
       (async function saveEditedBid() {
         try {
-          // GET IMAGE URL
+          // SAVE IMAGE TO CLOUDINARY AND GET URL
           let image_url = '';
           if (state.fetchedData.bid.image) {
             image_url = await handleUploadImage(state.fetchedData.bid.image);
@@ -241,7 +241,7 @@ function EditBidPage(props) {
             { cancelToken: request.token }
           );
 
-           dispatch({ type: 'saveRequestFinished' });
+          dispatch({ type: 'saveRequestFinished' });
 
           if (response.data == 'Success') {
             props.history.push(`/${state.params.projectId}/bid/${state.params.bidId}`);
@@ -457,7 +457,7 @@ function EditBidPage(props) {
             <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
               <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
             </svg>
-             {state.isSaving ? 'Saving...' : 'Save Updates'}
+            {state.isSaving ? 'Saving...' : 'Save Updates'}
           </button>
         </div>
       </form>

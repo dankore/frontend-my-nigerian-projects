@@ -86,8 +86,8 @@ function Main() {
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
         return;
       case 'toggleChangeProfilePic':
-          draft.toggleModal = !draft.toggleModal;
-          return;
+        draft.toggleModal = !draft.toggleModal;
+        return;
       case 'alwaysCloseTheseMenus':
         draft.isSideMenuOpen = false;
         draft.isSettingsTabOpen = false;
@@ -101,6 +101,10 @@ function Main() {
         draft.user.username = action.data.username;
         draft.user.firstName = action.data.firstName;
         draft.user.lastName = action.data.lastName;
+        return;
+      case 'updateAvatar':
+        localStorage.setItem('myNigerianProjects-avatar', action.value);
+        draft.user.avatar = action.value;
         return;
     }
   }
