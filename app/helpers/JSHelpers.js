@@ -1,18 +1,46 @@
 module.exports = {
-  handleUploadImage: async function (image) {
+  handleUploadImage: async function (image, type) {
     const data = new FormData();
-
     data.append('file', image);
-    data.append('upload_preset', 'my-nigerian-projects');
 
-    const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
-      method: 'POST',
-      body: data,
-    });
+    switch (type) {
+      case 'profilePicture': {
+        data.append('upload_preset', 'profile-pictures');
 
-    const file = await res.json();
+        const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
+          method: 'POST',
+          body: data,
+        });
 
-    return file.secure_url;
+        const file = await res.json();
+
+        return file.secure_url;
+      }
+      case 'project': {
+        data.append('upload_preset', 'projects-files');
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
+          method: 'POST',
+          body: data,
+        });
+
+        const file = await res.json();
+
+        return file.secure_url;
+      }
+      case 'bid': {
+        data.append('upload_preset', 'bids-files');
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
+          method: 'POST',
+          body: data,
+        });
+
+        const file = await res.json();
+
+        return file.secure_url;
+      }
+    }
   },
   removeDupsInObject_Id: function (arrayOfObjects) {
     let checker = [],

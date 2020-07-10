@@ -220,7 +220,7 @@ function EditBidPage(props) {
           // SAVE IMAGE TO CLOUDINARY AND GET URL
           let image_url = '';
           if (state.fetchedData.bid.image) {
-            image_url = await handleUploadImage(state.fetchedData.bid.image);
+            image_url = await handleUploadImage(state.fetchedData.bid.image, 'bid');
           }
 
           const response = await Axios.post(

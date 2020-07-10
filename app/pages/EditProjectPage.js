@@ -218,7 +218,7 @@ function EditProjectPage(props) {
           // SAVE IMAGE TO CLOUDINARY AND GET URL
           let image_url = '';
           if (state.image.value) {
-            image_url = await handleUploadImage(state.image.value);
+            image_url = await handleUploadImage(state.image.value, 'project');
           }
 
           const response = await Axios.post(
