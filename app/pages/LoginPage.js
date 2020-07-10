@@ -109,7 +109,7 @@ function LoginPage(props) {
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
             </label>
-            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' className='shadow-inner w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
+            <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' autoFocus className='shadow-inner w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.username.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
                 {state.username.message}
