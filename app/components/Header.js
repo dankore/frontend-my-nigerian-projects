@@ -40,7 +40,7 @@ function Header(props) {
 
             {/* SHOW THIS SIDE MENU ON SMALLER SCREENS */}
             {appState && appState.isSideMenuOpen && (
-              <div style={{ zIndex: 50, top: 45, left: 0, bottom: 0, right: 0 }} className='block bg-blue-600 absolute min-h-screen w-full lg:hidden lg:rounded-lg'>
+              <div style={{ zIndex: 50 }} className='block bg-blue-600 absolute min-h-screen w-full lg:hidden lg:rounded-lg'>
                 <div className='grid grid-cols-1 my-5 bg-blue-600'>
                   {appState && appState.loggedIn && (
                     <Link onClick={() => appDispatch({ type: 'alwaysCloseTheseMenus' })} className='flex items-center p-2 shadow-lg text-md rounded-lg m-2 bg-white hover:bg-gray-200' to={`/profile/${appState.user.username}`}>
