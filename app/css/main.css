@@ -20325,8 +20325,6 @@ MY NON-TAILWIND STYLES
 /* MODAL */
 
 .modal-overlay {
-  background-color: #0000008c;
-  opacity: 0.5;
   position: fixed;
   top: 0;
   right: 0;

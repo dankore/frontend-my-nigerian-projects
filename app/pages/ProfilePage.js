@@ -9,6 +9,7 @@ import ProfileFollowTemplate from '../components/ProfileFollowTemplate';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import DispatchContext from '../DispatchContext';
 import { handleUploadImage } from '../helpers/JSHelpers';
+import ImageViewer from '../components/ImageViewer';
 
 function ProfilePage(props) {
   const appDispatch = useContext(DispatchContext);
@@ -18,6 +19,7 @@ function ProfilePage(props) {
   const [state, setState] = useImmer({
     followActionLoading: false,
     changingProfilePic: false,
+    toggleOptions: false,
     startFollowingRequestCount: 0,
     stopFollowingRequestCount: 0,
     profileData: {
@@ -202,9 +204,8 @@ function ProfilePage(props) {
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
-
               {isOwner() ? (
-                <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })}>
+                <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })}>
                   <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                     <i className='fas fa-pen'></i> Edit
@@ -250,11 +251,11 @@ function ProfilePage(props) {
         </ul>
       </div>
       {/* MODAL CHANGE PROFILE IMAGE */}
-      {appState.toggleModal && (
+      {appState.toggleModals && (
         <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
           <div className='w-full py-3 mb-4'>
             <div className='flex w-full justify-end mb-1'>
-              <button onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <button onClick={() => appDispatch({ type: 'toggleModalOverlay' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 X
               </button>
             </div>
@@ -271,6 +272,20 @@ function ProfilePage(props) {
             {state.changingProfilePic ? 'Updating...' : 'Update Profile Picture'}
           </button>
         </form>
+      )}
+
+      {/* OPTIONS */}
+      {appState.toggleOptionsProfileImage && (
+        <div className='modal shadow-lg absolute bg-gray-200'>
+          <button className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <i className='fas fa-eye text-lg mr-1'></i>
+            <p>View Profile Picture</p>
+          </button>
+          <button className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <i className='fas fa-pen text-lg mr-1'></i> Edit
+            <p>Update Profile Picture</p>
+          </button>
+        </div>
       )}
 
       {/* PAGES */}
