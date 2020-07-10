@@ -42,14 +42,6 @@ MY NON-TAILWIND STYLES
   max-width: 90%;
 }
 
-
-.modal::before {
-  content: "Change Profile Picture";
-  margin-top: 5px;
-  margin-bottom: 10px;
-  display: block; 
- }
-
 /* PAGINATION */
 .pagination {
   margin: 15px auto;

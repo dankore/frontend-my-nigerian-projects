@@ -190,8 +190,12 @@ function ProfilePage(props) {
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
               <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })}>
-                <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full' src={state.profileData.profileAvatar} alt='Profile Pic' />
+                <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
+                <div className='text-xs -mt-6 -ml-3 bg-gray-800 text-white absolute px-1 py-px rounded'>
+                  <i className='fas fa-pen'></i> Edit
+                </div>
               </div>
+
               <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
@@ -230,7 +234,7 @@ function ProfilePage(props) {
         <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
           <div className='w-full py-3 mb-4'>
             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
-              Upload Profile Picture <span className='text-gray-500 text-xs'>Optional</span>
+              Update Profile Picture <span className='text-gray-500 text-xs'>Optional</span>
             </label>
             <input onChange={handleChangeProfilePic} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
           </div>
