@@ -253,15 +253,15 @@ function ProfilePage(props) {
       {appState.toggleModal && (
         <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
           <div className='w-full py-3 mb-4'>
-            <div className='flex w-full justify-end'>
-              <button onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <div className='flex w-full justify-end mb-1'>
+              <button onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                 X
               </button>
             </div>
-            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3' htmlFor='nickname'>
+            <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold' htmlFor='nickname'>
               Update Profile Picture
             </label>
-            <input onChange={handleChangeProfilePic} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
+            <input onChange={handleChangeProfilePic} name='file' placeholder='Upload an image' className='mt-3 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
           </div>
 
           <button type='submit' className='mb-6 relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
