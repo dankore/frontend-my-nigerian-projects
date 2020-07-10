@@ -59,6 +59,7 @@ function Main() {
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
     toggleModal: false,
+    toggleUpdateProfileImage: false,
     toggleModalOverLayImageViewer: false,
     toggleOptionsProfileImage: false,
   };
@@ -99,6 +100,9 @@ function Main() {
         return;
       case 'toggleOptionsProfileImage':
         draft.toggleOptionsProfileImage = !draft.toggleOptionsProfileImage;
+        return;
+      case 'toggleUpdateProfileImage':
+        draft.toggleUpdateProfileImage = !draft.toggleUpdateProfileImage;
         return;
       case 'updateUserInfo':
         localStorage.setItem('myNigerianProjects-id', action.data._id);

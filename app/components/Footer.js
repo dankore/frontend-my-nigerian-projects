@@ -10,8 +10,8 @@ function Footer() {
     <div className='text-center mt-10'>
       {/* MODAL OVERLAY */}
       {appState && appState.toggleOptionsProfileImage && <div onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='modal-overlay absolute cursor-pointer'></div>}
-      {/* {appState && appState.toggleModalOverLayImageViewer && <div onClick={() => appDispatch({ type: 'toggleModalOverlayImageViewer' })} className='modal-overlay bg-gray-900 absolute cursor-pointer'></div>}
-      {appState && appState.toggleModal && <div onClick={() => appDispatch({ type: 'toggleModalOverlay' })} className='modal-overlay absolute cursor-pointer'></div>} */}
+      {/* {appState && appState.toggleModalOverLayImageViewer && <div onClick={() => appDispatch({ type: 'toggleModalOverlayImageViewer' })} className='modal-overlay bg-gray-900 absolute cursor-pointer'></div>} */}
+      {appState && appState.toggleUpdateProfileImage && <div onClick={() => appDispatch({ type: 'toggleUpdateProfileImage' })} style={{ backgroundColor: '#0000008c' }} className='modal-overlay bg-opacity-50 absolute cursor-pointer'></div>}
       <div>
         <Link to='/'>Home</Link> | <Link to='/how-to-bid'>How to Bid</Link> | <Link to='/about'>About</Link> | <Link to='/terms'>Terms</Link> | <Link to='/privacy'>Privacy</Link> | <Link to='/cookies'>Cookies</Link> | <a href='https://github.com/dankore/frontend-my-nigerian-projects'>GitHub</a>
       </div>
