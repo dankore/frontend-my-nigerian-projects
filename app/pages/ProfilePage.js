@@ -198,9 +198,9 @@ function ProfilePage(props) {
     appDispatch({ type: 'toggleImageViewer' });
   }
 
-   function handleOpenImageViewerNotLoggedIn() {
-     appDispatch({ type: 'toggleImageViewer' });
-   }
+  function handleOpenImageViewerNotLoggedIn() {
+    appDispatch({ type: 'toggleImageViewer' });
+  }
 
   function handleChangeProfilePicSubmit(e) {
     e.preventDefault();
@@ -219,14 +219,15 @@ function ProfilePage(props) {
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
             <div className='flex items-center flex-wrap'>
-              {isOwner() ? (
+              {isOwner() && (
                 <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })}>
                   <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                     <i className='fas fa-pen'></i> Edit
                   </div>
                 </div>
-              ) : (
+              )}
+              {!isOwner() && (
                 <div className='cursor-pointer' onClick={handleOpenImageViewerNotLoggedIn}>
                   <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
