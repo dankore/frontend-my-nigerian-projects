@@ -58,7 +58,7 @@ function ProfileProjects() {
     return () => {
       request.cancel();
     };
-  }, [username]);
+  }, [username, appState.user.avatar]);
 
   function showThisWhenNoProject() {
     if (appState.loggedIn) {

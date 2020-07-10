@@ -60,7 +60,7 @@ function ProfilePage(props) {
     })();
     // CANCEL REQUEST
     return () => request.cancel();
-  }, [username]);
+  }, [username, state.profilePicFile.reRenderProjects]);
 
   // ADD FOLLOW
   useEffect(() => {
