@@ -283,12 +283,17 @@ function ProfilePage(props) {
       {/* OPTIONS */}
       {appState.toggleOptionsProfileImage && (
         <div className='modal shadow-lg absolute bg-white border'>
+          <div className='flex w-full justify-end mb-1'>
+            <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              X
+            </button>
+          </div>
           <button className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             <i className='fas fa-eye text-lg mr-1'></i>
             <p>View Profile Picture</p>
           </button>
           <button onClick={handleOpenUploadProfilePicture} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <i className='fas fa-pen text-lg mr-1'></i> Edit
+            <i className='fas fa-pen text-lg mr-1'></i>
             <p>Update Profile Picture</p>
           </button>
         </div>
