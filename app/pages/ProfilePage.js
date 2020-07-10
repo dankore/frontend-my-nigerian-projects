@@ -233,6 +233,11 @@ function ProfilePage(props) {
       {appState.toggleModal && (
         <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
           <div className='w-full py-3 mb-4'>
+            <div className='flex w-full justify-end'>
+              <button onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                X
+              </button>
+            </div>
             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
               Update Profile Picture <span className='text-gray-500 text-xs'>Optional</span>
             </label>
