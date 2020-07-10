@@ -1,11 +1,12 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react';
 
-function ImageViewer() {
+function ImageViewer({ image }) {
   return (
-    <>
-      
-    </>
-  )
+    <div style={{ zIndex: 1 }} className='modal absolute bg-white'>
+      <img src={image} alt='profilePic' />
+      Profile Picture
+    </div>
+  );
 }
 
-export default ImageViewer
+export default ImageViewer;

@@ -60,7 +60,7 @@ function Main() {
     isSettingsTabOpen: false,
     toggleModal: false,
     toggleUpdateProfileImage: false,
-    toggleModalOverLayImageViewer: false,
+    toggleImageViewer: false,
     toggleOptionsProfileImage: false,
   };
 
@@ -95,8 +95,8 @@ function Main() {
         draft.isSideMenuOpen = false;
         draft.isSettingsTabOpen = false;
         return;
-      case 'toggleModalOverlayImageViewer':
-        draft.toggleModalOverLayImageViewer = !draft.toggleModalOverLayImageViewer;
+      case 'toggleImageViewer':
+        draft.toggleImageViewer = !draft.toggleImageViewer;
         return;
       case 'toggleOptionsProfileImage':
         draft.toggleOptionsProfileImage = !draft.toggleOptionsProfileImage;
