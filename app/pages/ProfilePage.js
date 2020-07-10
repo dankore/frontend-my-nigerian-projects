@@ -130,7 +130,7 @@ function ProfilePage(props) {
           // SAVE IMAGE TO CLOUDINARY AND GET URL
           let image_url = '';
           if (state.profilePicFile.value) {
-            image_url = await handleUploadImage(state.profilePicFile.value);
+            image_url = await handleUploadImage(state.profilePicFile.value, 'profilePicture');
           }
 
           const response = await Axios.post(
