@@ -151,6 +151,7 @@ function ProfilePage(props) {
             });
 
             appDispatch({ type: 'updateAvatar', value: image_url });
+            appDispatch({ type: 'toggleUpdateProfileImage' });
           }
         })();
 
