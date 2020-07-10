@@ -24,6 +24,7 @@ function ViewSingleBid(props) {
         otherDetails: '',
         phone: '',
         email: '',
+        image: 'https://gravatar.com/avatar/palceholder?s=500',
         userCreationDate: '',
         bidCreationDate: '',
         updatedDate: '',

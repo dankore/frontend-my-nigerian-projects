@@ -90,7 +90,7 @@ function HomePage() {
           setProjectsThoseIFollow(draft => {
             draft.isLoading = false;
             draft.feed = response.data;
-            draft.pageCount = Math.ceil(response.data.length / draft.perPage);
+            draft.pageCount = Math.ceil(response.data.length / draft.perPage); // FOR PAGINATION
           });
         } catch (error) {
           console.log('Fetching Projects From Those You Follow Failed. Please Try Again.');
