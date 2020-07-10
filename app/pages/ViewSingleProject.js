@@ -18,7 +18,6 @@ function ViewSingleProject(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotfound] = useState(false);
   const [project, setProject] = useState({ image: 'https://gravatar.com/avatar/palceholder?s=500' });
-  console.log(project);
 
   useEffect(() => {
     const request = Axios.CancelToken.source();
