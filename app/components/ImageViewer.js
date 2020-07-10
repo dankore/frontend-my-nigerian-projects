@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 function ImageViewer({ image, name }) {
   return (
-    <div style={{ zIndex: 1 }} className='modal absolute bg-white'>
+    <div className='modal shadow-lg absolute bg-white'>
       <img src={image} alt='profilePic' />
       {name}
     </div>
