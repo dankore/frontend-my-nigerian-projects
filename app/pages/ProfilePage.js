@@ -191,7 +191,7 @@ function ProfilePage(props) {
             <div className='flex items-center flex-wrap'>
               <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleChangeProfilePic' })}>
                 <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
-                <div className='text-xs -mt-6 -ml-3 bg-gray-800 text-white absolute px-1 py-px rounded'>
+                <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                   <i className='fas fa-pen'></i> Edit
                 </div>
               </div>
