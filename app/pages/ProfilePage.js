@@ -235,7 +235,7 @@ function ProfilePage(props) {
                 </div>
               )}
 
-              <Link onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
+              <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
             </div>
@@ -314,7 +314,7 @@ function ProfilePage(props) {
         </form>
       )}
       {/* VIEW PROFILE IMAGE */}
-      {appState.toggleImageViewer && <ImageViewer image={state.profileData.profileAvatar} />}
+      {appState.toggleImageViewer && <ImageViewer name={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} image={state.profileData.profileAvatar} />}
 
       {/* PAGES */}
       <Switch>
