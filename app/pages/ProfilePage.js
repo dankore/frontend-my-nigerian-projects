@@ -198,6 +198,10 @@ function ProfilePage(props) {
     appDispatch({ type: 'toggleImageViewer' });
   }
 
+   function handleOpenImageViewerNotLoggedIn() {
+     appDispatch({ type: 'toggleImageViewer' });
+   }
+
   function handleChangeProfilePicSubmit(e) {
     e.preventDefault();
 
@@ -223,12 +227,15 @@ function ProfilePage(props) {
                   </div>
                 </div>
               ) : (
-                <Link className='text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
+                <div className='cursor-pointer' onClick={handleOpenImageViewerNotLoggedIn}>
                   <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
-                </Link>
+                  <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
+                    <i className='fas fa-eye'></i> View
+                  </div>
+                </div>
               )}
 
-              <Link className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
+              <Link onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='mx-3 text-blue-600' to={`/profile/${state.profileData.profileUsername}`}>
                 {state.profileData.profileFirstName} {state.profileData.profileLastName}
               </Link>
             </div>
@@ -274,10 +281,12 @@ function ProfilePage(props) {
             <i className='fas fa-eye text-lg mr-1'></i>
             <p>View Profile Picture</p>
           </button>
-          <button onClick={handleOpenUploadProfilePicture} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <i className='fas fa-pen text-lg mr-1'></i>
-            <p>Update Profile Picture</p>
-          </button>
+          {isOwner() && (
+            <button onClick={handleOpenUploadProfilePicture} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <i className='fas fa-pen text-lg mr-1'></i>
+              <p>Update Profile Picture</p>
+            </button>
+          )}
         </div>
       )}
 
@@ -304,7 +313,7 @@ function ProfilePage(props) {
           </button>
         </form>
       )}
-
+      {/* VIEW PROFILE IMAGE */}
       {appState.toggleImageViewer && <ImageViewer image={state.profileData.profileAvatar} />}
 
       {/* PAGES */}
