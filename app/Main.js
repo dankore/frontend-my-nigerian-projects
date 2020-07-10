@@ -59,6 +59,9 @@ function Main() {
     isSideMenuOpen: false,
     isSettingsTabOpen: false,
     toggleModal: false,
+    toggleUpdateProfileImage: false,
+    toggleImageViewer: false,
+    toggleOptionsProfileImage: false,
   };
 
   function reducer(draft, action) {
@@ -85,12 +88,21 @@ function Main() {
       case 'toggleSideMenu':
         draft.isSideMenuOpen = !draft.isSideMenuOpen;
         return;
-      case 'toggleChangeProfilePic':
+      case 'toggleModalOverlay':
         draft.toggleModal = !draft.toggleModal;
         return;
       case 'alwaysCloseTheseMenus':
         draft.isSideMenuOpen = false;
         draft.isSettingsTabOpen = false;
+        return;
+      case 'toggleImageViewer':
+        draft.toggleImageViewer = !draft.toggleImageViewer;
+        return;
+      case 'toggleOptionsProfileImage':
+        draft.toggleOptionsProfileImage = !draft.toggleOptionsProfileImage;
+        return;
+      case 'toggleUpdateProfileImage':
+        draft.toggleUpdateProfileImage = !draft.toggleUpdateProfileImage;
         return;
       case 'updateUserInfo':
         localStorage.setItem('myNigerianProjects-id', action.data._id);
