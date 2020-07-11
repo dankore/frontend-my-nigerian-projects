@@ -272,7 +272,7 @@ function ProfilePage(props) {
 
       {/* OPTIONS */}
       {appState.toggleOptionsProfileImage && (
-        <div className='modal -mt-32 shadow-lg absolute bg-white border'>
+        <div className='modal -mt-20 shadow-lg absolute bg-white border'>
           <div className='flex w-full justify-end mb-1'>
             <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               X
