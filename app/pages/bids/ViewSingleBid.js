@@ -10,6 +10,8 @@ import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../../DispatchContext';
 import ReactMarkdown from 'react-markdown';
 import { dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
+import ImageViewer from '../../components/shared/ImageViewer';
+
 
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
@@ -190,7 +192,10 @@ function ViewSingleBid(props) {
         </div>
 
         {/* IMAGE  */}
-        {state.projectAndBid.bid.image && <img className='object-cover bg-white h-48 w-full' src={`${state.projectAndBid.bid.image}`} alt='coverImage' />}
+        {state.projectAndBid.bid.image && <img onClick={() => appDispatch({ type: 'toggleImageViewer' })} className='object-cover cursor-pointer bg-white h-48 w-full' src={`${state.projectAndBid.bid.image}`} alt='coverImage' />}
+
+        {/* VIEW PROFILE IMAGE */}
+        {appState.toggleImageViewer && <ImageViewer image={state.projectAndBid.bid.image} />}
 
         {/* ITEMIZE LIST: IF NO ITEMS DON'T SHOW HTML */}
         {bidHasItems && (
