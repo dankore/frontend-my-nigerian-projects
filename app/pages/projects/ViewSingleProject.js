@@ -10,6 +10,7 @@ import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
 import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../../helpers/JSHelpers';
 import Bid from '../../components/bids/Bid';
+import ImageViewer from '../../components/shared/ImageViewer';
 
 
 function ViewSingleProject(props) {
@@ -115,7 +116,10 @@ function ViewSingleProject(props) {
         </div>
 
         {/* IMAGE  */}
-        {project.image && <img className='object-cover bg-white h-48 w-full' src={`${project.image}`} alt='coverImage' />}
+        {project.image && <img onClick={() => appDispatch({ type: 'toggleImageViewer' })} className='object-cover cursor-pointer bg-white h-48 w-full' src={`${project.image}`} alt='coverImage' />}
+
+        {/* VIEW PROFILE IMAGE */}
+        {appState.toggleImageViewer && <ImageViewer image={project.image} />}
 
         {/* DESCRIPTION */}
         <p className='pl-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
