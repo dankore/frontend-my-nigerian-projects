@@ -198,7 +198,7 @@ function About() {
               <path d='M241.71,370.65l1.66-3a9.92,9.92,0,0,1-3.85-3.82l1.82-1.61a9.07,9.07,0,0,0,3.59,3.65c2.13,1.17,4.23.73,5.17-1s.3-3.3-1.42-5.41c-2.39-2.87-3.52-5.28-2.09-7.88s4.16-3.39,7.16-2.33l1.65-3,1.85,1-1.59,2.9a9.11,9.11,0,0,1,3.31,3.18l-1.83,1.56a8.21,8.21,0,0,0-3.21-3.08c-2.3-1.27-3.92-.37-4.57.82-.86,1.56-.18,2.94,1.83,5.44,2.38,2.95,3.08,5.36,1.62,8-1.3,2.36-4.15,3.66-7.51,2.48l-1.71,3.1Z' transform='translate(-6 -17.51)' fill='#f8c244' />
             </svg>
           </div>
-          <h3 className='max-w-3xl text-2xl leading-8 font-display text-gray-900 sm:text-3xl sm:leading-9 lg:max-w-4xl lg:leading-10 lg:mx-auto lg:text-center'>It's free to post projects. Always will be.</h3>
+          <h3 className='max-w-3xl text-2xl leading-8 font-display text-gray-900 sm:leading-9 lg:leading-10 lg:mx-auto lg:text-center'>It's free to post projects. Always will be.</h3>
         </div>
       </div>
     </Page>
