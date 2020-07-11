@@ -87,9 +87,7 @@ function ProfilePage(props) {
         }
       })();
       // CANCEL REQUEST
-      return () => {
-        request.cancel();
-      };
+      return () => request.cancel();
     }
   }, [state.startFollowingRequestCount]);
 
