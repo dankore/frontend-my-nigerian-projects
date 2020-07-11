@@ -217,7 +217,7 @@ function ProfilePage(props) {
         <div className='bg-white max-w-2xl mx-auto'>
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
-            <div className='flex items-center flex-wrap'>
+            <div className='relative flex items-center flex-wrap'>
               {isOwner() && (
                 <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })}>
                   <img className='h-16 lg:h-20 w-16 lg:w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
@@ -232,6 +232,27 @@ function ProfilePage(props) {
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                     <i className='fas fa-eye'></i> View
                   </div>
+                </div>
+              )}
+
+              {/* OPTIONS */}
+              {appState.toggleOptionsProfileImage && (
+                <div style={{ marginTop: 5.5 + 'rem', zIndex: 1 }} className='shadow-lg absolute rounded-lg bg-white border px-2'>
+                  <div className='flex w-full justify-end'>
+                    <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                      X
+                    </button>
+                  </div>
+                  <button onClick={handleOpenImageViewer} className='mb-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                    <i className='fas fa-eye text-lg mr-1'></i>
+                    <p>View Profile Picture</p>
+                  </button>
+                  {isOwner() && (
+                    <button onClick={handleOpenUploadProfilePicture} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+                      <i className='fas fa-pen text-lg mr-1'></i>
+                      <p>Update Profile Picture</p>
+                    </button>
+                  )}
                 </div>
               )}
 
@@ -268,27 +289,6 @@ function ProfilePage(props) {
           </NavLink>
         </ul>
       </div>
-
-      {/* OPTIONS */}
-      {appState.toggleOptionsProfileImage && (
-        <div className='modal -mt-20 shadow-lg absolute bg-white border'>
-          <div className='flex w-full justify-end mb-1'>
-            <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              X
-            </button>
-          </div>
-          <button onClick={handleOpenImageViewer} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-            <i className='fas fa-eye text-lg mr-1'></i>
-            <p>View Profile Picture</p>
-          </button>
-          {isOwner() && (
-            <button onClick={handleOpenUploadProfilePicture} className='my-3 flex items-center px-2 text-gray-700 rounded hover:text-gray-800 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-              <i className='fas fa-pen text-lg mr-1'></i>
-              <p>Update Profile Picture</p>
-            </button>
-          )}
-        </div>
-      )}
 
       {/* MODAL CHANGE PROFILE IMAGE */}
       {appState.toggleUpdateProfileImage && (
