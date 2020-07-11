@@ -94,6 +94,9 @@ function Main() {
       case 'alwaysCloseTheseMenus':
         draft.isSideMenuOpen = false;
         draft.isSettingsTabOpen = false;
+        draft.toggleImageViewer = false;
+        draft.toggleOptionsProfileImage = false;
+        draft.toggleUpdateProfileImage = false;
         return;
       case 'toggleImageViewer':
         draft.toggleImageViewer = !draft.toggleImageViewer;
