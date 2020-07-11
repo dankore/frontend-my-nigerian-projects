@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import fs from 'fs';
-import Footer from './app/components/Footer';
-import Header from './app/components/Header';
-import LoadingDotsIcon from './app/components/LoadingDotsIcon';
+import Footer from './app/components/shared/Footer';
+import Header from './app/components/shared/Header';
+import LoadingDotsIcon from './app/components/shared/LoadingDotsIcon';
 import { StaticRouter as Router } from 'react-router-dom';
 import StateContext from './app/StateContext';
 
