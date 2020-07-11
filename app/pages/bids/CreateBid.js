@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import StateContext from '../../StateContext';
 import { inputTextAreaCSSCreateBid, inputTextAreaCSS, CSSTransitionStyle } from '../../helpers/CSSHelpers';
 import DispatchContext from '../../DispatchContext';
-import { daysRemaining, handleUploadImage } from '../../helpers/JSHelpers';
+import { handleUploadImage } from '../../helpers/JSHelpers';
 
 function CreateBid(props) {
   const appState = useContext(StateContext);
@@ -56,6 +56,7 @@ function CreateBid(props) {
     isOpen: false,
     openAddItem: false,
     sendCount: 0,
+    isSaving: false,
   };
 
   function reducer(draft, action) {
@@ -177,6 +178,12 @@ function CreateBid(props) {
       case 'openAddItemForm':
         draft.openAddItem = !draft.openAddItem;
         return;
+      case 'isSavingStarted':
+        draft.isSaving = true;
+        return;
+      case 'isSavingEnds':
+        draft.isSaving = false;
+        return;
       case 'submitForm':
         if (!draft.whatBestDescribesYou.hasErrors && draft.whatBestDescribesYou.value != '' && !draft.yearsOfExperience.hasErrors && draft.yearsOfExperience.value != '' && !draft.phone.hasErrors && draft.phone.value != '' && !draft.email.hasErrors && draft.email.value != '') {
           draft.sendCount++;
@@ -216,9 +223,11 @@ function CreateBid(props) {
     }
   }, [state.email.value]);
 
+  // SAVE BID
   useEffect(() => {
     const request = Axios.CancelToken.source();
     if (state.sendCount) {
+      dispatch({ type: 'isSavingStarted' });
       (async function saveBid() {
         try {
           // SAVE IMAGE TO CLOUDINARY AND GET URL
@@ -242,6 +251,8 @@ function CreateBid(props) {
             },
             { cancelToken: request.token }
           );
+
+          dispatch({ type: 'isSavingEnds' });
 
           if (response.data.status == 'Success') {
             props.history.push(`/${state.projectId}/bid/${response.data.bidId}`);
@@ -440,28 +451,20 @@ function CreateBid(props) {
                 </div>
               </div>
             </fieldset>
-
+              {/* COVER IMAGE */}
             <div className='w-full py-3 mb-4'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='nickname'>
                 Upload cover image <span className='text-gray-500 text-xs'>Optional</span>
               </label>
               <input onChange={e => dispatch({ type: 'imageUpdate', value: e.target.files[0] })} name='file' placeholder='Upload an image' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='photo' type='file' accept='image/*' />
             </div>
-            {daysRemaining(state.project.bidSubmissionDeadline) > -1 ? (
-              <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
-                <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
-                  <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
-                </svg>
-                Submit bid
-              </button>
-            ) : (
-              <div className='flex justify-end'>
-                <div className='cursor-pointer w-full inline-flex items-center justify-center text-white rounded border border-white bg-gray-600 hover:bg-gray-700 px-6 py-2'>
-                  <i className='fas fa-stop-circle mr-1'></i>
-                  Bidding Closed
-                </div>
-              </div>
-            )}
+
+            <button type='submit' className='relative w-full inline-flex items-center justify-center py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+              <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                <path d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'></path>
+              </svg>
+              {state.isSaving ? 'Saving' : 'Submit bid'}
+            </button>
           </div>
         </form>
       </div>
