@@ -26,6 +26,7 @@ function ProfilePage(props) {
       profileUsername: '...',
       profileFirstName: '',
       profileLastName: '',
+      email: '',
       profileAvatar: 'https://gravatar.com/avatar/palceholder?s=128',
       isFollowing: false,
       counts: {
@@ -76,7 +77,7 @@ function ProfilePage(props) {
 
       (async function addFollow() {
         try {
-          const response = await Axios.post(`/addFollow/${state.profileData.profileUsername}`, { token: appState.user.token }, { CancelToken: request.token });
+          const response = await Axios.post(`/addFollow/${state.profileData.profileUsername}`, { profileName: `${state.profileData.profileFirstName} ${state.profileData.profileLastName}`, email: state.profileData.email, token: appState.user.token }, { CancelToken: request.token });
           setState(draft => {
             draft.profileData.isFollowing = true;
             draft.profileData.counts.followerCount++;
