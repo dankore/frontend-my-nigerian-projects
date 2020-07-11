@@ -1,14 +1,14 @@
 import React, { useEffect, useContext } from 'react';
 import { NavLink, Switch, Route, Link } from 'react-router-dom';
-import Page from '../components/Page';
+import Page from '../components/shared/Page';
 import { useImmer } from 'use-immer';
-import LoadingDotsIcon from '../components/LoadingDotsIcon';
+import LoadingDotsIcon from '../components/shared/LoadingDotsIcon';
 import Axios from 'axios';
-import Project from '../components/Project';
+import Project from '../components/projects/Project';
 import { activeNavCSS, navLinkCSS } from '../helpers/CSSHelpers';
 import StateContext from '../StateContext';
-import SidebarRight from '../components/SidebarRight';
-import SidebarLeft from '../components/SidebarLeft';
+import SidebarRight from '../components/homepage/SidebarRight';
+import SidebarLeft from '../components/homepage/SidebarLeft';
 import ReactPaginate from 'react-paginate';
 
 function HomePage() {
