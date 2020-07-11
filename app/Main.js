@@ -14,32 +14,32 @@ console.log(process.env.BACKENDURL);
 Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-my-nigerian-projects.herokuapp.com';
 
 // COMPONENTS
-import Header from './components/Header';
+import Header from './components/shared/Header';
 const HomePage = lazy(() => import('./pages/HomePage'));
-import Footer from './components/Footer';
-import About from './pages/AboutPage';
-import Terms from './pages/TermsPage';
-import HowToBid from './pages/HowToBidPage';
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));
-import NotFoundPage from './pages/NotFoundPage';
-const ProfilePage = lazy(() => import('./pages/ProfilePage'));
-const CreateProject = lazy(() => import('./pages/CreateProject'));
-const ViewSingleProject = lazy(() => import('./pages/ViewSingleProject'));
-import FlashMessageSuccess from './components/FlashMessageSuccess';
-const EditProjectPage = lazy(() => import('./pages/EditProjectPage'));
-import FlashMessageErrors from './components/FlashMessageErrors';
-const SettingsPage = lazy(() => import('./pages/SettingsPage'));
-import YouMustBeLoggedInToViewThisPage from './components/YouMustBeLoggedIntoViewThisPage';
-import YouMustBeLoggedOutToViewThisPage from './components/YouMustBeLoggedOutToViewThisPage';
-const CreateBid = lazy(() => import('./pages/CreateBid'));
-const ViewSingleBid = lazy(() => import('./pages/ViewSingleBid'));
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import LoadingDotsIcon from './components/LoadingDotsIcon';
-import ResetYourPassword from './pages/ResetYourPassword';
-import CookiesPage from './pages/CookiesPage';
-const AccountRecoveryEnterPassword = lazy(() => import('./pages/AccountRecoveryEnterPassword'));
-const EditBidPage = lazy(() => import('./pages/EditBidPage'));
+import Footer from './components/shared/Footer';
+import About from './pages/shared/AboutPage';
+import Terms from './pages/shared/TermsPage';
+import HowToBid from './pages/shared/HowToBidPage';
+const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
+const RegistrationPage = lazy(() => import('./pages/auth/RegistrationPage'));
+import NotFoundPage from './pages/shared/NotFoundPage';
+const ProfilePage = lazy(() => import('./pages/profile/ProfilePage'));
+const CreateProject = lazy(() => import('./pages/projects/CreateProject'));
+const ViewSingleProject = lazy(() => import('./pages/projects/ViewSingleProject'));
+import FlashMessageSuccess from './components/shared/FlashMessageSuccess';
+const EditProjectPage = lazy(() => import('./pages/projects/EditProjectPage'));
+import FlashMessageErrors from './components/shared/FlashMessageErrors';
+const SettingsPage = lazy(() => import('./pages/profile/SettingsPage'));
+import YouMustBeLoggedInToViewThisPage from './components/shared/YouMustBeLoggedIntoViewThisPage';
+import YouMustBeLoggedOutToViewThisPage from './components/shared/YouMustBeLoggedOutToViewThisPage';
+const CreateBid = lazy(() => import('./pages/bids/CreateBid'));
+const ViewSingleBid = lazy(() => import('./pages/bids/ViewSingleBid'));
+import PrivacyPolicyPage from './pages/shared/PrivacyPolicyPage';
+import LoadingDotsIcon from './components/shared/LoadingDotsIcon';
+import ResetYourPassword from './pages/auth/ResetYourPassword';
+import CookiesPage from './pages/shared/CookiesPage';
+const AccountRecoveryEnterPassword = lazy(() => import('./pages/auth/AccountRecoveryEnterPassword'));
+const EditBidPage = lazy(() => import('./pages/bids/EditBidPage'));
 // COMPONENTS END
 
 function Main() {
