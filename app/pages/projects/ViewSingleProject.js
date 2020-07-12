@@ -12,7 +12,6 @@ import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../../helper
 import Bid from '../../components/bids/Bid';
 import ImageViewer from '../../components/shared/ImageViewer';
 
-
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
@@ -123,7 +122,7 @@ function ViewSingleProject(props) {
 
         {/* DESCRIPTION */}
         <p className='pl-2 mt-6 text-lg leading-7 font-medium tracking-tight text-gray-900'>Description:</p>
-        <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }} className='p-2 bg-white'>
+        <div style={{ overflowWrap: 'anywhere', minWidth: 0 + 'px' }} className='p-2 paragraph bg-white'>
           <ReactMarkdown source={project.description} allowedTypes={['paragraph', 'image', 'strong', 'emphasis', 'text', 'heading', 'list', 'listItem', 'link', 'linkReference']} />
         </div>
 
