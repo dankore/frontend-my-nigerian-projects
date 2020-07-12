@@ -237,7 +237,7 @@ function ProfilePage(props) {
 
               {/* OPTIONS */}
               {appState.toggleOptionsProfileImage && (
-                <div style={{ marginTop: 5.5 + 'rem', zIndex: 1 }} className='shadow-lg absolute rounded-lg bg-white border px-2'>
+                <div style={{ marginTop: 6.5 + 'rem', zIndex: 1 }} className='speech-bubble absolute rounded-lg bg-white border px-2'>
                   <div className='flex w-full justify-end'>
                     <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                       X
@@ -292,7 +292,7 @@ function ProfilePage(props) {
 
       {/* MODAL CHANGE PROFILE IMAGE */}
       {appState.toggleUpdateProfileImage && (
-        <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal absolute bg-white'>
+        <form onSubmit={handleChangeProfilePicSubmit} style={{ zIndex: 1 }} className='modal shadow-custom absolute bg-white'>
           <div className='w-full py-3 mb-4'>
             <div className='flex w-full justify-end mb-1'>
               <button onClick={() => appDispatch({ type: 'toggleUpdateProfileImage' })} className='flex absolute rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
