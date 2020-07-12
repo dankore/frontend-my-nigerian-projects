@@ -12,10 +12,10 @@ function Footer() {
       {appState && appState.toggleOptionsProfileImage && <div onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='modal-overlay absolute cursor-pointer'></div>}
       {appState && appState.toggleImageViewer && (
         <div onClick={() => appDispatch({ type: 'toggleImageViewer' })} className='modal-overlay bg-black absolute cursor-pointer'>
-          <div className='absolute flex items-center left-0 shadow-lg mt-2 text-3xl'>
-            <button className='rounded-full focus:outline-none transition ease-in-out duration-150 px-3 bg-white'>X</button>
+          <div className='absolute flex items-center left-0 shadow-lg mt-3 ml-3'>
+            <button className='rounded-full text-3xl focus:outline-none transition ease-in-out duration-150 px-3 bg-white'>X</button>
             <a href='/'>
-              <i className='fas fa-home text-white ml-2'></i>
+              <i className='fas fa-home text-white text-4xl ml-2'></i>
             </a>
           </div>
         </div>
