@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
@@ -7,18 +7,29 @@ import Welcome from './Welcome';
 function Footer() {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
+  const [state, setState] = useState(true);
+  const [welcome, setWelcome] = useState();
 
-  const showWelcomeMessage = () => {
+  useEffect(() => {
     if (localStorage.getItem('welcome')) {
-      return false;
+      setWelcome(false);
+      return;
     }
     localStorage.setItem('welcome', true);
-    return true;
-  };
+    setWelcome(true);
+  }, []);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setState(false);
+    }, 7000);
+
+    return () => clearTimeout(delay);
+  }, []);
 
   return (
     <div className='text-center mt-10 relative'>
-      {showWelcomeMessage() && <Welcome />}
+      {welcome && state && <Welcome />}
       {/* MODAL OVERLAY */}
       {appState && appState.toggleOptionsProfileImage && <div onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='modal-overlay absolute cursor-pointer'></div>}
       {appState && appState.toggleImageViewer && (
