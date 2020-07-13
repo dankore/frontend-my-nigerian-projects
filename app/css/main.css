@@ -20623,9 +20623,27 @@ h5 {
 /* Dots Loading Animation */
 
 .liveValidateMessage {
-  top: 52px;
+  top: -6px;
   position: absolute;
   z-index: 1;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-radius: .25rem;
+  border-right-width: 1px;
+  text-align: center;
+  --text-opacity: 1;
+  color: #c53030;
+  color: rgba(197, 48, 48, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #fc8181;
+  border-color: rgba(252, 129, 129, var(--border-opacity));
+  --bg-opacity: 1;
+  background-color: #fff5f5;
+  background-color: rgba(255, 245, 245, var(--bg-opacity));
 }
 
 .liveValidateMessage--visible {
