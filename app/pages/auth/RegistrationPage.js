@@ -297,8 +297,8 @@ function RegistrationPage(props) {
           </svg>
         </div>
 
-        <p className='text-2xl font-semibold text-center leading-tight mt-3'>Create Your My Nigerian Projects Account</p>
-        <p className='text-center mb-8'>Get paid helping me with my projects in Nigeria</p>
+        <p className='text-2xl font-semibold text-center leading-tight mt-3'>Get paid helping me with my projects in Nigeria</p>
+        <p className='text-center mb-8'> Create Your My Nigerian Projects Account</p>
         <form onSubmit={handleSubmit} className='mx-auto shadow-sm lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
           <div className='flex flex-wrap -mx-3 mt-1'>
             <div className='relative w-full px-3 mb-3'>
