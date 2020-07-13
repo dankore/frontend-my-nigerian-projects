@@ -126,7 +126,7 @@ function HomePage() {
   }, [appState.loggedIn]);
 
   function noProjectsThoseIFollow() {
-    return followingCount.followingCount > 0 ? <h2 className='bg-white shadow-sm lg:rounded-lg p-3'>No projects posted by those you follow at this time.</h2> : <h2 className='bg-white shadow-sm lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </h2>;
+    return followingCount.followingCount > 0 ? <p className='bg-white shadow-sm lg:rounded-lg p-3'>No projects posted by those you follow at this time.</p> : <h2 className='bg-white shadow-sm lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </h2>;
   }
 
   if (allProjects.isLoading && projectsThoseIFollow.isLoading) {
@@ -164,7 +164,7 @@ function HomePage() {
                   <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={allProjects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAllProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />
                 </>
               ) : (
-                <h2 className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</h2>
+                <p className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</p>
               )}
             </Page>
           </Route>
