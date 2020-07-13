@@ -20332,14 +20332,25 @@ MY NON-TAILWIND STYLES
   margin-bottom: 20px;
 }
 
+.paragraph h1,
+h2 {
+  font-weight: bold;
+}
+
+.paragraph h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
 .speech-bubble {
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3),
-  0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+    0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
 }
 
 .shadow-custom {
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3),
-  0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+    0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
 }
 
 .speech-bubble::before {
@@ -20348,7 +20359,8 @@ MY NON-TAILWIND STYLES
   width: 0;
   height: 0;
   bottom: 100%;
-  left: 1.5em; /* offset should move with padding of parent */
+  left: 1.5em;
+  /* offset should move with padding of parent */
   border: .75rem solid transparent;
   border-top: none;
   border-bottom-color: #fff;
