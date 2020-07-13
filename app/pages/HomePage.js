@@ -161,8 +161,8 @@ function HomePage() {
                   {current_paginated_projects.map(project => {
                     return <Project project={project} key={project._id} />;
                   })}
-                  {/* ONLY SHOW PAGINATION IF THERE'S MORE THAN ONE PROJECT */}
-                  {allProjects.feed.length > 1 && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={allProjects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAllProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
+                  {/* ONLY SHOW PAGINATION IF THERE'S MORE  THAN NUMBER OF PROJECTS PER PAGE */}
+                  {allProjects.feed.length > allProjects.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={allProjects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAllProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
                 </>
               ) : (
                 <p className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</p>
@@ -176,8 +176,8 @@ function HomePage() {
                   {current_paginated_projects_those_i_follow.map(project => {
                     return <Project project={project} key={project._id} />;
                   })}
-                  {/* ONLY SHOW PAGINATION IF THERE'S MORE THAN ONE PROJECT */}
-                  {projectsThoseIFollow.feed.length > 1 && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projectsThoseIFollow.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAThoseIFollowProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
+                  {/* ONLY SHOW PAGINATION IF THERE'S MORE  THAN NUMBER OF PROJECTS PER PAGE */}
+                  {projectsThoseIFollow.feed.length > allProjects.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projectsThoseIFollow.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAThoseIFollowProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
                 </>
               )}
               {/* NO PROJECTS */}

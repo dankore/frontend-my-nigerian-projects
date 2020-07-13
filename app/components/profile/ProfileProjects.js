@@ -11,7 +11,7 @@ function ProfileProjects() {
   const appState = useContext(StateContext);
   const { username } = useParams();
   const [projects, setProjects] = useImmer({
-    isLoading: true, 
+    isLoading: true,
     feed: [],
     offset: 0,
     elements: [],
@@ -43,7 +43,9 @@ function ProfileProjects() {
         const response = await Axios.get(`/profile/${username}/projects`, {
           cancelToken: request.token,
         });
-        setProjects( draft => {draft.isLoading = false})
+        setProjects(draft => {
+          draft.isLoading = false;
+        });
         if (response.data) {
           setProjects(draft => {
             draft.feed = response.data;
@@ -83,8 +85,8 @@ function ProfileProjects() {
           {current_paginated_projects.map(project => {
             return <Project project={project} key={project._id} />;
           })}
-          {/* ONLY SHOW PAGINATION IF THERE'S MORE THAN ONE PROJECT */}
-          {projects.feed.length > 1 && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
+          {/* ONLY SHOW PAGINATION IF THERE'S MORE  THAN NUMBER OF PROJECTS PER PAGE */}
+          {projects.feed.length > projects.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
         </>
       ) : (
         <p className='p-3 shadow-sm lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
