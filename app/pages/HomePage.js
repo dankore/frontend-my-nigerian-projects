@@ -126,7 +126,7 @@ function HomePage() {
   }, [appState.loggedIn]);
 
   function noProjectsThoseIFollow() {
-    return followingCount.followingCount > 0 ? <p className='bg-white shadow-sm lg:rounded-lg p-3'>No projects posted by those you follow at this time.</p> : <h2 className='bg-white shadow-sm lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </h2>;
+    return followingCount.followingCount > 0 ? <p className='bg-white shadow-sm lg:rounded-lg p-3'>No projects posted by those you follow at this time.</p> : <p className='bg-white shadow-sm lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </p>;
   }
 
   if (allProjects.isLoading && projectsThoseIFollow.isLoading) {
