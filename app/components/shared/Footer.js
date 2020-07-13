@@ -10,10 +10,10 @@ function Footer() {
 
   const showWelcomeMessage = () => {
     if (localStorage.getItem('welcome')) {
-      return 0;
+      return false;
     }
     localStorage.setItem('welcome', true);
-    return 1;
+    return true;
   };
 
   return (
