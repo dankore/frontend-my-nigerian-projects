@@ -237,7 +237,7 @@ function ProfilePage(props) {
 
               {/* OPTIONS */}
               {appState.toggleOptionsProfileImage && (
-                <div style={{ marginTop: 6.5 + 'rem', zIndex: 1 }} className='speech-bubble absolute rounded-lg bg-white border px-2'>
+                <div style={{ marginTop: 6.5 + 'rem', zIndex: 1 }} className='w-full speech-bubble absolute rounded-lg bg-white border px-2'>
                   <div className='flex w-full justify-end'>
                     <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                       X
