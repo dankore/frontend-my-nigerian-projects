@@ -13,11 +13,11 @@ function Bid({ bids, projectId }) {
 
   return (
     <div className='mb-4'>
-      <p className='px-2 text-lg leading-7 shadow-sm font-medium tracking-tight text-gray-900'>Bids[{bids?.length > 0 ? bids.length : 0}]:</p>
+      <p className='px-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids[{bids?.length > 0 ? bids.length : 0}]:</p>
       {bids?.length > 0 ? (
         bids.map((bid, index) => {
           return (
-            <Link key={index} to={`/${projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow-sm lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
+            <Link key={index} to={`/${projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
               <div className='flex items-center text-sm leading-5 mr-6'>
                 <i className='text-gray-700 fas fa-id-badge'></i>
                 <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
@@ -36,7 +36,7 @@ function Bid({ bids, projectId }) {
           );
         })
       ) : (
-        <div className='bg-white p-3 lg:rounded-lg shadow-sm'>No bids... yet.</div>
+        <div className='bg-white p-3 lg:rounded-lg shadow'>No bids... yet.</div>
       )}
     </div>
   );

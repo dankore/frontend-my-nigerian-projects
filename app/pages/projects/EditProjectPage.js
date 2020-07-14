@@ -279,7 +279,7 @@ function EditProjectPage(props) {
         </svg>
       </div>
       <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Edit Project</p>
-      <form onSubmit={submitEditProjectForm} className='bg-white shadow-sm lg:rounded-lg p-3'>
+      <form onSubmit={submitEditProjectForm} className='bg-white shadow lg:rounded-lg p-3'>
         <div className='relative mb-4'>
           <label htmlFor='title' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
             Title
@@ -366,7 +366,7 @@ function EditProjectPage(props) {
         </div>
 
         <div className='flex justify-end'>
-          <Link to={`/project/${state.id}`} className='cursor-pointer inline-flex shadow-sm mr-8 items-center justify-center px-4 py-2 border border-gray-400 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+          <Link to={`/project/${state.id}`} className='cursor-pointer inline-flex shadow mr-8 items-center justify-center px-4 py-2 border border-gray-400 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
             <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
               <line x1='18' y1='6' x2='6' y2='18'></line>
               <line x1='6' y1='6' x2='18' y2='18'></line>

@@ -56,7 +56,7 @@ function EditUserProfileInfo(props) {
       case 'usernameImmediately':
         draft.profileData.profileUsername.hasErrors = false;
         draft.profileData.profileUsername.value = action.value;
-        
+
         if (draft.profileData.profileUsername.value.length > 30) {
           draft.profileData.profileUsername.hasErrors = true;
           draft.profileData.profileUsername.message = 'Username cannot exceed 30 characters.';
@@ -101,7 +101,7 @@ function EditUserProfileInfo(props) {
           draft.profileData.profileFirstName.hasErrors = true;
           draft.profileData.profileFirstName.message = 'First name can only be letters.';
         }
-         if (draft.profileData.profileFirstName.value.length > 50 ) {
+        if (draft.profileData.profileFirstName.value.length > 50) {
           draft.profileData.profileFirstName.hasErrors = true;
           draft.profileData.profileFirstName.message = 'First name cannot exceed 50 characters.';
         }
@@ -115,11 +115,11 @@ function EditUserProfileInfo(props) {
           draft.profileData.profileLastName.hasErrors = true;
           draft.profileData.profileLastName.message = 'Last name field cannot be empty.';
         }
-         if (/[^a-zA-Z]/.test(draft.profileData.profileLastName.value.trim())) {
+        if (/[^a-zA-Z]/.test(draft.profileData.profileLastName.value.trim())) {
           draft.profileData.profileLastName.hasErrors = true;
           draft.profileData.profileLastName.message = 'Last name can only be letters.';
         }
-          if (draft.profileData.profileLastName.value.length > 50 ) {
+        if (draft.profileData.profileLastName.value.length > 50) {
           draft.profileData.profileLastName.hasErrors = true;
           draft.profileData.profileLastName.message = 'Last name cannot exceed 50 characters.';
         }
@@ -178,14 +178,13 @@ function EditUserProfileInfo(props) {
     (async function fetchData() {
       try {
         const response = await Axios.post(`/profile/${appState.user.username}`, { token: appState.user.token }, { CancelToken: request.token });
-        if(response.data){
+        if (response.data) {
           dispatch({ type: 'fetchDataComplete', value: response.data });
           dispatch({ type: 'isLoadingFinished' });
         } else {
           props.history.push('/');
-          appDispatch({type: 'flashMessageError', value: 'User does not exist.'})
+          appDispatch({ type: 'flashMessageError', value: 'User does not exist.' });
         }
-        
       } catch (error) {
         appDispatch({ type: 'flashMessageError', value: 'Fetching username failed.' });
       }
@@ -212,12 +211,12 @@ function EditUserProfileInfo(props) {
             },
             { cancelToken: request.token }
           );
-           dispatch({ type: 'isSavingUpdateFinished' });
+          dispatch({ type: 'isSavingUpdateFinished' });
           if (response.data._id) {
-                appDispatch({ type: 'updateUserInfo', data: response.data });
-                appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
+            appDispatch({ type: 'updateUserInfo', data: response.data });
+            appDispatch({ type: 'flashMessage', value: 'Profile updated.' });
           } else {
-               appDispatch({ type: 'flashMessageError', value: response.data });
+            appDispatch({ type: 'flashMessageError', value: response.data });
           }
         } catch (e) {
           appDispatch({ type: 'flashMessageError', value: 'Profile update failed. Please try again.' });
@@ -249,7 +248,7 @@ function EditUserProfileInfo(props) {
 
   return (
     <Page title='Edit Profile Info'>
-      <div className='max-w-lg mx-auto -mt-6 bg-white lg:rounded-lg shadow-xs'>
+      <div className='max-w-lg mx-auto -mt-6 bg-white lg:rounded-lg shadow'>
         <form onSubmit={handleSubmit} className='mx-auto p-3 rounded'>
           <div className='flex flex-wrap'>
             <div className='relative w-full px-3 mb-3'>

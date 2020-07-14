@@ -90,7 +90,7 @@ function RegistrationPage(props) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name can only be letters.';
         }
-        if (draft.firstName.value.length > 50 ) {
+        if (draft.firstName.value.length > 50) {
           draft.firstName.hasErrors = true;
           draft.firstName.message = 'First name cannot exceed 50 characters.';
         }
@@ -108,7 +108,7 @@ function RegistrationPage(props) {
           draft.lastName.hasErrors = true;
           draft.lastName.message = 'First name can only be letters.';
         }
-         if (draft.lastName.value.length > 50 ) {
+        if (draft.lastName.value.length > 50) {
           draft.lastName.hasErrors = true;
           draft.lastName.message = 'Last name cannot exceed 50 characters.';
         }
@@ -299,7 +299,7 @@ function RegistrationPage(props) {
 
         <p className='text-2xl font-semibold text-center leading-tight mt-3'>Get paid helping me with my projects in Nigeria</p>
         <p className='text-center mb-8'> Create Your My Nigerian Projects Account</p>
-        <form onSubmit={handleSubmit} className='mx-auto shadow-sm lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
+        <form onSubmit={handleSubmit} className='mx-auto shadow lg:max-w-sm p-3 border lg:rounded-lg bg-white'>
           <div className='flex flex-wrap -mx-3 mt-1'>
             <div className='relative w-full px-3 mb-3'>
               <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1' htmlFor='username'>

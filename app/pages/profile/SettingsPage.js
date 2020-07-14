@@ -9,7 +9,7 @@ import Page from '../../components/shared/Page';
 function SettingsPage() {
   return (
     <>
-      <div className='w-full shadow-sm border-b border-gray-500 bg-white pt-6'>
+      <div className='w-full shadow border-b border-gray-500 bg-white pt-6'>
         <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/settings' activeStyle={activeNavCSS} className={navLinkCSS}>
             Edit Profile Info

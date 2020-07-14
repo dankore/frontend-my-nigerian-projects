@@ -89,7 +89,7 @@ function ProfileProjects() {
           {projects.feed.length > projects.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={projects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
         </>
       ) : (
-        <p className='p-3 shadow-sm lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
+        <p className='p-3 shadow lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
       )}
     </div>
   );

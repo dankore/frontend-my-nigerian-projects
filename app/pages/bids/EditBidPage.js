@@ -317,7 +317,7 @@ function EditBidPage(props) {
             {state.fetchedData.projectTitle}
           </Link>
         </h2>
-        <div className='shadow-sm bg-white lg:rounded-lg p-3 rounded'>
+        <div className='shadow bg-white lg:rounded-lg p-3 rounded'>
           {/* WHAT BEST DESCRIBES YOU */}
           <div className='mb-4'>
             <label className='w-full text-xs font-bold uppercase tracking-wide text-gray-700 mr-3' htmlFor='as-what'>
@@ -454,7 +454,7 @@ function EditBidPage(props) {
           </div>
 
           <div className='flex justify-end'>
-            <Link to={`/${state.params.projectId}/bid/${state.params.bidId}`} className='cursor-pointer inline-flex shadow-sm mr-8 items-center justify-center px-4 py-2 border border-gray-400 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <Link to={`/${state.params.projectId}/bid/${state.params.bidId}`} className='cursor-pointer inline-flex shadow mr-8 items-center justify-center px-4 py-2 border border-gray-400 text-base leading-6 font-medium rounded-md text-blue-600 bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               <svg className='h-5 w-5 text-blue-300 mr-1 transition ease-in-out duration-150' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                 <line x1='18' y1='6' x2='6' y2='18'></line>
                 <line x1='6' y1='6' x2='18' y2='18'></line>

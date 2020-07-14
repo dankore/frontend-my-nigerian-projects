@@ -126,7 +126,7 @@ function HomePage() {
   }, [appState.loggedIn]);
 
   function noProjectsThoseIFollow() {
-    return followingCount.followingCount > 0 ? <p className='bg-white shadow-sm lg:rounded-lg p-3'>No projects posted by those you follow at this time.</p> : <p className='bg-white shadow-sm lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </p>;
+    return followingCount.followingCount > 0 ? <p className='bg-white shadow lg:rounded-lg p-3'>No projects posted by those you follow at this time.</p> : <p className='bg-white shadow lg:rounded-lg p-3'>You are not following anyone. Follow others to get their projects here. </p>;
   }
 
   if (allProjects.isLoading && projectsThoseIFollow.isLoading) {
@@ -139,7 +139,7 @@ function HomePage() {
 
   return (
     <div className='align-middle inline-block min-w-full'>
-      <div className='w-full shadow-sm border-b border-gray-500 bg-white pt-6'>
+      <div className='w-full shadow border-b border-gray-500 bg-white pt-6'>
         <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
             All Projects: {allProjects.feed.length}
@@ -165,7 +165,7 @@ function HomePage() {
                   {allProjects.feed.length > allProjects.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={allProjects.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleAllProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
                 </>
               ) : (
-                <p className='bg-white p-3 shadow-sm lg:rounded-lg'>No projects posted at this time.</p>
+                <p className='bg-white p-3 shadow lg:rounded-lg'>No projects posted at this time.</p>
               )}
             </Page>
           </Route>

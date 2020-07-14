@@ -104,7 +104,7 @@ function LoginPage(props) {
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Login to Your My Nigerian Projects Account</p>
-        <form onSubmit={handleSubmit} className='p-3 shadow-sm sm:p-4 border bg-white lg:rounded-lg'>
+        <form onSubmit={handleSubmit} className='p-3 shadow sm:p-4 border bg-white lg:rounded-lg'>
           <div className='relative mb-4'>
             <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
               Enter Your Username
@@ -143,7 +143,7 @@ function LoginPage(props) {
             </button>
           </div>
         </form>
-        <Link to='/register' className='block mt-3 px-4 bg-white p-3 shadow-sm lg:rounded-lg'>
+        <Link to='/register' className='block mt-3 px-4 bg-white p-3 shadow lg:rounded-lg'>
           Don't have an account? <span className='text-blue-600'>Create yours for free</span>
         </Link>
       </div>

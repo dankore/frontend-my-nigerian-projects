@@ -118,7 +118,6 @@ function AccountRecoveryEnterPassword(props) {
     return () => request.cancel();
   }, []);
 
-
   // SEND FORM
   useEffect(() => {
     if (state.sendCount) {
@@ -149,7 +148,7 @@ function AccountRecoveryEnterPassword(props) {
       </div>
       <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Choose a New Password</p>
       <div className='w-full max-w-md sm:max-w-sm mx-auto mt-6'>
-        <form onSubmit={handleSubmit} className='p-3 sm:p-4 bg-white shadow-sm lg:rounded-lg'>
+        <form onSubmit={handleSubmit} className='p-3 sm:p-4 bg-white shadow lg:rounded-lg'>
           <div className='relative mb-4'>
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
               <label htmlFor='password'>New Password </label>

@@ -39,7 +39,7 @@ function CookiesPage() {
         </svg>{' '}
       </div>
       <h1 className='px-2 mt-12 mb-4 text-base leading-6 text-blue-600 font-semibold tracking-wide uppercase'>My Nigerian Projects Cookies Policy</h1>
-      <div className='relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow-sm'>
+      <div className='relative z-10 leading-normal bg-white p-3 lg:rounded-lg shadow'>
         <p className=''>Cookies are small text files that are stored in a computer’s browser directory. They help site providers with things like understanding how people use a site, remembering a User’s login details, and storing site preferences.</p>
         <p className='mt-4'>My Nigerian Projects does not currently use any cookies.</p>
         <p className='mt-4'>If that changes in the future, it would be updated here. It is the responsibility of the user of this website to check this policy for changes. By using https://mynigerianprojects.com, you agreed to the this cookies policy and that changes to this policy can be updated without prior notice.</p>
