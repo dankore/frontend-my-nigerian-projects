@@ -47,7 +47,7 @@ function HowToBid() {
         </div>
         <div className='my-6 flex justify-center'>
           {!appState.loggedIn && (
-            <Link to='/register' className='block items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
+            <Link to='/register' className='block  items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
               Get Started
             </Link>
           )}
