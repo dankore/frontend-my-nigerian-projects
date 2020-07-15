@@ -98,6 +98,7 @@ function Main() {
         draft.toggleImageViewer = false;
         draft.toggleOptionsProfileImage = false;
         draft.toggleUpdateProfileImage = false;
+        draft.toggleSampleBid = false;
         return;
       case 'toggleImageViewer':
         draft.toggleImageViewer = !draft.toggleImageViewer;
