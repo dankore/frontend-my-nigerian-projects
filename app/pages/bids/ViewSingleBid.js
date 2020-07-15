@@ -12,7 +12,6 @@ import ReactMarkdown from 'react-markdown';
 import { dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
 
-
 function ViewSingleBid(props) {
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
@@ -222,7 +221,7 @@ function ViewSingleBid(props) {
           </div>
         )}
 
-        {/* PROFILE: IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
+        {/* PROFILE: CHECK IF USER DELETED THEIR PROFILE LINK TO HOMEPAGE */}
         <div className='bg-gray-700 py-2 lg:rounded-b-lg text-white'>
           <div className='flex justify-center'>
             <Link to={state.profileInfo.username ? `/profile/${state.profileInfo.username}` : '/'}>
