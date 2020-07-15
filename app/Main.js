@@ -61,6 +61,7 @@ function Main() {
     toggleModal: false,
     toggleUpdateProfileImage: false,
     toggleImageViewer: false,
+    toggleSampleBid: false,
     toggleOptionsProfileImage: false,
   };
 
@@ -100,6 +101,9 @@ function Main() {
         return;
       case 'toggleImageViewer':
         draft.toggleImageViewer = !draft.toggleImageViewer;
+        return;
+      case 'toggleSampleBid':
+        draft.toggleSampleBid = !draft.toggleSampleBid;
         return;
       case 'toggleOptionsProfileImage':
         draft.toggleOptionsProfileImage = !draft.toggleOptionsProfileImage;

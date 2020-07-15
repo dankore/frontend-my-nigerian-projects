@@ -42,6 +42,16 @@ function Footer() {
           </div>
         </div>
       )}
+      {appState && appState.toggleSampleBid && (
+        <div onClick={() => appDispatch({ type: 'toggleSampleBid' })} className='modal-overlay bg-black absolute cursor-pointer'>
+          <div className='absolute flex items-center left-0 shadow-lg mt-3 ml-3'>
+            <button className='rounded-full text-3xl focus:outline-none transition ease-in-out duration-150 px-3 bg-white'>X</button>
+            <a href='/'>
+              <i className='fas fa-home text-white text-4xl ml-2'></i>
+            </a>
+          </div>
+        </div>
+      )}
       {appState && appState.toggleUpdateProfileImage && <div onClick={() => appDispatch({ type: 'toggleUpdateProfileImage' })} style={{ backgroundColor: '#0000008c' }} className='modal-overlay bg-opacity-50 absolute cursor-pointer'></div>}
       <div>
         <Link to='/'>Home</Link> | <Link to='/how-to-bid'>How to Bid</Link> | <Link to='/about'>About</Link> | <Link to='/terms'>Terms</Link> | <Link to='/privacy'>Privacy</Link> | <Link to='/cookies'>Cookies</Link> | <a href='https://github.com/dankore/frontend-my-nigerian-projects'>GitHub</a>
