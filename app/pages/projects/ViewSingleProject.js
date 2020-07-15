@@ -165,7 +165,7 @@ function ViewSingleProject(props) {
         </div>
       </div>
       {/* BIDS: DON'T ALLOW OWNERS OF A PROJECT TO ADD BID. HIDE BID BTN */}
-       {/* SAMPLE BID */}
+      {/* SAMPLE BID */}
       {appState.toggleSampleBid && <img className='modal absolute' src='https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594816307/Others/exampleBid_fdlbkr.png' />}
       <div className='mt-8'>
         {appState.loggedIn ? (
@@ -196,8 +196,11 @@ function ViewSingleProject(props) {
         ) : (
           <>
             {daysRemaining(project.bidSubmissionDeadline) > -1 ? (
-              <div className='flex justify-end -mb-3'>
-                <Link to={`/create-bid/${id}`} className='inline-block text-white rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
+              <div className='flex justify-between text-white'>
+                <div onClick={() => appDispatch({ type: 'toggleSampleBid' })} className='bg-green-600 rounded cursor-pointer px-6 py-2'>
+                  See sample bid
+                </div>
+                <Link to={`/create-bid/${id}`} className='inline-block rounded border border-white bg-blue-600 hover:bg-blue-800 px-6 py-2'>
                   <i className='fas fa-plus mr-1'></i>
                   Add a Bid
                 </Link>
