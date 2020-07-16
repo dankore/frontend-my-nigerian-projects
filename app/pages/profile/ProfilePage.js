@@ -10,6 +10,7 @@ import { activeNavCSS, navLinkCSS } from '../../helpers/CSSHelpers';
 import DispatchContext from '../../DispatchContext';
 import { handleUploadImage } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
+import ProfileBids from '../../components/profile/ProfileBids';
 
 function ProfilePage(props) {
   const appDispatch = useContext(DispatchContext);
@@ -287,6 +288,10 @@ function ProfilePage(props) {
           <NavLink to={`/profile/${state.profileData.profileUsername}/following`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Following: {state.profileData.counts.followingCount}
           </NavLink>
+
+          <NavLink to={`/profile/${state.profileData.profileUsername}/bids`} activeStyle={activeNavCSS} className={navLinkCSS}>
+            Bids: 0
+          </NavLink>
         </ul>
       </div>
 
@@ -331,6 +336,11 @@ function ProfilePage(props) {
         <Route path='/profile/:username/following'>
           <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
+          </Page>
+        </Route>
+        <Route path='/profile/:username/bids'>
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s bids`}>
+            <ProfileBids />
           </Page>
         </Route>
       </Switch>
