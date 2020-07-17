@@ -283,16 +283,16 @@ function ProfilePage(props) {
             Projects: {state.profileData.counts.projectCount}
           </NavLink>
 
+          <NavLink to={`/profile/${state.profileData.profileUsername}/bids`} activeStyle={activeNavCSS} className={navLinkCSS}>
+            Bids: {state.profileData.counts.bidsCount}
+          </NavLink>
+
           <NavLink to={`/profile/${state.profileData.profileUsername}/followers`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Followers: {state.profileData.counts.followerCount}
           </NavLink>
 
           <NavLink to={`/profile/${state.profileData.profileUsername}/following`} activeStyle={activeNavCSS} className={navLinkCSS}>
             Following: {state.profileData.counts.followingCount}
-          </NavLink>
-
-          <NavLink to={`/profile/${state.profileData.profileUsername}/bids`} activeStyle={activeNavCSS} className={navLinkCSS}>
-            Bids: {state.profileData.counts.bidsCount}
           </NavLink>
         </ul>
       </div>
@@ -330,6 +330,11 @@ function ProfilePage(props) {
             <ProfileProjects />
           </Page>
         </Route>
+        <Route path='/profile/:username/bids'>
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s bids`}>
+            <ProfileBids />
+          </Page>
+        </Route>
         <Route path='/profile/:username/followers'>
           <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
             <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
@@ -338,11 +343,6 @@ function ProfilePage(props) {
         <Route path='/profile/:username/following'>
           <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
-          </Page>
-        </Route>
-        <Route path='/profile/:username/bids'>
-          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s bids`}>
-            <ProfileBids />
           </Page>
         </Route>
       </Switch>
