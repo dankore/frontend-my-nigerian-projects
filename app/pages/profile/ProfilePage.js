@@ -34,6 +34,7 @@ function ProfilePage(props) {
         projectCount: '',
         followerCount: '',
         followingCount: '',
+        bidsCount: '',
       },
     },
     profilePicFile: {
@@ -181,6 +182,7 @@ function ProfilePage(props) {
     });
   }
 
+  // EXTRACT
   function isOwner() {
     if (appState.loggedIn) {
       return appState.user.username == state.profileData.profileUsername;
@@ -290,7 +292,7 @@ function ProfilePage(props) {
           </NavLink>
 
           <NavLink to={`/profile/${state.profileData.profileUsername}/bids`} activeStyle={activeNavCSS} className={navLinkCSS}>
-            Bids: 0
+            Bids: {state.profileData.counts.bidsCount}
           </NavLink>
         </ul>
       </div>

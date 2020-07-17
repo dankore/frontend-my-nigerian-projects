@@ -6,20 +6,20 @@ import StateContext from '../../StateContext';
 import { useImmer } from 'use-immer';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
+import DispatchContext from '../../DispatchContext';
 
 function ProfileBids() {
   const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
   const [bids, setBids] = useImmer({
     isLoading: true,
     feed: [],
     offset: 0,
     elements: [],
-    perPage: 4,
+    perPage: 10,
     currentPage: 0,
   });
-
-  console.log({ bids: bids.feed });
 
   //PAGINATION STARTS
   // GET CURRENT PROJECT
@@ -35,7 +35,6 @@ function ProfileBids() {
       draft.offset = offset;
     });
   }
-
   // PAGINATION ENDS
 
   useEffect(() => {
@@ -48,8 +47,6 @@ function ProfileBids() {
         setBids(draft => {
           draft.isLoading = false;
         });
-
-        console.log(response.data);
 
         if (response.data) {
           setBids(draft => {
@@ -65,6 +62,7 @@ function ProfileBids() {
     return () => request.cancel();
   }, [username]);
 
+  // EXTRACT
   function showThisWhenNoProject() {
     if (appState.loggedIn) {
       if (appState.user.username == username) {
@@ -76,7 +74,7 @@ function ProfileBids() {
       return 'This user has no bids.';
     }
   }
-
+  // EXTRACT
   function bidItemsTotal(array) {
     return array.reduce((total, currentElem) => {
       const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
@@ -94,7 +92,7 @@ function ProfileBids() {
         <>
           {current_paginated_bids.map((bid, index) => {
             return (
-              <Link key={index} to={`/${bid.projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 p-2'>
+              <Link key={index} to={`/${bid.projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 pl-3'>
                 <div className='flex items-center text-sm leading-5 mr-6'>
                   <i className='text-gray-700 fas fa-id-badge'></i>
                   <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
