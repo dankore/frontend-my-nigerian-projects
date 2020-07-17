@@ -67,10 +67,10 @@ function ProfileProjects() {
       if (appState.user.username == username) {
         return 'You have not posted any project yet.';
       } else {
-        return 'This user has not posted any project yet.';
+        return 'User has not posted any project yet.';
       }
     } else {
-      return 'This user has not posted any project yet.';
+      return 'User has not posted any project yet.';
     }
   }
 

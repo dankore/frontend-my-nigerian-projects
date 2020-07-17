@@ -33,9 +33,9 @@ function ProfileFollow(props) {
         return 'You do not have any followers';
       } else {
         if (!appState.loggedIn) {
-          return `This user has no followers yet. Login or Register to get ${props.firstName}'s latest projects.`;
+          return `User has no followers yet. Login or Register to get ${props.firstName}'s latest projects.`;
         }
-        return 'This user has no followers. Click the Follow button to get the latest from this user.';
+        return 'User has no followers. Click the Follow button to get the latest from User.';
       }
     }
 
@@ -44,9 +44,9 @@ function ProfileFollow(props) {
         return 'You are not following anyone';
       } else {
         if (!appState.loggedIn) {
-          return `This user is not following anyone yet. Login or Register to get ${props.firstName}'s latest projects.`;
+          return `User is not following anyone yet. Login or Register to get ${props.firstName}'s latest projects.`;
         }
-        return 'This user is not following anyone yet.';
+        return 'User is not following anyone yet.';
       }
     }
   }
@@ -62,7 +62,7 @@ function ProfileFollow(props) {
           return (
             <Link key={index} to={`/profile/${follow.username}`} className='bg-white shadow lg:rounded-lg mt-1 hover:bg-gray-100 flex items-center p-3'>
               <img className='h-10 w-10 rounded-full mr-2' src={follow.avatar} alt='Profile Pic' />
-              {follow.firstName}{" "}{follow.lastName}
+              {follow.firstName} {follow.lastName}
             </Link>
           );
         })

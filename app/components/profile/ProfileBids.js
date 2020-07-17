@@ -6,11 +6,10 @@ import StateContext from '../../StateContext';
 import { useImmer } from 'use-immer';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
-import DispatchContext from '../../DispatchContext';
+import { bidItemsTotal } from '../../helpers/JSHelpers';
 
 function ProfileBids() {
   const appState = useContext(StateContext);
-  const appDispatch = useContext(DispatchContext);
   const { username } = useParams();
   const [bids, setBids] = useImmer({
     isLoading: true,
@@ -63,23 +62,16 @@ function ProfileBids() {
   }, [username]);
 
   // EXTRACT
-  function showThisWhenNoProject() {
+  function showThisWhenNoBids() {
     if (appState.loggedIn) {
       if (appState.user.username == username) {
         return 'You have no bids.';
       } else {
-        return 'This user has no bids.';
+        return 'User has no bids.';
       }
     } else {
-      return 'This user has no bids.';
+      return 'User has no bids.';
     }
-  }
-  // EXTRACT
-  function bidItemsTotal(array) {
-    return array.reduce((total, currentElem) => {
-      const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
-      return total + currentTotal;
-    }, 0);
   }
 
   if (bids.isLoading) {
@@ -114,7 +106,7 @@ function ProfileBids() {
           {bids.feed.length > bids.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={bids.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
         </>
       ) : (
-        <p className='p-3 shadow lg:rounded-lg bg-white'>{showThisWhenNoProject()}</p>
+        <p className='p-3 shadow lg:rounded-lg bg-white'>{showThisWhenNoBids()}</p>
       )}
     </div>
   );
