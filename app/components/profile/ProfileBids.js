@@ -102,7 +102,7 @@ function ProfileBids() {
               </Link>
             );
           })}
-          {/* ONLY SHOW PAGINATION IF THERE'S MORE  THAN NUMBER OF PROJECTS PER PAGE */}
+          {/* ONLY SHOW PAGINATION IF THERE'S MORE THAN THE NUMBER OF BIDS PER PAGE */}
           {bids.feed.length > bids.perPage && <ReactPaginate previousLabel={'prev'} nextLabel={'next'} breakLabel={'...'} breakClassName={'break-me'} pageCount={bids.pageCount} marginPagesDisplayed={2} pageRangeDisplayed={5} onPageChange={handleProjectsPagination} containerClassName={'pagination'} subContainerClassName={'pages pagination'} activeClassName={'active'} />}
         </>
       ) : (
