@@ -9,7 +9,7 @@ import NotFoundPage from '../shared/NotFoundPage';
 import ReactToolTip from 'react-tooltip';
 import DispatchContext from '../../DispatchContext';
 import ReactMarkdown from 'react-markdown';
-import { dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
+import {bidItemsTotal, dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
 
 function ViewSingleBid(props) {
@@ -123,10 +123,6 @@ function ViewSingleBid(props) {
       </div>
     );
   };
-
-  function bidItemsTotal(array) {
-    return array.reduce((total, currentElem) => total + +currentElem.quantity * +currentElem.price_per_item, 0);
-  }
 
   function outPutName() {
     if (appState.loggedIn) {

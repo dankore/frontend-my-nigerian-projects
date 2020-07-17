@@ -1,16 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import DispatchContext from '../../DispatchContext';
+import { bidItemsTotal } from '../../helpers/JSHelpers';
 
 function Bid({ bids, projectId }) {
-  const appDispatch = useContext(DispatchContext);
-  function bidItemsTotal(array) {
-    return array.reduce((total, currentElem) => {
-      const currentTotal = +currentElem.quantity * +currentElem.price_per_item;
-      return total + currentTotal;
-    }, 0);
-  }
-
   return (
     <div className='mb-4'>
       <p className='px-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids[{bids?.length > 0 ? bids.length : 0}]:</p>
