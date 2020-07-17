@@ -1,12 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import DispatchContext from '../../DispatchContext';
 import { bidItemsTotal } from '../../helpers/JSHelpers';
 
-
 function Bid({ bids, projectId }) {
-  const appDispatch = useContext(DispatchContext);
-
   return (
     <div className='mb-4'>
       <p className='px-2 text-lg leading-7 font-medium tracking-tight text-gray-900'>Bids[{bids?.length > 0 ? bids.length : 0}]:</p>
