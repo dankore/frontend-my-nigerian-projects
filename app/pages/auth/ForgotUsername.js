@@ -101,7 +101,7 @@ function ForgotUsername(props) {
       dispatch({ type: 'isSendingFormStart' });
       (async function submitLogin() {
         try {
-          const response = await Axios.post('/change-password', { email: state.email.value }, { cancelToken: request.token });
+          const response = await Axios.post('/recover-username', { email: state.email.value }, { cancelToken: request.token });
           if (response.data == 'Success') {
             dispatch({ type: 'isSendingFormFinished' });
             dispatch({ type: 'showNextStep' });
