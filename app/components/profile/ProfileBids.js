@@ -84,20 +84,25 @@ function ProfileBids() {
         <>
           {current_paginated_bids.map((bid, index) => {
             return (
-              <Link key={index} to={`/${bid.projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='flex flex-wrap shadow lg:rounded-lg border border-gray-300 bg-white hover:bg-gray-100 pl-3'>
-                <div className='flex items-center text-sm leading-5 mr-6'>
-                  <i className='text-gray-700 fas fa-id-badge'></i>
-                  <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
-                </div>
+              <Link key={index} to={`/${bid.projectId}/bid/${bid.id}`} style={{ minHeight: 60 + 'px' }} className='shadow lg:rounded-lg border border-gray-300 bg-white block hover:bg-gray-100 pl-3 py-2'>
+                <p className='font-regular text-base md:text-lg leading-snug truncate'>
+                  <span className='text-gray-700'>Project title:</span> {bid.projectTitle}
+                </p>
+                <div className='mt-3 flex flex-wrap'>
+                  <div className='flex items-center text-sm leading-5 mr-6'>
+                    <i className='text-gray-700 fas fa-id-badge'></i>
+                    <p className='ml-1.5'>{bid.whatBestDescribesYou}</p>
+                  </div>
 
-                <div className='flex items-center text-sm leading-5 mr-6'>
-                  <i className='text-gray-700 fas fa-money-bill-wave'></i>
-                  <p className='ml-1.5'>{new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</p>
-                </div>
+                  <div className='flex items-center text-sm leading-5 mr-6'>
+                    <i className='text-gray-700 fas fa-money-bill-wave'></i>
+                    <p className='ml-1.5'>{new Intl.NumberFormat().format(bidItemsTotal(bid.items))}</p>
+                  </div>
 
-                <div className='flex items-center text-sm leading-5'>
-                  <i className='text-gray-700 fas fa-user-cog'></i>
-                  <p className='ml-1.5'>{bid.yearsOfExperience > 1 ? `${bid.yearsOfExperience} years` : `${bid.yearsOfExperience} year`} of experience </p>
+                  <div className='flex items-center text-sm leading-5'>
+                    <i className='text-gray-700 fas fa-user-cog'></i>
+                    <p className='ml-1.5'>{bid.yearsOfExperience > 1 ? `${bid.yearsOfExperience} years` : `${bid.yearsOfExperience} year`} of experience </p>
+                  </div>
                 </div>
               </Link>
             );
