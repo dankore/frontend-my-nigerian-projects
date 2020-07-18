@@ -50,10 +50,10 @@ function ForgotUsername(props) {
           draft.email.isRegisteredEmail = true;
         }
         return;
-      case 'isSendingTokenStart':
+      case 'isSendingFormStart':
         draft.isLoggingIn = true;
         return;
-      case 'isSendingTokenFinished':
+      case 'isSendingFormFinished':
         draft.isLoggingIn = false;
         return;
       case 'showNextStep':
@@ -98,20 +98,20 @@ function ForgotUsername(props) {
   useEffect(() => {
     if (state.submitCount && state.submitCount < 5) {
       const request = Axios.CancelToken.source();
-      dispatch({ type: 'isSendingTokenStart' });
+      dispatch({ type: 'isSendingFormStart' });
       (async function submitLogin() {
         try {
-          const response = await Axios.post('/reset-password', { email: state.email.value }, { cancelToken: request.token });
+          const response = await Axios.post('/change-password', { email: state.email.value }, { cancelToken: request.token });
           if (response.data == 'Success') {
-            dispatch({ type: 'isSendingTokenFinished' });
+            dispatch({ type: 'isSendingFormFinished' });
             dispatch({ type: 'showNextStep' });
           } else {
-            dispatch({ type: 'isSendingTokenFinished' });
+            dispatch({ type: 'isSendingFormFinished' });
             appDispatch({ type: 'flashMessageError', value: response.data });
           }
         } catch (error) {
-          dispatch({ type: 'isSendingTokenFinished' });
-          appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem requesting a token. Please try again." });
+          dispatch({ type: 'isSendingFormFinished' });
+          appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem submitting your request. Please try again." });
         }
       })();
 
