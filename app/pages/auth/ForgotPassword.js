@@ -7,7 +7,7 @@ import { useImmerReducer } from 'use-immer';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionStyle } from '../../helpers/CSSHelpers';
 
-function ResetYourPassword(props) {
+function ForgotPassword(props) {
   const appDispatch = useContext(DispatchContext);
   const initialState = {
     email: {
@@ -134,7 +134,7 @@ function ResetYourPassword(props) {
             <path d='M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z'></path>
           </svg>
         </div>
-        <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Account Recovery</p>
+        <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Password Recovery</p>
         <p className='text-left text-xl mb-4 px-2'>Step 1 of 2:</p>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 bg-white shadow lg:rounded-lg'>
           {/* EMAIL */}
@@ -185,4 +185,4 @@ function ResetYourPassword(props) {
   );
 }
 
-export default withRouter(ResetYourPassword);
+export default withRouter(ForgotPassword);

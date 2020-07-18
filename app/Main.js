@@ -36,7 +36,7 @@ const CreateBid = lazy(() => import('./pages/bids/CreateBid'));
 const ViewSingleBid = lazy(() => import('./pages/bids/ViewSingleBid'));
 import PrivacyPolicyPage from './pages/shared/PrivacyPolicyPage';
 import LoadingDotsIcon from './components/shared/LoadingDotsIcon';
-import ResetYourPassword from './pages/auth/ResetYourPassword';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import CookiesPage from './pages/shared/CookiesPage';
 import ForgotUsername from './pages/auth/ForgotUsername';
 const AccountRecoveryEnterPassword = lazy(() => import('./pages/auth/AccountRecoveryEnterPassword'));
@@ -209,7 +209,7 @@ function Main() {
               </Route>
               <Route path='/reset-password/:token'>{state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <AccountRecoveryEnterPassword />}</Route>
               <Route path='/reset-password' exact>
-                {state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <ResetYourPassword />}
+                {state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <ForgotPassword />}
               </Route>
               <Route path='/forgot-username' exact>
                 {state.loggedIn ? <YouMustBeLoggedOutToViewThisPage /> : <ForgotUsername />}
