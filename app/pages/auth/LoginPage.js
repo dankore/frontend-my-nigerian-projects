@@ -110,7 +110,7 @@ function LoginPage(props) {
               <label htmlFor='username' className=''>
                 Enter Username
               </label>
-              <Link to='/reset-password' className='block text-blue-600'>
+              <Link to='/forgot-username' className='block text-blue-600'>
                 Forgot Username?
               </Link>
             </div>
@@ -123,9 +123,7 @@ function LoginPage(props) {
           </div>
           <div className='relative mb-4'>
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
-              <label htmlFor='password'>
-                Enter Password{' '}
-              </label>
+              <label htmlFor='password'>Enter Password </label>
               <Link to='/reset-password' className='block text-blue-600'>
                 Forgot password?
               </Link>

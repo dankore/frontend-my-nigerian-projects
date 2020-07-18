@@ -7,7 +7,7 @@ import { useImmerReducer } from 'use-immer';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionStyle } from '../../helpers/CSSHelpers';
 
-function ResetYourPassword(props) {
+function ForgotUsername(props) {
   const appDispatch = useContext(DispatchContext);
   const initialState = {
     email: {
@@ -173,16 +173,16 @@ function ResetYourPassword(props) {
                   <path fillRule='evenodd' d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z' clipRule='evenodd' />
                 </svg>
               </span>
-              {state.isLoggingIn ? 'Sending...' : 'Send me recovery token'}
+              {state.isLoggingIn ? 'Sending...' : 'Send me my Username'}
             </button>
           </div>
         </form>
         <Link to='/login' className='block mt-3 text-center p-3 bg-white shadow lg:rounded-lg'>
-          Remember your password? <span className='text-blue-600'>Login</span>
+          Remember your username? <span className='text-blue-600'>Login</span>
         </Link>
       </div>
     </Page>
   );
 }
 
-export default withRouter(ResetYourPassword);
+export default withRouter(ForgotUsername);
