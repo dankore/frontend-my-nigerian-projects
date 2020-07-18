@@ -127,7 +127,7 @@ function ForgotUsername(props) {
   }
 
   return (
-    <Page title='Step 1 of 2: Enter Email'>
+    <Page title='Recover Username'>
       <div className='lg:max-w-sm mx-auto'>
         <div className='flex justify-center text-4xl text-blue-600'>
           <svg className='w-12' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' viewBox='0 0 24 24' stroke='currentColor'>
@@ -135,7 +135,6 @@ function ForgotUsername(props) {
           </svg>
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Username Recovery</p>
-        <p className='text-left text-xl mb-4 px-2'>Step 1 of 2:</p>
         <form onSubmit={handleSubmit} className='p-3 sm:p-4 bg-white shadow lg:rounded-lg'>
           {/* EMAIL */}
           <div className='relative w-full mb-3'>
