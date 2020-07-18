@@ -105,10 +105,15 @@ function LoginPage(props) {
         </div>
         <p className='text-xl font-semibold text-center leading-tight mb-8 mt-3'>Login to Your My Nigerian Projects Account</p>
         <form onSubmit={handleSubmit} className='p-3 shadow sm:p-4 border bg-white lg:rounded-lg'>
-          <div className='relative mb-4'>
-            <label htmlFor='username' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
-              Enter Your Username
-            </label>
+          <div className='relative mb-4 '>
+            <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
+              <label htmlFor='username' className=''>
+                Enter Username
+              </label>
+              <Link to='/forgot-username' className='block text-blue-600'>
+                Forgot Username?
+              </Link>
+            </div>
             <input onChange={e => dispatch({ type: 'usernameImmediately', value: e.target.value })} id='username' type='text' autoComplete='username' autoFocus className='shadow-inner w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
             <CSSTransition in={state.username.hasErrors} timeout={330} classNames='liveValidateMessage' unmountOnExit>
               <div style={CSSTransitionStyle} className='liveValidateMessage'>
@@ -118,11 +123,9 @@ function LoginPage(props) {
           </div>
           <div className='relative mb-4'>
             <div className='flex justify-between items-center mb-1 text-xs uppercase font-bold tracking-wide text-gray-700'>
-              <label htmlFor='password' className=''>
-                Enter Your Password{' '}
-              </label>
+              <label htmlFor='password'>Enter Password </label>
               <Link to='/reset-password' className='block text-blue-600'>
-                Forgot your password?
+                Forgot password?
               </Link>
             </div>
             <input onChange={e => dispatch({ type: 'passwordImmediately', value: e.target.value })} id='password' type='password' autoComplete='current-password' className='shadow-inner w-full py-3 px-4 bg-gray-200 focus:outline-none focus:border-gray-500 focus:bg-white appearance-none border rounded text-gray-700 leading-tight' />
