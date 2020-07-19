@@ -182,7 +182,7 @@ function Main() {
         <BrowserRouter>
           <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
-         <SEO image={`https://ibb.co/cwFfNCb`} url={window.location} description={`Explore My Nigerian Projects`} title={`Browse`}/>
+         <SEO image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594491219/free-background-press-v2_pg66nf.svg`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one | My Nigerian Projects`}/>
           <Header />
           <Suspense fallback={<LoadingDotsIcon />}>
             <Switch>
