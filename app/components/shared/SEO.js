@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 
 function SEO({ image, description, url, title}) {
   // TRUNCATE TITLE AND DESCRIPTION

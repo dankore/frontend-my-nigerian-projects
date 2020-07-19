@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useImmerReducer } from 'use-immer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Axios from 'axios';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet} from 'react-helmet';
 
 // STATE MANAGEMENT
 import StateContext from './StateContext';
@@ -40,6 +40,7 @@ import LoadingDotsIcon from './components/shared/LoadingDotsIcon';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import CookiesPage from './pages/shared/CookiesPage';
 import ForgotUsername from './pages/auth/ForgotUsername';
+import SEO from './components/shared/SEO';
 const AccountRecoveryEnterPassword = lazy(() => import('./pages/auth/AccountRecoveryEnterPassword'));
 const EditBidPage = lazy(() => import('./pages/bids/EditBidPage'));
 // COMPONENTS END
@@ -177,12 +178,12 @@ function Main() {
   }, []);
 
   return (
-    <HelmetProvider>
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
           <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
+         <SEO image={`https://ibb.co/cwFfNCb`} url={window.location} description={`Explore My Nigerian Projects`} title={`Browse`}/>
           <Header />
           <Suspense fallback={<LoadingDotsIcon />}>
             <Switch>
@@ -243,7 +244,6 @@ function Main() {
         </BrowserRouter>
       </DispatchContext.Provider>
     </StateContext.Provider>
-    </HelmetProvider>
   );
 }
 
