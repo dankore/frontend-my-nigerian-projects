@@ -10,6 +10,7 @@ import StateContext from '../StateContext';
 import SidebarRight from '../components/homepage/SidebarRight';
 import SidebarLeft from '../components/homepage/SidebarLeft';
 import ReactPaginate from 'react-paginate';
+import SEO from '../components/shared/SEO';
 
 function HomePage() {
   const appState = useContext(StateContext);
@@ -139,6 +140,7 @@ function HomePage() {
 
   return (
     <div className='align-middle inline-block min-w-full'>
+      <SEO image={`https://ibb.co/cwFfNCb`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one on My Nigerian Projects`}/>
       <div className='w-full shadow border-b border-gray-500 bg-white pt-6'>
         <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>

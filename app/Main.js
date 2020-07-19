@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { useImmerReducer } from 'use-immer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Axios from 'axios';
-import { Helmet} from 'react-helmet';
 
 // STATE MANAGEMENT
 import StateContext from './StateContext';
