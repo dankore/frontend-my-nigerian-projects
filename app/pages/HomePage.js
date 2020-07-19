@@ -140,7 +140,7 @@ function HomePage() {
 
   return (
     <div className='align-middle inline-block min-w-full'>
-      <SEO image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594487157/mynigerianprojects_scdybp.png`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one | My Nigerian Projects`}/>
+      <SEO image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594491219/free-background-press-v2_pg66nf.svg`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one | My Nigerian Projects`}/>
       <div className='w-full shadow border-b border-gray-500 bg-white pt-6'>
         <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
