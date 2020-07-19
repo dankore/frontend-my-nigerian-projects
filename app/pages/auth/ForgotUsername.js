@@ -111,7 +111,7 @@ function ForgotUsername(props) {
           }
         } catch (error) {
           dispatch({ type: 'isSendingFormFinished' });
-          appDispatch({ type: 'flashMessageError', value: "Sorry, there's a problem submitting your request. Please try again." });
+          appDispatch({ type: 'flashMessageError', value: error.message });
         }
       })();
 
