@@ -79,7 +79,7 @@ function ViewSingleProject(props) {
 
   return (
     <Page margin='mx-2' title={project.title}>
-      <SEO image={project.image} url={window.location} description={project.description} title={project.title}/>
+      <SEO image={project.image} url={window.location} isArticle={true} description={project.description} title={project.title}/>
       <div className='shadow-md lg:rounded-lg'>
         <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>

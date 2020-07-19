@@ -153,7 +153,7 @@ function ViewSingleBid(props) {
 
   return (
     <Page margin='mx-2' title={`${outPutName()}: ${state.projectAndBid.projectTitle}`}>
-     <SEO image={state.projectAndBid.bid.image} url={window.location} description={state.projectAndBid.bid.otherDetails} title={`${outPutName()}: ${state.projectAndBid.projectTitle}`}/>
+     <SEO image={state.projectAndBid.bid.image} isArticle={true} url={window.location} description={state.projectAndBid.bid.otherDetails} title={`${outPutName()}: ${state.projectAndBid.projectTitle}`}/>
       <div className='shadow-md my-6'>
         <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>

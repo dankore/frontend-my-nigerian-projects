@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-function SEO({ image, description, url, title}) {
+function SEO({ image, description, url, title, isArticle}) {
   // TRUNCATE TITLE AND DESCRIPTION
   const formatTitleAndDescription = s => {
     if(s){
@@ -23,7 +23,7 @@ function SEO({ image, description, url, title}) {
 
         {/* OpenGraph tags */}
         <meta property="og:url" content={url} />
-        <meta property="og:type" content="article" /> 
+        {isArticle && <meta property="og:type" content="article" /> }
         <meta property="og:title" content={title} />
         <meta property="og:description" content={formatTitleAndDescription(description)} />
         <meta property="og:image" content={image} />
