@@ -332,7 +332,7 @@ function ProfilePage(props) {
           </Page>
         </Route>
         <Route path='/profile/:username/bids'>
-          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s bids`}>
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s bids`} image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`}>
             <ProfileBids />
           </Page>
         </Route>

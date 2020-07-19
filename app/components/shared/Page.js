@@ -16,11 +16,13 @@ function Page(props) {
       return `${inputToArray.slice(0, 5).join(' ')}...`;
     }
   };
-  
+
   useEffect(() => {
     appDispatch({ type: 'alwaysCloseTheseMenus' });
     window.scrollTo(0, 0);
   }, [props.title]);
+
+  console.log(props.image)
 
   return (
     <Container margin={props.margin} wide={props.wide}>

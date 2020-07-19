@@ -183,8 +183,8 @@ function Main() {
           <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
           <Header />
+          <SeoDefault />
           <Suspense fallback={<LoadingDotsIcon />}>
-            <SeoDefault />
             <Switch>
               <Route exact path='/'>
                 <Redirect to='/browse' />
