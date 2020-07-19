@@ -39,8 +39,7 @@ import LoadingDotsIcon from './components/shared/LoadingDotsIcon';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import CookiesPage from './pages/shared/CookiesPage';
 import ForgotUsername from './pages/auth/ForgotUsername';
-import SEO from './components/shared/SEO';
-import SeoDefault from './components/shared/SEODefault';
+import SeoDefault from './components/shared/SeoDefault';
 const AccountRecoveryEnterPassword = lazy(() => import('./pages/auth/AccountRecoveryEnterPassword'));
 const EditBidPage = lazy(() => import('./pages/bids/EditBidPage'));
 // COMPONENTS END
