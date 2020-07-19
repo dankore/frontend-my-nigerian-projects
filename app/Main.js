@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useImmerReducer } from 'use-immer';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Axios from 'axios';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // STATE MANAGEMENT
 import StateContext from './StateContext';
@@ -176,6 +177,7 @@ function Main() {
   }, []);
 
   return (
+    <HelmetProvider>
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
@@ -241,6 +243,7 @@ function Main() {
         </BrowserRouter>
       </DispatchContext.Provider>
     </StateContext.Provider>
+    </HelmetProvider>
   );
 }
 
