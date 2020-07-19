@@ -2,14 +2,15 @@ import React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function SEO({ image, description, url, title}) {
-
-    // TRUNCATE TITLE AND DESCRIPTION
+  // TRUNCATE TITLE AND DESCRIPTION
   const formatTitleAndDescription = s => {
-    const inputToArray = s.split(' ');
+    if(s){
+        const inputToArray = s.split(' ');
     if (inputToArray.length < 6) {
       return `${inputToArray.slice(0, 5).join(' ')}`;
     }
     return `${inputToArray.slice(0, 5).join(' ')}...`;
+    }
   };
 
   return (
