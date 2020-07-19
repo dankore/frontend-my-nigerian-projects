@@ -11,7 +11,6 @@ import DispatchContext from '../../DispatchContext';
 import ReactMarkdown from 'react-markdown';
 import {bidItemsTotal, dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
-import SEO from '../../components/shared/SEO';
 
 
 function ViewSingleBid(props) {
@@ -152,8 +151,7 @@ function ViewSingleBid(props) {
   const bidHasItems = state.projectAndBid.bid.items.length > 0;
 
   return (
-    <Page margin='mx-2' title={`${outPutName()}: ${state.projectAndBid.projectTitle}`}>
-     <SEO image={state.projectAndBid.bid.image} isArticle={true} url={window.location} description={state.projectAndBid.bid.otherDetails} title={`${outPutName()}: ${state.projectAndBid.projectTitle} | My Nigerian Projects`}/>
+    <Page margin='mx-2' title={`${outPutName()}: ${state.projectAndBid.projectTitle}`} image={state.projectAndBid.bid.image} isArticle={true} url={window.location} description={state.projectAndBid.bid.otherDetails}>
       <div className='shadow-md my-6'>
         <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>

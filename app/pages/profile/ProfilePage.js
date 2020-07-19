@@ -11,7 +11,6 @@ import DispatchContext from '../../DispatchContext';
 import { handleUploadImage } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
 import ProfileBids from '../../components/profile/ProfileBids';
-import SEO from '../../components/shared/SEO';
 
 
 function ProfilePage(props) {
@@ -218,7 +217,6 @@ function ProfilePage(props) {
 
   return (
     <>
-    <SEO image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`} title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile`}/>
       <div className='w-full shadow border-b border-gray-500 bg-white'>
         <div className='bg-white max-w-2xl mx-auto'>
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
@@ -329,7 +327,7 @@ function ProfilePage(props) {
       {/* PAGES */}
       <Switch>
         <Route exact path='/profile/:username'>
-          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`}>
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`} image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`}>
             <ProfileProjects />
           </Page>
         </Route>
@@ -339,12 +337,12 @@ function ProfilePage(props) {
           </Page>
         </Route>
         <Route path='/profile/:username/followers'>
-          <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
+          <Page margin='mx-2' title={`People following ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`}>
             <ProfileFollowTemplate followerCount={state.profileData.counts.followerCount} firstName={`${state.profileData.profileFirstName}`} action='followers' />
           </Page>
         </Route>
         <Route path='/profile/:username/following'>
-          <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`}>
+          <Page margin='mx-2' title={`People followed by ${state.profileData.profileFirstName} ${state.profileData.profileLastName}`} image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`}>
             <ProfileFollowTemplate firstName={`${state.profileData.profileFirstName}`} action='following' />
           </Page>
         </Route>
