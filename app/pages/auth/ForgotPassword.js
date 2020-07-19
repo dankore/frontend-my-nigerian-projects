@@ -81,7 +81,7 @@ function ForgotPassword(props) {
           const response = await Axios.post('/doesEmailExist', { email: state.email.value }, { cancelToken: request.token });
           dispatch({ type: 'isRegisteredEmail', value: response.data });
         } catch (error) {
-          alert('Having difficulty looking up your email. Please try again.');
+          console.log('Having difficulty looking up your email. Please try again.');
         }
       })();
       return () => request.cancel();
@@ -99,14 +99,16 @@ function ForgotPassword(props) {
     if (state.submitCount && state.submitCount < 5) {
       const request = Axios.CancelToken.source();
       dispatch({ type: 'isSendingTokenStart' });
-      (async function submitLogin() {
+
+      (async function submitEmail() {
         try {
           const response = await Axios.post('/reset-password', { email: state.email.value }, { cancelToken: request.token });
+          
+          dispatch({ type: 'isSendingTokenFinished' });
+          
           if (response.data == 'Success') {
-            dispatch({ type: 'isSendingTokenFinished' });
             dispatch({ type: 'showNextStep' });
           } else {
-            dispatch({ type: 'isSendingTokenFinished' });
             appDispatch({ type: 'flashMessageError', value: response.data });
           }
         } catch (error) {
