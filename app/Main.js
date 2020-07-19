@@ -40,6 +40,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import CookiesPage from './pages/shared/CookiesPage';
 import ForgotUsername from './pages/auth/ForgotUsername';
 import SEO from './components/shared/SEO';
+import SeoDefault from './components/shared/SEODefault';
 const AccountRecoveryEnterPassword = lazy(() => import('./pages/auth/AccountRecoveryEnterPassword'));
 const EditBidPage = lazy(() => import('./pages/bids/EditBidPage'));
 // COMPONENTS END
@@ -182,9 +183,9 @@ function Main() {
         <BrowserRouter>
           <FlashMessageSuccess messages={state.flashMessages} />
           <FlashMessageErrors messages={state.flashMessageErrors} />
-         <SEO image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594491219/free-background-press-v2_pg66nf.svg`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one | My Nigerian Projects`}/>
           <Header />
           <Suspense fallback={<LoadingDotsIcon />}>
+            <SeoDefault />
             <Switch>
               <Route exact path='/'>
                 <Redirect to='/browse' />

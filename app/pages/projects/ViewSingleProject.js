@@ -11,7 +11,6 @@ import DispatchContext from '../../DispatchContext';
 import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../../helpers/JSHelpers';
 import Bid from '../../components/bids/Bid';
 import ImageViewer from '../../components/shared/ImageViewer';
-import SEO from '../../components/shared/SEO';
 
 function ViewSingleProject(props) {
   const appState = useContext(StateContext);
@@ -78,8 +77,7 @@ function ViewSingleProject(props) {
   }
 
   return (
-    <Page margin='mx-2' title={project.title}>
-      <SEO image={project.image} url={window.location} isArticle={true} description={project.description} title={`${project.title} | My Nigerian Projects`}/>
+    <Page margin='mx-2' title={project.title} image={project.image} url={window.location} isArticle={true} description={project.description}>
       <div className='shadow-md lg:rounded-lg'>
         <div className='bg-white lg:rounded-t-lg p-3 flex justify-between items-center'>
           <div>

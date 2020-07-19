@@ -10,7 +10,6 @@ import StateContext from '../StateContext';
 import SidebarRight from '../components/homepage/SidebarRight';
 import SidebarLeft from '../components/homepage/SidebarLeft';
 import ReactPaginate from 'react-paginate';
-import SEO from '../components/shared/SEO';
 
 function HomePage() {
   const appState = useContext(StateContext);
@@ -140,7 +139,6 @@ function HomePage() {
 
   return (
     <div className='align-middle inline-block min-w-full'>
-      <SEO image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594491219/free-background-press-v2_pg66nf.svg`} url={window.location} description={`My Nigerian Projects is a site for posting small projects or finding one.`} title={`Find a side hustle or post one | My Nigerian Projects`}/>
       <div className='w-full shadow border-b border-gray-500 bg-white pt-6'>
         <ul className='flex justify-center mx-auto'>
           <NavLink exact to='/browse' activeStyle={activeNavCSS} className={navLinkCSS}>
@@ -157,7 +155,7 @@ function HomePage() {
 
         <Switch>
           <Route exact path='/browse'>
-            <Page margin='mx-2' title='Browse All Projects'>
+            <Page margin='mx-2' url={window.location} description={`Discover projects from those you follow`} image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594822913/projects/b0j7jes9mqtmjip9xbzd.jpg`} title='Browse All Projects'>
               {allProjects.feed.length > 0 ? (
                 <>
                   {current_paginated_projects.map(project => {
@@ -172,7 +170,7 @@ function HomePage() {
             </Page>
           </Route>
           <Route path='/browse/those-i-follow'>
-            <Page margin='mx-2' title='Projects from Follows'>
+            <Page margin='mx-2' title='Projects from Follows' url={window.location} description={`Discover projects from those you follow`} image={`https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594726196/projects/kpgyp67buylvrpxffvgh.jpg`}>
               {projectsThoseIFollow.feed.length > 0 && appState.loggedIn && (
                 <>
                   {current_paginated_projects_those_i_follow.map(project => {
