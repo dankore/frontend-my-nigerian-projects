@@ -218,7 +218,6 @@ function ProfilePage(props) {
 
   return (
     <>
-    <SEO image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`} title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile`}/>
       <div className='w-full shadow border-b border-gray-500 bg-white'>
         <div className='bg-white max-w-2xl mx-auto'>
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
@@ -329,7 +328,9 @@ function ProfilePage(props) {
       {/* PAGES */}
       <Switch>
         <Route exact path='/profile/:username'>
-          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`}>
+          <SEO   title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile`} />
+
+          <Page margin='mx-2' title={`${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s projects`} image={state.profileData.profileAvatar} url={window.location} description={`Checkout ${state.profileData.profileFirstName} ${state.profileData.profileLastName}'s profile for projects and more!`}>
             <ProfileProjects />
           </Page>
         </Route>
