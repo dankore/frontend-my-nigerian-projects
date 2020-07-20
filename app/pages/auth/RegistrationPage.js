@@ -209,9 +209,8 @@ function RegistrationPage(props) {
           alert('Having difficulty looking for your email. Please try again.');
         }
       })();
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
+      
+       return () => request.cancel();
     }
   }, [state.email.checkCount]);
 
@@ -221,15 +220,14 @@ function RegistrationPage(props) {
       const request = Axios.CancelToken.source();
       (async function checkForUsername() {
         try {
-          const response = await Axios.post('/doesUsernameExist', { username: state.username.value }, { cancelToken: request.token });
+          const response = await Axios.post('/doesUsernameExist', { username: state.username.value.toLowerCase() }, { cancelToken: request.token });
           dispatch({ type: 'usernameIsUnique', value: response.data });
         } catch (error) {
-          alert('Having difficulty looking for your username. Please try again.');
+          console.log({regisration: error.message});
         }
       })();
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
+
+      return () => request.cancel();
     }
   }, [state.username.checkCount]);
 
@@ -254,7 +252,7 @@ function RegistrationPage(props) {
 
          
           dispatch({ type: 'isCreatingFinished' });
-          
+
           if (response.data.token) {
             props.history.push('/browse');
             appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
@@ -270,7 +268,7 @@ function RegistrationPage(props) {
         }
       })();
 
-        return ()=> request.cancel();
+        return () => request.cancel();
     }
   }, [state.submitCount]);
 
