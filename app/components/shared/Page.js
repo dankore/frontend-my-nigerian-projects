@@ -22,8 +22,6 @@ function Page(props) {
     window.scrollTo(0, 0);
   }, [props.title]);
 
-  console.log(props.image)
-
   return (
     <Container margin={props.margin} wide={props.wide}>
       <Helmet>

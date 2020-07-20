@@ -251,20 +251,26 @@ function RegistrationPage(props) {
             },
             { cancelToken: request.token }
           );
-          if (response.data) {
-            dispatch({ type: 'isCreatingFinished' });
+
+         
+          dispatch({ type: 'isCreatingFinished' });
+          
+          if (response.data.token) {
             props.history.push('/browse');
             appDispatch({ type: 'flashMessage', value: 'Congrats! Welcome to your new account.' });
             // LOG USER IN
             appDispatch({ type: 'login', data: response.data });
+          } else {
+              appDispatch({ type: 'flashMessageError', value: response.data.failure });
           }
+
         } catch (e) {
-          alert('Problem registering your account. Please try again.');
+          dispatch({ type: 'isCreatingFinished' });
+          alert(e);
         }
       })();
-      return function cleanUpRequest() {
-        return request.cancel();
-      };
+
+        return ()=> request.cancel();
     }
   }, [state.submitCount]);
 
