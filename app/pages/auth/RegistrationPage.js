@@ -209,7 +209,7 @@ function RegistrationPage(props) {
           alert('Having difficulty looking for your email. Please try again.');
         }
       })();
-      
+
        return () => request.cancel();
     }
   }, [state.email.checkCount]);
@@ -262,9 +262,9 @@ function RegistrationPage(props) {
               appDispatch({ type: 'flashMessageError', value: response.data.failure });
           }
 
-        } catch (e) {
+        } catch (error) {
           dispatch({ type: 'isCreatingFinished' });
-          alert(e);
+          console.log({regisration: error})
         }
       })();
 
