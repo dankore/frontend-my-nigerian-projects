@@ -1,18 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
+import {formatTitleAndDescription, dateFormatted_Like_This_May_29_2020 } from '../../helpers/JSHelpers';
 
 function Project(props) {
   const project = props.project;
-
-  // TRUNCATE TITLE AND DESCRIPTION
-  const formatTitleAndDescription = s => {
-    const inputToArray = s.split(' ');
-    if (inputToArray.length < 6) {
-      return `${inputToArray.slice(0, 5).join(' ')}`;
-    }
-    return `${inputToArray.slice(0, 5).join(' ')}...`;
-  };
 
   // TIME DIFF IN DAYS
   function timeRemainingInDays() {

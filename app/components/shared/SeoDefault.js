@@ -1,21 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import {formatTitleAndDescription } from '../../helpers/JSHelpers';
+
 
 function SeoDefault() {
   const image = `https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594491219/free-background-press-v2_pg66nf.svg`
   const description = `My Nigerian Projects is a site for posting small projects or finding one.`
   const title = `Find a side hustle or post one | My Nigerian Projects`
 
-  // TRUNCATE TITLE AND DESCRIPTION
-  const formatTitleAndDescription = s => {
-    if (s) {
-      const inputToArray = s.split(' ');
-      if (inputToArray.length < 6) {
-        return `${inputToArray.slice(0, 5).join(' ')}`;
-      }
-      return `${inputToArray.slice(0, 5).join(' ')}...`;
-    }
-  };
 
   return (
     <>

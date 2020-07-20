@@ -2,20 +2,12 @@ import React, { useEffect, useContext } from 'react';
 import Container from './Container';
 import DispatchContext from '../../DispatchContext';
 import { Helmet } from 'react-helmet';
+import {formatTitleAndDescription } from '../../helpers/JSHelpers';
+
 
 
 function Page(props) {
   const appDispatch = useContext(DispatchContext);
-  // TRUNCATE TITLE AND DESCRIPTION
-  const formatTitleAndDescription = s => {
-    if (s) {
-      const inputToArray = s.split(' ');
-      if (inputToArray.length < 6) {
-        return `${inputToArray.slice(0, 5).join(' ')}`;
-      }
-      return `${inputToArray.slice(0, 5).join(' ')}...`;
-    }
-  };
 
   useEffect(() => {
     appDispatch({ type: 'alwaysCloseTheseMenus' });
