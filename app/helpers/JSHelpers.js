@@ -23,8 +23,8 @@ module.exports = {
     switch (type) {
       case 'profilePicture': {
         data.append('upload_preset', 'profile-pictures');
-
-        const res = await fetch(`https://api.cloudinary.com/v1_1/my-nigerian-projects/image/upload`, {
+        
+        const res = await fetch(`${process.env.CLOUDINARY_API_BASE_URL}`, {
           method: 'POST',
           body: data,
         });

@@ -48,6 +48,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
     "autoprefixer": "^9.7.6",
     "css-loader": "^3.5.3",
     "eslint-config-prettier": "^6.11.0",
