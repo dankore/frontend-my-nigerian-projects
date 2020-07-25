@@ -23,6 +23,7 @@ module.exports = {
     switch (type) {
       case 'profilePicture': {
         data.append('upload_preset', 'profile-pictures');
+        console.log(`${process.env.CLOUDINARY_API_BASE_URL}`)
         
         const res = await fetch(`${process.env.CLOUDINARY_API_BASE_URL}`, {
           method: 'POST',
