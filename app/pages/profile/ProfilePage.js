@@ -12,7 +12,6 @@ import { handleUploadImage } from '../../helpers/JSHelpers';
 import ImageViewer from '../../components/shared/ImageViewer';
 import ProfileBids from '../../components/profile/ProfileBids';
 
-
 function ProfilePage(props) {
   const appDispatch = useContext(DispatchContext);
   const appState = useContext(StateContext);
@@ -221,9 +220,9 @@ function ProfilePage(props) {
         <div className='bg-white max-w-2xl mx-auto'>
           <div className='lg:rounded-b-lg px-2 pt-10 h-20 bg-gradient'></div>
           <h2 className='flex flex-wrap justify-between px-2 -mt-4 lg:-mt-5'>
-            <div className='flex items-center flex-wrap'>
+            <div className='relative flex items-center flex-wrap'>
               {isOwner() && (
-                <div className='cursor-pointer relative ' onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })}>
+                <div className='cursor-pointer' onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })}>
                   <img className='h-20 w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                     <i className='fas fa-pen'></i> Edit
@@ -231,7 +230,7 @@ function ProfilePage(props) {
                 </div>
               )}
               {!isOwner() && (
-                <div className='cursor-pointer relative ' onClick={handleOpenImageViewerNotLoggedIn}>
+                <div className='cursor-pointer' onClick={handleOpenImageViewerNotLoggedIn}>
                   <img className='h-20 w-20 rounded-full z-0' src={state.profileData.profileAvatar} alt='Profile Pic' />
                   <div className='text-xs -mt-6  bg-gray-800 text-white absolute px-1 py-px rounded'>
                     <i className='fas fa-eye'></i> View
@@ -241,7 +240,7 @@ function ProfilePage(props) {
 
               {/* OPTIONS */}
               {appState.toggleOptionsProfileImage && (
-                <div style={{ marginTop: 13 + 'rem', zIndex: 1, minWidth: `${250}px` }} className='speech-bubble absolute rounded-lg bg-white border px-2'>
+                <div style={{ zIndex: 1, marginTop: `${185}px`, left: 0, minWidth: `${250}px` }} className='absolute rounded-lg bg-white border px-2'>
                   <div className='flex w-full justify-end'>
                     <button onClick={() => appDispatch({ type: 'toggleOptionsProfileImage' })} className='flex rounded-full px-2 justify-end hover:bg-gray-400 border border-transparent focus:outline-none focus:shadow-outline transition duration-150 ease-in-out'>
                       X
