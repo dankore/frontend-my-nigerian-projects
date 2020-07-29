@@ -11,7 +11,7 @@ import DispatchContext from './DispatchContext';
 
 // AXIOS COMMON URL
 console.log(process.env.BACKENDURL);
-Axios.defaults.baseURL = process.env.BACKENDURL || 'https://backend-my-nigerian-projects.herokuapp.com';
+Axios.defaults.baseURL = 'https://backend-my-nigerian-projects.herokuapp.com';
 
 // COMPONENTS
 import Header from './components/shared/Header';
