@@ -1,5 +1,7 @@
 # My Nigerian Projects
 I post my projects, people bid to win the projects. I save. They make money. 
 
+<img src="https://res.cloudinary.com/my-nigerian-projects/image/upload/v1596262997/Others/mnp_r63ghk.png" />
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a6c3d057-a31f-4741-bed1-6d454b6be9ca/deploy-status)](https://app.netlify.com/sites/bidding/deploys)
 
