@@ -360,7 +360,7 @@ function CreateBid(props) {
             </div>
             {/* ITEMIZE LIST */}
             <div className='mb-4 relative'>
-              <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
+              <p className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900'>
                 Itemize Lists <span className='text-red-600'>*</span>
               </p>
               <p className='text-sm text-gray-700 my-2'>How much do you want to charge for this project - labour, materials etc?</p>
@@ -378,7 +378,7 @@ function CreateBid(props) {
             </div>
             {/* ADD ITEM */}
               <fieldset className='border rounded p-2 mb-4'>
-                <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item Your Expenses Here:</legend>
+                <legend className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Your Expenses Here:</legend>
                 <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
                   <div className='mb-4 relative'>
                     <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
@@ -398,7 +398,7 @@ function CreateBid(props) {
                     <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                       Price per Item <span className='text-red-600'>*</span>
                     </label>
-                    <input placeholder='e.g 10000' onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                    <input placeholder='e.g 10000' onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='1' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                   </div>
                 </div>
                 <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
