@@ -67,7 +67,6 @@ function EditBidPage(props) {
     isSaving: false,
     params: useParams(),
     isOpen: false,
-    openAddItem: false,
     sendCount: 0,
   };
 
@@ -172,9 +171,6 @@ function EditBidPage(props) {
         return;
       case 'toggleOptions':
         draft.isOpen = !draft.isOpen;
-        return;
-      case 'openAddItemForm':
-        draft.openAddItem = !draft.openAddItem;
         return;
       case 'saveRequestStarted':
         draft.isSaving = true;
@@ -353,9 +349,10 @@ function EditBidPage(props) {
 
           {/* ITEMIZE LIST */}
           <div className='mb-4 relative'>
-            <p className='text-lg leading-7 font-medium tracking-tight text-gray-900'>
+            <p className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900'>
               Itemize Lists <span className='text-red-600'>*</span>
             </p>
+            <p className='text-sm text-gray-700 my-2'>How much do you want to charge for this project - labour, materials etc?</p>
             <div className='rounded-lg border border-gray-200' style={{ minHeight: 4 + 'rem', overflowWrap: 'anywhere', minWidth: 0 + 'px' }}>
               <div className='flex p-2 bg-gray-700 text-white justify-between rounded-t'>
                 <p className='border-b border-gray-200 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider'>Item Name</p>
@@ -370,44 +367,34 @@ function EditBidPage(props) {
           </div>
 
           {/* ADD ITEM */}
-          {/* TOGGLE */}
-          <div className='flex justify-end'>
-            <div onClick={() => dispatch({ type: 'openAddItemForm' })} className='-mb-3 bg-green-600 hover:bg-green-800 text-white rounded px-6 py-2 cursor-pointer'>
-              <i className='fas fa-plus mr-1'></i>
-              {state.openAddItem ? 'Close' : 'Open to Add Item'}
-            </div>
-          </div>
-          {/* INPUTS */}
-          {state.openAddItem && (
             <fieldset className='border rounded p-2 mb-4'>
-              <legend className='text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Item:</legend>
+              <legend className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900'>Add Your Expenses Here:</legend>
               <div className='lg:flex lg:flex-wrap lg:items-center lg:justify-between mb-4'>
                 <div className='mb-4 relative lg:mr-2'>
                   <label htmlFor='item-name' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                     Item Name <span className='text-red-600'>*</span>
                   </label>
-                  <input onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  <input placeholder='e.g labour' onChange={e => dispatch({ type: 'itemNameUpdate', value: e.target.value })} id='item-name' type='text' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                 </div>
 
                 <div className='mb-4 relative lg:mx-2'>
                   <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                     Quantity <span className='text-red-600'>*</span>
                   </label>
-                  <input onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  <input placeholder='e.g 1' onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                 </div>
 
                 <div className='mb-4 relative lg:mx-2'>
                   <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                     Price per Item <span className='text-red-600'>*</span>
                   </label>
-                  <input onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                  <input placeholder='e.g 10000' onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='1' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                 </div>
               </div>
               <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
                 Add Item
               </div>
             </fieldset>
-          )}
 
           {/* OTHER DETAILS */}
           <div className='my-4 relative'>
@@ -416,7 +403,6 @@ function EditBidPage(props) {
           </div>
 
           {/* CONTACT */}
-
           <fieldset className='border rounded p-2 mb-4'>
             <legend className='text-lg ml-2 leading-7 font-medium tracking-tight text-gray-900'>Contact:</legend>
             <div className='lg:w-auto lg:flex justify-between'>

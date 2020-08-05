@@ -990,6 +990,11 @@ video {
   margin-right: 0.25rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -1634,6 +1639,18 @@ video {
 MY NON-TAILWIND STYLES
 */
 
+.custom-underline {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 88%;
+  transition: background-size 0.25s ease-in;
+}
+
+.custom-underline:hover {
+  background-size: 100% 88%;
+}
+
 .paragraph p {
   margin-bottom: 20px;
 }
@@ -2073,10 +2090,6 @@ MY NON-TAILWIND STYLES ENDS
     justify-content: space-between;
   }
 
-  .lg\:h-20 {
-    height: 5rem;
-  }
-
   .lg\:text-4xl {
     font-size: 2.25rem;
   }
@@ -2147,10 +2160,6 @@ MY NON-TAILWIND STYLES ENDS
 
   .lg\:text-center {
     text-align: center;
-  }
-
-  .lg\:w-20 {
-    width: 5rem;
   }
 
   .lg\:w-64 {
