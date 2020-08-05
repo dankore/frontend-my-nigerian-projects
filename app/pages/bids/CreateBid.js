@@ -360,7 +360,7 @@ function CreateBid(props) {
             </div>
             {/* ITEMIZE LIST */}
             <div className='mb-4 relative'>
-              <p className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900'>
+              <p className='custom-underline text-lg leading-7 font-medium tracking-tight text-gray-900 inline-block'>
                 Itemize Lists <span className='text-red-600'>*</span>
               </p>
               <p className='text-sm text-gray-700 my-2'>How much do you want to charge for this project - labour, materials etc?</p>
