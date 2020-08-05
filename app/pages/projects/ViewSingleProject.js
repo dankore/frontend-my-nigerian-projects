@@ -9,7 +9,7 @@ import NotFoundPage from '../shared/NotFoundPage';
 import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
 import { dateFormatted_Like_This_May_29_2020, daysRemaining } from '../../helpers/JSHelpers';
-import Bid from '../../components/bids/Bid';
+import Bids from '../../components/bids/Bids';
 import ImageViewer from '../../components/shared/ImageViewer';
 
 function ViewSingleProject(props) {
@@ -218,7 +218,7 @@ function ViewSingleProject(props) {
         </div>
 
         {/* BIDS */}
-        <Bid bids={project.bids} projectId={id} />
+        <Bids bids={project.bids} projectId={id} />
       </div>
     </Page>
   );
