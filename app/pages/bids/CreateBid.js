@@ -391,14 +391,14 @@ function CreateBid(props) {
                     <label htmlFor='quantity' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                       Quantity <span className='text-red-600'>*</span>
                     </label>
-                    <input placeholder='e.g 1' onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                    <input placeholder='e.g 1' onChange={e => dispatch({ type: 'quantityUpdate', value: e.target.value })} id='quantity' type='number' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                   </div>
 
                   <div className='mb-4 relative'>
                     <label htmlFor='price' className='w-full text-xs font-bold block mb-1 uppercase tracking-wide text-gray-700 '>
                       Price per Item <span className='text-red-600'>*</span>
                     </label>
-                    <input placeholder='e.g 10000' onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='0' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
+                    <input placeholder='e.g 10000' onChange={e => dispatch({ type: 'pricePerItemUpdate', value: e.target.value })} id='price' type='number' step='0.01' min='1' autoComplete='off' className={inputTextAreaCSSCreateBid + 'w-full lg:w-auto'} />
                   </div>
                 </div>
                 <div style={{ padding: 7 + 'px' }} onClick={handleAddItem} className={`text-center text-white rounded border border-white mt-1 ${!addItemButtonBool ? 'hover:bg-green-800 bg-green-600 cursor-pointer' : 'bg-gray-700'}`}>
