@@ -45,7 +45,7 @@ function CookiesPage() {
         <p className='mt-4'>If that changes in the future, it would be updated here. It is the responsibility of the user of this website to check this policy for changes. By using https://mynigerianprojects.com, you agreed to the this cookies policy and that changes to this policy can be updated without prior notice.</p>
         <p className='mt-4'>Local storage is a browser feature which allows our site to save small amounts of information. This site uses this to store some of your preferences, such as when you log in.</p>
         <p className='mt-4'>
-          This site do not employ technologies to track your movements across the internet. We do collect some data for analytics, but it does not contain any personal info. For more information, please refer to <a className='underline' href='https://usefathom.com/'>Fathom Analytics</a>.
+          This site does not employ technologies to track your movements across the internet. We do collect some data for analytics, but it does not contain any personal info. For more information, please refer to <a className='underline' href='https://usefathom.com/'>Fathom Analytics</a>.
         </p>
       </div>
     </Page>
