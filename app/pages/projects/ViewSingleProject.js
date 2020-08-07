@@ -165,7 +165,7 @@ function ViewSingleProject(props) {
       </div>
       {/* BIDS: DON'T ALLOW OWNERS OF A PROJECT TO ADD BID. HIDE BID BTN */}
       {/* SAMPLE BID */}
-      {appState.toggleSampleBid && <img className='modal absolute' src='https://res.cloudinary.com/my-nigerian-projects/image/upload/v1594816307/Others/exampleBid_fdlbkr.png' />}
+      {appState.toggleSampleBid && <img className='modal absolute' src='https://res.cloudinary.com/my-nigerian-projects/image/upload/f_auto/v1594816307/Others/exampleBid_fdlbkr.png' />}
       <div className='mt-8'>
         <div className='mb-5'>
           {appState.loggedIn ? (
