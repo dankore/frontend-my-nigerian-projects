@@ -1,9 +1,4 @@
-{
+ {
   "schemaVersion": 2,
-  "dockerfileLines": [
-                        "ENV NODE_ENV production",
-                        "ENV PORT 80",
-                        "EXPOSE 80",
-                        "CMD [ \"npm\", \"dev\" ]"
-                    ]
-}
+  "templateId": "node/8.7.0"
+ }
