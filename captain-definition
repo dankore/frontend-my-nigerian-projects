@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "templateId": "node/14.15.0"
+  "templateId": "node/14.15.0",
   "dockerfileLines": [
                         "ENV NODE_ENV production",
                         "ENV PORT 80",
