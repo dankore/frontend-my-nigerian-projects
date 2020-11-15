@@ -1,7 +1,7 @@
 {
   "name": "frontend-my-nigerian-projects",
   "version": "1.0.0",
-  "description": "My Nigerian Projects",
+  "description": "Frontend My Nigerian Projects",
   "main": "Main.js",
   "scripts": {
     "dev": "npm-run-all -s watch:css generate webpackDev",
@@ -14,7 +14,7 @@
     "build:css": "postcss app/css/tailwind.css -o app/css/main.css",
     "watch:css": "postcss app/css/tailwind.css -o app/css/main.css"
   },
-  "keywords": [],
+  "keywords": ["nigeria", "adamu m dankore", "projects", "bid", "bidding"],
   "author": "",
   "license": "ISC",
   "dependencies": {
