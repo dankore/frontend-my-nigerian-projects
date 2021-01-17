@@ -10,7 +10,8 @@ import DispatchContext from './DispatchContext';
 // STATE MANAGEMENT ENDS
 
 // AXIOS COMMON URL
-Axios.defaults.baseURL = 'https://api.mynigerianprojects.com'; //'https://backend-my-nigerian-projects.herokuapp.com'; // HELLO
+Axios.defaults.baseURL = 'https://api.mynigerianprojects.com'; //'https://backend-my-nigerian-projects.herokuapp.com';
+console.log("Hello")
 
 // COMPONENTS
 import Header from './components/shared/Header';
